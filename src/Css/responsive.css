@@ -1,0 +1,28 @@
+@media screen and (max-width: 768px) {
+  .home-page .banner-top {
+    max-height: 428.889px;
+  }
+
+  .category-home .icon-category .icon-1 svg {
+    width: 100px;
+    height: 100px;
+  }
+  .category-home .icon-category .icon-2 svg {
+    width: 55px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .home-page .banner-top {
+    max-height: 289.889px;
+  }
+
+  .category-home .icon-category .icon-1 svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .category-home .icon-category .icon-2 svg {
+    width: 25px;
+  }
+}
