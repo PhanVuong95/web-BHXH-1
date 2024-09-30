@@ -41,7 +41,7 @@ const LayoutPage = () => {
       <header>
         <HeaderPage />
       </header>
-      <main className="pb-[66px]">
+      <main className="pb-[66px] bg-[#cfc8c8]">
         <Outlet />
       </main>
       <footer>
