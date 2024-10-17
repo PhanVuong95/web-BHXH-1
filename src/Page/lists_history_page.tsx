@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Widthheight } from "../Models";
 import axios from "axios";
 import { PulseLoader } from "react-spinners";
-import HeaderBase from "../Components/headerBase";
 import logo from "../assets-src/logo1.png";
 
 // Define an interface for the order item
@@ -20,8 +19,6 @@ interface OrderItem {
 }
 
 const ListsHistoryPage: React.FC<Widthheight> = () => {
-  const navigate = useNavigate();
-
   const PENDING = 1001;
   const DONE = 1002;
   const CANCELED = 1003;
@@ -29,7 +26,7 @@ const ListsHistoryPage: React.FC<Widthheight> = () => {
   const [openTab, setOpenTab] = useState<number>(1);
   const [listOrder, setListOrder] = useState<OrderItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const token = localStorage.token;
+  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
     axios
@@ -79,11 +76,11 @@ const ListsHistoryPage: React.FC<Widthheight> = () => {
   if (loading) {
     return (
       <>
-        <HeaderBase
+        {/* <HeaderBase
           isHome={false}
           onBack={() => navigate("/history")}
           title={"Lịch sử đăng ký BHXH TN"}
-        />
+        /> */}
         <div className="fixed inset-0 flex items-center justify-center">
           <PulseLoader size={15} loading={true} color="#0076B7" />
         </div>
@@ -93,12 +90,12 @@ const ListsHistoryPage: React.FC<Widthheight> = () => {
 
   return (
     <>
-      <HeaderBase
+      {/* <HeaderBase
         isHome={false}
         onBack={() => navigate("/history")}
         title={"Lịch sử đăng ký BHXH TN"}
-      />
-      <div className="page-1 !pb-2 !pt-24">
+      /> */}
+      <div className="page-1 !pb-16 !pt-24 min-h-[64.5vh]">
         <div className="max-w-md mx-auto">
           <div className="mb-4 flex space-x-4 p-1 bg-white rounded-lg shadow-md">
             <button

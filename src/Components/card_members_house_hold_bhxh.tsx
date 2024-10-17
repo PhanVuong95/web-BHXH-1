@@ -29,16 +29,16 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
   const memberWards = useRef([]);
 
   const [selectedMemberProvince, setSelectedMemberProvince] = useState(
-    insuranceOrder.houseHold.houseHoldPeoples[index].ksProvinceId
+    insuranceOrder.houseHold.houseHoldPeoples[index]?.ksProvinceId
   );
   const [selectedMemberDistrict, setSelectedMemberDistrict] = useState(
-    insuranceOrder.houseHold.houseHoldPeoples[index].ksDistrictId
+    insuranceOrder.houseHold.houseHoldPeoples[index]?.ksDistrictId
   );
   const [selectedMemberWard, setSelectedMemberWard] = useState(
-    insuranceOrder.houseHold.houseHoldPeoples[index].ksWardId
+    insuranceOrder.houseHold.houseHoldPeoples[index]?.ksWardId
   );
   const [addressDetailMember, setAddressDetailMember] = useState<string>(
-    insuranceOrder.houseHold.houseHoldPeoples[index].ksAddressDetail
+    insuranceOrder.houseHold.houseHoldPeoples[index]?.ksAddressDetail
   );
 
   const [temp, setTemp] = useState(false);
@@ -92,16 +92,16 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputCCCDMember = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số CCCD <samp className="text-red-600">*</samp>
         </label>
         <Input
           type="text"
           maxLength={12}
-          ref={members[index].citizenId}
+          ref={members[index]?.citizenId}
           defaultValue={
-            insuranceOrder.houseHold.houseHoldPeoples[index].citizenId
+            insuranceOrder.houseHold.houseHoldPeoples[index]?.citizenId
           }
           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Nhập CCCD"
@@ -116,20 +116,20 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputEthnicMember = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Dân tộc <samp className="text-red-600">*</samp>
         </label>
         <Select
           size="large"
           className="w-[100%]"
-          ref={members[index].ethnicId}
+          ref={members[index]?.ethnicId}
           dropdownStyle={{ maxWidth: "300px" }}
           showSearch
           dropdownMatchSelectWidth={false}
           placeholder="Chọn dân tộc"
           defaultValue={
-            insuranceOrder.houseHold.houseHoldPeoples[index].ethnicId
+            insuranceOrder.houseHold.houseHoldPeoples[index]?.ethnicId
           }
           onChange={(value) => {
             insuranceOrder.houseHold.houseHoldPeoples[index].ethnicId = value;
@@ -145,7 +145,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputGenderMemder = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Giới tính <samp className="text-red-600">*</samp>
         </label>
@@ -153,8 +153,10 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           size="large"
           className="w-[100%]"
           placeholder="Chọn giới tính"
-          ref={members[index].gender}
-          defaultValue={insuranceOrder.houseHold.houseHoldPeoples[index].gender}
+          ref={members[index]?.gender}
+          defaultValue={
+            insuranceOrder.houseHold.houseHoldPeoples[index]?.gender
+          }
           dropdownMatchSelectWidth={false}
           onChange={(value) => {
             insuranceOrder.houseHold.houseHoldPeoples[index].gender = value;
@@ -174,14 +176,14 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputFullNameMember = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Họ và tên <samp className="text-red-600">*</samp>
         </label>
         <Input
           type="text"
-          ref={members[index].name}
-          defaultValue={insuranceOrder.houseHold.houseHoldPeoples[index].name}
+          ref={members[index]?.name}
+          defaultValue={insuranceOrder.houseHold.houseHoldPeoples[index]?.name}
           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Họ và tên"
           onChange={(e) => {
@@ -195,7 +197,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputRelationshipMember = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Mối quan hệ <samp className="text-red-600">*</samp>
         </label>
@@ -203,11 +205,11 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           size="large"
           className="w-[100%]"
           showSearch
-          ref={members[index].relationShipId}
+          ref={members[index]?.relationShipId}
           placeholder="Chọn mối quan hệ"
           dropdownMatchSelectWidth={false}
           defaultValue={
-            insuranceOrder.houseHold.houseHoldPeoples[index].relationShipId
+            insuranceOrder.houseHold.houseHoldPeoples[index]?.relationShipId
           }
           onChange={(value) => {
             insuranceOrder.houseHold.houseHoldPeoples[index].relationShipId =
@@ -249,7 +251,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputDobMember = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Ngày sinh <samp className="text-red-600">*</samp>
         </label>
@@ -258,13 +260,13 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           size="large"
           locale={locale}
           className="w-[100%]"
-          ref={members[index].doB}
+          ref={members[index]?.doB}
           placeholder="dd/mm/yyyy"
           defaultValue={
-            insuranceOrder.houseHold.houseHoldPeoples[index].doB == ""
+            insuranceOrder.houseHold.houseHoldPeoples[index]?.doB == ""
               ? ""
               : dayjs(
-                  insuranceOrder.houseHold.houseHoldPeoples[index].doB,
+                  insuranceOrder.houseHold.houseHoldPeoples[index]?.doB,
                   dateFormat
                 )
           }
@@ -288,7 +290,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputProvinceMember = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành phố khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -296,7 +298,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           size="large"
           className="w-[100%]"
           showSearch
-          ref={members[index].ksProvinceId}
+          ref={members[index]?.ksProvinceId}
           dropdownMatchSelectWidth={false}
           placeholder="Thành phố"
           value={selectedMemberProvince}
@@ -324,7 +326,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputDistrictMember = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -334,7 +336,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           showSearch
           dropdownMatchSelectWidth={false}
           placeholder="Quận huyện"
-          ref={members[index].ksDistrictId}
+          ref={members[index]?.ksDistrictId}
           value={selectedMemberDistrict}
           key={selectedMemberDistrict}
           onChange={(value: any) => {
@@ -357,7 +359,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputWardMember = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -365,7 +367,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           size="large"
           className="w-[100%]"
           showSearch
-          ref={members[index].ksWardId}
+          ref={members[index]?.ksWardId}
           dropdownMatchSelectWidth={false}
           placeholder="Phường xã"
           value={selectedMemberWard}
@@ -386,13 +388,13 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputAddressDetailMember = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ cụ thể khai sinh
         </label>
         <Input
           type="text"
-          ref={members[index].ksAddressDetail}
+          ref={members[index]?.ksAddressDetail}
           value={addressDetailMember}
           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Địa chỉ cụ thể"
@@ -410,9 +412,9 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
   return (
     <div
       key={`${index}`}
-      className="p-4 rounded-xl flex flex-col gap-6 border border-gray-300"
+      className="p-4 rounded-xl flex flex-row flex-wrap gap-6 border border-gray-300 w-full"
     >
-      <div className="flex justify-between">
+      <div className="flex justify-between w-full">
         <div className="text-[#0076B7] text-sm font-medium">
           Thông tin thành viên số {index + 1}
         </div>

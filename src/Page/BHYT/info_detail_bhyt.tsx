@@ -13,7 +13,6 @@ import {
   isValidString,
 } from "../../Utils/validateString";
 import { registerInfoBHYT } from "./list_health_insurance";
-import HeaderBase from "../../Components/headerBase";
 
 const InfoDetailBHYT: React.FunctionComponent = () => {
   const { id } = useParams();
@@ -511,11 +510,11 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
 
   return (
     <div className="pt-20">
-      <HeaderBase
+      {/* <HeaderBase
         isHome={false}
         title={"Thông tin chi tiết"}
         onBack={() => navigate("/list-history-bhyt")}
-      />
+      /> */}
       <div
         className={`${renderBackground(
           billPay?.insuranceOrderStatusId

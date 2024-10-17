@@ -4,7 +4,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { SpecificContext } from "../Components/specificContext";
 import { PulseLoader } from "react-spinners";
 import warningIc from "../assets-src/warning_icon.png";
-import HeaderBase from "../Components/headerBase";
 
 const BuillDetailPage: React.FunctionComponent = () => {
   const { id } = useParams();
@@ -39,7 +38,7 @@ const BuillDetailPage: React.FunctionComponent = () => {
   }, [id]);
 
   const GetQrCode = async () => {
-    const token = localStorage.token;
+    const token = localStorage.getItem("accessToken");
     // const formData = new FormData();
     //   formData.append("file", file);
     try {
@@ -107,7 +106,7 @@ const BuillDetailPage: React.FunctionComponent = () => {
   if (!orderDetail || !base64QRCode) {
     return (
       <>
-        <HeaderBase isHome={false} title={"Chi tiết thanh toán"} />
+        {/* <HeaderBase isHome={false} title={"Chi tiết thanh toán"} /> */}
         <div className="fixed inset-0 flex items-center justify-center">
           <PulseLoader size={15} loading={true} color="#0076B7" />
         </div>
@@ -127,10 +126,10 @@ const BuillDetailPage: React.FunctionComponent = () => {
   };
 
   return (
-    <>
-      <HeaderBase isHome={false} title={"Chi tiết thanh toán"} />
+    <div className="max-w-[900px] w-full mx-auto">
+      {/* <HeaderBase isHome={false} title={"Chi tiết thanh toán"} /> */}
       {isPaymentSuccessful && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="container mx-auto fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-8 rounded-lg text-center w-4/5">
             <svg
               className="mx-auto"
@@ -168,7 +167,7 @@ const BuillDetailPage: React.FunctionComponent = () => {
           </div>
         </div>
       )}
-      <div className="page-1 flex flex-col gap-4 mb-[32px] !pt-[100px]">
+      <div className="page-1 container mx-auto flex flex-col gap-4 mb-[32px] !pt-[100px]">
         <h3 className="text-[#0076B7] text-lg font-medium text-center">
           Hệ thống đang ghi nhận thanh toán
         </h3>
@@ -278,9 +277,12 @@ const BuillDetailPage: React.FunctionComponent = () => {
               </p>
             </div>
           </div>
-          <div>
+          <div className="flex items-center justify-center">
             {base64QRCode != "400" ? (
-              <img src={`data:image/png;base64,${base64QRCode}`} />
+              <img
+                className="max-w-[400px]"
+                src={`data:image/png;base64,${base64QRCode}`}
+              />
             ) : (
               <div className="flex flex-row gap-5 items-center">
                 <img
@@ -308,7 +310,7 @@ const BuillDetailPage: React.FunctionComponent = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="page-2 bg-white">
+        <div className="page-2 container mx-auto bg-white">
           <div className="flex flex-col gap-3">
             <div className="flex flex-row content-center justify-center items-center">
               <button
@@ -340,7 +342,7 @@ const BuillDetailPage: React.FunctionComponent = () => {
           <FadeLoader height={10} width={3} loading={true} color="#0076B7" />
         </div>
       </Modal> */}
-    </>
+    </div>
   );
 };
 

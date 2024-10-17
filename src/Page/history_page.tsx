@@ -1,17 +1,15 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import HeaderBase from "../Components/headerBase";
+import { Link } from "react-router-dom";
 
 const HistoryPage: React.FunctionComponent = () => {
-  const navigate = useNavigate();
   return (
     <>
-      <HeaderBase
+      {/* <HeaderBase
         isHome={false}
         onBack={() => navigate("/")}
         title={"Nộp BHXH"}
-      />
-      <div className="bg-white page min-h-[100vh] flex flex-col gap-4 !pt-[95px]">
+      /> */}
+      <div className="bg-white page min-h-[70vh] flex flex-col gap-4 !pt-[95px] max-w-[1000px] mx-auto">
         <Link to="/lists-history">
           <div className="flex flex-row p-4  link-butoon ">
             <div className="flex items-center justify-center gap-4 ">

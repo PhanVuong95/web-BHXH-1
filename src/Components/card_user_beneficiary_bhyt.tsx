@@ -25,6 +25,7 @@ import Lottie from "lottie-react";
 import lottieScanQR from "../assets-src/lottie_scan_qr.json";
 import { motion } from "framer-motion";
 import { BenefitLevevlList } from "../Utils/constants";
+import { toast } from "react-toastify";
 
 dayjs.locale("vi");
 dayjs.extend(customParseFormat);
@@ -44,6 +45,8 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     props;
   const dateFormat = "DD/MM/YYYY";
   const [districts, setDistricts] = useState<any>([]);
+  console.log(districts);
+
   const [socialInsuranceNumber, setSocialInsuranceNumber] = useState(
     registerInfoBHYT["listInsuredPerson"][index].socialInsuranceNumber
   );
@@ -76,7 +79,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           "DD/MM/YYYY"
         )
   );
-  console.log(districts);
 
   const [gender, setGender] = useState(
     registerInfoBHYT["listInsuredPerson"][index].gender
@@ -124,6 +126,8 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   const [medicalDistrictId, setMedicalDistrictId] = useState<any>(
     registerInfoBHYT["listInsuredPerson"][index].medicalDistrictId
   );
+  console.log(medicalDistrictId);
+
   const [hospitalId, setHospitalId] = useState(
     registerInfoBHYT["listInsuredPerson"][index].hospitalId
   );
@@ -132,8 +136,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   const [size, setSize] = useState({ width: 200, height: 200 });
   const [opacityQR, setOpacityQR] = useState(1);
   const lottieRef = useRef(null);
-
-  console.log(medicalDistrictId);
 
   const ksProvinces = useRef([]);
   const ksDistricts = useRef([]);
@@ -179,8 +181,9 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   const [isShowModalbenefitLevel, setIsShowModalbenefitLevel] = useState(false);
 
   const [temp, setTemp] = useState(0);
-
   console.log(temp);
+
+  const [isLoadingLuckUp, setIsLoadingLuckUp] = useState(false);
 
   const calculatePrice = () => {
     switch (index) {
@@ -364,7 +367,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     event: React.ChangeEvent<HTMLInputElement>,
     setImageUrl: React.Dispatch<React.SetStateAction<string>>
   ) => {
-    const token = localStorage.token;
+    const token = localStorage.getItem("accessToken");
     const file = event.target.files?.[0];
     if (file) {
       const formData = new FormData();
@@ -412,11 +415,101 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     }
   };
 
+  const scrollToElement = (input: any, boxNumber: any) => {
+    switch (boxNumber) {
+      case 1:
+        break;
+      case 2:
+        input.current.focus();
+        break;
+      default:
+        break;
+    }
+  };
+
+  const validateSearchCodeBHXH = () => {
+    if (registerInfoBHYT["listInsuredPerson"][index].fullName == "") {
+      toast.warn("Họ và tên không được để trống");
+      scrollToElement(refs.fullName, 2);
+      return false;
+    }
+    if (registerInfoBHYT["listInsuredPerson"][index].doB == "") {
+      toast.warn("Ngày sinh không được để trống");
+      scrollToElement(refs.dob, 2);
+      return false;
+    }
+    if (registerInfoBHYT["listInsuredPerson"][index].gender == "") {
+      toast.warn("Giới tính không được để trống");
+      scrollToElement(refs.gender, 2);
+      return false;
+    }
+    if (registerInfoBHYT["listInsuredPerson"][index].ksTinhThanhMa == 0) {
+      toast.warn("Tỉnh thành khai sinh không được để trống");
+      scrollToElement(refs.selectedKSProvince, 2);
+      return false;
+    }
+
+    if (registerInfoBHYT["listInsuredPerson"][index].ksQuanHuyenMa == 0) {
+      toast.warn("Quận huyện khai sinh không được để trống");
+      scrollToElement(refs.selectedKSDistrict, 2);
+      return false;
+    }
+
+    if (registerInfoBHYT["listInsuredPerson"][index].ksXaPhuongMa == 0) {
+      toast.warn("Phường xã khai sinh không được để trống");
+      scrollToElement(refs.selectedKSWard, 2);
+      return false;
+    }
+    return true;
+  };
+
+  const onSubmitFormData = async () => {
+    setIsLoadingLuckUp(true);
+    const token = localStorage.getItem("accessToken");
+    const data = {
+      name: registerInfoBHYT["listInsuredPerson"][index].fullName,
+      doB: registerInfoBHYT["listInsuredPerson"][index].doB,
+      Gender: registerInfoBHYT["listInsuredPerson"][index].gender,
+      ProvinceId: registerInfoBHYT["listInsuredPerson"][index].ksTinhThanhMa,
+      DistrictId: registerInfoBHYT["listInsuredPerson"][index].ksQuanHuyenMa,
+      WardId: registerInfoBHYT["listInsuredPerson"][index].ksXaPhuongMa,
+    };
+    try {
+      const response = await axios.post(
+        "https://baohiem.dion.vn/InsuranceOrder/api/search-social-insurance-number",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.message == "SUCCESS") {
+        toast.success("Tra cứu mã bảo hiểm thành công");
+        setSocialInsuranceNumber(response.data.data[0].maSoBhxh);
+        setIsLoadingLuckUp(false);
+      }
+
+      if (response.data.message == "BAD_REQUEST") {
+        toast.warn("Không tìm thấy mã số BHXH");
+        setSocialInsuranceNumber("");
+        setIsLoadingLuckUp(false);
+      }
+    } catch (error) {
+      toast.error("Tra cứu mã bảo hiểm thất bại");
+      setSocialInsuranceNumber("");
+      setIsLoadingLuckUp(false);
+      console.log(error);
+    }
+  };
+
   const renderHeader = () => {
     return (
       <div className="flex items-center justify-between">
         <h3 className="text-[#0076B7] text-lg font-medium">
-          Thông tin người được bảo hiểm {index + 1}
+          Người tham gia BHYT HGD
         </h3>
         {index != 0 ? (
           <button
@@ -439,21 +532,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
         <span className="text-base font-semibold text-[#0076B7]">
           {calculatePrice()}
         </span>
-        <ul className="list-disc px-4">
-          <li>
-            <p className="text-sm font-normal">
-              Vui lòng nhập số BHXH để tra cứu thông tin
-            </p>
-          </li>
-          <li>
-            <p className="text-sm font-normal">
-              Tra cứu mã số BHXH bằng thông tin khai sinh{" "}
-              <span className="text-[#0076B7] font-semibold underline">
-                tại đây
-              </span>
-            </p>
-          </li>
-        </ul>
       </div>
     );
   };
@@ -497,8 +575,17 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
             required
           />
 
-          <div className="absolute inset-y-0 start-[79%] top-0 flex items-center pointer-events-none">
-            <p className="text-base font-normal text-[#0076B7]">Tra cứu</p>
+          <div
+            onClick={() => {
+              if (validateSearchCodeBHXH() && !isLoadingLuckUp) {
+                onSubmitFormData();
+              }
+            }}
+            className="absolute inset-y-0 start-[79%] top-0 flex items-center"
+          >
+            <p className="text-base font-normal text-[#0076B7]">
+              {!isLoadingLuckUp ? "Tra cứu" : "Đang tải..."}
+            </p>
           </div>
         </div>
         {errors.socialInsuranceNumber && (
@@ -574,11 +661,9 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     );
   };
 
-  type Position = "absolute" | "relative" | "fixed";
-
   const customStyles = {
     content: {
-      position: "absolute" as Position,
+      position: "absolute" as const, // Kiểu dữ liệu được khai báo là const để tránh lỗi TS
       top: "50%",
       left: "50%",
       right: "auto",
@@ -587,16 +672,16 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
       transform: "translate(-50%, -50%)",
     },
     overlay: {
-      background: "rgba(0, 0, 0, 0.5)",
+      background: "rgba(0, 0, 0, 0.75)",
     },
   };
 
   const drawRoundedRect = (
-    ctx: CanvasRenderingContext2D,
-    x: number,
-    y: number,
-    width: number,
-    radius: number
+    ctx: any,
+    x: any,
+    y: any,
+    width: any,
+    radius: any
   ) => {
     ctx.beginPath();
     ctx.moveTo(x + radius, y);
@@ -629,16 +714,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     ctx.strokeStyle = "red";
     ctx.lineWidth = 2;
     ctx.stroke();
-  };
-
-  const constraints = {
-    facingMode: "environment",
-    aspectRatio: { ideal: 18 / 6 },
-    frameRate: { ideal: 50 },
-    width: { ideal: 2160 },
-    height: { ideal: 720 },
-    echoCancellation: true,
-    suppressLocalAudioPlayback: true,
   };
 
   const renderUploadImages = () => {
@@ -695,8 +770,16 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
               <Scanner
                 paused={!isShowModelQR}
-                onError={() => {}}
-                constraints={constraints}
+                constraints={{
+                  facingMode: "environment",
+                  aspectRatio: { ideal: 18 / 6 },
+                  frameRate: { ideal: 50 },
+                  width: { ideal: 2160 },
+                  height: { ideal: 720 },
+                  echoCancellation: true,
+                  // latency: { ideal: 0 }, // Remove this line as it's not a valid property in MediaTrackConstraints
+                  // suppressLocalAudioPlayback: true,
+                }}
                 components={{
                   torch: false,
                   zoom: true,
@@ -707,9 +790,15 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
                   ) => {
                     if (detectedCodes.length > 0) {
                       const { boundingBox } = detectedCodes[0];
+
+                      // boundingBox object contains properties like x, y, width, and height
                       const { x, y, width, height } = boundingBox;
+
                       setOpacityQR(0);
+
+                      // setPosition({ x: x + width, y: y - height });
                       setSize({ width: width, height: height });
+
                       drawRoundedRect(ctx, x, y, width, height);
                     }
                   },
@@ -747,7 +836,9 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
                       setSize({ width: 200, height: 200 });
                     }, 1000);
-                  } catch (error) {}
+                  } catch (error) {
+                    console.log(error);
+                  }
                 }}
                 allowMultiple={false}
                 styles={{
@@ -1613,7 +1704,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           size="large"
           className="w-[100%]"
           showSearch
-          loading={true}
           ref={refs.selectedTTWard}
           dropdownMatchSelectWidth={false}
           placeholder="Chọn phường xã"
@@ -1780,9 +1870,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
       {/* Tiền bảo hiểm */}
       {renderPrice()}
 
-      {/* Số BHXH*/}
-      {renderInputsocialInsuranceNumber()}
-
       {renderLine()}
 
       {/* Note */}
@@ -1871,6 +1958,25 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
       {/* Địa chỉ cụ thể  thường trú*/}
       {inputTTAddressDetailParticipants()}
+
+      <ul className="list-disc px-4">
+        <li>
+          <p className="text-sm font-normal">
+            Vui lòng nhập số BHXH để tra cứu thông tin
+          </p>
+        </li>
+        <li>
+          <p className="text-sm font-normal">
+            Tra cứu mã số BHXH bằng thông tin khai sinh{" "}
+            {/* <span className="text-[#0076B7] font-semibold underline">
+              tại đây
+            </span> */}
+          </p>
+        </li>
+      </ul>
+
+      {/* Số BHXH*/}
+      {renderInputsocialInsuranceNumber()}
 
       {modalLoading()}
     </div>

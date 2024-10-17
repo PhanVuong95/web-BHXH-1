@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { formatMoneyVND } from "../Utils/validateString";
 import logo from "../assets-src/logo1.png";
 import { useNavigate } from "react-router-dom";
@@ -129,10 +130,21 @@ const CardProductBHYT: React.FC<CardProductBHYTProps> = ({ data }) => {
         <button
           type="button"
           onClick={() => {
-            navigate("/register-BHYT/", {
-              state: { data: data, type: "register" },
-            });
+            const token = localStorage.getItem("accessToken");
+            if (token) {
+              navigate("/register-BHYT", {
+                state: { data: data, type: "register" },
+              });
+            } else {
+              navigate("/login");
+              toast.info("Bạn cần đăng nhập để sử dụng tính năng này");
+            }
           }}
+          // onClick={() => {
+          //   navigate("/register-BHYT/", {
+          //     state: { data: data, type: "register" },
+          //   });
+          // }}
           className="px-[10px] py-3 w-[46%] rounded-full bg-[#0076B7] text-[15px] font-medium text-[#fff]"
         >
           Mua ngay

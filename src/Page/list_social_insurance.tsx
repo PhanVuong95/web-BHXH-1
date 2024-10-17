@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SpecificContext } from "../Components/specificContext";
 import logo from "../assets-src/logo1.png";
-import HeaderBase from "../Components/headerBase";
+import { toast } from "react-toastify";
 
 interface Insurance {
   name: string;
@@ -109,9 +109,10 @@ const ListSocialInsurance = () => {
   }, [setInsuranceOrder]);
 
   return (
-    <div>
-      <HeaderBase isHome={false} title={"BHXH tự nguyện"} />
-      <div className="px-4 mt-8 pt-[68px] gap-[16px] py-[24px] flex flex-col ">
+    <div className="container mx-auto py-[40px]">
+      <h3 className="title-top-header">Khai báo BHXH tự nguyện</h3>
+      {/* <HeaderBase isHome={false} title={"BHXH tự nguyện"} /> */}
+      <div className="gap-[16px] flex flex-col box-shadow-product product-items">
         <div className="flex flex-col gap-8">
           <div className="p-4 bg-white w-full rounded-xl flex flex-col gap-4">
             <div className="flex gap-[10px]">
@@ -217,7 +218,13 @@ const ListSocialInsurance = () => {
               <button
                 type="button"
                 onClick={() => {
-                  navigate("/register-BHXH");
+                  const token = localStorage.getItem("accessToken");
+                  if (token) {
+                    navigate("/register-BHXH");
+                  } else {
+                    navigate("/login");
+                    toast.info("Bạn cần đăng nhập để sử dụng tính năng này!");
+                  }
                 }}
                 className="px-[10px] py-3 w-[46%] rounded-full bg-[#0076B7] text-[15px] font-medium text-[#fff]"
               >

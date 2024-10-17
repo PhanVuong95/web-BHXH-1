@@ -183,7 +183,8 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
   const headerStatus = () => {
     return (
       <div
-        className={`bg-[${renderBackground()}] py-[12px] px-4 flex flex-row items-center justify-between`}
+        style={{ backgroundColor: renderBackground() }}
+        className={` py-[12px] px-4 flex flex-row items-center justify-between`}
       >
         <p className="text-white text-sm font-normal">Trạng thái</p>
         <p className="text-white text-sm font-semibold">
@@ -195,7 +196,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
 
   return (
     <div>
-      <div className="pt-20 relative">
+      <div className="pt-20 relative max-w-[900px] mx-auto">
         {headerStatus()}
 
         <div className="page-1 flex flex-col gap-4 mb-4">
@@ -422,7 +423,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
           </div>
 
           {/* --------------------------------------------- */}
-          <div className="p-4 bg-white rounded-xl flex flex-col gap-4 mb-[35%]">
+          <div className="p-4 bg-white rounded-xl flex flex-col gap-4 mb-[3%]">
             <h3 className="text-[#0076B7] text-lg font-medium">
               Danh mục sản phẩm
             </h3>
@@ -474,7 +475,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
         </div>
 
         {!(orderStatusId == CANCELED || orderStatusId == DONE) && (
-          <div className="page-2 bg-white fixed bottom-0 w-[100%]">
+          <div className="page-2 bg-white w-[100%]">
             <div className="flex flex-col gap-3">
               <div className="flex flex-row content-center justify-between">
                 <p className="block text-sm font-normal text-gray-900">

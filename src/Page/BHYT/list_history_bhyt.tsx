@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { PulseLoader } from "react-spinners";
 import { formatMoneyVND } from "../../Utils/validateString";
 import logo from "../../assets-src/logo1.png";
-import HeaderBase from "../../Components/headerBase";
 
 const ListHistoryBHYT = ({}) => {
-  const navigate = useNavigate();
-
   const PENDING = 1001;
   const DONE = 1002;
   const CANCELED = 1003;
 
   const [openTab, setOpenTab] = useState(1);
   const [listOrder, setListOrder] = useState<any>([]);
-  const token = localStorage.token;
+  const token = localStorage.getItem("accessToken");
 
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -79,11 +76,11 @@ const ListHistoryBHYT = ({}) => {
   if (loading) {
     return (
       <>
-        <HeaderBase
+        {/* <HeaderBase
           isHome={false}
           onBack={() => navigate("/history")}
           title={"Lịch sử đăng ký BHYT TN"}
-        />
+        /> */}
         <div className="fixed inset-0 flex items-center justify-center">
           <PulseLoader size={15} loading={true} color="#0076B7" />
         </div>
@@ -106,11 +103,11 @@ const ListHistoryBHYT = ({}) => {
 
   return (
     <>
-      <HeaderBase
+      {/* <HeaderBase
         isHome={false}
         onBack={() => navigate("/history")}
         title={"Lịch sử đăng ký BHYT TN"}
-      />
+      /> */}
       <div className="page-1 !pb-2 !pt-[95px]">
         <div className="max-w-md mx-auto">
           <div className="mb-4 flex space-x-4 p-1 bg-white rounded-lg shadow-md">

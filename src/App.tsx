@@ -20,13 +20,16 @@ import HistoryUnpaidPage from "./Components/history_unpaid";
 import ContractPage from "./Page/contract_page";
 import HistoryPage from "./Page/history_page";
 import UserPage from "./Page/user";
+import LoginPage from "./Page/LoginPage";
+import PrivacyPolicyPage from "./Components/privacy_policy";
+import LuckUpBHXH from "./Page/luckup_bhxh";
 
 function App() {
   return (
     <>
       <ToastContainer
         style={{
-          width: "80%",
+          width: "25%",
           borderRadius: "20px",
           marginTop: "40px",
           marginLeft: "10%",
@@ -52,72 +55,79 @@ function App() {
           <Route path="contract" element={<ContractPage />} />
           <Route path="history" element={<HistoryPage />} />
           <Route path="user" element={<UserPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route
+            path="social-insurance"
+            element={
+              <SpecificProvider>
+                <ListSocialInsurance />
+              </SpecificProvider>
+            }
+          />
+          <Route path="health-insurance" element={<ListHealthInsurance />} />
+          <Route
+            path="product-detail/:id"
+            element={
+              <SpecificProvider>
+                <ProductDetailPage />
+              </SpecificProvider>
+            }
+          />
+          <Route path="product-detail-1/:id" element={<ProductDetailPage1 />} />
+          <Route
+            path="buill-pay/:id"
+            element={
+              <SpecificProvider>
+                <BillPayPage w={""} h={""} url={""} />
+              </SpecificProvider>
+            }
+          />
+          <Route
+            path="bill-pay-bhyt/:id"
+            element={
+              <SpecificProvider>
+                <BillPayBHYTPage w={""} h={""} url={""} />
+              </SpecificProvider>
+            }
+          />
+          <Route
+            path="buill-detail/:id"
+            element={
+              <SpecificProvider>
+                <BuillDetailPage />
+              </SpecificProvider>
+            }
+          />
+          <Route
+            path="register-BHXH"
+            element={
+              <SpecificProvider>
+                <RegisterBHXH />
+              </SpecificProvider>
+            }
+          />
+          <Route path="register-BHYT/" element={<RegisterBHYT />} />
+          <Route
+            path="lists-history"
+            element={<ListsHistoryPage w={""} h={""} url={""} />}
+          />
+          <Route path="info-detail-bhyt/:id" element={<InfoDetailBHYT />} />
+          <Route path="list-history-bhyt" element={<ListHistoryBHYT />} />
+          <Route
+            path="check-status-procedure/:id"
+            element={<CheckStatusProcedure />}
+          />
+          <Route
+            path="history-unpaid/:id"
+            element={
+              <SpecificProvider>
+                <HistoryUnpaidPage />
+              </SpecificProvider>
+            }
+          />
+          <Route path="/privacy_policy" element={<PrivacyPolicyPage />} />
+          <Route path="/luckup-bhxh" element={<LuckUpBHXH />} />
         </Route>
-        <Route
-          path="/social-insurance"
-          element={
-            <SpecificProvider>
-              <ListSocialInsurance />
-            </SpecificProvider>
-          }
-        />
-        <Route path="/health-insurance" element={<ListHealthInsurance />} />
-        <Route
-          path="/product-detail/:id"
-          element={
-            <SpecificProvider>
-              <ProductDetailPage />
-            </SpecificProvider>
-          }
-        />
-        <Route path="/product-detail-1/:id" element={<ProductDetailPage1 />} />
-        <Route
-          path="/buill-pay/:id"
-          element={
-            <SpecificProvider>
-              <BillPayPage w={""} h={""} url={""} />
-            </SpecificProvider>
-          }
-        />
-        <Route
-          path="/bill-pay-bhyt/:id"
-          element={<BillPayBHYTPage w={""} h={""} url={""} />}
-        />
-        <Route
-          path="/buill-detail/:id"
-          element={
-            <SpecificProvider>
-              <BuillDetailPage />
-            </SpecificProvider>
-          }
-        />
-        <Route
-          path="/register-BHXH"
-          element={
-            <SpecificProvider>
-              <RegisterBHXH />
-            </SpecificProvider>
-          }
-        />
-        <Route path="/register-BHYT/" element={<RegisterBHYT />} />
-        <Route
-          path="/lists-history"
-          element={<ListsHistoryPage w={""} h={""} url={""} />}
-        />
-        <Route path="/info-detail-bhyt/:id" element={<InfoDetailBHYT />} />
-        <Route path="/list-history-bhyt" element={<ListHistoryBHYT />} />
-        <Route
-          path="/check-status-procedure/:id"
-          element={<CheckStatusProcedure />}
-        />
-        <Route
-          path="/history-unpaid/:id"
-          element={
-            <SpecificProvider>
-              <HistoryUnpaidPage />
-            </SpecificProvider>
-          }
-        />
       </Routes>
     </>
   );

@@ -17,7 +17,7 @@ import {
   isValidPhone,
 } from "../Utils/validateString";
 import { IDetectedBarcode, Scanner } from "@yudiel/react-qr-scanner";
-import { Input, Select, DatePicker, Checkbox } from "antd";
+import { Input, Select, DatePicker, Checkbox, Slider } from "antd";
 import dayjs from "dayjs";
 import "../locale/vi";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -26,7 +26,6 @@ import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import lottieScanQR from "../assets-src/lottie_scan_qr.json";
 import CardMembersHouseHoldBHXH from "./card_members_house_hold_bhxh";
-import HeaderBase from "./headerBase";
 
 dayjs.locale("vi");
 dayjs.extend(customParseFormat);
@@ -86,6 +85,7 @@ const RegisterBHXH = () => {
   const { insuranceOrder, setInsuranceOrder } = specificContext;
   const frontImageInputRef = useRef<HTMLInputElement>(null);
   const backImageInputRef = useRef<HTMLInputElement>(null);
+  const [wageSlider, setWageSlider] = useState<number>(1500000);
 
   // Hộ gia đình
   const createNewMember = () => ({
@@ -114,6 +114,8 @@ const RegisterBHXH = () => {
   const [benefitLevel, setBenefitLevel] = useState("");
   const infoInsuranceProvinces = useRef([]);
   const infoInsuranceHospital = useRef([]);
+
+  console.log(benefitLevel);
 
   const [
     selectedMedicalByProvinceParticipant,
@@ -866,7 +868,9 @@ const RegisterBHXH = () => {
     event: React.ChangeEvent<HTMLInputElement>,
     setImageUrl: React.Dispatch<React.SetStateAction<string>>
   ) => {
-    const token = localStorage.token;
+    const token = localStorage.getItem("accessToken");
+    console.log(token);
+
     const file = event.target.files?.[0];
     if (file) {
       const formData = new FormData();
@@ -1245,7 +1249,7 @@ const RegisterBHXH = () => {
   };
 
   const AddInsuranceOrder = async () => {
-    const token = localStorage.token;
+    const token = localStorage.getItem("accessToken");
     try {
       const response = await axios.post(
         "https://baohiem.dion.vn/insuranceorder/api/add-order",
@@ -1294,7 +1298,7 @@ const RegisterBHXH = () => {
   };
 
   const UpdateInsuranceOrder = async () => {
-    const token = localStorage.token;
+    const token = localStorage.getItem("accessToken");
     try {
       const response = await axios.post(
         "https://baohiem.dion.vn/insuranceorder/api/update-order",
@@ -1324,7 +1328,7 @@ const RegisterBHXH = () => {
 
   const boxHeaderParticipants = () => {
     return (
-      <div className="flex justify-between">
+      <div className="flex justify-between w-full">
         <h3 className="text-[#0076B7] text-lg font-medium">
           Thông tin người tham gia BHXH tự nguyện{" "}
         </h3>
@@ -1341,7 +1345,7 @@ const RegisterBHXH = () => {
 
   const inputFullNameParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Họ và tên <samp className="text-red-600">*</samp>
         </label>
@@ -1369,7 +1373,7 @@ const RegisterBHXH = () => {
 
   const inputProvinceParticipate = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành nơi tham gia BHXH <samp className="text-red-600">*</samp>
         </label>
@@ -1397,7 +1401,7 @@ const RegisterBHXH = () => {
 
   const inputCCCDParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số CCCD <samp className="text-red-600">*</samp>
         </label>
@@ -1461,7 +1465,7 @@ const RegisterBHXH = () => {
 
   const inputDobParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Ngày sinh <samp className="text-red-600">*</samp>
         </label>
@@ -1483,7 +1487,7 @@ const RegisterBHXH = () => {
 
   const inputGenderParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Giới tính <samp className="text-red-600">*</samp>
         </label>
@@ -1520,7 +1524,7 @@ const RegisterBHXH = () => {
 
   const inputEthnicParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Dân tộc <samp className="text-red-600">*</samp>
         </label>
@@ -1556,23 +1560,57 @@ const RegisterBHXH = () => {
 
   const inputSalaryParticipants = () => {
     return (
-      <div>
+      <div className="w-full">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Mức lương làm căn cứ đóng <samp className="text-red-600">*</samp>
         </label>
+        <Slider
+          min={1500000}
+          max={46800000}
+          step={50000}
+          value={wageSlider}
+          onChange={(e) => {
+            wage.current = e;
+            setWageSlider(e);
+            // Cập nhật giá trị trong insuranceOrder
+            setInsuranceOrder((prevOrder: any) => ({
+              ...prevOrder,
+              listInsuredPerson: prevOrder.listInsuredPerson.map(
+                (person: any, index: any) =>
+                  index === 0
+                    ? {
+                        ...person,
+                        wage: wage.current,
+                      }
+                    : person
+              ),
+            }));
+
+            // Hiển thị giá trị định dạng với phân cách hàng nghìn
+            setDisplayValue(e.toLocaleString("vi-VN"));
+
+            // Tính toán giá cuối cùng
+            calculateFinalPrice();
+          }}
+        />
         <div className="relative">
           <Input
             type="text"
+            // disabled
             id="salary"
             value={displayValue}
             ref={participantRefs.salaryParticipant}
             className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Nhập mức lương"
             onChange={(e) => {
-              // Lấy giá trị từ input và loại bỏ dấu phân cách hàng nghìn (dấu chấm)
-              let rawValue = e.target.value.replace(/\D/g, "");
+              const numbers = e!.target.value.replace(/\D/g, "");
+
               // Chuyển đổi giá trị thành số, nếu rỗng thì đặt thành 0
-              let numericValue = rawValue !== "" ? Number(rawValue) : 0;
+              let numericValue = numbers != "" ? Number(numbers) : 0;
+              if (numericValue > 46800000) numericValue = 46800000;
+
+              setWageSlider(numericValue);
+
               // Cập nhật giá trị wage
               wage.current = numericValue;
               // Cập nhật giá trị trong insuranceOrder
@@ -1606,7 +1644,7 @@ const RegisterBHXH = () => {
 
   const inputMonthcountParticipants = () => {
     return (
-      <div>
+      <div className="w-full">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số tháng đóng <samp className="text-red-600">*</samp>
         </label>
@@ -1675,7 +1713,7 @@ const RegisterBHXH = () => {
 
   const inputBudgetParticipants = () => {
     return (
-      <div>
+      <div className="w-full">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Ngân sách hỗ trợ
         </label>
@@ -1696,7 +1734,7 @@ const RegisterBHXH = () => {
 
   const inputKSProvinceParticipate = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành <samp className="text-red-600">*</samp>
         </label>
@@ -1745,7 +1783,7 @@ const RegisterBHXH = () => {
 
   const inputKSDistrictParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện <samp className="text-red-600">*</samp>
         </label>
@@ -1787,7 +1825,7 @@ const RegisterBHXH = () => {
 
   const inputKSWardParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã <samp className="text-red-600">*</samp>
         </label>
@@ -1825,7 +1863,7 @@ const RegisterBHXH = () => {
 
   const inputKSAddrestailParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ cụ thể <samp className="text-red-600">*</samp>
         </label>
@@ -1859,7 +1897,7 @@ const RegisterBHXH = () => {
 
   const inputTTProvinceParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành <samp className="text-red-600">*</samp>
         </label>
@@ -1907,7 +1945,7 @@ const RegisterBHXH = () => {
 
   const inputTTDistrictParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện <samp className="text-red-600">*</samp>
         </label>
@@ -1949,7 +1987,7 @@ const RegisterBHXH = () => {
 
   const inputTTWardParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã <samp className="text-red-600">*</samp>
         </label>
@@ -1989,7 +2027,7 @@ const RegisterBHXH = () => {
 
   const inputTTAddressDetailParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ cụ thể <samp className="text-red-600">*</samp>
         </label>
@@ -2023,7 +2061,7 @@ const RegisterBHXH = () => {
 
   const inputAreaSalaryParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Vùng lương tối thiểu <samp className="text-red-600">*</samp>
         </label>
@@ -2066,7 +2104,7 @@ const RegisterBHXH = () => {
 
   const inputMedicalByProvinceParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành khám chữa bệnh <samp className="text-red-600">*</samp>
         </label>
@@ -2253,7 +2291,7 @@ const RegisterBHXH = () => {
 
   const inputHospitalExaminationParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Bệnh viện khám chữa bệnh <samp className="text-red-600">*</samp>
         </label>
@@ -2297,7 +2335,7 @@ const RegisterBHXH = () => {
 
   const inputClosingRateParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Mức đóng / Hệ số đóng
         </label>
@@ -2315,7 +2353,7 @@ const RegisterBHXH = () => {
 
   const inputFullNamHouseHoldParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Họ tên chủ hộ <samp className="text-red-600">*</samp>
         </label>
@@ -2344,7 +2382,7 @@ const RegisterBHXH = () => {
 
   const inputCCCDHouseHoldParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số CCCD chủ hộ <samp className="text-red-600">*</samp>
         </label>
@@ -2374,7 +2412,7 @@ const RegisterBHXH = () => {
 
   const inputProvinceHouseHoldParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Thành phố khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -2415,7 +2453,7 @@ const RegisterBHXH = () => {
 
   const inputDistrictHouseHoldParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -2456,7 +2494,7 @@ const RegisterBHXH = () => {
 
   const inputWardHouseHoldParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã khai sinh<samp className="text-red-600">*</samp>
         </label>
@@ -2491,7 +2529,7 @@ const RegisterBHXH = () => {
 
   const inputTTProvinceHouseHoldParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Thành phố thường trú <samp className="text-red-600">*</samp>
         </label>
@@ -2535,7 +2573,7 @@ const RegisterBHXH = () => {
 
   const inputTTDistrictHouseHoldParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện thường trú <samp className="text-red-600">*</samp>
         </label>
@@ -2576,7 +2614,7 @@ const RegisterBHXH = () => {
 
   const inputTTWardHouseHoldParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã thường trú <samp className="text-red-600">*</samp>
         </label>
@@ -2611,7 +2649,7 @@ const RegisterBHXH = () => {
 
   const inputAddressDetailHouseHoldParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ cụ thể khai sinh<samp className="text-red-600">*</samp>
         </label>
@@ -2640,7 +2678,7 @@ const RegisterBHXH = () => {
 
   const inputAddressDetailHKHouseHoldParticipants = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ hộ khẩu <samp className="text-red-600">*</samp>
         </label>
@@ -2869,7 +2907,7 @@ const RegisterBHXH = () => {
   //   return (
   //     <div
   //       key={`${index}`}
-  //       className="p-4 rounded-xl flex flex-col gap-6 border border-gray-300"
+  //       className="p-4 rounded-xl flex flex-col gap-6 border border-gray-300 w-full"
   //     >
   //       <div className="flex justify-between">
   //         <div className="text-[#0076B7] text-sm font-medium">
@@ -2912,7 +2950,7 @@ const RegisterBHXH = () => {
     return (
       <button
         type="button"
-        className="p-3 bg-white rounded-xl flex flex-row items-center justify-center gap-2 border border-gray-300 "
+        className="p-3 bg-white rounded-xl flex flex-row items-center justify-center gap-2 border border-gray-300 w-full"
         onClick={() => {
           setMembers([...members, createNewMember()]);
 
@@ -2962,89 +3000,97 @@ const RegisterBHXH = () => {
     return (
       <div className="p-4 mx-4 bg-white rounded-xl flex flex-col gap-6">
         <>
-          {/* Header thông tin người tham gia */}
-          {boxHeaderParticipants()}
+          <div className=" bg-white rounded-xl flex flex-row flex-wrap gap-6">
+            {/* Header thông tin người tham gia */}
+            {boxHeaderParticipants()}
 
-          {/* Tên người tham gia */}
-          {inputFullNameParticipants()}
+            {/* Tên người tham gia */}
+            {inputFullNameParticipants()}
 
-          {/* Tỉnh thành nơi tham gia BHXH*/}
-          {inputProvinceParticipate()}
+            {/* Tỉnh thành nơi tham gia BHXH*/}
+            {inputProvinceParticipate()}
 
-          {/* Số CCCCD */}
-          {inputCCCDParticipants()}
+            {/* Số CCCCD */}
+            {inputCCCDParticipants()}
 
-          {/* Ngày sinh */}
-          {inputDobParticipants()}
+            {/* Ngày sinh */}
+            {inputDobParticipants()}
 
-          {/* Giới tính */}
-          {inputGenderParticipants()}
+            {/* Giới tính */}
+            {inputGenderParticipants()}
 
-          {/* Dân tộc */}
-          {inputEthnicParticipants()}
+            {/* Dân tộc */}
+            {inputEthnicParticipants()}
 
-          {/*  Mức lương làm căn cứ đóng */}
-          {inputSalaryParticipants()}
+            {/*  Mức lương làm căn cứ đóng */}
+            {inputSalaryParticipants()}
 
-          {/* Số tháng đóng */}
-          {inputMonthcountParticipants()}
+            {/* Số tháng đóng */}
+            {inputMonthcountParticipants()}
 
-          {/* Ngân sách hỗ trợ */}
-          {inputBudgetParticipants()}
+            {/* Ngân sách hỗ trợ */}
+            {inputBudgetParticipants()}
+          </div>
 
-          <h3 className="text-base font-semibold text-[#0076B7]">
-            Địa chỉ khai sinh{" "}
-          </h3>
+          <div className=" bg-white rounded-xl flex flex-row flex-wrap gap-6">
+            <h3 className="text-base font-semibold text-[#0076B7] w-full">
+              Địa chỉ khai sinh{" "}
+            </h3>
 
-          {/* Tỉnh thành */}
-          {inputKSProvinceParticipate()}
+            {/* Tỉnh thành */}
+            {inputKSProvinceParticipate()}
 
-          {/* Quận huyện */}
-          {inputKSDistrictParticipants()}
+            {/* Quận huyện */}
+            {inputKSDistrictParticipants()}
 
-          {/* Phường xã */}
-          {inputKSWardParticipants()}
+            {/* Phường xã */}
+            {inputKSWardParticipants()}
 
-          {/* Địa chỉ chi tiết */}
-          {inputKSAddrestailParticipants()}
+            {/* Địa chỉ chi tiết */}
+            {inputKSAddrestailParticipants()}
+          </div>
 
-          <h3 className="text-base font-semibold text-[#0076B7]">
-            Địa chỉ thường trú{" "}
-          </h3>
+          <div className=" bg-white rounded-xl flex flex-row flex-wrap gap-6">
+            <h3 className="text-base font-semibold text-[#0076B7] w-full">
+              Địa chỉ thường trú
+            </h3>
 
-          {/* Tỉnh thành */}
-          {inputTTProvinceParticipants()}
+            {/* Tỉnh thành */}
+            {inputTTProvinceParticipants()}
 
-          {/* Quận huyện */}
-          {inputTTDistrictParticipants()}
+            {/* Quận huyện */}
+            {inputTTDistrictParticipants()}
 
-          {/* Phường xã */}
-          {inputTTWardParticipants()}
+            {/* Phường xã */}
+            {inputTTWardParticipants()}
 
-          {/* Địa chỉ cụ thể */}
-          {inputTTAddressDetailParticipants()}
+            {/* Địa chỉ cụ thể */}
+            {inputTTAddressDetailParticipants()}
+          </div>
 
-          <h3 className="text-base font-semibold text-[#0076B7]">
-            Thông tin bảo hiểm{" "}
-          </h3>
+          <div className=" bg-white rounded-xl flex flex-row flex-wrap gap-6">
+            <h3 className="text-base font-semibold text-[#0076B7] w-full">
+              Thông tin bảo hiểm{" "}
+            </h3>
 
-          {/* Vùng lương tối thiểu */}
-          {inputAreaSalaryParticipants()}
+            {/* Vùng lương tối thiểu */}
+            {inputAreaSalaryParticipants()}
 
-          {/* Mức hưởng */}
-          {/* {inputBenefitLevelParticipants()} */}
+            {/* Mức hưởng */}
+            {/* {inputBenefitLevelParticipants()} */}
 
-          {/* Tỉnh thành khám chữa bệnh */}
-          {inputMedicalByProvinceParticipants()}
+            {/* Tỉnh thành khám chữa bệnh */}
+            {inputMedicalByProvinceParticipants()}
 
-          {/* Quận huyện khám chữa bênh */}
-          {/* {inputExaminationByDistrictParticipants()} */}
+            {/* Quận huyện khám chữa bênh */}
+            {/* {inputExaminationByDistrictParticipants()} */}
 
-          {/* Bệnh viện khám chữa bệnh */}
-          {inputHospitalExaminationParticipants()}
+            {/* Bệnh viện khám chữa bệnh */}
+            {inputHospitalExaminationParticipants()}
 
-          {/* Mức đóng / Hệ số đóng */}
-          {inputClosingRateParticipants()}
+            {/* Mức đóng / Hệ số đóng */}
+            {inputClosingRateParticipants()}
+          </div>
 
           <Checkbox
             checked={isHadBHXH}
@@ -3107,8 +3153,8 @@ const RegisterBHXH = () => {
           {isHadBHXH && inputBHXHParticipants()}
 
           {!isHadBHXH && (
-            <div className="flex flex-col gap-6">
-              <h3 className="text-base font-semibold text-[#0076B7]">
+            <div className="flex flex-row flex-wrap gap-6">
+              <h3 className="text-base font-semibold text-[#0076B7] w-full">
                 Thông tin hộ gia đình{" "}
               </h3>
 
@@ -3401,7 +3447,7 @@ const RegisterBHXH = () => {
 
   const inputPhoneBuyer = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số điện thoại <samp className="text-red-600">*</samp>
         </label>
@@ -3428,7 +3474,7 @@ const RegisterBHXH = () => {
 
   const inputFullNameBuyer = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Họ và tên <samp className="text-red-600">*</samp>
         </label>
@@ -3453,7 +3499,7 @@ const RegisterBHXH = () => {
 
   const inputEmailBuyer = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Email
         </label>
@@ -3478,7 +3524,7 @@ const RegisterBHXH = () => {
 
   const inputProvinceBuyer = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành <samp className="text-red-600">*</samp>
         </label>
@@ -3519,7 +3565,7 @@ const RegisterBHXH = () => {
 
   const inputDistrictBuyer = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện <samp className="text-red-600">*</samp>
         </label>
@@ -3556,7 +3602,7 @@ const RegisterBHXH = () => {
 
   const inputWardBuyer = () => {
     return (
-      <div>
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã <samp className="text-red-600">*</samp>
         </label>
@@ -3586,7 +3632,7 @@ const RegisterBHXH = () => {
 
   const inputAddressDetailBuyer = () => {
     return (
-      <div>
+      <div className="w-full">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ cụ thể <samp className="text-red-600">*</samp>
         </label>
@@ -3611,8 +3657,8 @@ const RegisterBHXH = () => {
 
   const infoBuyer = () => {
     return (
-      <div className="p-4 mx-4 bg-white rounded-xl flex flex-col gap-6">
-        <h3 className="text-[#0076B7] text-lg font-medium">
+      <div className="p-4 mx-4 bg-white rounded-xl flex flex-row flex-wrap gap-6">
+        <h3 className="text-[#0076B7] text-lg font-medium w-full">
           Thông tin người mua
         </h3>
 
@@ -3908,8 +3954,8 @@ const RegisterBHXH = () => {
   };
 
   return (
-    <>
-      <HeaderBase isHome={false} title={"Đăng ký BHXH Tự nguyện"} />
+    <div className="container mx-auto ">
+      {/* <HeaderBase isHome={false} title={"Đăng ký BHXH Tự nguyện"} /> */}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className=" flex flex-col gap-4 pt-[75px]"
@@ -3935,7 +3981,7 @@ const RegisterBHXH = () => {
 
       {/* Modal QR  */}
       {modalScanQR()}
-    </>
+    </div>
   );
 };
 

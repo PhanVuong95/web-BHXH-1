@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import HeaderBase from "./headerBase";
 
 const ProductDetailPage1: React.FunctionComponent = () => {
   const [imageSrcs, setImageSrcs] = useState<string[]>([]);
@@ -36,7 +35,7 @@ const ProductDetailPage1: React.FunctionComponent = () => {
   return (
     <div className="pt-20">
       <div className="p-4 mb-20">
-        <HeaderBase isHome={false} title={"Giới thiệu BHYT tự nguyện"} />
+        {/* <HeaderBase isHome={false} title={"Giới thiệu BHYT tự nguyện"} /> */}
         <div className="flex flex-wrap items-center justify-center min-h-[95vh]">
           {imageSrcs.length > 0 ? (
             imageSrcs.map((src, index) => (

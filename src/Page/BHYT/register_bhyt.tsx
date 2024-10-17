@@ -22,7 +22,6 @@ import Modal from "react-modal";
 import CardHouseHold from "../../Components/card_house_hold";
 import CardMembersHouseHold from "../../Components/card_members_house_hold";
 import CardObject from "../../Components/card_object";
-import HeaderBase from "./../../Components/headerBase";
 
 const RegisterBHYT = () => {
   const { state } = useLocation();
@@ -696,18 +695,18 @@ const RegisterBHYT = () => {
     return true;
   };
 
-  const renderHeader = () => {
-    return (
-      <HeaderBase
-        isHome={false}
-        title={
-          state.type == "register"
-            ? "Đăng ký BHYT tự nguyện"
-            : "Cập nhật BHYT tự nguyện"
-        }
-      />
-    );
-  };
+  // const renderHeader = () => {
+  //   return (
+  //     <HeaderBase
+  //       isHome={false}
+  //       title={
+  //         state.type == "register"
+  //           ? "Đăng ký BHYT tự nguyện"
+  //           : "Cập nhật BHYT tự nguyện"
+  //       }
+  //     />
+  //   );
+  // };
 
   const renderAddUserBeneficiary = () => {
     return (
@@ -749,7 +748,7 @@ const RegisterBHYT = () => {
     event: React.ChangeEvent<HTMLInputElement>,
     setFileUpload: React.Dispatch<React.SetStateAction<string>>
   ) => {
-    const token = localStorage.token;
+    const token = localStorage.getItem("accessToken");
     const file = event.target.files?.[0];
     if (file) {
       const formData = new FormData();
@@ -963,7 +962,7 @@ const RegisterBHYT = () => {
   };
 
   const onSubmitFormData = async () => {
-    const token = localStorage.token;
+    const token = localStorage.getItem("accessToken");
     try {
       if (registerInfoBHYT["id"] == 0) {
         onCreate(token);
@@ -1067,8 +1066,8 @@ const RegisterBHYT = () => {
   };
 
   return (
-    <div className="pt-20">
-      {renderHeader()}
+    <div className="pt-20 max-w-[1000px] mx-auto">
+      {/* {renderHeader()} */}
       <div className="page-1 flex flex-col gap-4">
         <div className="p-4 bg-white rounded-xl flex flex-col gap-6">
           <CardObject refs={ObjectTypeRefs} />

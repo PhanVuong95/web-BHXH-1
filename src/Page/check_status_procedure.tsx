@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 import { formatDate, formatDateByTime } from "../Utils/validateString";
-import HeaderBase from "../Components/headerBase";
 
 const CheckStatusProcedure = () => {
   const { id } = useParams();
@@ -12,7 +11,7 @@ const CheckStatusProcedure = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.token;
+      const token = localStorage.getItem("accessToken");
       try {
         const response = await axios.get(
           `https://baohiem.dion.vn/InsuranceOrder/api/check-status-procedure/${id}`,
@@ -52,7 +51,7 @@ const CheckStatusProcedure = () => {
   if (isLoading) {
     return (
       <>
-        <HeaderBase isHome={false} title={"Thông tin chi tiết"} />
+        {/* <HeaderBase isHome={false} title={"Thông tin chi tiết"} /> */}
         <div className="fixed inset-0 flex items-center justify-center">
           <PulseLoader size={15} loading={true} color="#0076B7" />
         </div>
@@ -258,7 +257,7 @@ const CheckStatusProcedure = () => {
 
   return (
     <div>
-      <HeaderBase isHome={false} title={"Thông tin chi tiết"} />
+      {/* <HeaderBase isHome={false} title={"Thông tin chi tiết"} /> */}
 
       <div className="pt-20">
         <div className="bg-white pb-1">

@@ -3,7 +3,6 @@ import axios from "axios";
 import { Widthheight } from "../Models";
 import { SpecificContext } from "./specificContext";
 import { Link } from "react-router-dom";
-import HeaderBase from "./headerBase";
 
 const BillPayPage: React.FC<Widthheight> = () => {
   const specificContext = useContext<any>(SpecificContext);
@@ -55,8 +54,7 @@ const BillPayPage: React.FC<Widthheight> = () => {
   }, []);
   return (
     <>
-      <HeaderBase isHome={false} title={"Đăng ký BHXH Tự nguyện"} />
-      <div className=" !pt-[95px] page-1 flex flex-col gap-4 mb-4 ">
+      <div className=" !pt-[95px] page-1 flex flex-col gap-4 mb-4 container mx-auto">
         <div className="p-4 bg-white rounded-xl flex flex-col gap-6">
           <h3 className="text-base font-medium text-[#0076B7]">
             Người mua bảo hiểm
@@ -298,7 +296,7 @@ const BillPayPage: React.FC<Widthheight> = () => {
         </div>
       </div>
 
-      <div className="page-2 bg-white">
+      <div className="page-2 bg-white  container mx-auto">
         <div className="flex flex-col gap-3">
           <div className="flex flex-row content-center justify-between">
             <p className="block text-sm font-normal text-gray-900">
