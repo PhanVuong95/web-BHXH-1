@@ -581,7 +581,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
                 onSubmitFormData();
               }
             }}
-            className="absolute inset-y-0 start-[79%] top-0 flex items-center"
+            className="absolute inset-y-0 start-[90%] top-0 flex items-center"
           >
             <p className="text-base font-normal text-[#0076B7]">
               {!isLoadingLuckUp ? "Tra cứu" : "Đang tải..."}
@@ -1200,7 +1200,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           className="w-[100%]"
           dropdownStyle={{ maxWidth: "300px" }}
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           ref={refs.ethnic}
           placeholder="Chọn dân tộc"
           value={ethnic}
@@ -1342,7 +1342,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           placeholder="Chọn tỉnh thành phố"
           virtual={false}
           value={medicalProvinceId}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           onChange={(value) => {
             setMedicalProvinceId(value);
 
@@ -1378,7 +1378,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   //         virtual={false}
   //         placeholder="Chọn quận huyện"
   //         value={medicalDistrictId}
-  //         dropdownMatchSelectWidth={false}
+  //         // // // dropdownMatchSelectWidth={false}
   //         onChange={(value) => {
   //           setMedicalDistrictId(value);
 
@@ -1420,7 +1420,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           virtual={false}
           placeholder="Chọn bệnh viện"
           value={hospitalId}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           onChange={(value) => {
             setHospitalId(value);
 
@@ -1484,7 +1484,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   //         showSearch
   //         placeholder="Chọn thành phố"
   //         ref={refs.insuranceProvinceId}
-  //         dropdownMatchSelectWidth={false}
+  //         // // // dropdownMatchSelectWidth={false}
   //         onChange={(value) => {
   //           setSelectedProvinceParticipate(value);
 
@@ -1513,7 +1513,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           className="w-[100%]"
           showSearch
           placeholder="Chọn tỉnh thành phố"
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           ref={refs.selectedKSProvince}
           value={selectedKSProvince}
           onChange={(value) => {
@@ -1551,7 +1551,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.selectedKSDistrict}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn quận huyện"
           value={selectedKSDistrict}
           key={selectedKSDistrict}
@@ -1583,7 +1583,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.selectedKSWard}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn phường xã"
           value={selectedKSWard}
           onChange={(value: any) => {
@@ -1637,7 +1637,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           showSearch
           ref={refs.selectedTTProvince}
           placeholder="Chọn tỉnh thành phố"
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           value={selectedTTProvince}
           onChange={(value) => {
             ttDistricts.current = [];
@@ -1673,7 +1673,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.selectedTTDistrict}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn quận huyện"
           value={selectedTTDistrict}
           key={selectedTTDistrict}
@@ -1705,7 +1705,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.selectedTTWard}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn phường xã"
           value={selectedTTWard}
           key={selectedTTWard}
@@ -1757,7 +1757,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn vùng lương"
           ref={refs.vungLuongToiThieuId}
           value={vungLuongToiThieuId}
@@ -1791,7 +1791,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.benefitLevel}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           dropdownStyle={{
             maxWidth: "300px",
           }}

@@ -387,7 +387,7 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
 
   const boxInfo = () => {
     return (
-      <div className="p-4 bg-white rounded-xl flex flex-col gap-4 mb-32">
+      <div className="p-4 bg-white rounded-xl flex flex-col gap-4 mb-2">
         <h3 className="text-[#0076B7] text-lg font-medium">
           Danh mục sản phẩm
         </h3>
@@ -461,7 +461,7 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
 
   const boxFooterPayment = () => {
     return (
-      <div className="page-2 bg-white fixed bottom-0 w-[100%]">
+      <div className="page-2 bg-white w-[100%]">
         <div className="flex flex-col gap-3">
           <div className="flex flex-row content-center justify-between">
             <p className="block text-sm font-normal text-gray-900">
@@ -509,7 +509,7 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
   };
 
   return (
-    <div className="pt-20">
+    <div className="pt-20 container mx-auto">
       {/* <HeaderBase
         isHome={false}
         title={"Thông tin chi tiết"}

@@ -188,7 +188,7 @@ const UserBuyerPage = (props: Props) => {
           ref={refs.provinceId}
           placeholder="Chọn tỉnh thành phố"
           value={selectedProvince}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           onChange={handleProvinceChange}
           key={selectedProvince}
           filterOption={(input, option) =>
@@ -214,7 +214,7 @@ const UserBuyerPage = (props: Props) => {
           ref={refs.districtId}
           placeholder="Chọn quận huyện"
           value={selectedDistrict}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           onChange={handleDistrictChange}
           key={selectedDistrict}
           filterOption={(input, option) =>
@@ -242,7 +242,7 @@ const UserBuyerPage = (props: Props) => {
           value={selectedWard}
           onChange={handlEwardChange}
           key={selectedWard}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           filterOption={(input, option) =>
             (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
           }

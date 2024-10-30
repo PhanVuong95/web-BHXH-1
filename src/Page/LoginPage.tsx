@@ -74,7 +74,7 @@ const LoginPage = () => {
         type: EQrCodeType.LOGIN_PORTAL,
         disableCallback: true,
       })
-    )}&${"env=DEVELOPMENT&version=zdev-0eea1ef1"}`;
+    )}&${"env=TESTING&version=34"}`;
 
     setLoginDeeplink(link);
   }, [clientId]);
@@ -93,7 +93,10 @@ const LoginPage = () => {
           paddingBottom: 50,
         }}
       >
-        <Tabs centered style={{ height: "100%", width: 400 }}>
+        <Tabs
+          centered
+          style={{ height: "100%", width: "100%", maxWidth: "400px" }}
+        >
           <Tabs.TabPane tab="Đăng nhập bằng ứng dụng" key="2">
             <FlexBox
               style={{

@@ -16,10 +16,10 @@ const HeaderPage = () => {
     setIsDropdownOpen((prevState) => !prevState);
   };
 
-  const handleDropdownItemClick = (item: any) => {
-    console.log(`Clicked on ${item}`);
-    // Add your logic for dropdown item click here
-  };
+  // const handleDropdownItemClick = (item: any) => {
+  //   console.log(`Clicked on ${item}`);
+  //   // Add your logic for dropdown item click here
+  // };
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -52,8 +52,8 @@ const HeaderPage = () => {
     const token = localStorage.getItem("accessToken");
     const profile = localStorage.getItem("profile");
 
-    console.log("profile: ", profile);
-    console.log("accessToken: ", token);
+    // console.log("profile: ", profile);
+    // console.log("accessToken: ", token);
 
     if (profile) {
       setUser(JSON.parse(profile));
@@ -175,12 +175,14 @@ const HeaderPage = () => {
             )}
           >
             <section className="text-black bg-white flex-col absolute left-0 top-0 h-screen p-5 z-50 w-full max-w-[388px] flex  ">
-              <IoCloseOutline
-                onClick={() => setMenu(false)}
-                className="mt-0 mb-5 text-3xl cursor-pointer"
-              />
+              <div className="w-[30px] h-[30px]">
+                <IoCloseOutline
+                  onClick={() => setMenu(false)}
+                  className="mt-0 mb-5 text-3xl cursor-pointer"
+                />
+              </div>
 
-              <div className="navbar-mobile-top py-[15px]">
+              <div className=" navbar-mobile-top py-[15px] ">
                 <div className="flex items-center gap-4 user-phone">
                   <div className="user">
                     <div className="flex flex-row items-center gap-1 name-user">
@@ -340,7 +342,7 @@ const HeaderPage = () => {
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded shadow-lg z-10">
                     <ul className="py-1">
-                      <li
+                      {/* <li
                         className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
                         onClick={() => handleDropdownItemClick("Profile")}
                       >
@@ -351,12 +353,12 @@ const HeaderPage = () => {
                         onClick={() => handleDropdownItemClick("Settings")}
                       >
                         Settings
-                      </li>
+                      </li> */}
                       <li
                         className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
                         onClick={handleLogout}
                       >
-                        Logout
+                        Đăng xuất
                       </li>
                     </ul>
                   </div>

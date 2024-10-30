@@ -230,7 +230,7 @@ const CardHouseHold = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.selectedHouseholdProvince}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Thành phố"
           value={selectedHouseholdProvince}
           key={selectedHouseholdProvince}
@@ -264,7 +264,7 @@ const CardHouseHold = (props: Props) => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Quận huyện"
           ref={refs.selectedHouseholdDistrict}
           value={selectedHouseholdDistrict}
@@ -300,7 +300,7 @@ const CardHouseHold = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.selectedHouseholdWard}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Phường xã"
           value={selectedHouseholdWard}
           key={selectedHouseholdWard}
@@ -350,7 +350,7 @@ const CardHouseHold = (props: Props) => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Thành phố"
           ref={refs.selectedTTHouseholdProvince}
           value={selectedTTHouseholdProvince}
@@ -388,7 +388,7 @@ const CardHouseHold = (props: Props) => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Quận huyện"
           ref={refs.selectedTTHouseholdDistrict}
           value={selectedTTHouseholdDistrict}
@@ -423,7 +423,7 @@ const CardHouseHold = (props: Props) => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Phường xã"
           ref={refs.selectedTTHouseholdWard}
           value={selectedTTHouseholdWard}

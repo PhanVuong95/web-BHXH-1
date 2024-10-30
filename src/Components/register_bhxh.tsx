@@ -102,6 +102,8 @@ const RegisterBHXH = () => {
     ksAddressDetail: React.createRef(),
   });
 
+  // console.log(insuranceOrder);
+
   const [members, setMembers] = useState<any>(
     Array.from(
       { length: insuranceOrder.houseHold.houseHoldPeoples.length },
@@ -109,13 +111,15 @@ const RegisterBHXH = () => {
     )
   );
 
+  // console.log(members);
+
   const [vungLuongToiThieuList, setVungLuongToiThieuList] = useState([]);
   const [vungLuongToiThieuId, setVungLuongToiThieuId] = useState(0);
   const [benefitLevel, setBenefitLevel] = useState("");
   const infoInsuranceProvinces = useRef([]);
   const infoInsuranceHospital = useRef([]);
 
-  console.log(benefitLevel);
+  // console.log(benefitLevel);
 
   const [
     selectedMedicalByProvinceParticipant,
@@ -682,7 +686,7 @@ const RegisterBHXH = () => {
           insuranceOrder.listInsuredPerson[0].hospitalId
         );
 
-        console.log(benefitLevel);
+        // console.log(benefitLevel);
 
         //Thông tin chủ hộ
         if (insuranceOrder.houseHold.soGiayToCaNhan != "") {
@@ -869,7 +873,7 @@ const RegisterBHXH = () => {
     setImageUrl: React.Dispatch<React.SetStateAction<string>>
   ) => {
     const token = localStorage.getItem("accessToken");
-    console.log(token);
+    // console.log(token);
 
     const file = event.target.files?.[0];
     if (file) {
@@ -901,7 +905,7 @@ const RegisterBHXH = () => {
   };
 
   const handleCardClick = (inputRef: React.RefObject<HTMLInputElement>) => {
-    if (inputRef.current) {
+    if (inputRef?.current) {
       inputRef.current.click();
     }
   };
@@ -1384,7 +1388,7 @@ const RegisterBHXH = () => {
           ref={participantRefs.provinceParticipate}
           placeholder="Chọn thành phố"
           value={selectedInsuranceProvinceId.current}
-          dropdownMatchSelectWidth={false}
+          // // // // dropdownMatchSelectWidth={false}
           onChange={handleProvinceChange}
           key={selectedInsuranceProvinceId.current}
           filterOption={(input, option) =>
@@ -1416,7 +1420,6 @@ const RegisterBHXH = () => {
           onChange={(e) => {
             // Lọc ra chỉ các ký tự số
             const filteredValue = e.target.value.replace(/\D/g, "");
-
             // Cập nhật giá trị của input và trạng thái citizenId
             setCitizenId(filteredValue);
             setInsuranceOrder((prevOrder: any) => ({
@@ -1496,7 +1499,7 @@ const RegisterBHXH = () => {
           className="w-[100%]"
           placeholder="Chọn giới tính"
           ref={participantRefs.genderParticipant}
-          dropdownMatchSelectWidth={false}
+          // // // // dropdownMatchSelectWidth={false}
           value={gender}
           onChange={(value) => {
             setGender(value);
@@ -1534,7 +1537,7 @@ const RegisterBHXH = () => {
           dropdownStyle={{ maxWidth: "300px" }}
           ref={participantRefs.ethnicParticipant}
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn dân tộc"
           value={ethnic}
           onChange={(value) => {
@@ -1560,7 +1563,7 @@ const RegisterBHXH = () => {
 
   const inputSalaryParticipants = () => {
     return (
-      <div className="w-full">
+      <div className="w-full sm:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Mức lương làm căn cứ đóng <samp className="text-red-600">*</samp>
         </label>
@@ -1644,7 +1647,7 @@ const RegisterBHXH = () => {
 
   const inputMonthcountParticipants = () => {
     return (
-      <div className="w-full">
+      <div className="w-full sm:w-[49%] pt-[35px]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số tháng đóng <samp className="text-red-600">*</samp>
         </label>
@@ -1652,7 +1655,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           placeholder="Chọn giới tính"
-          dropdownMatchSelectWidth={false}
+          // // // // dropdownMatchSelectWidth={false}
           ref={participantRefs.monthcountParticipant}
           value={monthCount.current}
           onChange={(value) => {
@@ -1724,7 +1727,7 @@ const RegisterBHXH = () => {
             value={supportBudget.toLocaleString("vi-VN")}
             readOnly
           />
-          <div className="absolute inset-y-0 start-[83%] top-0 flex items-center pointer-events-none">
+          <div className="absolute inset-y-0 start-[97%] top-0 flex items-center pointer-events-none">
             <p className="text-base font-normal text-[#767A7F]">vnđ</p>
           </div>
         </div>
@@ -1745,7 +1748,7 @@ const RegisterBHXH = () => {
           showSearch
           placeholder="Chọn tỉnh thành phố"
           ref={participantRefs.ksProvinceParticipant}
-          dropdownMatchSelectWidth={false}
+          // // // // dropdownMatchSelectWidth={false}
           value={selectedKSProvince}
           onChange={(value) => {
             ksDistricts.current = [];
@@ -1791,7 +1794,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // // dropdownMatchSelectWidth={false}
           ref={participantRefs.ksDistrictParticipant}
           placeholder="Chọn quận huyện"
           value={selectedKSDistrict}
@@ -1833,7 +1836,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // // dropdownMatchSelectWidth={false}
           ref={participantRefs.ksWardParticipant}
           placeholder="Chọn phường xã"
           value={selectedKSWard}
@@ -1907,7 +1910,7 @@ const RegisterBHXH = () => {
           className="w-[100%]"
           showSearch
           placeholder="Chọn tỉnh thành phố"
-          dropdownMatchSelectWidth={false}
+          // // // // dropdownMatchSelectWidth={false}
           ref={participantRefs.ttProvinceParticipant}
           value={selectedTTProvince}
           onChange={(value) => {
@@ -1953,7 +1956,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // // dropdownMatchSelectWidth={false}
           ref={participantRefs.ttDistrictParticipant}
           placeholder="Chọn quận huyện"
           value={selectedTTDistrict}
@@ -1995,7 +1998,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn phường xã"
           value={selectedTTWard}
           key={selectedTTWard}
@@ -2069,7 +2072,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // // dropdownMatchSelectWidth={false}
           ref={participantRefs.areaSalaryParticipant}
           placeholder="Chọn vùng lương"
           value={vungLuongToiThieuId}
@@ -2112,7 +2115,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Tỉnh thành"
           ref={participantRefs.medicalByProvinceParticipant}
           value={selectedMedicalByProvinceParticipant}
@@ -2165,7 +2168,7 @@ const RegisterBHXH = () => {
   //         className="w-[100%]"
   //         showSearch
   //         ref={participantRefs.benefitLevelParticipant}
-  //         dropdownMatchSelectWidth={false}
+  //         // // // dropdownMatchSelectWidth={false}
   //         dropdownStyle={{ maxWidth: "300px" }}
   //         placeholder="Mức hưởng"
   //         value={benefitLevel}
@@ -2257,7 +2260,7 @@ const RegisterBHXH = () => {
   //         size="large"
   //         className="w-[100%]"
   //         showSearch
-  //         dropdownMatchSelectWidth={false}
+  //         // // // dropdownMatchSelectWidth={false}
   //         placeholder="Quận huyện"
   //         value={selectedMeicalByDistrictParticipant}
   //         key={selectedMeicalByDistrictParticipant}
@@ -2299,7 +2302,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           dropdownStyle={{ maxWidth: "300px" }}
           ref={participantRefs.hospitalExaminationParticipant}
           placeholder="Bệnh viện"
@@ -2420,7 +2423,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           ref={participantRefs.provinceHouseHoldParticipant}
           placeholder="Thành phố"
           value={selectedHouseholdProvince}
@@ -2461,7 +2464,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Quận huyện"
           ref={participantRefs.districtHouseHoldParticipant}
           value={selectedHouseholdDistrict}
@@ -2502,7 +2505,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Phường xã"
           ref={participantRefs.wardHouseHoldParticipant}
           value={selectedHouseholdWard}
@@ -2537,7 +2540,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           ref={participantRefs.ttProvinceHouseHoldParticipant}
           placeholder="Thành phố"
           value={selectedTTHouseholdProvince}
@@ -2581,7 +2584,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Quận huyện"
           ref={participantRefs.ttDistrictHouseHoldParticipant}
           value={selectedTTHouseholdDistrict}
@@ -2622,7 +2625,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Phường xã"
           ref={participantRefs.ttWardHouseHoldParticipant}
           value={selectedTTHouseholdWard}
@@ -2741,7 +2744,7 @@ const RegisterBHXH = () => {
   //         placeholder="Chọn giới tính"
   //         ref={members[index].gender}
   //         defaultValue={insuranceOrder.houseHold.houseHoldPeoples[index].gender}
-  //         dropdownMatchSelectWidth={false}
+  //         // // // dropdownMatchSelectWidth={false}
   //         onChange={(value) => {
   //           insuranceOrder.houseHold.houseHoldPeoples[index].gender = value;
   //         }}
@@ -2792,7 +2795,7 @@ const RegisterBHXH = () => {
   //         showSearch
   //         ref={members[index].relationShipId}
   //         placeholder="Chọn mối quan hệ"
-  //         dropdownMatchSelectWidth={false}
+  //         // // // dropdownMatchSelectWidth={false}
   //         defaultValue={
   //           insuranceOrder.houseHold.houseHoldPeoples[index].relationShipId
   //         }
@@ -2886,7 +2889,7 @@ const RegisterBHXH = () => {
   //         ref={members[index].ethnicId}
   //         dropdownStyle={{ maxWidth: "300px" }}
   //         showSearch
-  //         dropdownMatchSelectWidth={false}
+  //         // // // dropdownMatchSelectWidth={false}
   //         placeholder="Chọn dân tộc"
   //         defaultValue={
   //           insuranceOrder.houseHold.houseHoldPeoples[index].ethnicId
@@ -3188,7 +3191,7 @@ const RegisterBHXH = () => {
               {/* Địa chỉ hộ khẩu */}
               {inputAddressDetailHKHouseHoldParticipants()}
 
-              {members.map((index: any) => (
+              {members.map((item, index: any) => (
                 <CardMembersHouseHoldBHXH
                   key={`member_${index}`}
                   members={members}
@@ -3486,6 +3489,7 @@ const RegisterBHXH = () => {
           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Nhập tên của bạn"
           onChange={(e) => {
+            console.log(e.target.value);
             setBuyerName(e.target.value);
             setInsuranceOrder((prevOrder: any) => ({
               ...prevOrder,
@@ -3534,7 +3538,7 @@ const RegisterBHXH = () => {
           className="w-[100%]"
           showSearch
           placeholder="Chọn tỉnh thành phố"
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           ref={buyerRefs.selectedBuyerProvince}
           value={selectedBuyerProvince}
           onChange={(value) => {
@@ -3573,7 +3577,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn quận huyện"
           ref={buyerRefs.selectedBuyerDistrict}
           value={selectedBuyerDistrict}
@@ -3610,7 +3614,7 @@ const RegisterBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn phường xã"
           ref={buyerRefs.selectedBuyerWard}
           value={selectedBuyerWard}

@@ -207,7 +207,7 @@ const LuckUpBHXH = () => {
           className="w-[100%]"
           showSearch
           placeholder="Chọn tỉnh thành phố"
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           value={selectedKSProvince}
           onChange={(value) => {
             ksDistricts.current = [];
@@ -238,7 +238,7 @@ const LuckUpBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn quận huyện"
           value={selectedKSDistrict}
           key={selectedKSDistrict}
@@ -267,7 +267,7 @@ const LuckUpBHXH = () => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn phường xã"
           value={selectedKSWard}
           onChange={(value: any) => {

@@ -73,7 +73,7 @@ const CardObject = (props: Props) => {
           showSearch
           ref={refs.nhomLoaiDoiTuongId}
           dropdownStyle={{ maxWidth: "300px" }}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn loại đối tượng"
           value={selectedObjectTypeGroupList}
           key={selectedObjectTypeGroupList}
@@ -107,7 +107,7 @@ const CardObject = (props: Props) => {
           showSearch
           ref={refs.loaiDoiTuongId}
           dropdownStyle={{ maxWidth: "300px" }}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn loại đối tượng"
           value={selectedObjectTypeGroup}
           key={selectedObjectTypeGroup}

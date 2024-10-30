@@ -102,7 +102,7 @@ const CardMembersHouseHold = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.ksProvinceId}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Thành phố"
           value={selectedMemberProvince}
           key={selectedMemberProvince}
@@ -137,7 +137,7 @@ const CardMembersHouseHold = (props: Props) => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Quận huyện"
           ref={refs.ksDistrictId}
           value={selectedMemberDistrict}
@@ -171,7 +171,7 @@ const CardMembersHouseHold = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.ksWardId}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Phường xã"
           value={selectedMemberWard}
           key={selectedMemberWard}
@@ -249,7 +249,7 @@ const CardMembersHouseHold = (props: Props) => {
           defaultValue={
             registerInfoBHYT.houseHold.houseHoldPeoples[index].relationShipId
           }
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           onChange={(value) => {
             registerInfoBHYT.houseHold.houseHoldPeoples[index].relationShipId =
               value;
@@ -326,7 +326,7 @@ const CardMembersHouseHold = (props: Props) => {
           defaultValue={
             registerInfoBHYT.houseHold.houseHoldPeoples[index].gender
           }
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           onChange={(value) => {
             registerInfoBHYT.houseHold.houseHoldPeoples[index].gender = value;
           }}
@@ -358,7 +358,7 @@ const CardMembersHouseHold = (props: Props) => {
           defaultValue={
             registerInfoBHYT.houseHold.houseHoldPeoples[index].ethnicId
           }
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn dân tộc"
           onChange={(value) => {
             registerInfoBHYT.houseHold.houseHoldPeoples[index].ethnicId = value;

@@ -126,7 +126,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           ref={members[index]?.ethnicId}
           dropdownStyle={{ maxWidth: "300px" }}
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn dân tộc"
           defaultValue={
             insuranceOrder.houseHold.houseHoldPeoples[index]?.ethnicId
@@ -157,7 +157,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           defaultValue={
             insuranceOrder.houseHold.houseHoldPeoples[index]?.gender
           }
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           onChange={(value) => {
             insuranceOrder.houseHold.houseHoldPeoples[index].gender = value;
           }}
@@ -207,7 +207,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           showSearch
           ref={members[index]?.relationShipId}
           placeholder="Chọn mối quan hệ"
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           defaultValue={
             insuranceOrder.houseHold.houseHoldPeoples[index]?.relationShipId
           }
@@ -299,7 +299,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={members[index]?.ksProvinceId}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Thành phố"
           value={selectedMemberProvince}
           key={selectedMemberProvince}
@@ -334,7 +334,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           size="large"
           className="w-[100%]"
           showSearch
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Quận huyện"
           ref={members[index]?.ksDistrictId}
           value={selectedMemberDistrict}
@@ -368,7 +368,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={members[index]?.ksWardId}
-          dropdownMatchSelectWidth={false}
+          // // // dropdownMatchSelectWidth={false}
           placeholder="Phường xã"
           value={selectedMemberWard}
           key={selectedMemberWard}

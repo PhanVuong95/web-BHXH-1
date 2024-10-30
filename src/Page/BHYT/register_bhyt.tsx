@@ -923,6 +923,7 @@ const RegisterBHYT = () => {
 
     if (response.data.message == "CREATED" && response.data.status == "201") {
       const result = response.data.data[0];
+      console.log("result", result);
       registerInfoBHYT["id"] = result.id;
       registerInfoBHYT["insuranceId"] = result.insuranceId;
       registerInfoBHYT["accountId"] = result.accountId;
@@ -954,6 +955,7 @@ const RegisterBHYT = () => {
 
     if (response.data.message == "CREATED" && response.data.status == "201") {
       registerInfoBHYT["id"] = response.data.data[0];
+      console.log("registerInfoBHYT", registerInfoBHYT["id"]);
     }
 
     toast.success("Cập nhật thành công");
