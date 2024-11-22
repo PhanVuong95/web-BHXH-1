@@ -86,7 +86,7 @@ function App() {
             path="bill-pay-bhyt/:id"
             element={
               <SpecificProvider>
-                <BillPayBHYTPage w={""} h={""} url={""} />
+                <BillPayBHYTPage />
               </SpecificProvider>
             }
           />

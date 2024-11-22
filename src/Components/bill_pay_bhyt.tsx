@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { formatMoneyVND, formatPhoneNumber } from "../Utils/validateString";
 
@@ -12,13 +12,15 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
   // const [provinceName, setProvinceName] = useState("");
   // const [districtName, setDistrictName] = useState("");
   // const [wardeName, setWardeName] = useState("");
-  // const [selectedCheckbox, setSelectedCheckbox] = useState("");
+  const [selectedCheckbox, setSelectedCheckbox] = useState("");
+
+  console.log(selectedCheckbox);
 
   // const navigate = useNavigate();
 
-  // const handleCheckboxChange = (value) => {
-  //   setSelectedCheckbox(value);
-  // };
+  const handleCheckboxChange = (value: any) => {
+    setSelectedCheckbox(value);
+  };
 
   useEffect(() => {
     axios
@@ -126,7 +128,7 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
     );
   };
 
-  const boxBeneficiary = (item, index) => {
+  const boxBeneficiary = (item: any, index: any) => {
     return (
       <div className="p-4 bg-white rounded-xl flex flex-col gap-6 mt-4">
         <h3 className="text-base font-medium text-[#0076B7]">
@@ -252,7 +254,7 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
           {loading ? (
             <div></div>
           ) : (
-            billPay.listInsuredPerson.map((item, index) => {
+            billPay.listInsuredPerson.map((item: any, index: any) => {
               return boxBeneficiary(item, index);
             })
           )}

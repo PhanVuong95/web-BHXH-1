@@ -161,6 +161,12 @@ body {
   height: 100%;
 }
 
+#google-button-wrapper {
+  display: block;
+  visibility: visible;
+  height: auto;
+}
+
 /* .swiper-slide {
   width: 314px !important;
 } */

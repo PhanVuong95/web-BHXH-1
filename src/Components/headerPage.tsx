@@ -52,8 +52,8 @@ const HeaderPage = () => {
     const token = localStorage.getItem("accessToken");
     const profile = localStorage.getItem("profile");
 
-    // console.log("profile: ", profile);
-    // console.log("accessToken: ", token);
+    console.log("profile: ", profile);
+    console.log("accessToken: ", token);
 
     if (profile) {
       setUser(JSON.parse(profile));

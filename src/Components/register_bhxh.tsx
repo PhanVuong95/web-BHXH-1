@@ -119,7 +119,7 @@ const RegisterBHXH = () => {
   const infoInsuranceProvinces = useRef([]);
   const infoInsuranceHospital = useRef([]);
 
-  // console.log(benefitLevel);
+  console.log(benefitLevel);
 
   const [
     selectedMedicalByProvinceParticipant,
@@ -3191,24 +3191,30 @@ const RegisterBHXH = () => {
               {/* Địa chỉ hộ khẩu */}
               {inputAddressDetailHKHouseHoldParticipants()}
 
-              {members.map((item, index: any) => (
-                <CardMembersHouseHoldBHXH
-                  key={`member_${index}`}
-                  members={members}
-                  insuranceOrder={insuranceOrder}
-                  ethnicLists={ethnicLists}
-                  provinces={buyerProvinces.current}
-                  index={index}
-                  onClose={(index) => {
-                    const newMembers = members.filter(
-                      (_: any, i: any) => i !== index
-                    );
-                    setMembers([...newMembers]);
+              {members.map((item: any, index: any) => {
+                console.log(item);
+                return (
+                  <CardMembersHouseHoldBHXH
+                    key={`member_${index}`}
+                    members={members}
+                    insuranceOrder={insuranceOrder}
+                    ethnicLists={ethnicLists}
+                    provinces={buyerProvinces.current}
+                    index={index}
+                    onClose={(index) => {
+                      const newMembers = members.filter(
+                        (_: any, i: any) => i !== index
+                      );
+                      setMembers([...newMembers]);
 
-                    insuranceOrder.houseHold.houseHoldPeoples.splice(index, 1);
-                  }}
-                />
-              ))}
+                      insuranceOrder.houseHold.houseHoldPeoples.splice(
+                        index,
+                        1
+                      );
+                    }}
+                  />
+                );
+              })}
 
               {buttonAddMember()}
             </div>
