@@ -159,8 +159,8 @@ const LoginPage = () => {
 
         // Lưu token vào localStorage và cookie
         localStorage.setItem("currentUser", JSON.stringify(data));
-        localStorage.setItem("token", data.accessToken);
-        document.cookie = `token=${data.accessToken}; path=/; secure; HttpOnly`;
+        localStorage.setItem("accessToken", data.accessToken);
+        document.cookie = `accessToken=${data.accessToken}; path=/; secure; HttpOnly`;
         localStorage.setItem("profile", JSON.stringify(data.profile));
 
         Swal.fire({
@@ -243,9 +243,7 @@ const LoginPage = () => {
                     (googleButtonWrapper as HTMLElement)?.click();
                   }}
                   className="custom-google-button"
-                >
-                  Đăng nhập bằng Google
-                </button>
+                ></button>
               </div>
             </FlexBox>
           </Tabs.TabPane>

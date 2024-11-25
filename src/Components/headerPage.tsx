@@ -47,6 +47,8 @@ const HeaderPage = () => {
   // Quản lý trạng thái đăng nhập
   const [user, setUser] = useState<any>(null);
 
+  console.log("user", user);
+
   useEffect(() => {
     // Kiểm tra xem người dùng đã đăng nhập chưa
     const token = localStorage.getItem("accessToken");
@@ -187,7 +189,7 @@ const HeaderPage = () => {
                   <div className="user">
                     <div className="flex flex-row items-center gap-1 name-user">
                       <span className="text-black font-medium">
-                        Xin chào, Trần Đăng Trung
+                        {/* Xin chào, ${user.fullName} */}
                       </span>
                     </div>
                     <p className="text-[#595959] text-[14px] font-normal float-right phone-user-1">
@@ -197,7 +199,8 @@ const HeaderPage = () => {
                   {/* avtar img */}
                   <img
                     className="rounded-full avatar-img"
-                    src="https://i.pravatar.cc/150?img=52"
+                    // src="https://i.pravatar.cc/150?img=52"
+                    src={user && user.photo ? user.photo : users}
                     alt="avatar-img"
                   />
                 </div>
@@ -323,7 +326,8 @@ const HeaderPage = () => {
                 <div className="flex items-center gap-1 name-user">
                   <span className="text-white font-medium">Xin chào,</span>
                   <span className="text-white font-medium ">
-                    {user.username}
+                    {/* {user.username} */}
+                    {user.fullName}
                   </span>
                 </div>
                 <p className="text-[#D1D1D6] text-[14px] font-normal float-right phone-user">
