@@ -16,11 +16,6 @@ const HeaderPage = () => {
     setIsDropdownOpen((prevState) => !prevState);
   };
 
-  // const handleDropdownItemClick = (item: any) => {
-  //   console.log(`Clicked on ${item}`);
-  //   // Add your logic for dropdown item click here
-  // };
-
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -62,30 +57,22 @@ const HeaderPage = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   window.location.reload();
-  // }, []);
-
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("profile");
     setUser(null);
   };
 
-  // const handleToggle = () => {
-  //   setIsOpen(!isOpen);
-  // };
-
   return (
-    <div className=" fixed header-page">
-      <nav className="bg-[#096DD9] border-gray-200 dark:bg-gray-900 ">
-        <nav className="flex justify-between px-[20px] sm:px-8 items-center py-2 sm:py-6 container mx-auto">
+    <div className=" fixed header-page ">
+      <nav className="bg-[#fff] border-gray-200 dark:bg-gray-900 container mx-auto">
+        <nav className="flex justify-between  items-center py-2 sm:py-[20px] max-w-[1280px] mx-auto">
           <div className="flex items-center gap-8">
             <section className="flex items-center gap-4">
               {/* menu */}
               <div
                 onClick={() => setMenu(true)}
-                className="text-3xl cursor-pointer nav-link-mobile text-white"
+                className="text-3xl cursor-pointer nav-link-mobile text-black"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -96,22 +83,22 @@ const HeaderPage = () => {
                 >
                   <path
                     d="M19.875 7.875H4.125C3.4875 7.875 3 7.3875 3 6.75C3 6.1125 3.4875 5.625 4.125 5.625H19.875C20.5125 5.625 21 6.1125 21 6.75C21 7.3875 20.5125 7.875 19.875 7.875Z"
-                    fill="white"
+                    fill="black"
                   />
                   <path
                     d="M19.875 13.125H4.125C3.4875 13.125 3 12.6375 3 12C3 11.3625 3.4875 10.875 4.125 10.875H19.875C20.5125 10.875 21 11.3625 21 12C21 12.6375 20.5125 13.125 19.875 13.125Z"
-                    fill="white"
+                    fill="black"
                   />
                   <path
                     d="M19.875 18.375H4.125C3.4875 18.375 3 17.8875 3 17.25C3 16.6125 3.4875 16.125 4.125 16.125H19.875C20.5125 16.125 21 16.6125 21 17.25C21 17.8875 20.5125 18.375 19.875 18.375Z"
-                    fill="white"
+                    fill="black"
                   />
                 </svg>
               </div>
               {/* logo */}
               <Link
                 to={"/"}
-                className="text-[24px] font-semibold flex items-center gap-3 text-white logo"
+                className="text-[24px] font-semibold flex items-center gap-3 text-[#0077D5] logo"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +144,7 @@ const HeaderPage = () => {
             {navLinks.map((d, i) => (
               <Link
                 key={i}
-                className={`block py-2 px-3 text-white font-normal ${
+                className={`block py-[10px] px-[20px] font-normal ${
                   activeLink === d.link || (activeLink === "" && d.link === "/")
                     ? "active"
                     : ""
@@ -324,8 +311,8 @@ const HeaderPage = () => {
             <section className="flex items-center gap-4">
               <div className="user">
                 <div className="flex items-center gap-1 name-user">
-                  <span className="text-white font-medium">Xin chào,</span>
-                  <span className="text-white font-medium ">
+                  <span className="text-black font-medium">Xin chào,</span>
+                  <span className="text-black font-medium ">
                     {/* {user.username} */}
                     {user.fullName}
                   </span>

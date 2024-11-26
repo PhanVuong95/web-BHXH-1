@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 const FooterPage = () => {
   return (
-    <div className="footer-container py-[20px] ms:py-[60px] bg-[#096DD9] px-[20px] ms:px-[0px]">
-      <div className="container mx-auto">
-        <div className="footer-top flex items-center justify-between flex-wrap gap-[20px]">
+    <div className="bg-[#0077D5]">
+      <div className="container mx-auto py-[60px]">
+        <div className="footer-top flex items-center justify-between flex-wrap gap-[20px] max-w-[1280px] mx-auto">
           <div className="footer-top-1 footer-top-col">
             <div className="logo-footer">
               <Link
@@ -120,13 +120,13 @@ const FooterPage = () => {
                   </div>
 
                   <div>
-                    <p>Địa chỉ: Audi Hanoi, 8 Phạm Hùng, Nam Từ Liêm,</p>
-                    <p>Hà Nội</p>
+                    <p>Địa chỉ: D27 Dreamland - 107 Xuân La,</p>
+                    <p>Phường Xuân Tảo, Quận Bắc Từ Liêm, Hà Nội</p>
                   </div>
                 </Link>
 
                 <Link
-                  to="mailto:info@audi.vn"
+                  to="phone:info@audi.vn"
                   className="flex flex-row gap-1 items-center"
                 >
                   <svg
@@ -153,7 +153,7 @@ const FooterPage = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                  <span>Hotline: (+84) 86 86 86 86</span>
+                  <span>Hotline: 190088807</span>
                 </Link>
 
                 <Link
@@ -190,7 +190,9 @@ const FooterPage = () => {
             </div>
           </div>
         </div>
-        <div className="footer-bot"></div>
+      </div>
+      <div className="footer-bot bg-black text-center py-2">
+        <p>© 2024, Baohiemviet. Powered by baohiemviet</p>
       </div>
     </div>
   );

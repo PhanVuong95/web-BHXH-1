@@ -31,15 +31,59 @@
 
 .items-icon {
   max-width: 167px;
+  min-height: 255px;
   width: 100%;
   display: flex;
-  padding: var(--20_px, 20px);
+  padding: 4px;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  border-radius: var(--20_px, 20px);
+  border-radius: 20px;
   background: #fff;
   box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.1);
+}
+
+.items-icon .items-icon-in {
+  padding: 35px 10px;
+  background: rgba(0, 119, 213, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  flex: 1 0 0;
+  align-self: stretch;
+  border-radius: 20px;
+}
+
+.items-icon .items-icon-in:hover {
+  background: var(--Blue, #0077d5);
+}
+
+.items-icon .items-icon-in:hover .icon-border {
+  border: 1px solid #fff;
+}
+
+.items-icon .items-icon-in:hover .icon-border svg path {
+  fill: #fff;
+}
+
+.items-icon .items-icon-in:hover .content {
+  color: #fff;
+}
+
+.items-icon .items-icon-in p.content {
+  color: #000;
+  text-align: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.icon-border {
+  border: 1px solid #0077d5;
+  border-radius: 20px;
+  padding: 13px;
 }
 
 /* .footer-top .footer-top-col {
@@ -115,7 +159,16 @@
     display: none;
   }
 
+  .home-page .banner-top .user-home {
+    padding: 20px;
+    bottom: -20%;
+  }
+
   .nav-link-mobile {
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 6px;
+    margin-left: 10px;
     display: inline;
   }
 }
@@ -123,6 +176,14 @@
 @media screen and (max-width: 768px) {
   body {
     background-color: #fff;
+  }
+
+  .home-page .banner-top .user-home .user-home-content h3 {
+    font-size: 26px;
+  }
+
+  .home-page .banner-top .user-home .user-home-content p {
+    font-size: 14px;
   }
 
   .logo {
@@ -162,23 +223,6 @@
     display: none;
   }
 
-  .slider-items-products {
-    padding: 0;
-  }
-
-  .home-page .banner-top {
-    max-height: 428.889px;
-    padding-top: 75px;
-  }
-
-  .category-home .icon-category .icon-1 svg {
-    width: 100px;
-    height: 100px;
-  }
-  .category-home .icon-category .icon-2 svg {
-    width: 55px;
-  }
-
   .user-phone span {
     font-size: 16px;
     font-style: normal;
@@ -200,22 +244,33 @@
   }
 }
 
+@media screen and (max-width: 1025px) {
+  .home-page .banner-top img {
+    width: 100%;
+    aspect-ratio: 1920 / 905;
+    object-fit: cover;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .home-page .banner-top {
-    max-height: 289.889px;
     padding-top: 0;
+  }
+
+  .footer-top {
+    padding: 16px;
+  }
+
+  .home-page .banner-top img {
+    width: 100%;
+    aspect-ratio: 1920 / 2000;
+    object-fit: cover;
+    object-position: center;
   }
 
   .slider-items-products {
     padding: 16px;
   }
-
-  .items-icon {
-    max-width: 100px;
-    padding: 0;
-    box-shadow: none;
-  }
-
   .tex-items {
     color: var(--Grey-grey-9, #262626);
     text-align: center;
@@ -225,13 +280,73 @@
     line-height: 18px; /* 128.571% */
     letter-spacing: 0.035px;
   }
+}
 
-  .category-home .icon-category .icon-1 svg {
-    width: 48px;
-    height: 48px;
-  }
+/* card_new_page */
 
-  .category-home .icon-category .icon-2 svg {
-    width: 25px;
-  }
+.card_new_page {
+  max-width: 410px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #d1d1d6;
+  background: #fff;
+  overflow: hidden;
+}
+
+.card_new_page img {
+  width: 100%;
+}
+
+.card_new_page .title-card-new .title-new {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+}
+
+.card_new_page .title-card-new .title-new h3 {
+  overflow: hidden;
+  color: var(--Grey-grey-9, #262626);
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.card_new_page .title-card-new .title-new p {
+  max-width: 381px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  color: var(--Grey-grey-9, #262626);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.card_new_page .title-card-new .title-new button {
+  display: flex;
+  padding: 13px 36px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 10px;
+  border: 1px solid #0076b7;
+  background: #fff;
+}
+
+.card_new_page .title-card-new .title-new button p {
+  color: #0076b7;
+  font-family: Lexend;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
