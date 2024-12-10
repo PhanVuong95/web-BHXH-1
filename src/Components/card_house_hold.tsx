@@ -168,7 +168,7 @@ const CardHouseHold = (props: Props) => {
 
   const renderTextHeader = () => {
     return (
-      <h3 className="text-[#0076B7] text-lg font-medium">
+      <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
         Thông tin hộ gia đình
       </h3>
     );
@@ -176,7 +176,7 @@ const CardHouseHold = (props: Props) => {
 
   const inputFullNamHouseHoldParticipants = () => {
     return (
-      <div className="mt-4">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Họ tên chủ hộ <samp className="text-red-600">*</samp>
         </label>
@@ -184,7 +184,8 @@ const CardHouseHold = (props: Props) => {
           type="text"
           ref={refs.fullNamHouseHoldParticipant}
           value={fullNamHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+          "
           placeholder="Họ và tên"
           onChange={(e) => {
             setFullNamHouseHoldParticipant(e.target.value);
@@ -198,7 +199,7 @@ const CardHouseHold = (props: Props) => {
 
   const inputCCCDHouseHoldParticipants = () => {
     return (
-      <div className="mt-4">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số CCCD chủ hộ <samp className="text-red-600">*</samp>
         </label>
@@ -207,7 +208,7 @@ const CardHouseHold = (props: Props) => {
           maxLength={12}
           ref={refs.cccdHouseHoldParticipant}
           value={cccdHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Số CCCD"
           onChange={(e) => {
             setCCCDHouseHoldParticipant(e.target.value);
@@ -221,7 +222,7 @@ const CardHouseHold = (props: Props) => {
 
   const inputProvinceHouseHoldParticipants = () => {
     return (
-      <div className="mt-4">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành phố khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -256,7 +257,7 @@ const CardHouseHold = (props: Props) => {
 
   const inputDistrictHouseHoldParticipants = () => {
     return (
-      <div className="mt-4">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -291,7 +292,7 @@ const CardHouseHold = (props: Props) => {
 
   const inputWardHouseHoldParticipants = () => {
     return (
-      <div className="mt-4">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -320,7 +321,7 @@ const CardHouseHold = (props: Props) => {
 
   const inputAddressDetailHouseHoldParticipants = () => {
     return (
-      <div className="mt-4">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ cụ thể khai sinh<samp className="text-red-600">*</samp>
         </label>
@@ -328,7 +329,7 @@ const CardHouseHold = (props: Props) => {
           type="text"
           ref={refs.addressDetailHouseHoldParticipant}
           value={addressDetailHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Địa chỉ cụ thể"
           onChange={(e) => {
             setAddressDetailHouseHoldParticipant(e.target.value);
@@ -342,7 +343,7 @@ const CardHouseHold = (props: Props) => {
 
   const inputTTProvinceHouseHoldParticipants = () => {
     return (
-      <div className="mt-4">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành phố thường trú <samp className="text-red-600">*</samp>
         </label>
@@ -380,7 +381,7 @@ const CardHouseHold = (props: Props) => {
 
   const inputTTDistrictHouseHoldParticipants = () => {
     return (
-      <div className="mt-4">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện thường trú <samp className="text-red-600">*</samp>
         </label>
@@ -415,7 +416,7 @@ const CardHouseHold = (props: Props) => {
 
   const inputTTWardHouseHoldParticipants = () => {
     return (
-      <div className="mt-4">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã thường trú <samp className="text-red-600">*</samp>
         </label>
@@ -444,7 +445,7 @@ const CardHouseHold = (props: Props) => {
 
   const inputAddressDetailHKHouseHoldParticipants = () => {
     return (
-      <div className="mt-4">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ hộ khẩu <samp className="text-red-600">*</samp>
         </label>
@@ -452,7 +453,7 @@ const CardHouseHold = (props: Props) => {
           type="text"
           ref={refs.addressDetailHKHouseHoldParticipant}
           value={addressDetailHKHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Địa chỉ cụ thể"
           onChange={(e) => {
             setAddressDetailHKHouseHoldParticipant(e.target.value);
@@ -465,38 +466,40 @@ const CardHouseHold = (props: Props) => {
   };
 
   return (
-    <div>
+    <div className="rounded-xl flex flex-col flex-wrap border border-[#B9BDC1] overflow-hidden">
       {renderTextHeader()}
 
-      {/* Họ tên chủ hộ */}
-      {inputFullNamHouseHoldParticipants()}
+      <div className="flex flex-row justify-between flex-wrap p-[40px] gap-3">
+        {/* Họ tên chủ hộ */}
+        {inputFullNamHouseHoldParticipants()}
 
-      {/* Số CCCD */}
-      {inputCCCDHouseHoldParticipants()}
+        {/* Số CCCD */}
+        {inputCCCDHouseHoldParticipants()}
 
-      {/* Tỉnh thành khai sinh */}
-      {inputProvinceHouseHoldParticipants()}
+        {/* Tỉnh thành khai sinh */}
+        {inputProvinceHouseHoldParticipants()}
 
-      {/* Quận huyện khai sinh */}
-      {inputDistrictHouseHoldParticipants()}
+        {/* Quận huyện khai sinh */}
+        {inputDistrictHouseHoldParticipants()}
 
-      {/* Phường xã khai sinh */}
-      {inputWardHouseHoldParticipants()}
+        {/* Phường xã khai sinh */}
+        {inputWardHouseHoldParticipants()}
 
-      {/* Địa chỉ cụ thể */}
-      {inputAddressDetailHouseHoldParticipants()}
+        {/* Địa chỉ cụ thể */}
+        {inputAddressDetailHouseHoldParticipants()}
 
-      {/* Thành phố thường trú */}
-      {inputTTProvinceHouseHoldParticipants()}
+        {/* Thành phố thường trú */}
+        {inputTTProvinceHouseHoldParticipants()}
 
-      {/* Quận huyện thường trú */}
-      {inputTTDistrictHouseHoldParticipants()}
+        {/* Quận huyện thường trú */}
+        {inputTTDistrictHouseHoldParticipants()}
 
-      {/* Phường xã thường trú */}
-      {inputTTWardHouseHoldParticipants()}
+        {/* Phường xã thường trú */}
+        {inputTTWardHouseHoldParticipants()}
 
-      {/* Địa chỉ hộ khẩu */}
-      {inputAddressDetailHKHouseHoldParticipants()}
+        {/* Địa chỉ hộ khẩu */}
+        {inputAddressDetailHKHouseHoldParticipants()}
+      </div>
     </div>
   );
 };

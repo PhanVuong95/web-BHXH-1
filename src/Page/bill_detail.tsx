@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { SpecificContext } from "../Components/specificContext";
 import { PulseLoader } from "react-spinners";
 import warningIc from "../assets-src/warning_icon.png";
+import HeaderTitle from "../Components/HeaderTitle";
 
 const BuillDetailPage: React.FunctionComponent = () => {
   const { id } = useParams();
@@ -39,8 +40,6 @@ const BuillDetailPage: React.FunctionComponent = () => {
 
   const GetQrCode = async () => {
     const token = localStorage.getItem("accessToken");
-    // const formData = new FormData();
-    //   formData.append("file", file);
     try {
       const response = await axios.post(
         "https://baohiem.dion.vn/insuranceorder/api/create-payment?orderId=" +
@@ -126,10 +125,17 @@ const BuillDetailPage: React.FunctionComponent = () => {
   };
 
   return (
-    <div className="max-w-[900px] w-full mx-auto">
+    <div className="w-full">
       {/* <HeaderBase isHome={false} title={"Chi tiết thanh toán"} /> */}
+      <HeaderTitle
+        links={[
+          { title: "Khai báo BHXH tự nguyện" },
+          { title: "Đăng ký BHXH Tự nguyện" },
+          { title: "Xác nhận đăng ký BHXH tự nguyện " },
+        ]}
+      />
       {isPaymentSuccessful && (
-        <div className="container mx-auto fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="container mx-auto fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 max-w-[1280px]">
           <div className="bg-white p-8 rounded-lg text-center w-4/5">
             <svg
               className="mx-auto"
@@ -167,170 +173,175 @@ const BuillDetailPage: React.FunctionComponent = () => {
           </div>
         </div>
       )}
-      <div className="page-1 container mx-auto flex flex-col gap-4 mb-[32px] !pt-[100px]">
-        <h3 className="text-[#0076B7] text-lg font-medium text-center">
+      <div className="page-1 container mx-auto flex flex-col gap-4 mb-[32px] !pt-[60px] max-w-[1280px]">
+        <h3 className="text-[#0076B7] text-[24px] font-bold text-center">
           Hệ thống đang ghi nhận thanh toán
         </h3>
-        <p className="text-[#000] text-sm font-normal text-center">
+        <p className="text-[#000] text-[18px] font-normal text-center">
           Xin quý khách vui lòng chờ trong giây lát
         </p>
         <div
           ref={orderRef}
-          className="p-4 bg-white rounded-xl flex flex-col gap-4"
+          className=" bg-white rounded-xl flex flex-row flex-wrap border border-[#B9BDC1] overflow-hidden"
         >
-          <h3 className="text-[#0076B7] text-lg font-medium">
+          <h3 className="text-[18px] font-normal text-[#fff] w-full p-[20px] bg-[#0077D5] text-center">
             Thông tin đơn hàng
           </h3>
-          <hr className="border-dashed border-[1px] text-[#DEE7FE] "></hr>
-          <div className="flex flex-row justify-between w-full">
-            <div>
-              <p className="text-[#646464] text-sm font-normal">Mã đơn hàng</p>
-            </div>
-            <div>
-              <p className="text-[#2E2E2E] text-sm font-semibold max-w-[190px] text-right">
-                #{orderDetail.id}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-row justify-between w-full">
-            <div>
-              <p className="text-[#646464] text-sm font-normal">
-                Tình trạng thanh toán
-              </p>
-            </div>
-            <div>
-              <p className="text-[#FAAD14] text-sm font-semibold max-w-[190px] text-right">
-                {orderDetail.insuranceOrderStatusName}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-row justify-between w-full">
-            <div>
-              <p className="text-[#646464] text-sm font-normal">Họ và tên</p>
-            </div>
-            <div>
-              <p className="text-[#2E2E2E] text-sm font-semibold max-w-[190px] text-right">
-                {orderDetail.fullName}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-row justify-between w-full">
-            <div>
-              <p className="text-[#646464] text-sm font-normal">Email</p>
-            </div>
-            <div>
-              <p className="text-[#2E2E2E] text-sm font-semibold max-w-[180px] text-right">
-                {orderDetail.email}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-row justify-between w-full">
-            <div>
-              <p className="text-[#646464] text-sm font-normal">
-                Số điện thoại
-              </p>
-            </div>
-            <div>
-              <p className="text-[#2E2E2E] text-sm font-semibold max-w-[142px] text-right">
-                {orderDetail.phone}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-row justify-between w-full">
-            <div>
-              <p className="text-[#646464] text-sm font-normal">Địa chỉ</p>
-            </div>
-            <div>
-              <p className="text-[#2E2E2E] text-sm font-semibold max-w-[180px] text-right">
-                {orderDetail.addressDetail}, {orderDetail.wardName},{" "}
-                {orderDetail.districtName}, {orderDetail.provinceName}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-row justify-between w-full">
-            <div>
-              <p className="text-[#646464] text-sm font-normal">Gói bảo hiểm</p>
-            </div>
-            <div>
-              <p className="text-[#2E2E2E] text-sm font-semibold max-w-[180px] text-right">
-                {orderDetail.insuranceName}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-row justify-between w-full">
-            <div>
-              <p className="text-[#646464] text-sm font-normal">Gói</p>
-            </div>
-            <div>
-              <p className="text-[#2E2E2E] text-sm font-semibold max-w-[142px] text-right">
-                Theo tháng
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-row justify-between w-full">
-            <div>
-              <p className="text-[#646464] text-sm font-normal">Tổng cộng</p>
-            </div>
-            <div>
-              <p className="text-[#0076B7] text-sm font-semibold max-w-[142px] text-right">
-                {orderDetail.finalPrice.toLocaleString("vi-VN")} vnđ
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center justify-center">
-            {base64QRCode != "400" ? (
-              <img
-                className="max-w-[400px]"
-                src={`data:image/png;base64,${base64QRCode}`}
-              />
-            ) : (
-              <div className="flex flex-row gap-5 items-center">
-                <img
-                  className="object-contain"
-                  width="45"
-                  height="12"
-                  src={warningIc}
-                ></img>
-                <p className="text-sm italic font-bold">
-                  Dịch vụ thanh toán tạm thời gián đoạn. Quý khách vui lòng thử
-                  lại sau!
+          <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-[20px]">
+            <div className="flex flex-row justify-between w-full">
+              <div>
+                <p className="text-[#646464] text-lg font-normal">
+                  Mã đơn hàng
                 </p>
               </div>
+              <div>
+                <p className="text-[#2E2E2E] text-lg font-semibold max-w-[190px] text-right">
+                  #{orderDetail.id}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-row justify-between w-full">
+              <div>
+                <p className="text-[#646464] text-lg font-normal">
+                  Tình trạng thanh toán
+                </p>
+              </div>
+              <div>
+                <p className="text-[#FAAD14] text-lg font-semibold max-w-[190px] text-right">
+                  {orderDetail.insuranceOrderStatusName}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-row justify-between w-full">
+              <div>
+                <p className="text-[#646464] text-lg font-normal">Họ và tên</p>
+              </div>
+              <div>
+                <p className="text-[#2E2E2E] text-lg font-semibold max-w-[190px] text-right">
+                  {orderDetail.fullName}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-row justify-between w-full">
+              <div>
+                <p className="text-[#646464] text-lg font-normal">Email</p>
+              </div>
+              <div>
+                <p className="text-[#2E2E2E] text-lg font-semibold max-w-[370px] text-right">
+                  {orderDetail.email}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-row justify-between w-full">
+              <div>
+                <p className="text-[#646464] text-lg font-normal">
+                  Số điện thoại
+                </p>
+              </div>
+              <div>
+                <p className="text-[#2E2E2E] text-lg font-semibold max-w-[142px] text-right">
+                  {orderDetail.phone}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-row justify-between w-full">
+              <div>
+                <p className="text-[#646464] text-lg font-normal">Địa chỉ</p>
+              </div>
+              <div>
+                <p className="text-[#2E2E2E] text-lg font-semibold max-w-[370px] text-right">
+                  {orderDetail.addressDetail}, {orderDetail.wardName},{" "}
+                  {orderDetail.districtName}, {orderDetail.provinceName}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-row justify-between w-full">
+              <div>
+                <p className="text-[#646464] text-lg font-normal">
+                  Gói bảo hiểm
+                </p>
+              </div>
+              <div>
+                <p className="text-[#2E2E2E] text-lg font-semibold max-w-[370px] text-right">
+                  {orderDetail.insuranceName}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-row justify-between w-full">
+              <div>
+                <p className="text-[#646464] text-lg font-normal">Gói</p>
+              </div>
+              <div>
+                <p className="text-[#2E2E2E] text-lg font-semibold max-w-[142px] text-right">
+                  Theo tháng
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-row justify-between w-full">
+              <div>
+                <p className="text-[#646464] text-lg font-normal">Tổng cộng</p>
+              </div>
+              <div>
+                <p className="text-[#0076B7] text-lg font-semibold max-w-[142px] text-right">
+                  {orderDetail.finalPrice.toLocaleString("vi-VN")} vnđ
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center justify-center w-full">
+              {base64QRCode != "400" ? (
+                <img
+                  className="max-w-[400px]"
+                  src={`data:image/png;base64,${base64QRCode}`}
+                />
+              ) : (
+                <div className="flex flex-row gap-5 items-center w-full">
+                  <img
+                    className="object-contain"
+                    width="45"
+                    height="12"
+                    src={warningIc}
+                  ></img>
+                  <p className="text-lg italic font-bold text-center">
+                    Dịch vụ thanh toán tạm thời gián đoạn. Quý khách vui lòng
+                    thử lại sau!
+                  </p>
+                </div>
+              )}
+            </div>
+            {base64QRCode != "400" ? (
+              <i className="text-xs font-semibold text-center text-red-700 w-full">
+                QR thanh toán sẽ hết hạn vào lúc {expiryDateString}
+              </i>
+            ) : (
+              <></>
             )}
           </div>
-          {base64QRCode != "400" ? (
-            <i className="text-xs font-semibold text-center text-red-700">
-              QR thanh toán sẽ hết hạn vào lúc {expiryDateString}
-            </i>
-          ) : (
-            <></>
-          )}
         </div>
-      </div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="page-2 container mx-auto bg-white">
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-row content-center justify-center items-center">
-              <button
-                onClick={handleDownload}
-                className="px-[24px] py-3 bg-[#DEE7FE] w-full rounded-full bg-[#0076B7] text-base font-normal text-[#0076B7] text-center"
-              >
-                Tải xuống hóa đơn
-              </button>
-            </div>
-            <div className="flex flex-row content-center justify-center items-center">
-              <Link
-                to="/"
-                className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
-              >
-                Trở về trang chủ
-              </Link>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="page-2 container mx-auto bg-white">
+            <div className="flex flex-row items-center content-center justify-center w-full gap-3">
+              <div className="flex flex-row content-center justify-center items-center">
+                <button
+                  onClick={handleDownload}
+                  className="px-[44px] py-3 bg-[#fff] rounded-[10px] text-base font-normal text-[#0076B7] text-center border-[1px] border-[#0077D5]"
+                >
+                  Tải xuống hóa đơn
+                </button>
+              </div>
+              <div className="flex flex-row content-center justify-center items-center">
+                <Link
+                  to="/"
+                  className="px-[44px] py-3 rounded-[10px] bg-[#0076B7] text-base font-normal text-white text-center"
+                >
+                  Trở về trang chủ
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* <Modal
         visible={loading}

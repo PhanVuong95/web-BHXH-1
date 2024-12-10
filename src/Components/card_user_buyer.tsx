@@ -95,7 +95,7 @@ const UserBuyerPage = (props: Props) => {
 
   const renderTextHeader = () => {
     return (
-      <h3 className="text-[#0076B7] text-lg font-medium">
+      <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
         Thông tin người mua
       </h3>
     );
@@ -103,7 +103,7 @@ const UserBuyerPage = (props: Props) => {
 
   const renderInputPhone = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Số điện thoại <samp className="text-red-600">*</samp>
         </label>
@@ -118,7 +118,7 @@ const UserBuyerPage = (props: Props) => {
             setPhone(e.target.value);
             registerInfoBHYT["phone"] = e.target.value;
           }}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Số điện thoại"
           required
         />
@@ -128,7 +128,7 @@ const UserBuyerPage = (props: Props) => {
 
   const renderFullName = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Họ và tên <samp className="text-red-600">*</samp>
         </label>
@@ -142,7 +142,7 @@ const UserBuyerPage = (props: Props) => {
             setFullName(e.target.value);
             registerInfoBHYT["fullName"] = e.target.value;
           }}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Nhập tên của bạn"
           required
         />
@@ -152,7 +152,7 @@ const UserBuyerPage = (props: Props) => {
 
   const renderEmail = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Email
         </label>
@@ -166,7 +166,7 @@ const UserBuyerPage = (props: Props) => {
             setEmail(e.target.value);
             registerInfoBHYT["email"] = e.target.value;
           }}
-          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Nhập email của bạn"
           required
         />
@@ -176,7 +176,7 @@ const UserBuyerPage = (props: Props) => {
 
   const renderProvince = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Tỉnh thành phố <samp className="text-red-600">*</samp>
         </label>
@@ -202,7 +202,7 @@ const UserBuyerPage = (props: Props) => {
 
   const renderDistrict = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Quận huyện <samp className="text-red-600">*</samp>
         </label>
@@ -228,7 +228,7 @@ const UserBuyerPage = (props: Props) => {
 
   const renderWard = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Phường xã <samp className="text-red-600">*</samp>
         </label>
@@ -254,7 +254,7 @@ const UserBuyerPage = (props: Props) => {
 
   const renderAddressDetail = () => {
     return (
-      <div>
+      <div className="w-full ">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Địa chỉ cụ thể <samp className="text-red-600">*</samp>
         </label>
@@ -268,7 +268,7 @@ const UserBuyerPage = (props: Props) => {
             setAddressDetail(e.target.value);
             registerInfoBHYT["addressDetail"] = e.target.value;
           }}
-          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="VD: Số nhà, số đường,...."
           required
         />
@@ -277,22 +277,23 @@ const UserBuyerPage = (props: Props) => {
   };
 
   return (
-    <div className="p-4 bg-white rounded-xl flex flex-col gap-4">
+    <div className=" bg-white rounded-xl flex flex-row flex-wrap border border-[#B9BDC1] overflow-hidden">
       {renderTextHeader()}
+      <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+        {renderFullName()}
 
-      {renderFullName()}
+        {renderInputPhone()}
 
-      {renderInputPhone()}
+        {renderEmail()}
 
-      {renderEmail()}
+        {renderProvince()}
 
-      {renderProvince()}
+        {renderDistrict()}
 
-      {renderDistrict()}
+        {renderWard()}
 
-      {renderWard()}
-
-      {renderAddressDetail()}
+        {renderAddressDetail()}
+      </div>
     </div>
   );
 };

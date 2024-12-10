@@ -507,8 +507,8 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const renderHeader = () => {
     return (
-      <div className="flex items-center justify-between">
-        <h3 className="text-[#0076B7] text-lg font-medium">
+      <div className="flex items-center justify-between bg-[#0077D5] p-[20px]">
+        <h3 className="text-base font-semibold text-[#fff] w-full">
           Người tham gia BHYT HGD
         </h3>
         {index != 0 ? (
@@ -527,7 +527,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const renderPrice = () => {
     return (
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 p-4">
         <p className="text-sm font-normal text-gray-900">Phí bảo hiểm</p>
         <span className="text-base font-semibold text-[#0076B7]">
           {calculatePrice()}
@@ -570,7 +570,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
                 setErrors({ ...errors, ...{ socialInsuranceNumber: null } });
               }
             }}
-            className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
             placeholder="Nhập số BHXH"
             required
           />
@@ -603,7 +603,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const renderNote = () => {
     return (
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 p-4">
         <p className="text-sm font-normal text-gray-900">
           Trường hợp không có số BHXH vui lòng
         </p>
@@ -649,7 +649,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
               setErrors({ ...errors, ...{ citizenId: null } });
             }
           }}
-          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Nhập số CCCD"
           required
         />
@@ -1037,7 +1037,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const renderFullName = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Họ và tên <samp className="text-red-600">*</samp>
         </label>
@@ -1060,7 +1060,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
               setErrors({ ...errors, ...{ fullName: "" } });
             }
           }}
-          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Nhập tên của bạn"
           required
         />
@@ -1074,7 +1074,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const renderInputBHYT = () => {
     return (
-      <div>
+      <div className="w-full">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Mã BHYT cũ
         </label>
@@ -1106,7 +1106,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
               setErrors({ ...errors, ...{ healthInsuranceNumber: null } });
             }
           }}
-          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="---"
           required
         />
@@ -1121,7 +1121,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const renderDob = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Ngày sinh <samp className="text-red-600">*</samp>
         </label>
@@ -1155,7 +1155,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const renderGender = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Giới tính <samp className="text-red-600">*</samp>
         </label>
@@ -1191,7 +1191,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const renderEthnic = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Dân tộc <samp className="text-red-600">*</samp>
         </label>
@@ -1244,7 +1244,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   //               registerInfoBHYT["listInsuredPerson"][index].oldCardStartDate =
   //                 formatDate(value);
   //             }}
-  //             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  //             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
   //             placeholder="Chọn ngày sinh"
   //             required
   //           />
@@ -1267,7 +1267,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   //               registerInfoBHYT["listInsuredPerson"][index].oldCardEndDate =
   //                 formatDate(value);
   //             }}
-  //             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  //             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
   //             placeholder="Chọn ngày sinh"
   //             required
   //           />
@@ -1327,7 +1327,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const renderProvince = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Tỉnh thành phố khám chữa bệnh
           <samp className="text-red-600"> *</samp>
@@ -1399,7 +1399,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const renderHispital = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Bệnh viện đăng ký khám chữa bệnh
           <samp className="text-red-600"> *</samp>
@@ -1503,7 +1503,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const inputKSProvinceParticipate = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành <samp className="text-red-600">*</samp>
         </label>
@@ -1542,7 +1542,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const inputKSDistrictParticipants = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện <samp className="text-red-600">*</samp>
         </label>
@@ -1574,7 +1574,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const inputKSWardParticipants = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã <samp className="text-red-600">*</samp>
         </label>
@@ -1602,7 +1602,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const inputKSAddrestailParticipants = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ cụ thể <samp className="text-red-600">*</samp>
         </label>
@@ -1611,7 +1611,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           id="address"
           ref={refs.ksAddressDetail}
           value={ksAddressDetail}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="VD: Số nhà, số đường,...."
           onChange={(e) => {
             setKSAddressDetail(e.target.value);
@@ -1626,7 +1626,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const inputTTProvinceParticipants = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành <samp className="text-red-600">*</samp>
         </label>
@@ -1664,7 +1664,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const inputTTDistrictParticipants = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện <samp className="text-red-600">*</samp>
         </label>
@@ -1696,7 +1696,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const inputTTWardParticipants = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã <samp className="text-red-600">*</samp>
         </label>
@@ -1725,7 +1725,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const inputTTAddressDetailParticipants = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ cụ thể <samp className="text-red-600">*</samp>
         </label>
@@ -1734,7 +1734,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           id="address"
           ref={refs.ttAddressDetail}
           value={ttAddressDetail}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="VD: Số nhà, số đường,...."
           onChange={(e) => {
             setTTAddressDetail(e.target.value);
@@ -1749,7 +1749,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const inputAreaSalaryParticipants = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Vùng lương tối thiểu <samp className="text-red-600">*</samp>
         </label>
@@ -1782,7 +1782,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   const inputBenefitLevelParticipants = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Mức hưởng <samp className="text-red-600">*</samp>
         </label>
@@ -1865,118 +1865,123 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   };
 
   return (
-    <div className="p-4 bg-white rounded-xl flex flex-col gap-4">
+    <div className="flex flex-col flex-wrap border border-[#B9BDC1] overflow-hidden rounded-xl">
       {renderHeader()}
       {/* Tiền bảo hiểm */}
-      {renderPrice()}
+      <div className="flex flex-col flex-wrap p-[20px] gap-4 border ">
+        {renderPrice()}
 
-      {renderLine()}
+        {renderLine()}
 
-      {/* Note */}
-      {renderNote()}
+        {/* Note */}
+        {renderNote()}
 
-      {/* CCCD */}
-      {renderCitizenId()}
+        {/* CCCD */}
+        {renderCitizenId()}
 
-      {/* Ảnh cccd */}
-      {renderUploadImages()}
+        {/* Ảnh cccd */}
+        {renderUploadImages()}
 
-      {/* Họ tên người tham gia */}
-      {renderFullName()}
+        <div className="flex flex-row flex-wrap justify-between w-full gap-2">
+          {/* Họ tên người tham gia */}
+          {renderFullName()}
 
-      {/* Ngày sinh người tham gia */}
-      {renderDob()}
+          {/* Ngày sinh người tham gia */}
+          {renderDob()}
 
-      {/* Giới tính người tham gia*/}
-      {renderGender()}
+          {/* Giới tính người tham gia*/}
+          {renderGender()}
 
-      {/* Dân tộc người tham gia*/}
-      {renderEthnic()}
+          {/* Dân tộc người tham gia*/}
+          {renderEthnic()}
 
-      {/* Số BHYT người tham gia*/}
-      {renderInputBHYT()}
+          {/* Số BHYT người tham gia*/}
+          {renderInputBHYT()}
+        </div>
 
-      {renderLine()}
+        {renderLine()}
 
-      {/* Thẻ mới */}
-      {renderBoxNewCard()}
+        {/* Thẻ mới */}
+        {renderBoxNewCard()}
+      </div>
 
-      {renderLine()}
-
-      <h3 className="text-base font-semibold text-[#0076B7]">
+      <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
         Thông tin bảo hiểm{" "}
       </h3>
 
-      {/* Thẻ mới người tham gia*/}
-      {/* {inputProvinceParticipate()} */}
+      <div className="flex flex-row flex-wrap justify-between w-full gap-2 p-[20px]">
+        {/* Thẻ mới người tham gia*/}
+        {/* {inputProvinceParticipate()} */}
 
-      {/* Thẻ thành phố tham gia khám chữa bệnh */}
-      {renderProvince()}
+        {/* Thẻ thành phố tham gia khám chữa bệnh */}
+        {renderProvince()}
 
-      {/* Bệnh viện tham gia khám chữa bệnh */}
-      {/* {renderDistrict()} */}
+        {/* Bệnh viện tham gia khám chữa bệnh */}
+        {/* {renderDistrict()} */}
 
-      {/* Bệnh viện tham gia khám chữa bệnh */}
-      {renderHispital()}
+        {/* Bệnh viện tham gia khám chữa bệnh */}
+        {renderHispital()}
 
-      {/* Vùng lương tôi thiểu */}
-      {inputAreaSalaryParticipants()}
+        {/* Vùng lương tôi thiểu */}
+        {inputAreaSalaryParticipants()}
 
-      {/* Mức hưởng */}
-      {inputBenefitLevelParticipants()}
+        {/* Mức hưởng */}
+        {inputBenefitLevelParticipants()}
+      </div>
 
-      {renderLine()}
-
-      <h3 className="text-base font-semibold text-[#0076B7]">
+      <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
         Địa chỉ khai sinh{" "}
       </h3>
+      <div className="flex flex-row flex-wrap justify-between w-full gap-2 p-[20px]">
+        {/* Tỉnh thành  khai sinh*/}
+        {inputKSProvinceParticipate()}
 
-      {/* Tỉnh thành  khai sinh*/}
-      {inputKSProvinceParticipate()}
+        {/* Quận huyện khai sinh*/}
+        {inputKSDistrictParticipants()}
 
-      {/* Quận huyện khai sinh*/}
-      {inputKSDistrictParticipants()}
+        {/* Phường xã khai sinh*/}
+        {inputKSWardParticipants()}
 
-      {/* Phường xã khai sinh*/}
-      {inputKSWardParticipants()}
+        {/* Địa chỉ chi tiết khai sinh */}
+        {inputKSAddrestailParticipants()}
+      </div>
 
-      {/* Địa chỉ chi tiết khai sinh */}
-      {inputKSAddrestailParticipants()}
-
-      <h3 className="text-base font-semibold text-[#0076B7]">
+      <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
         Địa chỉ thường trú{" "}
       </h3>
+      <div className="flex flex-row flex-wrap justify-between w-full gap-2 p-[20px]">
+        {/* Tỉnh thành thường trú*/}
+        {inputTTProvinceParticipants()}
 
-      {/* Tỉnh thành thường trú*/}
-      {inputTTProvinceParticipants()}
+        {/* Quận huyện thường trú*/}
+        {inputTTDistrictParticipants()}
 
-      {/* Quận huyện thường trú*/}
-      {inputTTDistrictParticipants()}
+        {/* Phường xã thường trú */}
+        {inputTTWardParticipants()}
 
-      {/* Phường xã thường trú */}
-      {inputTTWardParticipants()}
-
-      {/* Địa chỉ cụ thể  thường trú*/}
-      {inputTTAddressDetailParticipants()}
-
-      <ul className="list-disc px-4">
-        <li>
-          <p className="text-sm font-normal">
-            Vui lòng nhập số BHXH để tra cứu thông tin
-          </p>
-        </li>
-        <li>
-          <p className="text-sm font-normal">
-            Tra cứu mã số BHXH bằng thông tin khai sinh{" "}
-            {/* <span className="text-[#0076B7] font-semibold underline">
+        {/* Địa chỉ cụ thể  thường trú*/}
+        {inputTTAddressDetailParticipants()}
+      </div>
+      <div className="p-[20px]">
+        <ul className="list-disc px-4">
+          <li>
+            <p className="text-sm font-normal">
+              Vui lòng nhập số BHXH để tra cứu thông tin
+            </p>
+          </li>
+          <li>
+            <p className="text-sm font-normal">
+              Tra cứu mã số BHXH bằng thông tin khai sinh{" "}
+              {/* <span className="text-[#0076B7] font-semibold underline">
               tại đây
             </span> */}
-          </p>
-        </li>
-      </ul>
+            </p>
+          </li>
+        </ul>
 
-      {/* Số BHXH*/}
-      {renderInputsocialInsuranceNumber()}
+        {/* Số BHXH*/}
+        {renderInputsocialInsuranceNumber()}
+      </div>
 
       {modalLoading()}
     </div>

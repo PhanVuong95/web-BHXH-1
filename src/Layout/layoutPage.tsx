@@ -5,10 +5,10 @@ import FooterPage from "../Components/footerPage";
 const LayoutPage = () => {
   return (
     <div>
-      <header>
+      <header className="">
         <HeaderPage />
       </header>
-      <main className="pt-[51px] ms:pt-[60px]">
+      <main className="pt-[92px] ms:pt-[60px] bg-[#fff] min-h-[66vh]">
         <Outlet />
       </main>
       <footer>

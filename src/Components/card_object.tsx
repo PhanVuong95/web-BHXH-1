@@ -55,7 +55,7 @@ const CardObject = (props: Props) => {
 
   const renderTextHeader = () => {
     return (
-      <h3 className="text-[#0076B7] text-lg font-medium">
+      <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
         Thông tin đối tượng tham gia
       </h3>
     );
@@ -63,7 +63,7 @@ const CardObject = (props: Props) => {
 
   const renderObjectTypeGroupList = () => {
     return (
-      <div className="mt-4">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Nhóm loại đối tượng <samp className="text-red-600">*</samp>
         </label>
@@ -97,7 +97,7 @@ const CardObject = (props: Props) => {
 
   const renderObjectTypeGroup = () => {
     return (
-      <div className="mt-4">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Loại đối tượng <samp className="text-red-600">*</samp>
         </label>
@@ -126,12 +126,14 @@ const CardObject = (props: Props) => {
   };
 
   return (
-    <div>
+    <div className="rounded-xl flex flex-col flex-wrap border border-[#B9BDC1] overflow-hidden">
       {renderTextHeader()}
 
-      {renderObjectTypeGroupList()}
+      <div className="flex flex-row justify-between flex-wrap p-[40px]">
+        {renderObjectTypeGroupList()}
 
-      {renderObjectTypeGroup()}
+        {renderObjectTypeGroup()}
+      </div>
     </div>
   );
 };

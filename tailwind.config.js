@@ -13,6 +13,11 @@ export default {
         sm1: "10px",
       },
     },
+    extend: {
+      screens: {
+        lg1130: "1130px",
+      },
+    },
   },
   plugins: [],
 };

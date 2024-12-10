@@ -15,6 +15,10 @@ const FooterPage = () => {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 51 52"
                   fill="none"
+                  style={{
+                    height: "108px",
+                    width: "100px",
+                  }}
                 >
                   <g clipPath="url(#clip0_3962_33958)">
                     <path
@@ -39,23 +43,23 @@ const FooterPage = () => {
                   <defs>
                     <clipPath id="clip0_3962_33958">
                       <rect
-                        width="50.9481"
-                        height="50.9481"
+                        width="250.9481"
+                        height="250.9481"
                         fill="white"
                         transform="translate(0 0.52594)"
                       />
                     </clipPath>
                   </defs>
                 </svg>
-                Nộp BHXH
+                {/* Nộp BHXH */}
               </Link>
             </div>
             <div className="logo-content max-w-[370px] w-full">
-              <p className="text-base text-white">
+              {/* <p className="text-base text-white">
                 Lorem Ipsum has been the industry's standard dummy text ever
                 since the 1500s, when an unknown printer took a galley of type
                 and scrambled it to make a type specimen book.
-              </p>
+              </p> */}
             </div>
           </div>
           <div className="footer-top-2 footer-top-col flex flex-col gap-4">

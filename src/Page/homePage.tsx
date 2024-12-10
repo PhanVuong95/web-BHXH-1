@@ -1,21 +1,21 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import CardNewPage from "../Components/card_new";
-import { Link, useNavigate } from "react-router-dom";
-import banner from "../assets/banner-1.png";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import CardNewPage from "../Components/card_new";
+import { Link } from "react-router-dom";
+import banner from "../assets/banner-2.png";
 import { toast } from "react-toastify";
 import CardNewPages from "./../Components/card_new_page";
 
 const HomePage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleClick = (e: any) => {
-    const token = localStorage.getItem("accessToken");
-    if (!token) {
-      e.preventDefault();
-      navigate("/login");
-      toast.info("Bạn cần đăng nhập để sử dụng tính năng này!");
-    }
-  };
+  // const handleClick = (e: any) => {
+  //   const token = localStorage.getItem("accessToken");
+  //   if (!token) {
+  //     e.preventDefault();
+  //     navigate("/login");
+  //     toast.info("Bạn cần đăng nhập để sử dụng tính năng này!");
+  //   }
+  // };
 
   return (
     <div className=" bg-white">
@@ -28,9 +28,11 @@ const HomePage = () => {
                 Tham gia <br /> bảo hiểm xã hội tự nguyện
               </h3>
               <p>
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book.
+                Nộp BHXH là nền tảng hỗ trợ nộp bảo hiểm xã hội tự nguyện, bảo
+                hiểm y tế trực tuyến, giúp bạn dễ dàng quản lý và đóng BHXH,
+                BHYT mọi lúc, mọi nơi. Chúng tôi cam kết mang đến sự tiện lợi,
+                minh bạch và an toàn trong từng giao dịch. Đồng hành cùng bạn
+                trong việc xây dựng tương lai bền vững.
               </p>
               <button>Xem ngay</button>
             </div>
@@ -103,10 +105,10 @@ const HomePage = () => {
                         viewBox="0 0 33 33"
                         fill="none"
                       >
-                        <g clip-path="url(#clip0_4436_39802)">
+                        <g clipPath="url(#clip0_4436_39802)">
                           <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
                             d="M13.7445 0.575684C6.25499 0.575684 0.183594 6.64708 0.183594 14.1366C0.183594 21.6261 6.25499 27.6974 13.7445 27.6974C21.234 27.6974 27.3054 21.6261 27.3054 14.1366C27.3054 6.64708 21.234 0.575684 13.7445 0.575684ZM31.583 31.8412C30.8285 32.6091 29.5872 32.62 28.8193 31.8655L23.3987 26.539C24.4299 25.7351 25.358 24.8054 26.1605 23.773L31.5588 29.0775C32.3267 29.832 32.3376 31.0733 31.583 31.8412ZM13.7445 4.35139C19.1487 4.35139 23.5296 8.73236 23.5296 14.1365C23.5296 19.5406 19.1486 23.9216 13.7445 23.9216C8.34027 23.9216 3.95936 19.5406 3.95936 14.1365C3.95936 8.73236 8.34033 4.35139 13.7445 4.35139Z"
                             fill="#0077D5"
                           />
@@ -128,7 +130,14 @@ const HomePage = () => {
                 </div>
               </Link>
 
-              <Link to="history" onClick={handleClick}>
+              <Link
+                to=""
+                onClick={async () => {
+                  // await openUrlInWebview()
+                  toast.info("Tính năng này đang phát triển");
+                }}
+                // onClick={handleClick}
+              >
                 <div className="items-icon">
                   <div className="items-icon-in">
                     <div className="icon-border">

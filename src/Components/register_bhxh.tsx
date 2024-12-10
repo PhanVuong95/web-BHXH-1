@@ -26,6 +26,7 @@ import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import lottieScanQR from "../assets-src/lottie_scan_qr.json";
 import CardMembersHouseHoldBHXH from "./card_members_house_hold_bhxh";
+import HeaderTitle from "./HeaderTitle";
 
 dayjs.locale("vi");
 dayjs.extend(customParseFormat);
@@ -876,6 +877,8 @@ const RegisterBHXH = () => {
     // console.log(token);
 
     const file = event.target.files?.[0];
+    console.log(file);
+
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
@@ -1332,9 +1335,9 @@ const RegisterBHXH = () => {
 
   const boxHeaderParticipants = () => {
     return (
-      <div className="flex justify-between w-full">
-        <h3 className="text-[#0076B7] text-lg font-medium">
-          Thông tin người tham gia BHXH tự nguyện{" "}
+      <div className="flex justify-between items-center w-full p-[20px] bg-[#0077D5;]">
+        <h3 className="text-[#fff] text-lg font-medium">
+          Thông tin người tham gia BHXH tự nguyện
         </h3>
         <div
           onClick={() => {
@@ -1349,7 +1352,7 @@ const RegisterBHXH = () => {
 
   const inputFullNameParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Họ và tên <samp className="text-red-600">*</samp>
         </label>
@@ -1358,7 +1361,7 @@ const RegisterBHXH = () => {
           id="name"
           ref={participantRefs.fullNameParticipants}
           value={personName}
-          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Nhập tên của bạn"
           onChange={(e) => {
             setPersonName(e.target.value);
@@ -1377,7 +1380,7 @@ const RegisterBHXH = () => {
 
   const inputProvinceParticipate = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành nơi tham gia BHXH <samp className="text-red-600">*</samp>
         </label>
@@ -1405,7 +1408,7 @@ const RegisterBHXH = () => {
 
   const inputCCCDParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số CCCD <samp className="text-red-600">*</samp>
         </label>
@@ -1415,7 +1418,7 @@ const RegisterBHXH = () => {
           value={citizenId}
           maxLength={12}
           ref={participantRefs.cccdParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Nhập số CCCD"
           onChange={(e) => {
             // Lọc ra chỉ các ký tự số
@@ -1447,7 +1450,7 @@ const RegisterBHXH = () => {
           maxLength={15}
           ref={participantRefs.bhxhParticipant}
           value={socialInsuranceId}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Nhập số Bảo hiểm Xã hội"
           onChange={(e) => {
             setSocialInsuranceId(e.target.value);
@@ -1468,7 +1471,7 @@ const RegisterBHXH = () => {
 
   const inputDobParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Ngày sinh <samp className="text-red-600">*</samp>
         </label>
@@ -1490,7 +1493,7 @@ const RegisterBHXH = () => {
 
   const inputGenderParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Giới tính <samp className="text-red-600">*</samp>
         </label>
@@ -1527,7 +1530,7 @@ const RegisterBHXH = () => {
 
   const inputEthnicParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Dân tộc <samp className="text-red-600">*</samp>
         </label>
@@ -1563,7 +1566,7 @@ const RegisterBHXH = () => {
 
   const inputSalaryParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Mức lương làm căn cứ đóng <samp className="text-red-600">*</samp>
         </label>
@@ -1603,7 +1606,7 @@ const RegisterBHXH = () => {
             id="salary"
             value={displayValue}
             ref={participantRefs.salaryParticipant}
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
             placeholder="Nhập mức lương"
             onChange={(e) => {
               const numbers = e!.target.value.replace(/\D/g, "");
@@ -1637,7 +1640,7 @@ const RegisterBHXH = () => {
               calculateFinalPrice();
             }}
           />
-          <div className="absolute inset-y-0 start-[72%] top-0 flex items-center pointer-events-none">
+          <div className="absolute inset-y-0 start-[68%] sm:start-[72%] top-0 flex items-center pointer-events-none">
             <p className="text-base font-normal text-[#767A7F]">vnđ/tháng</p>
           </div>
         </div>
@@ -1647,7 +1650,7 @@ const RegisterBHXH = () => {
 
   const inputMonthcountParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%] pt-[35px]">
+      <div className="w-full lg1130:w-[49%] pt-[35px]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số tháng đóng <samp className="text-red-600">*</samp>
         </label>
@@ -1723,11 +1726,11 @@ const RegisterBHXH = () => {
         <div className="relative">
           <Input
             type="text"
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
             value={supportBudget.toLocaleString("vi-VN")}
             readOnly
           />
-          <div className="absolute inset-y-0 start-[97%] top-0 flex items-center pointer-events-none">
+          <div className="absolute inset-y-0 start-[85%] lg1130:start-[90%] top-0 flex items-center pointer-events-none">
             <p className="text-base font-normal text-[#767A7F]">vnđ</p>
           </div>
         </div>
@@ -1737,7 +1740,7 @@ const RegisterBHXH = () => {
 
   const inputKSProvinceParticipate = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành <samp className="text-red-600">*</samp>
         </label>
@@ -1786,7 +1789,7 @@ const RegisterBHXH = () => {
 
   const inputKSDistrictParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện <samp className="text-red-600">*</samp>
         </label>
@@ -1828,7 +1831,7 @@ const RegisterBHXH = () => {
 
   const inputKSWardParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã <samp className="text-red-600">*</samp>
         </label>
@@ -1866,7 +1869,7 @@ const RegisterBHXH = () => {
 
   const inputKSAddrestailParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ cụ thể <samp className="text-red-600">*</samp>
         </label>
@@ -1875,7 +1878,7 @@ const RegisterBHXH = () => {
           id="address"
           value={ksAddressDetail}
           ref={participantRefs.ksAddrestailParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="VD: Số nhà, số đường,...."
           onChange={(e) => {
             setKSAddressDetail(e.target.value);
@@ -1900,7 +1903,7 @@ const RegisterBHXH = () => {
 
   const inputTTProvinceParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành <samp className="text-red-600">*</samp>
         </label>
@@ -1948,7 +1951,7 @@ const RegisterBHXH = () => {
 
   const inputTTDistrictParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện <samp className="text-red-600">*</samp>
         </label>
@@ -1990,7 +1993,7 @@ const RegisterBHXH = () => {
 
   const inputTTWardParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã <samp className="text-red-600">*</samp>
         </label>
@@ -2030,7 +2033,7 @@ const RegisterBHXH = () => {
 
   const inputTTAddressDetailParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ cụ thể <samp className="text-red-600">*</samp>
         </label>
@@ -2039,7 +2042,7 @@ const RegisterBHXH = () => {
           id="address"
           value={ttAddressDetail}
           ref={participantRefs.ttAddressDetailParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="VD: Số nhà, số đường,...."
           onChange={(e) => {
             setTTAddressDetail(e.target.value);
@@ -2064,7 +2067,7 @@ const RegisterBHXH = () => {
 
   const inputAreaSalaryParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Vùng lương tối thiểu <samp className="text-red-600">*</samp>
         </label>
@@ -2107,7 +2110,7 @@ const RegisterBHXH = () => {
 
   const inputMedicalByProvinceParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành khám chữa bệnh <samp className="text-red-600">*</samp>
         </label>
@@ -2294,7 +2297,7 @@ const RegisterBHXH = () => {
 
   const inputHospitalExaminationParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Bệnh viện khám chữa bệnh <samp className="text-red-600">*</samp>
         </label>
@@ -2338,7 +2341,7 @@ const RegisterBHXH = () => {
 
   const inputClosingRateParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Mức đóng / Hệ số đóng
         </label>
@@ -2346,7 +2349,7 @@ const RegisterBHXH = () => {
           type="text"
           id="address"
           value={displayValue}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="0"
           disabled
         />
@@ -2356,7 +2359,7 @@ const RegisterBHXH = () => {
 
   const inputFullNamHouseHoldParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Họ tên chủ hộ <samp className="text-red-600">*</samp>
         </label>
@@ -2365,7 +2368,7 @@ const RegisterBHXH = () => {
           id="address"
           value={fullNamHouseHoldParticipant}
           ref={participantRefs.fullNamHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Họ và tên"
           onChange={(e) => {
             setFullNamHouseHoldParticipant(e.target.value);
@@ -2385,7 +2388,7 @@ const RegisterBHXH = () => {
 
   const inputCCCDHouseHoldParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số CCCD chủ hộ <samp className="text-red-600">*</samp>
         </label>
@@ -2395,7 +2398,7 @@ const RegisterBHXH = () => {
           maxLength={12}
           value={cccdHouseHoldParticipant}
           ref={participantRefs.cccdHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Số CCCD"
           onChange={(e) => {
             setCCCDHouseHoldParticipant(e.target.value);
@@ -2415,7 +2418,7 @@ const RegisterBHXH = () => {
 
   const inputProvinceHouseHoldParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Thành phố khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -2456,7 +2459,7 @@ const RegisterBHXH = () => {
 
   const inputDistrictHouseHoldParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -2497,7 +2500,7 @@ const RegisterBHXH = () => {
 
   const inputWardHouseHoldParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã khai sinh<samp className="text-red-600">*</samp>
         </label>
@@ -2532,7 +2535,7 @@ const RegisterBHXH = () => {
 
   const inputTTProvinceHouseHoldParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Thành phố thường trú <samp className="text-red-600">*</samp>
         </label>
@@ -2576,7 +2579,7 @@ const RegisterBHXH = () => {
 
   const inputTTDistrictHouseHoldParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện thường trú <samp className="text-red-600">*</samp>
         </label>
@@ -2617,7 +2620,7 @@ const RegisterBHXH = () => {
 
   const inputTTWardHouseHoldParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã thường trú <samp className="text-red-600">*</samp>
         </label>
@@ -2652,7 +2655,7 @@ const RegisterBHXH = () => {
 
   const inputAddressDetailHouseHoldParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ cụ thể khai sinh<samp className="text-red-600">*</samp>
         </label>
@@ -2661,7 +2664,7 @@ const RegisterBHXH = () => {
           id="address"
           value={addressDetailHouseHoldParticipant}
           ref={participantRefs.addressDetailHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Địa chỉ cụ thể"
           onChange={(e) => {
             setAddressDetailHouseHoldParticipant(e.target.value);
@@ -2681,7 +2684,7 @@ const RegisterBHXH = () => {
 
   const inputAddressDetailHKHouseHoldParticipants = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ hộ khẩu <samp className="text-red-600">*</samp>
         </label>
@@ -2690,7 +2693,7 @@ const RegisterBHXH = () => {
           id="address"
           value={addressDetailHKHouseHoldParticipant}
           ref={participantRefs.addressDetailHKHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Địa chỉ cụ thể"
           onChange={(e) => {
             setAddressDetailHKHouseHoldParticipant(e.target.value);
@@ -2721,7 +2724,7 @@ const RegisterBHXH = () => {
   //         defaultValue={
   //           insuranceOrder.houseHold.houseHoldPeoples[index].citizenId
   //         }
-  //         className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  //         className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
   //         placeholder="Nhập CCCD"
   //         onChange={(e) => {
   //           insuranceOrder.houseHold.houseHoldPeoples[index].citizenId =
@@ -2772,7 +2775,7 @@ const RegisterBHXH = () => {
   //         type="text"
   //         ref={members[index].name}
   //         defaultValue={insuranceOrder.houseHold.houseHoldPeoples[index].name}
-  //         className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+  //         className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
   //         placeholder="Họ và tên"
   //         onChange={(e) => {
   //           insuranceOrder.houseHold.houseHoldPeoples[index].name =
@@ -3001,98 +3004,105 @@ const RegisterBHXH = () => {
 
   const infoParticipants = () => {
     return (
-      <div className="p-4 mx-4 bg-white rounded-xl flex flex-col gap-6">
+      <div className=" bg-white rounded-xl flex flex-col gap-6">
         <>
-          <div className=" bg-white rounded-xl flex flex-row flex-wrap gap-6">
+          <div className=" bg-white flex flex-row flex-wrap rounded-xl border border-[#B9BDC1] overflow-hidden">
             {/* Header thông tin người tham gia */}
             {boxHeaderParticipants()}
 
-            {/* Tên người tham gia */}
-            {inputFullNameParticipants()}
+            <div className="p-[40px] flex flex-row flex-wrap justify-between gap-3">
+              {/* Tên người tham gia */}
+              {inputFullNameParticipants()}
 
-            {/* Tỉnh thành nơi tham gia BHXH*/}
-            {inputProvinceParticipate()}
+              {/* Tỉnh thành nơi tham gia BHXH*/}
+              {inputProvinceParticipate()}
 
-            {/* Số CCCCD */}
-            {inputCCCDParticipants()}
+              {/* Số CCCCD */}
+              {inputCCCDParticipants()}
 
-            {/* Ngày sinh */}
-            {inputDobParticipants()}
+              {/* Ngày sinh */}
+              {inputDobParticipants()}
 
-            {/* Giới tính */}
-            {inputGenderParticipants()}
+              {/* Giới tính */}
+              {inputGenderParticipants()}
 
-            {/* Dân tộc */}
-            {inputEthnicParticipants()}
+              {/* Dân tộc */}
+              {inputEthnicParticipants()}
 
-            {/*  Mức lương làm căn cứ đóng */}
-            {inputSalaryParticipants()}
+              {/*  Mức lương làm căn cứ đóng */}
+              {inputSalaryParticipants()}
 
-            {/* Số tháng đóng */}
-            {inputMonthcountParticipants()}
+              {/* Số tháng đóng */}
+              {inputMonthcountParticipants()}
 
-            {/* Ngân sách hỗ trợ */}
-            {inputBudgetParticipants()}
+              {/* Ngân sách hỗ trợ */}
+              {inputBudgetParticipants()}
+            </div>
           </div>
 
-          <div className=" bg-white rounded-xl flex flex-row flex-wrap gap-6">
-            <h3 className="text-base font-semibold text-[#0076B7] w-full">
-              Địa chỉ khai sinh{" "}
+          <div className=" bg-white rounded-xl flex flex-row flex-wrap border border-[#B9BDC1] overflow-hidden">
+            <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
+              Địa chỉ khai sinh
             </h3>
+            <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+              {/* Tỉnh thành */}
+              {inputKSProvinceParticipate()}
 
-            {/* Tỉnh thành */}
-            {inputKSProvinceParticipate()}
+              {/* Quận huyện */}
+              {inputKSDistrictParticipants()}
 
-            {/* Quận huyện */}
-            {inputKSDistrictParticipants()}
+              {/* Phường xã */}
+              {inputKSWardParticipants()}
 
-            {/* Phường xã */}
-            {inputKSWardParticipants()}
-
-            {/* Địa chỉ chi tiết */}
-            {inputKSAddrestailParticipants()}
+              {/* Địa chỉ chi tiết */}
+              {inputKSAddrestailParticipants()}
+            </div>
           </div>
 
-          <div className=" bg-white rounded-xl flex flex-row flex-wrap gap-6">
-            <h3 className="text-base font-semibold text-[#0076B7] w-full">
+          <div className=" bg-white rounded-xl flex flex-row flex-wrap border border-[#B9BDC1] overflow-hidden">
+            <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
               Địa chỉ thường trú
             </h3>
 
-            {/* Tỉnh thành */}
-            {inputTTProvinceParticipants()}
+            <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+              {/* Tỉnh thành */}
+              {inputTTProvinceParticipants()}
 
-            {/* Quận huyện */}
-            {inputTTDistrictParticipants()}
+              {/* Quận huyện */}
+              {inputTTDistrictParticipants()}
 
-            {/* Phường xã */}
-            {inputTTWardParticipants()}
+              {/* Phường xã */}
+              {inputTTWardParticipants()}
 
-            {/* Địa chỉ cụ thể */}
-            {inputTTAddressDetailParticipants()}
+              {/* Địa chỉ cụ thể */}
+              {inputTTAddressDetailParticipants()}
+            </div>
           </div>
 
-          <div className=" bg-white rounded-xl flex flex-row flex-wrap gap-6">
-            <h3 className="text-base font-semibold text-[#0076B7] w-full">
+          <div className=" bg-white rounded-xl flex flex-row flex-wrap border border-[#B9BDC1] overflow-hidden">
+            <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
               Thông tin bảo hiểm{" "}
             </h3>
 
-            {/* Vùng lương tối thiểu */}
-            {inputAreaSalaryParticipants()}
+            <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+              {/* Vùng lương tối thiểu */}
+              {inputAreaSalaryParticipants()}
 
-            {/* Mức hưởng */}
-            {/* {inputBenefitLevelParticipants()} */}
+              {/* Mức hưởng */}
+              {/* {inputBenefitLevelParticipants()} */}
 
-            {/* Tỉnh thành khám chữa bệnh */}
-            {inputMedicalByProvinceParticipants()}
+              {/* Tỉnh thành khám chữa bệnh */}
+              {inputMedicalByProvinceParticipants()}
 
-            {/* Quận huyện khám chữa bênh */}
-            {/* {inputExaminationByDistrictParticipants()} */}
+              {/* Quận huyện khám chữa bênh */}
+              {/* {inputExaminationByDistrictParticipants()} */}
 
-            {/* Bệnh viện khám chữa bệnh */}
-            {inputHospitalExaminationParticipants()}
+              {/* Bệnh viện khám chữa bệnh */}
+              {inputHospitalExaminationParticipants()}
 
-            {/* Mức đóng / Hệ số đóng */}
-            {inputClosingRateParticipants()}
+              {/* Mức đóng / Hệ số đóng */}
+              {inputClosingRateParticipants()}
+            </div>
           </div>
 
           <Checkbox
@@ -3156,67 +3166,69 @@ const RegisterBHXH = () => {
           {isHadBHXH && inputBHXHParticipants()}
 
           {!isHadBHXH && (
-            <div className="flex flex-row flex-wrap gap-6">
-              <h3 className="text-base font-semibold text-[#0076B7] w-full">
+            <div className="flex flex-row flex-wrap border rounded-xl border-[#B9BDC1] overflow-hidden">
+              <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
                 Thông tin hộ gia đình{" "}
               </h3>
 
-              {/* Họ tên chủ hộ */}
-              {inputFullNamHouseHoldParticipants()}
+              <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+                {/* Họ tên chủ hộ */}
+                {inputFullNamHouseHoldParticipants()}
 
-              {/* Số CCCD */}
-              {inputCCCDHouseHoldParticipants()}
+                {/* Số CCCD */}
+                {inputCCCDHouseHoldParticipants()}
 
-              {/* Tỉnh thành khai sinh */}
-              {inputProvinceHouseHoldParticipants()}
+                {/* Tỉnh thành khai sinh */}
+                {inputProvinceHouseHoldParticipants()}
 
-              {/* Quận huyện khai sinh */}
-              {inputDistrictHouseHoldParticipants()}
+                {/* Quận huyện khai sinh */}
+                {inputDistrictHouseHoldParticipants()}
 
-              {/* Phường xã khai sinh */}
-              {inputWardHouseHoldParticipants()}
+                {/* Phường xã khai sinh */}
+                {inputWardHouseHoldParticipants()}
 
-              {/* Địa chỉ cụ thể */}
-              {inputAddressDetailHouseHoldParticipants()}
+                {/* Địa chỉ cụ thể */}
+                {inputAddressDetailHouseHoldParticipants()}
 
-              {/* Tỉnh thành thường trú */}
-              {inputTTProvinceHouseHoldParticipants()}
+                {/* Tỉnh thành thường trú */}
+                {inputTTProvinceHouseHoldParticipants()}
 
-              {/* Quận huyện thường trú */}
-              {inputTTDistrictHouseHoldParticipants()}
+                {/* Quận huyện thường trú */}
+                {inputTTDistrictHouseHoldParticipants()}
 
-              {/* Phường xã thường trú */}
-              {inputTTWardHouseHoldParticipants()}
+                {/* Phường xã thường trú */}
+                {inputTTWardHouseHoldParticipants()}
 
-              {/* Địa chỉ hộ khẩu */}
-              {inputAddressDetailHKHouseHoldParticipants()}
+                {/* Địa chỉ hộ khẩu */}
+                {inputAddressDetailHKHouseHoldParticipants()}
 
-              {members.map((item: any, index: any) => {
-                console.log(item);
-                return (
-                  <CardMembersHouseHoldBHXH
-                    key={`member_${index}`}
-                    members={members}
-                    insuranceOrder={insuranceOrder}
-                    ethnicLists={ethnicLists}
-                    provinces={buyerProvinces.current}
-                    index={index}
-                    onClose={(index) => {
-                      const newMembers = members.filter(
-                        (_: any, i: any) => i !== index
-                      );
-                      setMembers([...newMembers]);
+                {members.map((item: any, index: any) => {
+                  console.log(item);
+                  return (
+                    <CardMembersHouseHoldBHXH
+                      key={`member_${index}`}
+                      members={members}
+                      insuranceOrder={insuranceOrder}
+                      ethnicLists={ethnicLists}
+                      provinces={buyerProvinces.current}
+                      index={index}
+                      onClose={(index) => {
+                        const newMembers = members.filter(
+                          (_: any, i: any) => i !== index
+                        );
+                        setMembers([...newMembers]);
 
-                      insuranceOrder.houseHold.houseHoldPeoples.splice(
-                        index,
-                        1
-                      );
-                    }}
-                  />
-                );
-              })}
+                        insuranceOrder.houseHold.houseHoldPeoples.splice(
+                          index,
+                          1
+                        );
+                      }}
+                    />
+                  );
+                })}
 
-              {buttonAddMember()}
+                {buttonAddMember()}
+              </div>
             </div>
           )}
         </>
@@ -3280,23 +3292,23 @@ const RegisterBHXH = () => {
   };
   const uploadImage = () => {
     return (
-      <div className="p-4 mx-4 mt-4 bg-white rounded-xl border border-[#B9BDC1] flex flex-col gap-3">
-        <div className="flex justify-between">
-          <h3 className="text-[#0076B7] text-lg font-medium">
+      <div className=" bg-white rounded-xl border border-[#B9BDC1] flex flex-col gap-3 min-w-[370px] h-full w-full overflow-hidden">
+        <div className="flex justify-between bg-[#0077D5]">
+          <h3 className="text-[#fff] text-lg font-medium p-[20px]">
             Chụp ảnh giấy tờ tuỳ thân
           </h3>
         </div>
 
         <div
           ref={participantRefs.uploadCCCD}
-          className="flex flex-row gap-2 justify-between w-[100%]"
+          className="flex flex-col gap-2 justify-between w-[100%] p-[40px]"
         >
-          <div className="flex gap-3 w-[100%]">
+          <div className="flex flex-col gap-3 w-[100%]">
             <div className="flex flex-col gap-2 w-[100%]">
               <div
                 className={`bg-[#F5F5F5]  rounded-lg p-[${
                   frontImageUrl ? "0px" : "9px"
-                }]  card-cccd w-[100%] h-[100px]`}
+                }]  card-cccd w-[100%] h-[200px]`}
                 onClick={() => handleCardClick(frontImageInputRef)}
               >
                 <div className="icon-1">
@@ -3304,7 +3316,7 @@ const RegisterBHXH = () => {
                     <img
                       src={`https://baohiem.dion.vn${frontImageUrl}`}
                       alt="Mặt trước"
-                      className="w-[100%] h-[100px] object-center rounded-lg "
+                      className="w-[100%] h-[200px] object-center rounded-lg "
                     />
                   ) : (
                     <svg
@@ -3374,7 +3386,7 @@ const RegisterBHXH = () => {
               <div
                 className={`bg-[#F5F5F5]  rounded-lg p-[${
                   backImageUrl ? "0px" : "9px"
-                }]  card-cccd w-[100%] h-[100px]`}
+                }]  card-cccd w-[100%] h-[200px]`}
                 onClick={() => handleCardClick(backImageInputRef)}
               >
                 <div className="icon-1">
@@ -3382,7 +3394,7 @@ const RegisterBHXH = () => {
                     <img
                       src={`https://baohiem.dion.vn${backImageUrl}`}
                       alt="Mặt sau"
-                      className="w-[100%] h-[100px] object-center rounded-lg"
+                      className="w-[100%] h-[200px] object-center rounded-lg"
                     />
                   ) : (
                     <svg
@@ -3456,7 +3468,7 @@ const RegisterBHXH = () => {
 
   const inputPhoneBuyer = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số điện thoại <samp className="text-red-600">*</samp>
         </label>
@@ -3465,7 +3477,7 @@ const RegisterBHXH = () => {
           id="phone"
           value={phone}
           ref={buyerRefs.phone}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Số điện thoại"
           maxLength={10}
           onChange={(e) => {
@@ -3483,7 +3495,7 @@ const RegisterBHXH = () => {
 
   const inputFullNameBuyer = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Họ và tên <samp className="text-red-600">*</samp>
         </label>
@@ -3492,7 +3504,7 @@ const RegisterBHXH = () => {
           id="name"
           value={buyerName}
           ref={buyerRefs.buyerName}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Nhập tên của bạn"
           onChange={(e) => {
             console.log(e.target.value);
@@ -3509,7 +3521,7 @@ const RegisterBHXH = () => {
 
   const inputEmailBuyer = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Email
         </label>
@@ -3518,7 +3530,7 @@ const RegisterBHXH = () => {
           id="email"
           value={email}
           ref={buyerRefs.email}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="Nhập email của bạn"
           onChange={(e) => {
             setEmail(e.target.value);
@@ -3534,7 +3546,7 @@ const RegisterBHXH = () => {
 
   const inputProvinceBuyer = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành <samp className="text-red-600">*</samp>
         </label>
@@ -3575,7 +3587,7 @@ const RegisterBHXH = () => {
 
   const inputDistrictBuyer = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện <samp className="text-red-600">*</samp>
         </label>
@@ -3612,7 +3624,7 @@ const RegisterBHXH = () => {
 
   const inputWardBuyer = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã <samp className="text-red-600">*</samp>
         </label>
@@ -3651,7 +3663,7 @@ const RegisterBHXH = () => {
           id="address"
           value={buyerAddressDetail}
           ref={buyerRefs.buyerAddressDetail}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
           placeholder="VD: Số nhà, số đường,...."
           onChange={(e) => {
             setBuyerAddressDetail(e.target.value);
@@ -3667,31 +3679,32 @@ const RegisterBHXH = () => {
 
   const infoBuyer = () => {
     return (
-      <div className="p-4 mx-4 bg-white rounded-xl flex flex-row flex-wrap gap-6">
-        <h3 className="text-[#0076B7] text-lg font-medium w-full">
+      <div className="my-[20px] bg-white rounded-xl flex flex-row flex-wrap border border-[#B9BDC1] overflow-hidden">
+        <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
           Thông tin người mua
         </h3>
+        <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+          {/* Số điện thoại */}
+          {inputPhoneBuyer()}
 
-        {/* Số điện thoại */}
-        {inputPhoneBuyer()}
+          {/* Họ và tên */}
+          {inputFullNameBuyer()}
 
-        {/* Họ và tên */}
-        {inputFullNameBuyer()}
+          {/* Email */}
+          {inputEmailBuyer()}
 
-        {/* Email */}
-        {inputEmailBuyer()}
+          {/* Tỉnh thành */}
+          {inputProvinceBuyer()}
 
-        {/* Tỉnh thành */}
-        {inputProvinceBuyer()}
+          {/* Quận huyện */}
+          {inputDistrictBuyer()}
 
-        {/* Quận huyện */}
-        {inputDistrictBuyer()}
+          {/* Phường xã */}
+          {inputWardBuyer()}
 
-        {/* Phường xã */}
-        {inputWardBuyer()}
-
-        {/* Địa chỉ cụ thể */}
-        {inputAddressDetailBuyer()}
+          {/* Địa chỉ cụ thể */}
+          {inputAddressDetailBuyer()}
+        </div>
       </div>
     );
   };
@@ -3964,33 +3977,45 @@ const RegisterBHXH = () => {
   };
 
   return (
-    <div className="container mx-auto ">
-      {/* <HeaderBase isHome={false} title={"Đăng ký BHXH Tự nguyện"} /> */}
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className=" flex flex-col gap-4 pt-[75px]"
-      >
-        {/* Cập nhật căn cước công dân */}
-        {uploadImage()}
+    <div>
+      <HeaderTitle
+        links={[
+          { title: "Khai báo BHXH tự nguyện" },
+          { title: "Đăng ký BHXH Tự nguyện" },
+        ]}
+      />
+      <div className="container mx-auto max-w-[1280px]">
+        {/* <HeaderBase isHome={false} title={"Đăng ký BHXH Tự nguyện"} /> */}
+        <h3 className="py-[40px] mx-4 text-[42px] text-black font-bold">
+          Đăng ký BHXH Tự nguyện
+        </h3>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-row gap-4  flex-row-2"
+        >
+          <div className="flex flex-col">
+            {/* Thông tin người tham gia và hộ gia đình */}
+            {infoParticipants()}
 
-        {/* Thông tin người tham gia và hộ gia đình */}
-        {infoParticipants()}
+            {/* Người mua */}
+            {infoBuyer()}
 
-        {/* Người mua */}
-        {infoBuyer()}
+            {/* Chính sách bảo mật */}
+            {rendePrivacyPolicy()}
 
-        {/* Chính sách bảo mật */}
-        {rendePrivacyPolicy()}
+            {/* Fotter */}
+            {renderFotter()}
+          </div>
+          {/* Cập nhật căn cước công dân */}
+          {uploadImage()}
+        </form>
 
-        {/* Fotter */}
-        {renderFotter()}
-      </form>
+        {/* Modal loading  */}
+        {modalLoading()}
 
-      {/* Modal loading  */}
-      {modalLoading()}
-
-      {/* Modal QR  */}
-      {modalScanQR()}
+        {/* Modal QR  */}
+        {modalScanQR()}
+      </div>
     </div>
   );
 };

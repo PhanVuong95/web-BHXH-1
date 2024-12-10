@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Widthheight } from "../Models";
+import { ListsHistoryPageProps } from "../Models";
 import axios from "axios";
 import { PulseLoader } from "react-spinners";
 import logo from "../assets-src/logo1.png";
@@ -18,7 +18,7 @@ interface OrderItem {
   statusColor?: string; // Optional property
 }
 
-const ListsHistoryPage: React.FC<Widthheight> = () => {
+const ListsHistoryPage: React.FC<ListsHistoryPageProps> = ({ onBack }) => {
   const PENDING = 1001;
   const DONE = 1002;
   const CANCELED = 1003;
@@ -39,7 +39,7 @@ const ListsHistoryPage: React.FC<Widthheight> = () => {
         }
       )
       .then((response) => {
-        let filteredOrders: OrderItem[] = [];
+        const filteredOrders: OrderItem[] = [];
         response.data.data.forEach((item: OrderItem) => {
           if (item.insuranceOrderStatusId === DONE && openTab === 2) {
             filteredOrders.push(item);
@@ -90,14 +90,9 @@ const ListsHistoryPage: React.FC<Widthheight> = () => {
 
   return (
     <>
-      {/* <HeaderBase
-        isHome={false}
-        onBack={() => navigate("/history")}
-        title={"Lịch sử đăng ký BHXH TN"}
-      /> */}
-      <div className="page-1 !pb-16 !pt-24 min-h-[64.5vh]">
-        <div className="max-w-md mx-auto">
-          <div className="mb-4 flex space-x-4 p-1 bg-white rounded-lg shadow-md">
+      <div className="">
+        <div className="mx-auto p-2">
+          <div className="mb-4 flex space-x-4 p-1 bg-white rounded-lg shadow-md border border-[#B9BDC1] overflow-hidden">
             <button
               onClick={() => {
                 setListOrder([]);
@@ -124,7 +119,7 @@ const ListsHistoryPage: React.FC<Widthheight> = () => {
             </button>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
             {listOrder.length === 0 ? (
               <div
                 style={{
@@ -140,8 +135,8 @@ const ListsHistoryPage: React.FC<Widthheight> = () => {
               listOrder.map((item, index) => {
                 return (
                   <Link to={"/history-unpaid/" + item.id} key={index}>
-                    <div className="p-4 bg-white w-full rounded-xl flex flex-col gap-4">
-                      <div className="flex gap-[10px]">
+                    <div className="p-4 bg-white h-full w-full rounded-xl flex flex-row items-center gap-4 border border-[#B9BDC1] overflow-hidden">
+                      <div className="flex gap-[10px] w-[47%]">
                         <img src={logo} className="w-16 h-16" alt="Logo" />
                         <div className="title-product flex flex-col">
                           <h3 className="text-[#0076B7] text-lg font-medium">
@@ -156,9 +151,9 @@ const ListsHistoryPage: React.FC<Widthheight> = () => {
                         </div>
                       </div>
 
-                      <hr className="border-dashed border-[1px] text-[#DEE7FE] " />
+                      <div className="border-dashed w-[1px] h-[124px] border-[1px] text-[#DEE7FE]" />
 
-                      <div className="flex flex-col gap-4">
+                      <div className="flex flex-col gap-4 w-[47%]">
                         <div className="flex flex-row justify-between w-full">
                           <div>
                             <p className="text-[#646464] text-sm font-normal">
@@ -222,6 +217,12 @@ const ListsHistoryPage: React.FC<Widthheight> = () => {
             )}
           </div>
         </div>
+        <button
+          className="m-2 border py-3 w-[30%] rounded-xl border-[#FF0000]"
+          onClick={onBack}
+        >
+          <div className="text-[#FF0000] font-bold text-[16px]">Quay lại</div>
+        </button>
       </div>
     </>
   );

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { PulseLoader } from "react-spinners";
 import CardProductBHYT from "../../Components/card_product_bhyt";
+import HeaderTitle from "../../Components/HeaderTitle";
 
 export let registerInfoBHYT = {
   id: 0,
@@ -290,21 +291,24 @@ const ListHealthInsurance: React.FunctionComponent = () => {
   }
 
   return (
-    <div className="container mx-auto py-[40px]">
-      <h3 className="title-top-header">Khai báo BHYT tự nguyện</h3>
-      {/* <HeaderBase isHome={false} title={"BHYT tự nguyện"} /> */}
-      <div className="gap-[16px] flex flex-col box-shadow-product product-items">
-        <div className="flex flex-col gap-8 pt-1">
-          {/* Danh sách bảo hiểm y tế tự nguyện */}
-          {listProduct.map((item: any) => {
-            return (
-              <CardProductBHYT
-                key={`${item?.id}`}
-                url={"/register-BHYT"}
-                data={item}
-              />
-            );
-          })}
+    <div>
+      <HeaderTitle links={[{ title: "Khai báo BHYT tự nguyện" }]} />
+      <div className="container mx-auto py-[40px] max-w-[1280px]">
+        <h3 className="title-top-header">Khai báo BHYT tự nguyện</h3>
+        {/* <HeaderBase isHome={false} title={"BHYT tự nguyện"} /> */}
+        <div className="gap-[16px] flex flex-col  product-items">
+          <div className="flex flex-col gap-8 pt-1">
+            {/* Danh sách bảo hiểm y tế tự nguyện */}
+            {listProduct.map((item: any) => {
+              return (
+                <CardProductBHYT
+                  key={`${item?.id}`}
+                  url={"/register-BHYT"}
+                  data={item}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
