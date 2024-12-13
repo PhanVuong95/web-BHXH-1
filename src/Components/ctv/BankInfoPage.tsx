@@ -94,7 +94,7 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
         <Input
           type="text"
           value={bankBranch}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập chi nhánh"
           onChange={(e) => {
             setBankBranch(e.target.value);
@@ -113,7 +113,7 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
         <Input
           type="text"
           value={bankOwner}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập tên"
           onChange={(e) => {
             setBankOwner(e.target.value);
@@ -132,7 +132,7 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
         <Input
           type="text"
           value={bankNumber}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập số tài khoản"
           onChange={(e) => {
             setBankNumber(e.target.value);

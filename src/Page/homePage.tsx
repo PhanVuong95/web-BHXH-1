@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import banner from "../assets/banner-2.png";
 import { toast } from "react-toastify";
 import CardNewPages from "./../Components/card_new_page";
+import { useEffect, useState } from "react";
+import { Post } from "../Models";
 
 const HomePage = () => {
   // const navigate = useNavigate();
@@ -16,6 +18,38 @@ const HomePage = () => {
   //     toast.info("Bạn cần đăng nhập để sử dụng tính năng này!");
   //   }
   // };
+
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [pageIndex, setPageIndex] = useState(1);
+  const [pageSize] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://baohiem.dion.vn/post/api/listPaging-post?pageIndex=${pageIndex}&pageSize=${pageSize}`
+        );
+        const jsonData = await response.json();
+
+        const data = jsonData.data?.[0] || [];
+        setPosts(data);
+
+        // Giả sử API trả về số tổng trang
+        setTotalPages(5); // Cập nhật số trang giả lập (nếu API không trả về, sửa lại)
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchData();
+  }, [pageIndex]);
+
+  const handlePageChange = (newPageIndex: number) => {
+    if (newPageIndex > 0 && newPageIndex <= totalPages) {
+      setPageIndex(newPageIndex);
+    }
+  };
 
   return (
     <div className=" bg-white">
@@ -235,8 +269,9 @@ const HomePage = () => {
               Tin tức mới nhất
             </h3>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-[25px]">
-            {/* <Swiper
+          <div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-[25px]">
+              {/* <Swiper
               slidesPerView={1.1}
               spaceBetween={20}
               loop={true}
@@ -288,15 +323,53 @@ const HomePage = () => {
               </SwiperSlide>
             </Swiper> */}
 
-            <CardNewPages />
-            <CardNewPages />
-            <CardNewPages />
-            <CardNewPages />
-            <CardNewPages />
-            <CardNewPages />
-            <CardNewPages />
-            <CardNewPages />
-            <CardNewPages />
+              {posts.length > 0 ? (
+                posts.map((post, index) => (
+                  <CardNewPages post={post} index={index + 1} />
+                ))
+              ) : (
+                <p>Không có bài đăng nào.</p>
+              )}
+            </div>
+            {/* Pagination */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "20px",
+              }}
+            >
+              <button
+                onClick={() => handlePageChange(pageIndex - 1)}
+                disabled={pageIndex === 1}
+                style={{ margin: "0 5px" }}
+              >
+                {"<"}
+              </button>
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => handlePageChange(i + 1)}
+                  style={{
+                    margin: "0 5px",
+                    padding: "5px 10px",
+                    backgroundColor: pageIndex === i + 1 ? "blue" : "white",
+                    color: pageIndex === i + 1 ? "white" : "black",
+                    border: "1px solid #ddd",
+                    cursor: "pointer",
+                  }}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={() => handlePageChange(pageIndex + 1)}
+                disabled={pageIndex === totalPages}
+                style={{ margin: "0 5px" }}
+              >
+                {">"}
+              </button>
+            </div>
           </div>
         </div>
       </div>

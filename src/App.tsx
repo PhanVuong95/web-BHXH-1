@@ -24,6 +24,7 @@ import LoginPage from "./Page/LoginPage";
 import PrivacyPolicyPage from "./Components/privacy_policy";
 import LuckUpBHXH from "./Page/luckup_bhxh";
 import { useEffect, useState } from "react";
+import CardNewDetailPages from "./Components/CardNewDetailPages";
 
 function App() {
   const [user, setUser] = useState<any>(null);
@@ -179,6 +180,7 @@ function App() {
           />
           <Route path="/privacy_policy" element={<PrivacyPolicyPage />} />
           <Route path="/luckup-bhxh" element={<LuckUpBHXH />} />
+          <Route path="/new-detail/:id" element={<CardNewDetailPages />} />
         </Route>
       </Routes>
     </>

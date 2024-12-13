@@ -735,7 +735,7 @@ const RegisterCollaborate = () => {
         <Input
           type="text"
           value={fullNameHouseHold}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Họ và tên"
           onChange={(e) => {
             setFullNameHouseHold(e.target.value);
@@ -754,7 +754,7 @@ const RegisterCollaborate = () => {
         <Input
           type="text"
           value={referrerCode}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập mã giới thiệu nếu có..."
           onChange={(e) => {
             setReferrerCode(e.target.value);
@@ -774,7 +774,7 @@ const RegisterCollaborate = () => {
           type="number"
           maxLength={12}
           value={numberCardId}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Số CCCD"
           onChange={(e) => {
             setNumberCardId(e.target.value);
@@ -794,7 +794,7 @@ const RegisterCollaborate = () => {
           type="number"
           maxLength={12}
           value={phone}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Số điện thoại"
           onChange={(e) => {
             setPhone(e.target.value);
@@ -813,7 +813,7 @@ const RegisterCollaborate = () => {
         <Input
           type="text"
           value={email}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Địa chỉ Email"
           onChange={(e) => {
             setEmail(e.target.value);

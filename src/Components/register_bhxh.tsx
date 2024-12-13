@@ -5,7 +5,7 @@ import { FadeLoader } from "react-spinners";
 import Modal from "react-modal";
 import { SpecificContext } from "./specificContext";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import imageQR from "../assets-src/icon_qr.png";
 import {
   convertListToSelect,
@@ -87,6 +87,7 @@ const RegisterBHXH = () => {
   const frontImageInputRef = useRef<HTMLInputElement>(null);
   const backImageInputRef = useRef<HTMLInputElement>(null);
   const [wageSlider, setWageSlider] = useState<number>(1500000);
+  const [dateStr, setDateStr] = useState("");
 
   // Hộ gia đình
   const createNewMember = () => ({
@@ -800,6 +801,9 @@ const RegisterBHXH = () => {
     )
       .toString()
       .padStart(2, "0")}/${dateObject.year()}`;
+
+    setDateStr(dateStr);
+
     setDateValue(dayjs(dateStr, dateFormat));
     setInsuranceOrder((prevOrder: any) => ({
       ...prevOrder,
@@ -1333,6 +1337,69 @@ const RegisterBHXH = () => {
     }
   };
 
+  const [isSearched, setIsSearched] = useState(false);
+  const [btnLoading, setBtnLoading] = useState(false);
+  const [isLoadingLuckUp, setIsLoadingLuckUp] = useState(false);
+  console.log(isSearched);
+  console.log(btnLoading);
+
+  const onSubmitFormData = async () => {
+    setIsLoadingLuckUp(true);
+    const token = localStorage.token;
+    const data = {
+      name: personName,
+      doB: dateStr,
+      Gender: gender,
+      ProvinceId: selectedKSProvince,
+      DistrictId: selectedKSDistrict,
+      WardId: selectedKSWard,
+    };
+    try {
+      const response = await axios.post(
+        `https://baohiem.dion.vn/InsuranceOrder/api/search-social-insurance-number`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.message == "SUCCESS") {
+        setSocialInsuranceId(response.data.data[0].maSoBhxh);
+        setInsuranceOrder((prevOrder: any) => ({
+          ...prevOrder,
+          listInsuredPerson: prevOrder.listInsuredPerson.map(
+            (person: any, index: any) =>
+              index === 0
+                ? {
+                    ...person,
+                    socialInsuranceNumber: response.data.data[0].maSoBhxh,
+                  }
+                : person
+          ),
+        }));
+        toast.success("Tra cứu mã bảo hiểm thành công");
+      }
+
+      if (response.data.message == "BAD_REQUEST") {
+        toast.warn("Không tìm thấy mã số BHXH");
+        setSocialInsuranceId("");
+      }
+
+      setIsSearched(true);
+
+      setIsLoadingLuckUp(false);
+    } catch (error) {
+      toast.error("Tra cứu mã bảo hiểm thất bại");
+      setSocialInsuranceId("");
+      setBtnLoading(false);
+      setIsLoadingLuckUp(false);
+      console.log(error);
+    }
+  };
+
   const boxHeaderParticipants = () => {
     return (
       <div className="flex justify-between items-center w-full p-[20px] bg-[#0077D5;]">
@@ -1361,7 +1428,7 @@ const RegisterBHXH = () => {
           id="name"
           ref={participantRefs.fullNameParticipants}
           value={personName}
-          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập tên của bạn"
           onChange={(e) => {
             setPersonName(e.target.value);
@@ -1418,7 +1485,7 @@ const RegisterBHXH = () => {
           value={citizenId}
           maxLength={12}
           ref={participantRefs.cccdParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập số CCCD"
           onChange={(e) => {
             // Lọc ra chỉ các ký tự số
@@ -1438,33 +1505,89 @@ const RegisterBHXH = () => {
     );
   };
 
+  const validateSearchCodeBHXH = () => {
+    if (!isValidEmptyString(personName)) {
+      toast.warn("Họ và tên người tham gia không được để trống");
+      scrollToElement(participantRefs.fullNameParticipants);
+      return false;
+    }
+
+    if (!isValidEmptyString(dateValue)) {
+      toast.warn("Ngày sinh không được để trống");
+      scrollToElement(participantRefs.dobParticipant);
+      return false;
+    }
+
+    if (!isValidEmptyString(gender)) {
+      toast.warn("Giới tính không được để trống");
+      scrollToElement(participantRefs.genderParticipant);
+      return false;
+    }
+
+    if (selectedKSProvince == 0) {
+      toast.warn("Địa chỉ tỉnh thành khai sinh không được để trống");
+      scrollToElement(participantRefs.ksProvinceParticipant);
+      return false;
+    }
+
+    if (selectedKSDistrict == 0) {
+      toast.warn("Địa chỉ quận huyện khai sinh không được để trống");
+      scrollToElement(participantRefs.ksDistrictParticipant);
+      return false;
+    }
+
+    if (selectedKSWard == 0) {
+      toast.warn("Địa chỉ phường xã khai sinh không được để trống");
+      scrollToElement(participantRefs.ksWardParticipant);
+      return false;
+    }
+
+    return true;
+  };
+
   const inputBHXHParticipants = () => {
     return (
       <div>
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số BHXH
         </label>
-        <Input
-          type="text"
-          id="bhxh"
-          maxLength={15}
-          ref={participantRefs.bhxhParticipant}
-          value={socialInsuranceId}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
-          placeholder="Nhập số Bảo hiểm Xã hội"
-          onChange={(e) => {
-            setSocialInsuranceId(e.target.value);
-            setInsuranceOrder((prevOrder: any) => ({
-              ...prevOrder,
-              listInsuredPerson: prevOrder.listInsuredPerson.map(
-                (person: any, index: any) =>
-                  index === 0
-                    ? { ...person, socialInsuranceNumber: e.target.value }
-                    : person
-              ),
-            }));
-          }}
-        />
+        <div className="relative">
+          <Input
+            type="text"
+            id="bhxh"
+            maxLength={15}
+            ref={participantRefs.bhxhParticipant}
+            value={socialInsuranceId}
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5   "
+            placeholder="Nhập số Bảo hiểm Xã hội"
+            onChange={(e) => {
+              setSocialInsuranceId(e.target.value);
+              setInsuranceOrder((prevOrder: any) => ({
+                ...prevOrder,
+                listInsuredPerson: prevOrder.listInsuredPerson.map(
+                  (person: any, index: any) =>
+                    index === 0
+                      ? { ...person, socialInsuranceNumber: e.target.value }
+                      : person
+                ),
+              }));
+            }}
+          />
+
+          <Link
+            to={""}
+            onClick={() => {
+              if (validateSearchCodeBHXH()) {
+                onSubmitFormData();
+              }
+            }}
+            className="absolute inset-y-0 start-[79%] top-0 flex items-center"
+          >
+            <p className="text-base font-normal text-[#0076B7]">
+              {!isLoadingLuckUp ? "Tra cứu" : "Đang tải..."}
+            </p>
+          </Link>
+        </div>
       </div>
     );
   };
@@ -1564,6 +1687,26 @@ const RegisterBHXH = () => {
     );
   };
 
+  const [salaryErrors, setSalaryErrors] = useState({
+    error1: true,
+    error2: true,
+  });
+
+  const validateSalary = (salary: any) => {
+    const newErrors = { error1: true, error2: true };
+    if (salary % 50000 != 0) {
+      newErrors.error1 = false;
+    }
+
+    if (salary == 0) {
+      newErrors.error1 = false;
+    }
+    if (salary < 1500000 || salary > 46800000) {
+      newErrors.error2 = false;
+    }
+    setSalaryErrors(newErrors);
+  };
+
   const inputSalaryParticipants = () => {
     return (
       <div className="w-full lg1130:w-[49%]">
@@ -1578,6 +1721,9 @@ const RegisterBHXH = () => {
           onChange={(e) => {
             wage.current = e;
             setWageSlider(e);
+
+            validateSalary(e);
+
             // Cập nhật giá trị trong insuranceOrder
             setInsuranceOrder((prevOrder: any) => ({
               ...prevOrder,
@@ -1606,7 +1752,7 @@ const RegisterBHXH = () => {
             id="salary"
             value={displayValue}
             ref={participantRefs.salaryParticipant}
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="Nhập mức lương"
             onChange={(e) => {
               const numbers = e!.target.value.replace(/\D/g, "");
@@ -1614,6 +1760,8 @@ const RegisterBHXH = () => {
               // Chuyển đổi giá trị thành số, nếu rỗng thì đặt thành 0
               let numericValue = numbers != "" ? Number(numbers) : 0;
               if (numericValue > 46800000) numericValue = 46800000;
+
+              validateSalary(numericValue);
 
               setWageSlider(numericValue);
 
@@ -1640,14 +1788,27 @@ const RegisterBHXH = () => {
               calculateFinalPrice();
             }}
           />
-          <div className="absolute inset-y-0 start-[68%] sm:start-[72%] top-0 flex items-center pointer-events-none">
+          <div className="absolute inset-y-0 start-[72%] top-0 flex items-center pointer-events-none">
             <p className="text-base font-normal text-[#767A7F]">vnđ/tháng</p>
           </div>
+        </div>
+        <div
+          className={`block text-sm font-normal ${
+            salaryErrors["error2"] == true ? "text-green-600" : "text-red-600"
+          }  pt-2`}
+        >
+          - Mức lương phải nằm trong khoảng 1.500.000 - 46.800.0000 vnđ
+        </div>
+        <div
+          className={`block text-sm font-normal ${
+            salaryErrors["error1"] == true ? "text-green-600" : "text-red-600"
+          }  pt-2`}
+        >
+          - Mức lương phải là số chia hết cho 50.000.
         </div>
       </div>
     );
   };
-
   const inputMonthcountParticipants = () => {
     return (
       <div className="w-full lg1130:w-[49%] pt-[35px]">
@@ -1726,7 +1887,7 @@ const RegisterBHXH = () => {
         <div className="relative">
           <Input
             type="text"
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
             value={supportBudget.toLocaleString("vi-VN")}
             readOnly
           />
@@ -1878,7 +2039,7 @@ const RegisterBHXH = () => {
           id="address"
           value={ksAddressDetail}
           ref={participantRefs.ksAddrestailParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="VD: Số nhà, số đường,...."
           onChange={(e) => {
             setKSAddressDetail(e.target.value);
@@ -2042,7 +2203,7 @@ const RegisterBHXH = () => {
           id="address"
           value={ttAddressDetail}
           ref={participantRefs.ttAddressDetailParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="VD: Số nhà, số đường,...."
           onChange={(e) => {
             setTTAddressDetail(e.target.value);
@@ -2349,7 +2510,7 @@ const RegisterBHXH = () => {
           type="text"
           id="address"
           value={displayValue}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="0"
           disabled
         />
@@ -2368,7 +2529,7 @@ const RegisterBHXH = () => {
           id="address"
           value={fullNamHouseHoldParticipant}
           ref={participantRefs.fullNamHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Họ và tên"
           onChange={(e) => {
             setFullNamHouseHoldParticipant(e.target.value);
@@ -2398,7 +2559,7 @@ const RegisterBHXH = () => {
           maxLength={12}
           value={cccdHouseHoldParticipant}
           ref={participantRefs.cccdHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Số CCCD"
           onChange={(e) => {
             setCCCDHouseHoldParticipant(e.target.value);
@@ -2664,7 +2825,7 @@ const RegisterBHXH = () => {
           id="address"
           value={addressDetailHouseHoldParticipant}
           ref={participantRefs.addressDetailHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Địa chỉ cụ thể"
           onChange={(e) => {
             setAddressDetailHouseHoldParticipant(e.target.value);
@@ -2693,7 +2854,7 @@ const RegisterBHXH = () => {
           id="address"
           value={addressDetailHKHouseHoldParticipant}
           ref={participantRefs.addressDetailHKHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Địa chỉ cụ thể"
           onChange={(e) => {
             setAddressDetailHKHouseHoldParticipant(e.target.value);
@@ -2724,7 +2885,7 @@ const RegisterBHXH = () => {
   //         defaultValue={
   //           insuranceOrder.houseHold.houseHoldPeoples[index].citizenId
   //         }
-  //         className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+  //         className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
   //         placeholder="Nhập CCCD"
   //         onChange={(e) => {
   //           insuranceOrder.houseHold.houseHoldPeoples[index].citizenId =
@@ -2775,7 +2936,7 @@ const RegisterBHXH = () => {
   //         type="text"
   //         ref={members[index].name}
   //         defaultValue={insuranceOrder.houseHold.houseHoldPeoples[index].name}
-  //         className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+  //         className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
   //         placeholder="Họ và tên"
   //         onChange={(e) => {
   //           insuranceOrder.houseHold.houseHoldPeoples[index].name =
@@ -2960,7 +3121,7 @@ const RegisterBHXH = () => {
         onClick={() => {
           setMembers([...members, createNewMember()]);
 
-          let houseHoldPeoples = insuranceOrder.houseHold.houseHoldPeoples;
+          const houseHoldPeoples = insuranceOrder.houseHold.houseHoldPeoples;
           houseHoldPeoples.push({
             id: 0,
             name: "",
@@ -3477,7 +3638,7 @@ const RegisterBHXH = () => {
           id="phone"
           value={phone}
           ref={buyerRefs.phone}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Số điện thoại"
           maxLength={10}
           onChange={(e) => {
@@ -3504,7 +3665,7 @@ const RegisterBHXH = () => {
           id="name"
           value={buyerName}
           ref={buyerRefs.buyerName}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập tên của bạn"
           onChange={(e) => {
             console.log(e.target.value);
@@ -3530,7 +3691,7 @@ const RegisterBHXH = () => {
           id="email"
           value={email}
           ref={buyerRefs.email}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập email của bạn"
           onChange={(e) => {
             setEmail(e.target.value);
@@ -3663,7 +3824,7 @@ const RegisterBHXH = () => {
           id="address"
           value={buyerAddressDetail}
           ref={buyerRefs.buyerAddressDetail}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="VD: Số nhà, số đường,...."
           onChange={(e) => {
             setBuyerAddressDetail(e.target.value);

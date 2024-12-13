@@ -231,14 +231,14 @@ const LoginPage = () => {
               <div className="flex gap-4 flex-col w-full justify-center items-center">
                 {/* <div className="w-full bg-white rounded-lg shadow darks:border md:mt-0 sm:max-w-md xl:p-0 darks:bg-gray-800 darks:border-gray-700">
                   <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl darks:text-white">
+                    <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl  ">
                       Đăng nhập
                     </h1>
                     <form className="space-y-4 md:space-y-6" action="#">
                       <div>
                         <label
                           htmlFor="email"
-                          className="block mb-2 text-sm font-medium text-gray-900 darks:text-white"
+                          className="block mb-2 text-sm font-medium text-gray-900  "
                         >
                           Nhập email
                         </label>
@@ -246,7 +246,7 @@ const LoginPage = () => {
                           type="email"
                           name="email"
                           id="email"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5             "
                           placeholder="name@company.com"
                           required
                         />
@@ -254,7 +254,7 @@ const LoginPage = () => {
                       <div>
                         <label
                           htmlFor="password"
-                          className="block mb-2 text-sm font-medium text-gray-900 darks:text-white"
+                          className="block mb-2 text-sm font-medium text-gray-900  "
                         >
                           Nhập Password
                         </label>
@@ -263,7 +263,7 @@ const LoginPage = () => {
                           name="password"
                           id="password"
                           placeholder="••••••••"
-                          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5             "
                           required
                         />
                       </div>

@@ -208,7 +208,7 @@ const CardHouseHold = (props: Props) => {
           maxLength={12}
           ref={refs.cccdHouseHoldParticipant}
           value={cccdHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Số CCCD"
           onChange={(e) => {
             setCCCDHouseHoldParticipant(e.target.value);
@@ -329,7 +329,7 @@ const CardHouseHold = (props: Props) => {
           type="text"
           ref={refs.addressDetailHouseHoldParticipant}
           value={addressDetailHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Địa chỉ cụ thể"
           onChange={(e) => {
             setAddressDetailHouseHoldParticipant(e.target.value);
@@ -453,7 +453,7 @@ const CardHouseHold = (props: Props) => {
           type="text"
           ref={refs.addressDetailHKHouseHoldParticipant}
           value={addressDetailHKHouseHoldParticipant}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Địa chỉ cụ thể"
           onChange={(e) => {
             setAddressDetailHKHouseHoldParticipant(e.target.value);

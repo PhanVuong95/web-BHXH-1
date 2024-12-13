@@ -200,7 +200,7 @@ const CardMembersHouseHold = (props: Props) => {
           id="address"
           ref={refs.ksAddressDetail}
           value={addressDetailMember}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Địa chỉ cụ thể"
           onChange={(e) => {
             setAddressDetailMember(e.target.value);
@@ -223,7 +223,7 @@ const CardMembersHouseHold = (props: Props) => {
           type="text"
           ref={refs.name}
           defaultValue={registerInfoBHYT.houseHold.houseHoldPeoples[index].name}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Họ và tên"
           onChange={(e) => {
             registerInfoBHYT.houseHold.houseHoldPeoples[index].name =
@@ -301,7 +301,7 @@ const CardMembersHouseHold = (props: Props) => {
           defaultValue={
             registerInfoBHYT.houseHold.houseHoldPeoples[index].citizenId
           }
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập CCCD"
           onChange={(e) => {
             registerInfoBHYT.houseHold.houseHoldPeoples[index].citizenId =

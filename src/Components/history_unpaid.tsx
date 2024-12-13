@@ -9,7 +9,7 @@ import logo from "../assets-src/logo1.png";
 import HeaderTitle from "./HeaderTitle";
 
 const HistoryUnpaidPage: React.FunctionComponent = () => {
-  const { id } = useParams();
+  const { id, statusName } = useParams();
   const navigate = useNavigate();
   const [orderDetail, setOrderDetail] = useState<any>();
   const [insuredPerson, setInsuredPerson] = useState<any>();
@@ -445,6 +445,27 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
             </div>
           </div>
         </div>
+
+        {orderStatusId == DONE && statusName == "Thành công" ? (
+          <div className="flex flex-row content-center justify-center items-center mb-[25%]">
+            <button
+              onClick={() => {
+                setInsuranceOrder((prevOrder: any) => ({
+                  ...prevOrder,
+                  id: 0,
+                }));
+                setTimeout(() => {
+                  navigate("/register-BHXH");
+                }, 100);
+              }}
+              className="px-[24px] py-3 bg-[#e9c058] w-full rounded-full text-base font-normal text-white text-center"
+            >
+              Tái hợp đồng bảo hiểm
+            </button>
+          </div>
+        ) : (
+          <div className="mb-32"></div>
+        )}
 
         {!(orderStatusId == CANCELED || orderStatusId == DONE) && (
           <div className="page-2 bg-white w-[100%]">

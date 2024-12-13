@@ -118,7 +118,7 @@ const UserBuyerPage = (props: Props) => {
             setPhone(e.target.value);
             registerInfoBHYT["phone"] = e.target.value;
           }}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Số điện thoại"
           required
         />
@@ -142,7 +142,7 @@ const UserBuyerPage = (props: Props) => {
             setFullName(e.target.value);
             registerInfoBHYT["fullName"] = e.target.value;
           }}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập tên của bạn"
           required
         />
@@ -166,7 +166,7 @@ const UserBuyerPage = (props: Props) => {
             setEmail(e.target.value);
             registerInfoBHYT["email"] = e.target.value;
           }}
-          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập email của bạn"
           required
         />
@@ -268,7 +268,7 @@ const UserBuyerPage = (props: Props) => {
             setAddressDetail(e.target.value);
             registerInfoBHYT["addressDetail"] = e.target.value;
           }}
-          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="VD: Số nhà, số đường,...."
           required
         />

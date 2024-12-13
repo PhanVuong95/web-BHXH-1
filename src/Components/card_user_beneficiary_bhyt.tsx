@@ -570,7 +570,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
                 setErrors({ ...errors, ...{ socialInsuranceNumber: null } });
               }
             }}
-            className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+            className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5              "
             placeholder="Nhập số BHXH"
             required
           />
@@ -649,7 +649,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
               setErrors({ ...errors, ...{ citizenId: null } });
             }
           }}
-          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập số CCCD"
           required
         />
@@ -1060,7 +1060,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
               setErrors({ ...errors, ...{ fullName: "" } });
             }
           }}
-          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập tên của bạn"
           required
         />
@@ -1106,7 +1106,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
               setErrors({ ...errors, ...{ healthInsuranceNumber: null } });
             }
           }}
-          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="---"
           required
         />
@@ -1244,7 +1244,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   //               registerInfoBHYT["listInsuredPerson"][index].oldCardStartDate =
   //                 formatDate(value);
   //             }}
-  //             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+  //             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
   //             placeholder="Chọn ngày sinh"
   //             required
   //           />
@@ -1267,7 +1267,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   //               registerInfoBHYT["listInsuredPerson"][index].oldCardEndDate =
   //                 formatDate(value);
   //             }}
-  //             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+  //             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
   //             placeholder="Chọn ngày sinh"
   //             required
   //           />
@@ -1611,7 +1611,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           id="address"
           ref={refs.ksAddressDetail}
           value={ksAddressDetail}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="VD: Số nhà, số đường,...."
           onChange={(e) => {
             setKSAddressDetail(e.target.value);
@@ -1734,7 +1734,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           id="address"
           ref={refs.ttAddressDetail}
           value={ttAddressDetail}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 darks:bg-gray-700 darks:border-gray-600 darks:placeholder-gray-400 darks:text-white darks:focus:ring-blue-500 darks:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="VD: Số nhà, số đường,...."
           onChange={(e) => {
             setTTAddressDetail(e.target.value);
