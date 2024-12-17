@@ -219,20 +219,67 @@ const LoginPage = () => {
       >
         <Tabs
           centered
-          style={{ height: "100%", width: "100%", maxWidth: "400px" }}
+          style={{ height: "100%", width: "100%", maxWidth: "500px" }}
         >
           <Tabs.TabPane tab="Đăng nhập bằng tài khoản" key="1">
             <FlexBox
               style={{
                 alignItems: "center",
                 flexDirection: "column",
-                marginTop: 100,
               }}
             >
-              <div>
+              <div className="flex gap-4 flex-col w-full justify-center items-center">
+                {/* <div className="w-full bg-white rounded-lg shadow darks:border md:mt-0 sm:max-w-md xl:p-0 darks:bg-gray-800 darks:border-gray-700">
+                  <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl  ">
+                      Đăng nhập
+                    </h1>
+                    <form className="space-y-4 md:space-y-6" action="#">
+                      <div>
+                        <label
+                          htmlFor="email"
+                          className="block mb-2 text-sm font-medium text-gray-900  "
+                        >
+                          Nhập email
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          id="email"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5             "
+                          placeholder="name@company.com"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="password"
+                          className="block mb-2 text-sm font-medium text-gray-900  "
+                        >
+                          Nhập Password
+                        </label>
+                        <input
+                          type="password"
+                          name="password"
+                          id="password"
+                          placeholder="••••••••"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5             "
+                          required
+                        />
+                      </div>
+                      <button
+                        type="submit"
+                        className="w-full border border-[#B9BDC1] overflow-hidden text-black bg-primary-600 rounded-lg text-lg px-5 py-2.5 text-center"
+                      >
+                        Đăng nhập
+                      </button>
+                    </form>
+                  </div>
+                </div> */}
+
                 <div
                   id="google-button-wrapper"
-                  style={{ display: "block" }}
+                  style={{ display: "block", maxWidth: "450px", width: "100%" }}
                 ></div>
                 <button
                   id="login-with-google"

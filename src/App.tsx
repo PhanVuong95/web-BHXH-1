@@ -1,5 +1,5 @@
 import { ToastContainer } from "react-toastify";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import LayoutPage from "./Layout/layoutPage";
 import HomePage from "./Page/homePage";
 import { SpecificProvider } from "./Components/specificContext";
@@ -23,8 +23,39 @@ import UserPage from "./Page/user";
 import LoginPage from "./Page/LoginPage";
 import PrivacyPolicyPage from "./Components/privacy_policy";
 import LuckUpBHXH from "./Page/luckup_bhxh";
+import { useEffect, useState } from "react";
+import CardNewDetailPages from "./Components/CardNewDetailPages";
 
 function App() {
+  const [user, setUser] = useState<any>(null);
+  console.log(user);
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("profile");
+    setUser(null);
+    // alert("You have been logged out due to inactivity.");
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    const profile = localStorage.getItem("profile");
+
+    if (profile) {
+      setUser(JSON.parse(profile));
+    }
+
+    // Thiết lập timeout để logout sau 1 phút (1 * 60 * 1000 ms)
+    const logoutTimeout = setTimeout(() => {
+      handleLogout();
+    }, 3 * 60 * 60 * 1000);
+
+    // Cleanup timeout khi component bị unmount hoặc trước khi thiết lập lại
+    return () => clearTimeout(logoutTimeout);
+  }, []);
+
+  const navigate = useNavigate();
+
   return (
     <>
       <ToastContainer
@@ -53,8 +84,24 @@ function App() {
         <Route path="/" element={<LayoutPage key="layout" />}>
           <Route index element={<HomePage />} />
           <Route path="contract" element={<ContractPage />} />
-          <Route path="history" element={<HistoryPage />} />
-          <Route path="user" element={<UserPage />} />
+          <Route
+            path="history"
+            element={
+              <HistoryPage
+                onViewCollaborators={() => navigate("/collaborators")}
+                onViewBHYT={() => navigate("/list-history-bhyt")}
+              />
+            }
+          />
+          <Route
+            path="user"
+            element={
+              <UserPage
+                onViewCollaborators={() => navigate("/collaborators")}
+                onViewBHYT={() => navigate("/list-history-bhyt")}
+              />
+            }
+          />
           <Route path="login" element={<LoginPage />} />
           <Route
             path="social-insurance"
@@ -106,13 +153,19 @@ function App() {
               </SpecificProvider>
             }
           />
-          <Route path="register-BHYT/" element={<RegisterBHYT />} />
+          <Route
+            path="register-BHYT/"
+            element={<RegisterBHYT onBack={() => navigate(-1)} />}
+          />
           <Route
             path="lists-history"
-            element={<ListsHistoryPage w={""} h={""} url={""} />}
+            element={<ListsHistoryPage onBack={() => navigate(-1)} />}
           />
           <Route path="info-detail-bhyt/:id" element={<InfoDetailBHYT />} />
-          <Route path="list-history-bhyt" element={<ListHistoryBHYT />} />
+          <Route
+            path="list-history-bhyt"
+            element={<ListHistoryBHYT onBack={() => navigate(-1)} />}
+          />
           <Route
             path="check-status-procedure/:id"
             element={<CheckStatusProcedure />}
@@ -127,6 +180,7 @@ function App() {
           />
           <Route path="/privacy_policy" element={<PrivacyPolicyPage />} />
           <Route path="/luckup-bhxh" element={<LuckUpBHXH />} />
+          <Route path="/new-detail/:id" element={<CardNewDetailPages />} />
         </Route>
       </Routes>
     </>

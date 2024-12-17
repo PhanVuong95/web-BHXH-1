@@ -5,8 +5,11 @@ import axios from "axios";
 import { PulseLoader } from "react-spinners";
 import { formatMoneyVND } from "../../Utils/validateString";
 import logo from "../../assets-src/logo1.png";
+import { ListsHistoryPageProps, Order } from "../../Models";
 
-const ListHistoryBHYT = ({}) => {
+const ListHistoryBHYT: React.FunctionComponent<ListsHistoryPageProps> = ({
+  onBack,
+}) => {
   const PENDING = 1001;
   const DONE = 1002;
   const CANCELED = 1003;
@@ -28,19 +31,18 @@ const ListHistoryBHYT = ({}) => {
         }
       )
       .then((response) => {
-        let fillteredOrders: any = [];
-        response.data.data.forEach((item: any) => {
-          if (item.insuranceOrderStatusId == DONE && openTab == 2) {
+        const fillteredOrders: Order[] = [];
+        response.data.data.forEach((item: Order) => {
+          if (item.insuranceOrderStatusId === DONE && openTab === 2) {
             fillteredOrders.push(item);
           } else if (
-            (item.insuranceOrderStatusId == PENDING && openTab == 1) ||
-            (item.insuranceOrderStatusId == CANCELED && openTab == 1)
+            (item.insuranceOrderStatusId === PENDING && openTab === 1) ||
+            (item.insuranceOrderStatusId === CANCELED && openTab === 1)
           ) {
             fillteredOrders.push(item);
           }
         });
         setListOrder(fillteredOrders);
-
         setLoading(false);
       })
       .catch((error) => {
@@ -103,14 +105,9 @@ const ListHistoryBHYT = ({}) => {
 
   return (
     <>
-      {/* <HeaderBase
-        isHome={false}
-        onBack={() => navigate("/history")}
-        title={"Lịch sử đăng ký BHYT TN"}
-      /> */}
-      <div className="page-1 !pb-2 !pt-[95px]">
-        <div className="max-w-md mx-auto">
-          <div className="mb-4 flex space-x-4 p-1 bg-white rounded-lg shadow-md">
+      <div className="">
+        <div className="p-2 mx-auto">
+          <div className="mb-4 flex space-x-4 p-1 bg-white rounded-lg shadow-md border border-[#B9BDC1] overflow-hidden">
             <button
               onClick={() => setOpenTab(1)}
               className={`flex-1 py-2 px-[24px] rounded-md text-base focus:outline-none focus:shadow-outline-blue transition-all duration-300 ${
@@ -129,7 +126,7 @@ const ListHistoryBHYT = ({}) => {
             </button>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
             {listOrder.length == 0 ? (
               <div
                 style={{
@@ -146,7 +143,7 @@ const ListHistoryBHYT = ({}) => {
             {listOrder?.map((item: any, index: any) => {
               return (
                 <Link to={"/info-detail-bhyt/" + item.id} key={index}>
-                  <div className="p-4 bg-white w-full rounded-xl flex flex-col gap-4">
+                  <div className="p-4 bg-white h-full w-full rounded-xl flex flex-row items-center gap-4 border border-[#B9BDC1] overflow-hidden">
                     <div className="flex gap-[10px]">
                       <img src={logo} className="w-16 h-16" />
                       <div className="title-product flex flex-col">
@@ -232,6 +229,12 @@ const ListHistoryBHYT = ({}) => {
           </div>
         </div>
       </div>
+      <button
+        className="m-2 border py-3 w-[30%] rounded-xl border-[#FF0000]"
+        onClick={onBack}
+      >
+        <div className="text-[#FF0000] font-bold text-[16px]">Quay lại</div>
+      </button>
     </>
   );
 };

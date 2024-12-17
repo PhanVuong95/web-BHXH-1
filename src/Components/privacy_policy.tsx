@@ -6,17 +6,21 @@ import image5 from "../assets-src/dieukhoan/image5.jpg";
 import image6 from "../assets-src/dieukhoan/image6.jpg";
 import image7 from "../assets-src/dieukhoan/image7.jpg";
 import image8 from "../assets-src/dieukhoan/image8.jpg";
+import HeaderTitle from "./HeaderTitle";
 const PrivacyPolicyPage: React.FunctionComponent = () => {
   return (
-    <div className="pt-20 max-w-[900px] mx-auto flex flex-col gap-8 my-8">
-      <img src={image1} className="w-full" />
-      <img src={image2} className="w-full" />
-      <img src={image3} className="w-full" />
-      <img src={image4} className="w-full" />
-      <img src={image5} className="w-full" />
-      <img src={image6} className="w-full" />
-      <img src={image7} className="w-full" />
-      <img src={image8} className="w-full" />
+    <div>
+      <HeaderTitle links={[{ title: "Tài liệu Bảo hiểm Xã hội" }]} />
+      <div className="mx-3 max-w-[1280px] xl:mx-auto flex flex-col gap-8 my-8 border border-[#B9BDC1] overflow-hidden rounded-lg p-[20px]">
+        <img src={image1} className="w-full" />
+        <img src={image2} className="w-full" />
+        <img src={image3} className="w-full" />
+        <img src={image4} className="w-full" />
+        <img src={image5} className="w-full" />
+        <img src={image6} className="w-full" />
+        <img src={image7} className="w-full" />
+        <img src={image8} className="w-full" />
+      </div>
     </div>
   );
 };

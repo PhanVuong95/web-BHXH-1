@@ -1,3 +1,5 @@
+import { Bank } from "../Models";
+
 export const formatMoneyVND = (amount: number): string => {
   try {
     return amount.toLocaleString("vi-VN", { currency: "VND" });
@@ -13,9 +15,9 @@ export function isValidDate(date: any) {
 export const formatDate = (date: any) => {
   try {
     const temp = new Date(date);
-    let year = temp.getFullYear();
-    let month = (temp.getMonth() + 1).toString().padStart(2, "0");
-    let day = temp.getDate().toString().padStart(2, "0");
+    const year = temp.getFullYear();
+    const month = (temp.getMonth() + 1).toString().padStart(2, "0");
+    const day = temp.getDate().toString().padStart(2, "0");
     return `${day}/${month}/${year}`;
   } catch {
     return "";
@@ -24,13 +26,13 @@ export const formatDate = (date: any) => {
 
 export const formatDateToUpdateSQL = (date: Date) => {
   try {
-    let year = date.getFullYear();
-    let month = (date.getMonth() + 1).toString().padStart(2, "0");
-    let day = date.getDate().toString().padStart(2, "0");
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
 
-    let hours = date.getHours().toString().padStart(2, "0");
-    let minutes = date.getMinutes().toString().padStart(2, "0");
-    let seconds = date.getSeconds().toString().padStart(2, "0");
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const seconds = date.getSeconds().toString().padStart(2, "0");
 
     return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
   } catch {
@@ -88,7 +90,7 @@ export const formatTime1 = (dates: string) => {
 };
 
 export const formatTimeSql = (dates: string) => {
-  var time = dates.split("/");
+  const time = dates.split("/");
   if (time) {
     return `${time[2]}-${time[1]}-${time[0]}`;
   }
@@ -139,6 +141,7 @@ export const formatPhoneNumber = (phoneNumber: any) => {
   try {
     return phoneNumber.replace(/(\d{4})(\d{3})(\d{3})/, "$1.$2.$3");
   } catch (error) {
+    console.log(error);
     return "";
   }
 };
@@ -207,7 +210,7 @@ export const isValidString = (data: any): string => {
 };
 
 export const convertListToSelect = (data: any, placeholer: any) => {
-  let list: typeSelect[] = [];
+  const list: typeSelect[] = [];
   list.push({ value: 0, label: placeholer });
   data.forEach((element: any) => {
     list.push({ value: element.id, label: element.name });
@@ -216,7 +219,7 @@ export const convertListToSelect = (data: any, placeholer: any) => {
 };
 
 export const convertListToSelectVungLuong = (data: any, placeholer: any) => {
-  let list: typeSelect[] = [];
+  const list: typeSelect[] = [];
   list.push({ value: 0, label: placeholer });
   data.forEach((element: any) => {
     list.push({ value: element.id, label: element.vungLttTen });
@@ -226,9 +229,9 @@ export const convertListToSelectVungLuong = (data: any, placeholer: any) => {
 
 export const formatDate2 = (date: Date) => {
   try {
-    let year = date.getFullYear();
-    let month = (date.getMonth() + 1).toString().padStart(2, "0");
-    let day = date.getDate().toString().padStart(2, "0");
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
 
     return `${day}/${month}/${year}`;
   } catch {
@@ -238,13 +241,13 @@ export const formatDate2 = (date: Date) => {
 
 export const formatDateByTime = (date: Date) => {
   try {
-    let year = date.getFullYear();
-    let month = (date.getMonth() + 1).toString().padStart(2, "0");
-    let day = date.getDate().toString().padStart(2, "0");
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
 
-    let hours = date.getHours().toString().padStart(2, "0");
-    let minutes = date.getMinutes().toString().padStart(2, "0");
-    let seconds = date.getSeconds().toString().padStart(2, "0");
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const seconds = date.getSeconds().toString().padStart(2, "0");
 
     return `${day}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
   } catch {
@@ -259,7 +262,7 @@ interface TypeSelect {
 export const convertListToSelectObjectTypeGroupList = (
   data: any[]
 ): TypeSelect[] => {
-  let list: TypeSelect[] = [];
+  const list: TypeSelect[] = [];
   data.forEach((element: any) => {
     list.push({ value: element.id, label: element.nhomLoaiDoiTuongTen });
   });
@@ -269,9 +272,18 @@ export const convertListToSelectObjectTypeGroupList = (
 export const convertListToSelectObjectTypeGroup = (
   data: any[]
 ): TypeSelect[] => {
-  let list: TypeSelect[] = [];
+  const list: TypeSelect[] = [];
   data.forEach((element: any) => {
     list.push({ value: element.id, label: element.doiTuongTen });
+  });
+  return list;
+};
+
+export const convertListToSelectBanks = (data: any, placeholer: any) => {
+  const list: typeSelect[] = [];
+  list.push({ value: 0, label: placeholer });
+  data.forEach((element: Bank) => {
+    list.push({ value: element.bin, label: element.name });
   });
   return list;
 };

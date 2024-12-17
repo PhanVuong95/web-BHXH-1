@@ -92,7 +92,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputCCCDMember = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full sm:w-[48%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Số CCCD <samp className="text-red-600">*</samp>
         </label>
@@ -103,7 +103,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           defaultValue={
             insuranceOrder.houseHold.houseHoldPeoples[index]?.citizenId
           }
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập CCCD"
           onChange={(e) => {
             insuranceOrder.houseHold.houseHoldPeoples[index].citizenId =
@@ -116,7 +116,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputEthnicMember = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full sm:w-[48%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Dân tộc <samp className="text-red-600">*</samp>
         </label>
@@ -145,7 +145,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputGenderMemder = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full sm:w-[48%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Giới tính <samp className="text-red-600">*</samp>
         </label>
@@ -176,7 +176,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputFullNameMember = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full sm:w-[48%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Họ và tên <samp className="text-red-600">*</samp>
         </label>
@@ -184,7 +184,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           type="text"
           ref={members[index]?.name}
           defaultValue={insuranceOrder.houseHold.houseHoldPeoples[index]?.name}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Họ và tên"
           onChange={(e) => {
             insuranceOrder.houseHold.houseHoldPeoples[index].name =
@@ -197,7 +197,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputRelationshipMember = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full sm:w-[48%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Mối quan hệ <samp className="text-red-600">*</samp>
         </label>
@@ -251,7 +251,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputDobMember = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full sm:w-[48%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Ngày sinh <samp className="text-red-600">*</samp>
         </label>
@@ -290,7 +290,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputProvinceMember = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full sm:w-[48%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành phố khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -326,7 +326,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputDistrictMember = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full sm:w-[48%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -359,7 +359,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputWardMember = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full sm:w-[48%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -388,7 +388,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
 
   const inputAddressDetailMember = () => {
     return (
-      <div className="w-full sm:w-[49%]">
+      <div className="w-full sm:w-[48%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Địa chỉ cụ thể khai sinh
         </label>
@@ -396,7 +396,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           type="text"
           ref={members[index]?.ksAddressDetail}
           value={addressDetailMember}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Địa chỉ cụ thể"
           onChange={(e) => {
             setAddressDetailMember(e.target.value);

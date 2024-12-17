@@ -11,6 +11,7 @@ import noData from "../assets-src/no_data.png";
 import { FadeLoader } from "react-spinners";
 import Modal from "react-modal";
 import icon from "../assets-src/icon_coppy.png";
+import HeaderTitle from "../Components/HeaderTitle";
 
 const LuckUpBHXH = () => {
   const [errors, setErrors] = useState<any>({});
@@ -95,7 +96,7 @@ const LuckUpBHXH = () => {
 
   const renderFullName = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Họ và tên <samp className="text-red-600">*</samp>
         </label>
@@ -116,7 +117,7 @@ const LuckUpBHXH = () => {
               setErrors({ ...errors, ...{ fullName: "" } });
             }
           }}
-          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập tên của bạn"
           required
         />
@@ -130,7 +131,7 @@ const LuckUpBHXH = () => {
 
   const renderDob = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Ngày sinh <samp className="text-red-600">*</samp>
         </label>
@@ -164,7 +165,7 @@ const LuckUpBHXH = () => {
 
   const renderGender = () => {
     return (
-      <div>
+      <div className="w-full">
         <label className="block text-sm font-normal pb-2 text-gray-900">
           Giới tính <samp className="text-red-600">*</samp>
         </label>
@@ -197,7 +198,7 @@ const LuckUpBHXH = () => {
 
   const inputKSProvinceParticipate = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Tỉnh thành khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -230,7 +231,7 @@ const LuckUpBHXH = () => {
 
   const inputKSDistrictParticipants = () => {
     return (
-      <div>
+      <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Quận huyện khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -259,7 +260,7 @@ const LuckUpBHXH = () => {
 
   const inputKSWardParticipants = () => {
     return (
-      <div>
+      <div className="w-full">
         <label className="block text-sm font-normal text-gray-900 pb-2">
           Phường xã khai sinh <samp className="text-red-600">*</samp>
         </label>
@@ -405,31 +406,42 @@ const LuckUpBHXH = () => {
 
   return (
     <div>
-      {/* <HeaderBase isHome={false} title={"Tra cứu BHXH"} /> */}
+      <HeaderTitle links={[{ title: "Tra cứu Bảo hiểm Xã hội" }]} />
 
-      <div className=" flex flex-col gap-4 pt-[100px] pb-[80px] max-w-[1000px] w-full mx-auto">
-        <div className="p-4 mx-4 bg-white rounded-xl flex flex-col gap-4">
-          <h3 className="text-[#0076B7] text-lg font-medium">Nhập thông tin</h3>
+      <div className="px-3 xl:px-0 flex flex-col gap-4 py-[60px] max-w-[1280px] w-full mx-auto">
+        <div className="flex flex-col gap-4">
+          <div className=" bg-white rounded-xl flex flex-row flex-wrap justify-between gap-4">
+            <div className="flex flex-col flex-wrap border border-[#B9BDC1] overflow-hidden rounded-xl w-full lg1130:w-[49%]">
+              <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
+                Nhập thông tin
+              </h3>
 
-          {renderFullName()}
+              <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+                {renderFullName()}
 
-          {renderDob()}
+                {renderDob()}
 
-          {renderGender()}
+                {renderGender()}
+              </div>
+            </div>
 
-          <h3 className="text-[#0076B7] text-lg font-medium">
-            Địa chỉ khai sinh
-          </h3>
+            <div className="flex flex-col flex-wrap border border-[#B9BDC1] overflow-hidden rounded-xl w-full lg1130:w-[49%]">
+              <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
+                Địa chỉ khai sinh
+              </h3>
 
-          {/* Tỉnh thành  khai sinh*/}
-          {inputKSProvinceParticipate()}
+              <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+                {/* Tỉnh thành  khai sinh*/}
+                {inputKSProvinceParticipate()}
 
-          {/* Quận huyện khai sinh*/}
-          {inputKSDistrictParticipants()}
+                {/* Quận huyện khai sinh*/}
+                {inputKSDistrictParticipants()}
 
-          {/* Phường xã khai sinh*/}
-          {inputKSWardParticipants()}
-
+                {/* Phường xã khai sinh*/}
+                {inputKSWardParticipants()}
+              </div>
+            </div>
+          </div>
           {btnSubmit()}
         </div>
 

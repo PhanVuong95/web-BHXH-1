@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Province } from "../../Models";
+import { ListHistoryBHYTProps, Province } from "../../Models";
 import { registerInfoBHYT } from "./list_health_insurance";
 import {
   formatMoneyVND,
@@ -22,8 +22,11 @@ import Modal from "react-modal";
 import CardHouseHold from "../../Components/card_house_hold";
 import CardMembersHouseHold from "../../Components/card_members_house_hold";
 import CardObject from "../../Components/card_object";
+import HeaderTitle from "../../Components/HeaderTitle";
 
-const RegisterBHYT = () => {
+const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
+  onBack,
+}) => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const [provinces, setProvinces] = useState<Province[]>([]);
@@ -711,10 +714,10 @@ const RegisterBHYT = () => {
   const renderAddUserBeneficiary = () => {
     return (
       <button
-        className="p-4 bg-white rounded-xl flex flex-row items-center justify-center gap-2"
+        className="p-4 max-w-[296px] bg-[#0077D5] rounded-xl flex flex-row items-center justify-center gap-2 border border-[#B9BDC1]"
         onClick={addBeneficiary}
       >
-        <p className="text-base font-semibold text-[#0076B7]">
+        <p className="text-base font-semibold text-[#fff]">
           Thêm người được bảo hiểm
         </p>
         <div>
@@ -728,7 +731,7 @@ const RegisterBHYT = () => {
             <path
               fillRule="evenodd"
               d="M1.25122 12C1.25122 6.08579 6.08701 1.25 12.0012 1.25C17.9154 1.25 22.7512 6.08579 22.7512 12C22.7512 17.9142 17.9154 22.75 12.0012 22.75C6.08701 22.75 1.25122 17.9142 1.25122 12ZM12.0012 2.75C6.91543 2.75 2.75122 6.91421 2.75122 12C2.75122 17.0858 6.91543 21.25 12.0012 21.25C17.087 21.25 21.2512 17.0858 21.2512 12C21.2512 6.91421 17.087 2.75 12.0012 2.75ZM7.25122 12C7.25122 11.5858 7.58701 11.25 8.00122 11.25H11.2512V8C11.2512 7.58579 11.587 7.25 12.0012 7.25C12.4154 7.25 12.7512 7.58579 12.7512 8V11.25H16.0012C16.4154 11.25 16.7512 11.5858 16.7512 12C16.7512 12.4142 16.4154 12.75 16.0012 12.75H12.7512V16C12.7512 16.4142 12.4154 16.75 12.0012 16.75C11.587 16.75 11.2512 16.4142 11.2512 16V12.75H8.00122C7.58701 12.75 7.25122 12.4142 7.25122 12Z"
-              fill="#0076B7"
+              fill="#fff"
             />
           </svg>
         </div>
@@ -785,37 +788,39 @@ const RegisterBHYT = () => {
   const renderAttachedFiles = () => {
     return (
       <div className="flex flex-col gap-2 mb-[32px]">
-        <div className="bg-white rounded-xl flex flex-col gap-6 p-4">
+        <div className="bg-white rounded-xl flex flex-col border border-[#B9BDC1] overflow-hidden">
           <div>
-            <h3 className="text-[#0076B7] text-lg font-medium">
+            <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
               File đính kèm
             </h3>
-            {!fileUpload && (
-              <button
-                className="button-add w-[100%] mt-3"
-                onClick={() => handleUploadFileClick(fileUploadUrl)}
-              >
-                <div className="flex flex-row justify-center items-center gap-3">
-                  <p className="text-[#0076B7] text-base font-semibold">
-                    Upload hình ảnh liên quan
-                  </p>
+            <div className="p-[20px]">
+              {!fileUpload && (
+                <button
+                  className="button-add w-[100%] mt-3"
+                  onClick={() => handleUploadFileClick(fileUploadUrl)}
+                >
+                  <div className="flex flex-row justify-center items-center gap-3">
+                    <p className="text-[#0076B7] text-base font-semibold">
+                      Upload hình ảnh liên quan
+                    </p>
 
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    viewBox="0 0 25 25"
-                    fill="none"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M1.75134 12.7915C1.75134 6.87729 6.58713 2.0415 12.5013 2.0415C18.4156 2.0415 23.2513 6.87729 23.2513 12.7915C23.2513 18.7057 18.4156 23.5415 12.5013 23.5415C6.58713 23.5415 1.75134 18.7057 1.75134 12.7915ZM12.5013 3.5415C7.41556 3.5415 3.25134 7.70572 3.25134 12.7915C3.25134 17.8773 7.41556 22.0415 12.5013 22.0415C17.5871 22.0415 21.7513 17.8773 21.7513 12.7915C21.7513 7.70572 17.5871 3.5415 12.5013 3.5415ZM7.75134 12.7915C7.75134 12.3773 8.08713 12.0415 8.50134 12.0415H11.7513V8.7915C11.7513 8.37729 12.0871 8.0415 12.5013 8.0415C12.9156 8.0415 13.2513 8.37729 13.2513 8.7915V12.0415H16.5013C16.9156 12.0415 17.2513 12.3773 17.2513 12.7915C17.2513 13.2057 16.9156 13.5415 16.5013 13.5415H13.2513V16.7915C13.2513 17.2057 12.9156 17.5415 12.5013 17.5415C12.0871 17.5415 11.7513 17.2057 11.7513 16.7915V13.5415H8.50134C8.08713 13.5415 7.75134 13.2057 7.75134 12.7915Z"
-                      fill="#0076B7"
-                    />
-                  </svg>
-                </div>
-              </button>
-            )}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="25"
+                      height="25"
+                      viewBox="0 0 25 25"
+                      fill="none"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M1.75134 12.7915C1.75134 6.87729 6.58713 2.0415 12.5013 2.0415C18.4156 2.0415 23.2513 6.87729 23.2513 12.7915C23.2513 18.7057 18.4156 23.5415 12.5013 23.5415C6.58713 23.5415 1.75134 18.7057 1.75134 12.7915ZM12.5013 3.5415C7.41556 3.5415 3.25134 7.70572 3.25134 12.7915C3.25134 17.8773 7.41556 22.0415 12.5013 22.0415C17.5871 22.0415 21.7513 17.8773 21.7513 12.7915C21.7513 7.70572 17.5871 3.5415 12.5013 3.5415ZM7.75134 12.7915C7.75134 12.3773 8.08713 12.0415 8.50134 12.0415H11.7513V8.7915C11.7513 8.37729 12.0871 8.0415 12.5013 8.0415C12.9156 8.0415 13.2513 8.37729 13.2513 8.7915V12.0415H16.5013C16.9156 12.0415 17.2513 12.3773 17.2513 12.7915C17.2513 13.2057 16.9156 13.5415 16.5013 13.5415H13.2513V16.7915C13.2513 17.2057 12.9156 17.5415 12.5013 17.5415C12.0871 17.5415 11.7513 17.2057 11.7513 16.7915V13.5415H8.50134C8.08713 13.5415 7.75134 13.2057 7.75134 12.7915Z"
+                        fill="#0076B7"
+                      />
+                    </svg>
+                  </div>
+                </button>
+              )}
+            </div>
           </div>
 
           <input
@@ -840,14 +845,12 @@ const RegisterBHYT = () => {
             </div>
           )}
 
-          <hr className="border-dashed border-[1px] text-[#DEE7FE] "></hr>
-
           <div className="gap-2 flex flex-col">
-            <p className="text-sm font-normal text-[#000]">
+            <p className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
               Quy tắc giảm phí cùng hộ gia đình:
             </p>
 
-            <ul className="list-disc px-4">
+            <ul className="list-disc px-[40px] py-[20px]">
               <li>
                 <p className="text-sm font-normal">
                   Cung cấp toàn bộ thẻ CCCD gắn chip điện tử những người tham
@@ -867,42 +870,6 @@ const RegisterBHYT = () => {
                 </p>
               </li>
             </ul>
-          </div>
-
-          <hr className="border-dashed border-[1px] text-[#DEE7FE] "></hr>
-
-          <div className="flex flex-col gap-2 pb-4">
-            <h3 className="text-[#0076B7] text-lg font-medium">
-              Thông tin thẻ BHYT
-            </h3>
-            <div>
-              <p className="text-sm font-normal text-[#000]">
-                Thông tin BHXH sẽ được cập nhật trên ứng dụng{" "}
-                <strong className="text-[#0076B7] font-bold">VSSID </strong>
-                trong 15 ngày làm việc.
-              </p>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                onChange={() => {
-                  policyTerm2.current = !policyTerm2.current;
-                }}
-                className="relative appearance-none bg-white w-5 h-5 border rounded-full border-gray-400 cursor-pointer checked:bg-[#0076B7]"
-                id="unchecked-circular-checkbox"
-              />
-              <label
-                htmlFor="unchecked-circular-checkbox"
-                className="text-sm font-normal text-[#000] w-[96%]"
-              >
-                Tôi cam đoan rằng tất cả những lời khai trên là đúng và đã hiểu
-                rõ
-                <strong className="text-[#0076B7] font-bold">
-                  {" "}
-                  Chính sách và điều khoản
-                </strong>
-              </label>
-            </div>
           </div>
         </div>
       </div>
@@ -1068,69 +1035,115 @@ const RegisterBHYT = () => {
   };
 
   return (
-    <div className="pt-20 max-w-[1000px] mx-auto">
-      {/* {renderHeader()} */}
-      <div className="page-1 flex flex-col gap-4">
-        <div className="p-4 bg-white rounded-xl flex flex-col gap-6">
-          <CardObject refs={ObjectTypeRefs} />
+    <div>
+      <HeaderTitle links={[{ title: "Khai báo BHYT tự nguyện" }]} />
+      <div className="max-w-[1280px] mx-auto pt-[60px]">
+        <h3 className="title-top-header lg1130:px-0 px-[20px]">
+          Khai báo BHYT tự nguyện
+        </h3>
+        {/* {renderHeader()} */}
+        <div className="flex flex-row gap-[40px] flex-wrap">
+          <div className="flex flex-col gap-4 max-w-[100%] lg1130:px-0 px-[20px] lg1130:max-w-[840px] w-full">
+            <div className=" bg-white rounded-xl flex flex-col gap-6">
+              <CardObject refs={ObjectTypeRefs} />
+            </div>
+
+            <div className=" bg-white rounded-xl flex flex-col gap-6">
+              <CardHouseHold refs={houseHoldRefs} />
+
+              {members.map((member: any, index: any) => (
+                <CardMembersHouseHold
+                  key={`${index}`}
+                  item={member}
+                  index={index}
+                  members={members}
+                  ethnicLists={ethnicLists}
+                  provinces={provinces}
+                  onClose={(index) => {
+                    members.splice(index, 1);
+                    setMembers([...members]);
+
+                    registerInfoBHYT["houseHold"]["houseHoldPeoples"].splice(
+                      index,
+                      1
+                    );
+                  }}
+                  refs={member}
+                />
+              ))}
+
+              {renderAddMember()}
+            </div>
+
+            {beneficiaries.map((beneficiary, index) => (
+              <UserBeneficiaryBHYTPage
+                index={index}
+                price={state.data.price}
+                onClose={(index) => {
+                  beneficiaries.splice(index, 1);
+                  setBeneficiaries([...beneficiaries]);
+
+                  registerInfoBHYT["listInsuredPerson"].splice(index, 1);
+                }}
+                windowSize={windowSize}
+                provinces={provinces}
+                refs={beneficiary}
+                ethnicLists={ethnicLists}
+              />
+            ))}
+
+            {renderAddUserBeneficiary()}
+
+            <div>
+              <UserBuyerPage data={state.data} refs={userBuyerPageRefs} />
+            </div>
+
+            <div className="flex flex-col flex-wrap border border-[#B9BDC1] overflow-hidden rounded-xl ">
+              <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
+                Thông tin thẻ BHYT
+              </h3>
+              <div className="pt-[40px] px-[40px]">
+                <p className="text-sm font-normal text-[#000]">
+                  Thông tin BHXH sẽ được cập nhật trên ứng dụng{" "}
+                  <strong className="text-[#0076B7] font-bold">VSSID </strong>
+                  trong 15 ngày làm việc.
+                </p>
+              </div>
+              <div className="flex gap-2 p-[40px]">
+                <input
+                  type="checkbox"
+                  onChange={() => {
+                    policyTerm2.current = !policyTerm2.current;
+                  }}
+                  className="relative appearance-none bg-white w-5 h-5 border rounded-full border-gray-400 cursor-pointer checked:bg-[#0076B7]"
+                  id="unchecked-circular-checkbox"
+                />
+                <label
+                  htmlFor="unchecked-circular-checkbox"
+                  className="text-sm font-normal text-[#000] w-[96%]"
+                >
+                  Tôi cam đoan rằng tất cả những lời khai trên là đúng và đã
+                  hiểu rõ
+                  <strong className="text-[#0076B7] font-bold">
+                    {" "}
+                    Chính sách và điều khoản
+                  </strong>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="max-w-[100%] lg1130:max-w-[400px] lg1130:px-0 px-[20px] w-full">
+            {renderAttachedFiles()}
+          </div>
         </div>
 
-        <div className="p-4 bg-white rounded-xl flex flex-col gap-6">
-          <CardHouseHold refs={houseHoldRefs} />
+        {renderFooter()}
 
-          {members.map((member: any, index: any) => (
-            <CardMembersHouseHold
-              key={`${index}`}
-              item={member}
-              index={index}
-              members={members}
-              ethnicLists={ethnicLists}
-              provinces={provinces}
-              onClose={(index) => {
-                members.splice(index, 1);
-                setMembers([...members]);
-
-                registerInfoBHYT["houseHold"]["houseHoldPeoples"].splice(
-                  index,
-                  1
-                );
-              }}
-              refs={member}
-            />
-          ))}
-
-          {renderAddMember()}
-        </div>
-
-        {beneficiaries.map((beneficiary, index) => (
-          <UserBeneficiaryBHYTPage
-            index={index}
-            price={state.data.price}
-            onClose={(index) => {
-              beneficiaries.splice(index, 1);
-              setBeneficiaries([...beneficiaries]);
-
-              registerInfoBHYT["listInsuredPerson"].splice(index, 1);
-            }}
-            windowSize={windowSize}
-            provinces={provinces}
-            refs={beneficiary}
-            ethnicLists={ethnicLists}
-          />
-        ))}
-
-        {renderAddUserBeneficiary()}
-
-        <div>
-          <UserBuyerPage data={state.data} refs={userBuyerPageRefs} />
-        </div>
-
-        {renderAttachedFiles()}
+        {modalLoading()}
       </div>
-
-      {renderFooter()}
-
-      {modalLoading()}
+      <button className="" onClick={onBack}>
+        Quay lại
+      </button>
     </div>
   );
 };
