@@ -245,6 +245,10 @@
     height: 100px;
   }
 
+  .flex-row-1 {
+    flex-wrap: wrap;
+  }
+
   .flex-row-2 {
     flex-wrap: wrap;
     flex-direction: column-reverse;

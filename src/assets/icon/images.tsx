@@ -11,6 +11,8 @@ import money from "./image-money.png";
 import wallet from "./image-wallet.png";
 import next from "./Icon-next.png";
 import coppy from "./copy-copy.png";
+import logo from "./logo-bh.jpg";
+import logoIcon from "./ioc.jpg";
 
 const imagesIocn = {
   icon1,
@@ -26,6 +28,8 @@ const imagesIocn = {
   wallet,
   next,
   coppy,
+  logo,
+  logoIcon,
 };
 
 export default imagesIocn;

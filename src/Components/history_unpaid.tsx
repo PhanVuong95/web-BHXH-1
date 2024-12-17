@@ -182,7 +182,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
         ]}
       />
       <div className="py-[60px] relative max-w-[1280px] mx-auto">
-        <div className="flex flex-row gap-[40px] mb-4">
+        <div className="flex flex-row flex-row-1 gap-[40px] mb-4 px-2">
           <div className="w-full flex flex-col flex-wrap gap-4 xl:gap-6">
             {headerStatus()}
 
@@ -468,7 +468,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
         )}
 
         {!(orderStatusId == CANCELED || orderStatusId == DONE) && (
-          <div className="page-2 bg-white w-[100%]">
+          <div className=" bg-white w-[100%]">
             <div className="flex flex-row justify-between gap-3">
               <div className="flex flex-col gap-1 content-center justify-between w-[49%]">
                 <p className="block text-lg font-normal text-gray-900">
@@ -490,12 +490,12 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
           </div>
         )}
         {orderStatusId == CANCELED && (
-          <div className="page-2 bg-white fixed bottom-0 w-[100%]">
+          <div className=" bg-white w-[100%]">
             <div className="flex flex-col gap-3">
               <div className="flex flex-row content-center justify-center items-center">
                 <Link
                   to={"/register-BHXH"}
-                  className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
+                  className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full  text-base font-normal text-white text-center"
                 >
                   Tra cứu lại
                 </Link>
@@ -505,12 +505,12 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
         )}
 
         {orderStatusId == DONE && (
-          <div className="page-2 bg-white fixed bottom-0 w-[100%]">
+          <div className=" bg-white w-[100%]">
             <div className="flex flex-col gap-3">
               <div className="flex flex-row content-center justify-center items-center">
                 <Link
                   to={`/check-status-procedure/${orderDetail.id}`}
-                  className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
+                  className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full text-base font-normal text-white text-center"
                 >
                   Kiểm tra trạng thái thủ tục
                 </Link>
