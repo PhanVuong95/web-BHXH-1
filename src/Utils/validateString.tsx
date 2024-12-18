@@ -190,9 +190,9 @@ export const compareTwoDateString = (dateString1: any, dateString2: any) => {
   // So sánh
   if (date1 > date2) {
     // Ngày 1 sau ngày 2
+
     return 2;
   } else if (date1 < date2) {
-    // Ngày 1 trước ngày 2
     return 1;
   } else {
     return 0;
@@ -234,6 +234,18 @@ export const formatDate2 = (date: Date) => {
     const day = date.getDate().toString().padStart(2, "0");
 
     return `${day}/${month}/${year}`;
+  } catch {
+    return "";
+  }
+};
+
+export const formatDate3 = (date: Date) => {
+  try {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+
+    return `${month}/${year}`;
   } catch {
     return "";
   }

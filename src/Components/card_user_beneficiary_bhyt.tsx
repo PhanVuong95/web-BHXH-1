@@ -723,13 +723,13 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           <h3 className="text-[#0076B7] text-lg font-medium items-center">
             Tải ảnh CCCD
           </h3>
-          <button
+          <div
             onClick={() => {
               setIsShowModelQR(true);
             }}
           >
-            <img src={imageQR} className="w-8" />
-          </button>
+            <img alt="image qr" src={imageQR} className="w-8" />
+          </div>
         </div>
 
         {

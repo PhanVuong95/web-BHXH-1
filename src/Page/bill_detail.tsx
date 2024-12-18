@@ -125,8 +125,7 @@ const BuillDetailPage: React.FunctionComponent = () => {
   };
 
   return (
-    <div className="w-full">
-      {/* <HeaderBase isHome={false} title={"Chi tiết thanh toán"} /> */}
+    <div className="w-full pt-6">
       <HeaderTitle
         links={[
           { title: "Khai báo BHXH tự nguyện" },

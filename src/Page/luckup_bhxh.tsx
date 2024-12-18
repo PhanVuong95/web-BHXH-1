@@ -405,7 +405,7 @@ const LuckUpBHXH = () => {
   };
 
   return (
-    <div>
+    <div className="pt-6">
       <HeaderTitle links={[{ title: "Tra cứu Bảo hiểm Xã hội" }]} />
 
       <div className="px-3 xl:px-0 flex flex-col gap-4 py-[60px] max-w-[1280px] w-full mx-auto">

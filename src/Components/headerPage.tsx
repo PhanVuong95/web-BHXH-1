@@ -38,6 +38,10 @@ const HeaderPage = () => {
       labe: "Liên hệ chúng tôi",
       link: "/#",
     },
+    {
+      labe: "Công cụ hỗ trợ",
+      link: "/tool-support",
+    },
   ];
 
   // Quản lý trạng thái đăng nhập

@@ -4,7 +4,7 @@ interface BreadcrumbProps {
 
 const HeaderTitle: React.FC<BreadcrumbProps> = ({ links }) => {
   return (
-    <div className="bg-[#0077D5;] py-3 header-title-container">
+    <div className="bg-[#0077D5;] py-5 header-title-container">
       <div className="container max-w-[1280px] mx-auto flex items-center gap-3">
         <a href="/">
           <h3 className="text-white text-base font-normal">Trang chủ</h3>

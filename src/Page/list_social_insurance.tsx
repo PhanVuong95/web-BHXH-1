@@ -110,7 +110,7 @@ const ListSocialInsurance = () => {
   }, [setInsuranceOrder]);
 
   return (
-    <div>
+    <div className="pt-6">
       <HeaderTitle links={[{ title: "Khai báo BHXH tự nguyện" }]} />
       <div className="container mx-auto py-[40px] max-w-[1280px] mx-auto">
         <h3 className="title-top-header">Khai báo BHXH tự nguyện</h3>

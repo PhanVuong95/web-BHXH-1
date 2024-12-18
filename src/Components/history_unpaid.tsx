@@ -173,7 +173,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
   };
 
   return (
-    <div>
+    <div className="pt-6">
       <HeaderTitle
         links={[
           { title: "Tài khoản" },

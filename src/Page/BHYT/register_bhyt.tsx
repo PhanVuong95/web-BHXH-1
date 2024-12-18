@@ -1035,7 +1035,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
   };
 
   return (
-    <div>
+    <div className="pt-6">
       <HeaderTitle links={[{ title: "Khai báo BHYT tự nguyện" }]} />
       <div className="max-w-[1280px] mx-auto pt-[60px]">
         <h3 className="title-top-header lg1130:px-0 px-[20px]">
