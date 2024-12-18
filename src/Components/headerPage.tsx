@@ -47,7 +47,7 @@ const HeaderPage = () => {
   // Quản lý trạng thái đăng nhập
   const [user, setUser] = useState<any>(null);
 
-  console.log("user", user);
+  console.log("isSideMenuOpen", isSideMenuOpen);
 
   useEffect(() => {
     // Kiểm tra xem người dùng đã đăng nhập chưa
