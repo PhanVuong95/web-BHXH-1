@@ -289,12 +289,14 @@ const BuillDetailPage: React.FunctionComponent = () => {
             <div className="flex items-center justify-center w-full">
               {base64QRCode != "400" ? (
                 <img
+                  alt="image qr"
                   className="max-w-[400px]"
                   src={`data:image/png;base64,${base64QRCode}`}
                 />
               ) : (
                 <div className="flex flex-row gap-5 items-center w-full">
                   <img
+                    alt="image qr"
                     className="object-contain"
                     width="45"
                     height="12"

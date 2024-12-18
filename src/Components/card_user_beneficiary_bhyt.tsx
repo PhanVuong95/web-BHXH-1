@@ -518,7 +518,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
               onClose(index);
             }}
           >
-            <img src={iconClose} className="w-3 h-3" />
+            <img alt="icon close" src={iconClose} className="w-3 h-3" />
           </button>
         ) : null}
       </div>

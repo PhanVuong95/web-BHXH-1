@@ -16,7 +16,6 @@ import locale from "antd/es/date-picker/locale/vi_VN";
 import "../locale/vi";
 import {
   compareTwoDateString,
-  formatDate3,
   formatMoneyVND,
   isValidEmptyString,
 } from "../Utils/validateString";
@@ -196,7 +195,7 @@ const ToolSupportPage = () => {
             <div className="pl-[10px] text-[#0077D5]">Thêm quá trình</div>
           </div>
 
-          {insurancePaymentPeriod.map((item, index) => {
+          {insurancePaymentPeriod.map((_item, index) => {
             return (
               <div className="flex flex-row gap-10 mb-5">
                 <div className="flex-[4]">
@@ -448,7 +447,6 @@ const ToolSupportPage = () => {
                   size="large"
                   className="w-[100%]"
                   placeholder="Chọn thời gian"
-                  onChange={(value) => {}}
                   filterOption={(input, option) =>
                     (option?.label ?? "")
                       .toLowerCase()
@@ -470,7 +468,6 @@ const ToolSupportPage = () => {
                   size="large"
                   className="w-[100%]"
                   placeholder="Chọn thời gian"
-                  onChange={(value) => {}}
                   filterOption={(input, option) =>
                     (option?.label ?? "")
                       .toLowerCase()
@@ -490,7 +487,6 @@ const ToolSupportPage = () => {
               <div className="relative">
                 <Input
                   type="text"
-                  onChange={(e) => {}}
                   className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5              "
                   placeholder="Nhập mức lương đóng"
                   required
@@ -550,7 +546,6 @@ const ToolSupportPage = () => {
             <div className="relative">
               <Input
                 type="text"
-                onChange={(e) => {}}
                 className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5              "
                 placeholder="Nhập mức lương đóng"
                 required
@@ -573,7 +568,6 @@ const ToolSupportPage = () => {
               size="large"
               className="w-[100%]"
               placeholder="Chọn thời gian"
-              onChange={(value) => {}}
               filterOption={(input, option) =>
                 (option?.label ?? "")
                   .toLowerCase()
