@@ -256,7 +256,7 @@ const WithdrawBHXH = () => {
                 }
               }
             }}
-            className="rounded-[10px] cursor-pointer  bg-[#0077D5] py-[10px] px-[20px] flex items-center w-[140px] mb-5 border-[1.5px] border-solid border-[#0077D5]"
+            className="rounded-[10px] cursor-pointer  bg-[#0077D5] py-[10px] px-[20px] flex items-center w-[140px] border-[1.5px] border-solid border-[#0077D5]"
           >
             <img alt="Icon search" src={iconSearch} width={22} height={22} />
             <div className="pl-[10px] text-[white]">Tra cứu</div>
@@ -273,7 +273,7 @@ const WithdrawBHXH = () => {
                 },
               ]);
             }}
-            className="rounded-[10px] cursor-pointer  py-[10px] px-[20px] flex items-center w-[202px] mb-5"
+            className="rounded-[10px] cursor-pointer  py-[10px] px-[20px] flex items-center w-[202px]"
           >
             <img alt="Icon refresh" src={iconRefresh} width={22} height={22} />
             <div className="pl-[10px] text-[#797D77]">Làm mới</div>

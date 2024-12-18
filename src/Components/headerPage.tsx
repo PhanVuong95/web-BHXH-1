@@ -197,14 +197,23 @@ const HeaderPage = () => {
                 </div>
               </div>
               <div className="navbar-menu-mobile">
-                <Link className="font-bold py-[20px] border-bottom-1" to="/">
+                <Link
+                  className="font-bold py-[20px] border-bottom-1"
+                  to="/social-insurance"
+                >
                   Khai báo BHXH tự nguyện
                 </Link>
-                <Link className="font-bold py-[20px] border-bottom-1" to="/">
+                <Link
+                  className="font-bold py-[20px] border-bottom-1"
+                  to="/health-insurance"
+                >
                   Mua BHYT tự nguyện
                 </Link>
-                <Link className="font-bold py-[20px] border-bottom-1" to="/">
-                  Tính mức BHXH
+                <Link
+                  className="font-bold py-[20px] border-bottom-1"
+                  to="/tool-support"
+                >
+                  Công cụ hỗ trợ
                 </Link>
                 <Link className="font-bold py-[20px] border-bottom-1" to="/">
                   Điều chỉnh thông tin BHXH
@@ -212,7 +221,10 @@ const HeaderPage = () => {
                 <Link className="font-bold py-[20px] border-bottom-1" to="/">
                   Liên hệ chúng tôi
                 </Link>
-                <Link className="font-bold py-[20px] border-bottom-1" to="/">
+                <Link
+                  className="font-bold py-[20px] border-bottom-1"
+                  to="/privacy_policy"
+                >
                   Tài liệu BHXH
                 </Link>
                 <div className="relative">
@@ -262,7 +274,7 @@ const HeaderPage = () => {
                     >
                       <ul>
                         <li className="font-bold py-[20px] border-bottom-1 w-full">
-                          Thông tin tài khoản
+                          <Link to="/user">Thông tin tài khoản</Link>
                         </li>
                         <li
                           onClick={handleLogout}

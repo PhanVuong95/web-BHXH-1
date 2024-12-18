@@ -9,7 +9,7 @@ import iconRefresh from "../assets/icon/ic_refresh.svg";
 const CloseRateBXH = () => {
   const [baseSalary, setBaseSalary] = useState<string>("");
   const [months, setMonths] = useState<string>("");
-  const [salary, setSalary] = useState<any>();
+  const [valueToPay, setValueToPay] = useState<any>();
 
   const validateForm2 = () => {
     if (!isValidEmptyString(baseSalary)) {
@@ -95,12 +95,14 @@ const CloseRateBXH = () => {
                 if (response.data.status == "200") {
                   toast.success("Tra cứu thành công");
 
-                  setSalary(response.data.data[0].salary);
+                  console.log(response.data.data[0].salary);
+
+                  setValueToPay(response.data.data[0].valueToPay);
                   return;
                 }
               }
             }}
-            className="rounded-[10px] cursor-pointer bg-[#0077D5] py-[10px] px-[20px] flex items-center w-[140px] mb-5 border-[1.5px] border-solid border-[#0077D5]"
+            className="rounded-[10px] cursor-pointer bg-[#0077D5] py-[10px] px-[20px] flex items-center w-[140px] border-[1.5px] border-solid border-[#0077D5]"
           >
             <img alt="Icon search" src={iconSearch} width={22} height={22} />
             <div className="pl-[10px] text-[white]">Tra cứu</div>
@@ -110,20 +112,20 @@ const CloseRateBXH = () => {
             onClick={() => {
               setBaseSalary("");
               setMonths("");
-              setSalary(null);
+              setValueToPay(null);
             }}
-            className="rounded-[10px] cursor-pointer py-[10px] px-[20px] flex items-center w-[202px] mb-5"
+            className="rounded-[10px] cursor-pointer py-[10px] px-[20px] flex items-center w-[202px]"
           >
             <img alt="Icon refresh" src={iconRefresh} width={22} height={22} />
             <div className="pl-[10px] text-[#797D77]">Làm mới</div>
           </div>
         </div>
 
-        {salary != null && (
-          <div>
+        {valueToPay != null && (
+          <div className="mt-5">
             <div className="text-[16px] mb-5">Mức đóng BHXH còn thiếu:</div>
             <div className="text-[#0077D5]">
-              <span>{formatMoneyVND(salary)}</span>
+              <span>{formatMoneyVND(valueToPay)}</span>
               <span className="pl-1">Vnđ</span>
             </div>
           </div>
