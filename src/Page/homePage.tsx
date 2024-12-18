@@ -55,7 +55,7 @@ const HomePage = () => {
     <div className=" bg-white">
       <div className="home-page bg-white">
         <div className="banner-top  h-full">
-          <img src={banner} />
+          <img alt="" src={banner} />
           <div className="flex justify-between items-center user-home mx-auto container">
             <div className="user-home-content">
               <h3>

@@ -17,7 +17,7 @@ const HomePage: React.FunctionComponent = () => {
       </div> */}
 
       <div className="banner-top h-full">
-        <img src={banner} />
+        <img alt="" src={banner} />
         <div className="flex justify-between items-center user-home">
           {<UserCard user={userProfile?.userInfo} />}
         </div>

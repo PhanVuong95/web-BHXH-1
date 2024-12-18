@@ -65,12 +65,11 @@ function App() {
           borderRadius: "20px",
           marginTop: "40px",
           marginLeft: "10%",
-          marginRight: "10%",
         }}
         toastStyle={{
           borderRadius: "7px",
         }}
-        position="top-center"
+        position="top-right"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
