@@ -209,6 +209,11 @@ const ToolSupportPage = () => {
                       locale={locale}
                       className="w-[100%]"
                       picker="month"
+                      value={
+                        _item.FromDate
+                          ? dayjs(_item.FromDate, "DD/MM/YYYY")
+                          : null
+                      }
                       placeholder="mm/yyyy"
                       onChange={(value) => {
                         try {
@@ -255,6 +260,9 @@ const ToolSupportPage = () => {
                       locale={locale}
                       className="w-[100%]"
                       picker="month"
+                      value={
+                        _item.ToDate ? dayjs(_item.ToDate, "DD/MM/YYYY") : null
+                      }
                       placeholder="mm/yyyy"
                       onChange={(value) => {
                         try {
