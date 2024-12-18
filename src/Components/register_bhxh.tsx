@@ -1411,7 +1411,7 @@ const RegisterBHXH = () => {
             setIsShowModelQR(true);
           }}
         >
-          <img className="w-12" src={imageQR} />
+          <img alt="image qr" className="w-12" src={imageQR} />
         </div>
       </div>
     );
@@ -4138,7 +4138,7 @@ const RegisterBHXH = () => {
   };
 
   return (
-    <div>
+    <div className="pt-6">
       <HeaderTitle
         links={[
           { title: "Khai báo BHXH tự nguyện" },

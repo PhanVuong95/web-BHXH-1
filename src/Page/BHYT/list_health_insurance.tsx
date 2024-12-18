@@ -291,11 +291,10 @@ const ListHealthInsurance: React.FunctionComponent = () => {
   }
 
   return (
-    <div>
+    <div className="pt-6">
       <HeaderTitle links={[{ title: "Khai báo BHYT tự nguyện" }]} />
       <div className="container mx-auto py-[40px] max-w-[1280px]">
         <h3 className="title-top-header">Khai báo BHYT tự nguyện</h3>
-        {/* <HeaderBase isHome={false} title={"BHYT tự nguyện"} /> */}
         <div className="gap-[16px] flex flex-col  product-items">
           <div className="flex flex-col gap-8 pt-1">
             {/* Danh sách bảo hiểm y tế tự nguyện */}

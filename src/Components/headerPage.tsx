@@ -38,12 +38,16 @@ const HeaderPage = () => {
       labe: "Liên hệ chúng tôi",
       link: "/#",
     },
+    {
+      labe: "Công cụ hỗ trợ",
+      link: "/tool-support",
+    },
   ];
 
   // Quản lý trạng thái đăng nhập
   const [user, setUser] = useState<any>(null);
 
-  console.log("user", user);
+  console.log("isSideMenuOpen", isSideMenuOpen);
 
   useEffect(() => {
     // Kiểm tra xem người dùng đã đăng nhập chưa

@@ -173,7 +173,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
   };
 
   return (
-    <div>
+    <div className="pt-6">
       <HeaderTitle
         links={[
           { title: "Tài khoản" },
@@ -400,7 +400,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
               Danh mục sản phẩm
             </h3>
             <div className="flex gap-[10px] p-4">
-              <img src={logo} className="w-16 h-16" />
+              <img alt="Img logo" src={logo} className="w-16 h-16" />
 
               <div className="title-product flex flex-col">
                 <h3 className="text-[#0076B7] text-lg font-medium">

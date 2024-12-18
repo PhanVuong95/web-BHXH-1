@@ -250,7 +250,7 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
   };
 
   return (
-    <div>
+    <div className="pt-6">
       <HeaderTitle
         links={[
           { title: "Khai báo BHYT tự nguyện" },
@@ -328,7 +328,6 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
                     className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 "
                     placeholder="Nhập mã giới thiệu"
                   />
-
                 </div>
 
                 <button className="kiem-tra">Kiểm tra</button>

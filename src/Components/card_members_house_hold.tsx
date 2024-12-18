@@ -312,7 +312,7 @@ const CardMembersHouseHold = (props: Props) => {
     );
   };
 
-  const inputGenderMemder = () => {
+  const inputGenderMember = () => {
     return (
       <div className="w-full lg1130:w-[49%]">
         <label className="block text-sm font-normal text-gray-900 pb-2">
@@ -358,7 +358,6 @@ const CardMembersHouseHold = (props: Props) => {
           defaultValue={
             registerInfoBHYT.houseHold.houseHoldPeoples[index].ethnicId
           }
-          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn dân tộc"
           onChange={(value) => {
             registerInfoBHYT.houseHold.houseHoldPeoples[index].ethnicId = value;
@@ -424,7 +423,7 @@ const CardMembersHouseHold = (props: Props) => {
               onClose(index);
             }}
           >
-            <img src={iconClose} className="w-3 h-3" />
+            <img alt="icon close" src={iconClose} className="w-3 h-3" />
           </button>
         ) : null}
       </div>
@@ -440,7 +439,7 @@ const CardMembersHouseHold = (props: Props) => {
         {inputEthnicMember()}
 
         {/* Giới tính thành viên */}
-        {inputGenderMemder()}
+        {inputGenderMember()}
 
         {/* Mối quan hệ */}
         {inputRelationshipMember()}

@@ -405,7 +405,7 @@ const LuckUpBHXH = () => {
   };
 
   return (
-    <div>
+    <div className="pt-6">
       <HeaderTitle links={[{ title: "Tra cứu Bảo hiểm Xã hội" }]} />
 
       <div className="px-3 xl:px-0 flex flex-col gap-4 py-[60px] max-w-[1280px] w-full mx-auto">
@@ -463,7 +463,7 @@ const LuckUpBHXH = () => {
                 {socialInsuranceCode}
               </div>
               <div className="flex border p-2 rounded-xl items-center border-spacing-2">
-                <img className="w-4 h-4" src={icon} />
+                <img alt="icon" className="w-4 h-4" src={icon} />
                 <div className="ml-2 text-[#797D77] text-lg font-normal">
                   {" "}
                   Sao chép
@@ -480,7 +480,7 @@ const LuckUpBHXH = () => {
             </h3>
 
             <div className="flex justify-center items-center">
-              <img src={noData} width={120} height={130} />
+              <img alt="no data" src={noData} width={120} height={130} />
             </div>
             <div className="flex justify-center items-center">
               Không tìm thấy mã BHXH

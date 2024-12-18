@@ -73,8 +73,7 @@ const BillPayPage: React.FC<Widthheight> = () => {
     }
   };
   return (
-    <>
-      {/* <HeaderBase isHome={false} title={"Đăng ký BHXH Tự nguyện"} /> */}
+    <div className="pt-6">
       <HeaderTitle
         links={[
           { title: "Khai báo BHXH tự nguyện" },
@@ -353,7 +352,7 @@ const BillPayPage: React.FC<Widthheight> = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

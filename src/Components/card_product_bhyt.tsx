@@ -3,12 +3,10 @@ import { formatMoneyVND } from "../Utils/validateString";
 import logo from "../assets-src/logo1.png";
 import { useNavigate } from "react-router-dom";
 
-// Define the type for the insurance benefit item
 interface InsuranceBenefit {
   name: string;
 }
 
-// Define the type for the data prop
 interface DataProps {
   name: string;
   monthDuration: number;
@@ -19,9 +17,8 @@ interface DataProps {
   insuranceBenefits: InsuranceBenefit[];
 }
 
-// Define the props for the CardProductBHYT component
 interface CardProductBHYTProps {
-  url: string; // Adjust the type based on your requirements
+  url: string;
   data: DataProps;
 }
 

@@ -518,7 +518,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
               onClose(index);
             }}
           >
-            <img src={iconClose} className="w-3 h-3" />
+            <img alt="icon close" src={iconClose} className="w-3 h-3" />
           </button>
         ) : null}
       </div>
@@ -723,13 +723,13 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           <h3 className="text-[#0076B7] text-lg font-medium items-center">
             Tải ảnh CCCD
           </h3>
-          <button
+          <div
             onClick={() => {
               setIsShowModelQR(true);
             }}
           >
-            <img src={imageQR} className="w-8" />
-          </button>
+            <img alt="image qr" src={imageQR} className="w-8" />
+          </div>
         </div>
 
         {

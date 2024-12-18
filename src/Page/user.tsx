@@ -104,7 +104,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
   };
 
   return (
-    <div>
+    <div className="pt-6">
       <HeaderTitle links={[{ title: "Thông tin tài khoản" }]} />
       <div className="container px-3 xl:px-0  py-[40px] mx-auto items-start flex flex-col lg:flex-row gap-[40px] max-w-[1280px]">
         <div className="w-full p-[20px] lg:w-1/2 bg-blue-500 user-card-border border-[1px] border-[#B9BDC1]">

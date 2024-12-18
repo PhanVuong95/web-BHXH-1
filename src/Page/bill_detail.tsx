@@ -125,8 +125,7 @@ const BuillDetailPage: React.FunctionComponent = () => {
   };
 
   return (
-    <div className="w-full">
-      {/* <HeaderBase isHome={false} title={"Chi tiết thanh toán"} /> */}
+    <div className="w-full pt-6">
       <HeaderTitle
         links={[
           { title: "Khai báo BHXH tự nguyện" },
@@ -290,12 +289,14 @@ const BuillDetailPage: React.FunctionComponent = () => {
             <div className="flex items-center justify-center w-full">
               {base64QRCode != "400" ? (
                 <img
+                  alt="image qr"
                   className="max-w-[400px]"
                   src={`data:image/png;base64,${base64QRCode}`}
                 />
               ) : (
                 <div className="flex flex-row gap-5 items-center w-full">
                   <img
+                    alt="image qr"
                     className="object-contain"
                     width="45"
                     height="12"

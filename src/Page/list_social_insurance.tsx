@@ -110,7 +110,7 @@ const ListSocialInsurance = () => {
   }, [setInsuranceOrder]);
 
   return (
-    <div>
+    <div className="pt-6">
       <HeaderTitle links={[{ title: "Khai báo BHXH tự nguyện" }]} />
       <div className="container mx-auto py-[40px] max-w-[1280px] mx-auto">
         <h3 className="title-top-header">Khai báo BHXH tự nguyện</h3>
@@ -119,7 +119,11 @@ const ListSocialInsurance = () => {
           <div className="flex flex-col gap-8">
             <div className="p-10 bg-white w-full rounded-xl flex flex-col gap-[20px]">
               <div className="flex gap-[10px]">
-                <img src={logo} className="w-[70px] h-[70px]" />
+                <img
+                  alt="image logo"
+                  src={logo}
+                  className="w-[70px] h-[70px]"
+                />
                 <div className="title-product flex flex-col">
                   <h3 className="text-[#0076B7] text-lg font-medium">
                     {insurance?.name}

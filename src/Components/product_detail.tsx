@@ -21,7 +21,7 @@ const ProductDetailPage: React.FunctionComponent = () => {
   console.log(insurance);
 
   return (
-    <div>
+    <div className="pt-6">
       <HeaderTitle
         links={[
           { title: "Khai báo BHXH tự nguyện" },
