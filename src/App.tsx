@@ -28,12 +28,13 @@ import CardNewDetailPages from "./Components/CardNewDetailPages";
 import ToolSupportPage from "./Page/tool_support_page";
 
 function App() {
-  const [user, setUser] = useState<any>(null);
+  const [, setUser] = useState<any>(null);
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("profile");
     setUser(null);
+
     // alert("You have been logged out due to inactivity.");
     window.location.reload();
   };

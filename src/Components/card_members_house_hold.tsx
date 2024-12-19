@@ -38,7 +38,7 @@ const CardMembersHouseHold = (props: Props) => {
     registerInfoBHYT.houseHold.houseHoldPeoples[index].ksAddressDetail
   );
 
-  const [temp, setTemp] = useState(0);
+  const [, setTemp] = useState(0);
 
   // Cập nhập danh sách quận huyện hộ gia đình
   useEffect(() => {

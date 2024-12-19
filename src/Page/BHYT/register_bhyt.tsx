@@ -39,6 +39,8 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
     height: window.innerHeight,
   });
 
+  console.log(onBack);
+
   const ObjectTypeRefs = {
     nhomLoaiDoiTuongId: useRef<any>(null),
     loaiDoiTuongId: useRef<any>(null),

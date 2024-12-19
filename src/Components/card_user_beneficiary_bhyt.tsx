@@ -14,7 +14,6 @@ import {
 } from "../Utils/validateString";
 import { IDetectedBarcode, Scanner } from "@yudiel/react-qr-scanner";
 import iconClose from "../assets-src/close_1.png";
-import imageQR from "../assets-src/icon_qr.png";
 import { Input, Select, DatePicker } from "antd";
 import dayjs from "dayjs";
 import "../locale/vi";
@@ -44,7 +43,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   const { index, price, onClose, refs, provinces, windowSize, ethnicLists } =
     props;
   const dateFormat = "DD/MM/YYYY";
-  const [districts, setDistricts] = useState<any>([]);
+  const [, setDistricts] = useState<any>([]);
 
   const [socialInsuranceNumber, setSocialInsuranceNumber] = useState(
     registerInfoBHYT["listInsuredPerson"][index].socialInsuranceNumber
@@ -99,7 +98,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   const [medicalProvinceId, setMedicalProvinceId] = useState<any>(
     registerInfoBHYT["listInsuredPerson"][index].medicalProvinceId
   );
-  const [medicalDistrictId, setMedicalDistrictId] = useState<any>(
+  const [, setMedicalDistrictId] = useState<any>(
     registerInfoBHYT["listInsuredPerson"][index].medicalDistrictId
   );
 
@@ -153,7 +152,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   );
   const [isShowModalbenefitLevel, setIsShowModalbenefitLevel] = useState(false);
 
-  const [temp, setTemp] = useState(0);
+  const [, setTemp] = useState(0);
 
   const [isLoadingLuckUp, setIsLoadingLuckUp] = useState(false);
 

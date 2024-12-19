@@ -6,7 +6,6 @@ import Modal from "react-modal";
 import { SpecificContext } from "./specificContext";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import imageQR from "../assets-src/icon_qr.png";
 import {
   convertListToSelect,
   convertListToSelectVungLuong,
@@ -113,7 +112,7 @@ const RegisterBHXH = () => {
 
   const [vungLuongToiThieuList, setVungLuongToiThieuList] = useState([]);
   const [vungLuongToiThieuId, setVungLuongToiThieuId] = useState(0);
-  const [benefitLevel, setBenefitLevel] = useState("");
+  const [, setBenefitLevel] = useState("");
   const infoInsuranceProvinces = useRef([]);
   const infoInsuranceHospital = useRef([]);
 
@@ -1304,8 +1303,8 @@ const RegisterBHXH = () => {
     }
   };
 
-  const [isSearched, setIsSearched] = useState(false);
-  const [btnLoading, setBtnLoading] = useState(false);
+  const [, setIsSearched] = useState(false);
+  const [, setBtnLoading] = useState(false);
   const [isLoadingLuckUp, setIsLoadingLuckUp] = useState(false);
 
   const onSubmitFormData = async () => {
@@ -3327,7 +3326,7 @@ const RegisterBHXH = () => {
                 {/* Địa chỉ hộ khẩu */}
                 {inputAddressDetailHKHouseHoldParticipants()}
 
-                {members.map((item: any, index: any) => {
+                {members.map((_item: any, index: any) => {
                   return (
                     <CardMembersHouseHoldBHXH
                       key={`member_${index}`}

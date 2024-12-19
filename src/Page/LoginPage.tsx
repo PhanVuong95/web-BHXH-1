@@ -20,7 +20,6 @@ const LoginPage = () => {
   const [clientId, setConnectionIds] = useState<string | null>(null);
   // let loginDeeplink = "";
   const [loginDeeplink, setLoginDeeplink] = useState<any>();
-  const [loginGoogle, setLoginGoogle] = useState<any>();
 
   const navigate = useNavigate();
 
@@ -136,8 +135,6 @@ const LoginPage = () => {
         }
       );
 
-      setLoginGoogle(response);
-
       const responseData = response.data;
 
       if (responseData.status == 200 && responseData.message == "SUCCESS") {
@@ -186,6 +183,7 @@ const LoginPage = () => {
   // Hàm cập nhật trạng thái đã đăng nhập
   const updateLoginStatus = (isLoggedIn: boolean) => {
     // Gọi các hàm hoặc thay đổi trạng thái trong ứng dụng
+    console.log(isLoggedIn);
   };
 
   return (

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import HeaderTitle from "./HeaderTitle";
 
 const ProductDetailPage: React.FunctionComponent = () => {
-  const [insurance, setInsurance] = useState<any>();
+  const [, setInsurance] = useState<any>();
   const [detailSrcs, setDetailSrcs] = useState<string[]>([]);
 
   useEffect(() => {

@@ -25,7 +25,7 @@ const LuckUpBHXH = () => {
   const [selectedKSProvince, setSelectedKSProvince] = useState<number>(0);
   const [selectedKSDistrict, setSelectedKSDistrict] = useState<number>(0);
   const [selectedKSWard, setSelectedKSWard] = useState<number>(0);
-  const [temp, setTemp] = useState(0);
+  const [, setTemp] = useState(0);
   const [dateStr, setDateStr] = useState("");
   const [socialInsuranceCode, setSocialInsuranceCode] = useState("");
   const [isSearched, setIsSearched] = useState(false);

@@ -11,8 +11,8 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [selectedCollaborator, setSelectedCollaborator] =
     useState<CollaboratorItem | null>(null);
   const [report, setReport] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [phone, setPhone] = useState("");
+  const [, setIsLoading] = useState(false);
+  const [, setPhone] = useState("");
 
   const fetchCollabrorates = async () => {
     const token = localStorage.accessToken;

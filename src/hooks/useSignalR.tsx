@@ -40,7 +40,7 @@ const useSignalR = (props: Props) => {
       setClientId(message);
     });
 
-    connection.onclose((error) => {
+    connection.onclose(() => {
       setConnected(false);
     });
 

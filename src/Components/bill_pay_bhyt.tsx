@@ -14,7 +14,7 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
   // const [provinceName, setProvinceName] = useState("");
   // const [districtName, setDistrictName] = useState("");
   // const [wardeName, setWardeName] = useState("");
-  const [selectedCheckbox, setSelectedCheckbox] = useState("");
+  const [, setSelectedCheckbox] = useState("");
 
   // const navigate = useNavigate();
 
@@ -48,8 +48,8 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
           "Content-Type": "application/json",
         },
       });
-
       const data = await response.json();
+      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     }

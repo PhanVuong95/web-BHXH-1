@@ -15,7 +15,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
   const [insuredPerson, setInsuredPerson] = useState<any>();
   const [orderStatusId, setOrderStatusId] = useState<number>(0);
   const specificContext = useContext<any>(SpecificContext);
-  const { insuranceOrder, setInsuranceOrder } = specificContext;
+  const { setInsuranceOrder } = specificContext;
 
   const PENDING = 1001;
   const DONE = 1002;

@@ -670,10 +670,8 @@ const RegisterCollaborate = () => {
   const [backImageUrl, setBackImageUrl] = useState<string>("");
   const frontImageInputRef = useRef<HTMLInputElement>(null);
   const backImageInputRef = useRef<HTMLInputElement>(null);
-  const [isUploadingPhotoCitizenFont, setIsUploadingPhotoCitizenFont] =
-    useState(false);
-  const [isUploadingPhotoCitizenBack, setIsUploadingPhotoCitizenBack] =
-    useState(false);
+  const [, setIsUploadingPhotoCitizenFont] = useState(false);
+  const [, setIsUploadingPhotoCitizenBack] = useState(false);
   const [isShowModalSuccess, setisShowModalSuccess] = useState(false);
   const [fullNameHouseHold, setFullNameHouseHold] = useState("");
   const [numberCardId, setNumberCardId] = useState("");
