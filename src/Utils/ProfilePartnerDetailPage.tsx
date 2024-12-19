@@ -30,9 +30,7 @@ const ProfilePartnerDetailPage: React.FC<ProfilePartnerDetailPageProps> = ({
       if (response.data.status == "200" && response.data.message == "SUCCESS") {
         setBankInfo(response.data.data[0]);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {

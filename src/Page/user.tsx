@@ -60,7 +60,6 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
     setUser(null);
   };
 
-  // console.log(user?.roleId);
   const handleDropdownItemClick = (item: string) => {
     setActiveButton(item);
     switch (item) {
@@ -683,9 +682,6 @@ const RegisterCollaborate = () => {
   const [referrerCode, setReferrerCode] = useState("");
   const navigate = useNavigate();
 
-  console.log(isUploadingPhotoCitizenFont);
-  console.log(isUploadingPhotoCitizenBack);
-
   const handleCardClick = (inputRef: React.RefObject<HTMLInputElement>) => {
     if (inputRef.current) {
       inputRef.current.click();
@@ -1112,10 +1108,6 @@ const RegisterCollaborate = () => {
         imgCitizenBack: backImageUrl,
         referrerCode: referrerCode != "" ? referrerCode : null,
       };
-
-      // console.log(data);
-
-      // console.log(localStorage.referrerCode);
 
       try {
         const response = await axios.post(

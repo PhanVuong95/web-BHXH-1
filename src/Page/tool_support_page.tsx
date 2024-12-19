@@ -51,11 +51,11 @@ const ToolSupportPage = () => {
 
   const menu = () => {
     return (
-      <div className="flex-[4] drop-shadow">
-        <div className="text-[18px] text-[white] bg-[#0077D5] leading[24px] font-normal p-[20px] rounded-tr-[10px] rounded-tl-[10px]">
+      <div className="flex-[4] drop-shadow mx-2">
+        <div className="text-[16px] md:text-[18px] lg:text-[18px] text-[white] bg-[#0077D5] leading[24px] font-normal p-[15px] md:p-[20px] lg:p-[20px] rounded-tr-[10px] rounded-tl-[10px]">
           Công cụ hỗ trợ
         </div>
-        <div className="p-6 bg-[white] rounded-br-[10px] rounded-bl-[10px]">
+        <div className="p-2 md:p-3 lg:p-4 bg-[white] rounded-br-[10px] rounded-bl-[10px]">
           <ItemMenu
             icon={iconCalculate}
             iconActive={iconCalculateBlue}
@@ -64,7 +64,7 @@ const ToolSupportPage = () => {
             title="Tính toán lương hưu"
           />
 
-          <div className="h-[2px] my-6 w-[100%] border-b-[2px] border-dashed border-[#D1D1D6]"></div>
+          <div className="h-[2px] my-3 md:my-3 lg:my-4 w-[100%] border-b-[2px] border-dashed border-[#D1D1D6]"></div>
 
           <ItemMenu
             icon={iconWithdraw}
@@ -74,7 +74,7 @@ const ToolSupportPage = () => {
             title="Rút BHXH một lần"
           />
 
-          <div className="h-[2px] my-6 w-[100%] border-b-[2px] border-dashed border-[#D1D1D6]"></div>
+          <div className="h-[2px] my-3 md:my-3 lg:my-4 w-[100%] border-b-[2px] border-dashed border-[#D1D1D6]"></div>
 
           <ItemMenu
             icon={iconCloseRate}
@@ -89,28 +89,28 @@ const ToolSupportPage = () => {
   };
 
   return (
-    <div className="pt-6">
+    <div className="pt-3 md:pt-6 lg:pt-6">
       <HeaderTitle links={[{ title: "Công cụ hỗ trợ" }]} />
-      <div className="container mx-auto py-[40px] max-w-[1280px] mx-auto ">
-        <div className="flex flex-row gap-10 ">
+      <div className="container mx-auto py-[0px] md:py-[30px] lg:py-[40px] max-w-[1280px]">
+        <div className="layoutToolSupport  gap-4 md:gap-6 lg:gap-10 ">
           {/* Bên trái */}
           {menu()}
 
           {/* Trái phải */}
           <div
-            className="flex-[8]"
+            className="flex-[8] mx-2"
             style={{ display: indexSelected === 0 ? "block" : "none" }}
           >
             <PensionCalculation />
           </div>
           <div
-            className="flex-[8]"
+            className="flex-[8] mx-2"
             style={{ display: indexSelected === 1 ? "block" : "none" }}
           >
             <WithdrawBHXH />
           </div>
           <div
-            className="flex-[8]"
+            className="flex-[8] mx-2"
             style={{ display: indexSelected === 2 ? "block" : "none" }}
           >
             <CloseRateBXH />

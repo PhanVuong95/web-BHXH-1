@@ -291,9 +291,9 @@ const ListHealthInsurance: React.FunctionComponent = () => {
   }
 
   return (
-    <div className="pt-6">
+    <div className="pt-0 md:pt-6 lg:pt-6">
       <HeaderTitle links={[{ title: "Khai báo BHYT tự nguyện" }]} />
-      <div className="container mx-auto py-[40px] max-w-[1280px]">
+      <div className="container mx-auto  py-[0px] md:py-[10px] lg:py-[40px] max-w-[1280px]">
         <h3 className="title-top-header">Khai báo BHYT tự nguyện</h3>
         <div className="gap-[16px] flex flex-col  product-items">
           <div className="flex flex-col gap-8 pt-1">

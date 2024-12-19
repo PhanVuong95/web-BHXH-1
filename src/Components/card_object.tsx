@@ -129,7 +129,7 @@ const CardObject = (props: Props) => {
     <div className="rounded-xl flex flex-col flex-wrap border border-[#B9BDC1] overflow-hidden">
       {renderTextHeader()}
 
-      <div className="flex flex-row justify-between flex-wrap p-[40px]">
+      <div className="flex flex-row justify-between flex-wrap p-[15px] md:p-[20px] lg:p-[40px]">
         {renderObjectTypeGroupList()}
 
         {renderObjectTypeGroup()}

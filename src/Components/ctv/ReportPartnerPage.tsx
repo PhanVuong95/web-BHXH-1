@@ -25,11 +25,8 @@ const ReportPartnerPage: React.FC<{ onViewCollaborators: () => void }> = ({
 
       if (response.data.status == "200" && response.data.message == "SUCCESS") {
         setReport(response.data.data[0]);
-        console.log(response.data.data[0]);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -40,7 +37,7 @@ const ReportPartnerPage: React.FC<{ onViewCollaborators: () => void }> = ({
     return (
       <div className="border p-2 rounded-lg border-[#0076B7]">
         <div className="flex items-center">
-          <img src={image} className="w-7 h-7" />
+          <img alt="" src={image} className="w-7 h-7" />
           <div className="text-[16px] ml-2">{title}</div>
         </div>
 

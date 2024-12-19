@@ -45,8 +45,6 @@ const CardMembersHouseHold = (props: Props) => {
     fetchMemberProvinces();
   }, [selectedMemberProvince]);
 
-  console.log(temp);
-
   const fetchMemberProvinces = () => {
     if (selectedMemberProvince !== 0) {
       axios
@@ -428,7 +426,7 @@ const CardMembersHouseHold = (props: Props) => {
         ) : null}
       </div>
 
-      <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+      <div className="p-[15px] md:p-[20px] lg:p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
         {/* Họ tên */}
         {inputFullNameMember()}
 

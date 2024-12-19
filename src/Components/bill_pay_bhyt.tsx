@@ -16,8 +16,6 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
   // const [wardeName, setWardeName] = useState("");
   const [selectedCheckbox, setSelectedCheckbox] = useState("");
 
-  console.log(selectedCheckbox);
-
   // const navigate = useNavigate();
 
   const handleCheckboxChange = (value: any) => {
@@ -52,7 +50,6 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
       });
 
       const data = await response.json();
-      console.log("Response:", data);
     } catch (error) {
       console.error("Error:", error);
     }

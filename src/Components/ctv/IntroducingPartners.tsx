@@ -29,13 +29,10 @@ const IntroducingPartnersPage = () => {
       setCode(response.data.resources.referrerCode);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
       setLinkQRCode("400");
     }
   };
-
-  console.log(linkQRCode);
 
   useEffect(() => {
     getQrIntroduction();

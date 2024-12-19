@@ -70,7 +70,6 @@ export const formatTime = (dates: string): string => {
 
     return "";
   } catch (error) {
-    console.log(error);
     return "";
   }
 };
@@ -84,7 +83,6 @@ export const formatTime1 = (dates: string) => {
       return ` ${dateParts[2]}/${dateParts[1]}/${dateParts[0]} ${timeParts[0]}:${timeParts[1]}`;
     }
   } catch (error) {
-    console.log(error);
     return "";
   }
 };
@@ -141,7 +139,6 @@ export const formatPhoneNumber = (phoneNumber: any) => {
   try {
     return phoneNumber.replace(/(\d{4})(\d{3})(\d{3})/, "$1.$2.$3");
   } catch (error) {
-    console.log(error);
     return "";
   }
 };

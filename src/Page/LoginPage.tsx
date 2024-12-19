@@ -34,10 +34,7 @@ const LoginPage = () => {
 
     connection
       .start()
-      .then(() => {
-        console.log("SignalR Connected.");
-        console.log("connection:", connection);
-      })
+      .then(() => {})
       .catch((err) => console.error("Connection error:", err));
 
     connection.on("SendConnectionId", (ConnectionId) => {
@@ -46,8 +43,6 @@ const LoginPage = () => {
 
     connection.on("SignIn", (res) => {
       if (res.status == "200" && res.message == "SUCCESS" && res.resources) {
-        console.log("SignIn successful:", res);
-
         const { accessToken, profile } = res.resources;
 
         // Lưu token vào localStorage
@@ -59,8 +54,6 @@ const LoginPage = () => {
         // Lưu token vào cookies
         document.cookie = `accessToken=${accessToken}; path=/; max-age=86400`;
 
-        console.log("Token and profile saved to localStorage and cookies.");
-
         navigate("/");
 
         setTimeout(() => {
@@ -71,8 +64,6 @@ const LoginPage = () => {
   }, []);
 
   useEffect(() => {
-    // console.log(clientId);
-
     const link = `https://zalo.me/s/3118469885204258242/login/portal?state=${btoa(
       JSON.stringify({
         data: {
@@ -90,7 +81,6 @@ const LoginPage = () => {
   // đăng nhập google
   useEffect(() => {
     if (window.google) {
-      console.log("Google SDK loaded");
       window.google.accounts.id.initialize({
         client_id:
           "110872706346-2usv0onovmio1n2ikh181t412923e3kl.apps.googleusercontent.com",
@@ -148,14 +138,10 @@ const LoginPage = () => {
 
       setLoginGoogle(response);
 
-      console.log(loginGoogle);
-
       const responseData = response.data;
 
       if (responseData.status == 200 && responseData.message == "SUCCESS") {
         const data = responseData.resources;
-
-        console.log(loginGoogle);
 
         // Lưu token vào localStorage và cookie
         localStorage.setItem("currentUser", JSON.stringify(data));
@@ -200,7 +186,6 @@ const LoginPage = () => {
   // Hàm cập nhật trạng thái đã đăng nhập
   const updateLoginStatus = (isLoggedIn: boolean) => {
     // Gọi các hàm hoặc thay đổi trạng thái trong ứng dụng
-    console.log("User login status:", isLoggedIn);
   };
 
   return (
@@ -277,11 +262,11 @@ const LoginPage = () => {
                   </div>
                 </div> */}
 
-                <div
+                {/* <div
                   id="google-button-wrapper"
                   style={{ display: "block", maxWidth: "450px", width: "100%" }}
                 ></div>
-                <button
+                <div
                   id="login-with-google"
                   onClick={() => {
                     const googleButtonWrapper = document.querySelector(
@@ -290,7 +275,38 @@ const LoginPage = () => {
                     (googleButtonWrapper as HTMLElement)?.click();
                   }}
                   className="custom-google-button"
-                ></button>
+                ></div> */}
+
+                <div id="google-button-wrapper">
+                  <div
+                    id="login-with-google"
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Login with Google"
+                    onClick={() => {
+                      const googleButtonWrapper = document.querySelector(
+                        "#google-button-wrapper > div[role='button']"
+                      );
+
+                      if (googleButtonWrapper) {
+                        (googleButtonWrapper as HTMLElement).click();
+                      } else {
+                        console.error("Google login button not found!");
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        const googleButtonWrapper = document.querySelector(
+                          "#google-button-wrapper > div[role='button']"
+                        );
+                        (googleButtonWrapper as HTMLElement)?.click();
+                      }
+                    }}
+                    className="custom-google-button"
+                  >
+                    Login with Google
+                  </div>
+                </div>
               </div>
             </FlexBox>
           </Tabs.TabPane>

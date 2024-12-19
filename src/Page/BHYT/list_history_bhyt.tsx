@@ -145,7 +145,7 @@ const ListHistoryBHYT: React.FunctionComponent<ListsHistoryPageProps> = ({
                 <Link to={"/info-detail-bhyt/" + item.id} key={index}>
                   <div className="p-4 bg-white h-full w-full rounded-xl flex flex-row items-center gap-4 border border-[#B9BDC1] overflow-hidden">
                     <div className="flex gap-[10px]">
-                      <img src={logo} className="w-16 h-16" />
+                      <img alt="" src={logo} className="w-16 h-16" />
                       <div className="title-product flex flex-col">
                         <h3 className="text-[#0076B7] text-lg font-medium">
                           {item?.insuranceName}

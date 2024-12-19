@@ -47,14 +47,9 @@ const HeaderPage = () => {
   // Quản lý trạng thái đăng nhập
   const [user, setUser] = useState<any>(null);
 
-  console.log("isSideMenuOpen", isSideMenuOpen);
-
   useEffect(() => {
     // Kiểm tra xem người dùng đã đăng nhập chưa
     const profile = localStorage.getItem("profile");
-
-    // console.log("profile: ", profile);
-    // console.log("accessToken: ", token);
 
     if (profile) {
       setUser(JSON.parse(profile));
@@ -198,38 +193,44 @@ const HeaderPage = () => {
               </div>
               <div className="navbar-menu-mobile">
                 <Link
-                  className="font-bold py-[20px] border-bottom-1"
+                  className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
                   to="/social-insurance"
                 >
                   Khai báo BHXH tự nguyện
                 </Link>
                 <Link
-                  className="font-bold py-[20px] border-bottom-1"
+                  className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
                   to="/health-insurance"
                 >
                   Mua BHYT tự nguyện
                 </Link>
                 <Link
-                  className="font-bold py-[20px] border-bottom-1"
+                  className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
                   to="/tool-support"
                 >
                   Công cụ hỗ trợ
                 </Link>
-                <Link className="font-bold py-[20px] border-bottom-1" to="/">
+                <Link
+                  className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
+                  to="/"
+                >
                   Điều chỉnh thông tin BHXH
                 </Link>
-                <Link className="font-bold py-[20px] border-bottom-1" to="/">
+                <Link
+                  className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
+                  to="/"
+                >
                   Liên hệ chúng tôi
                 </Link>
                 <Link
-                  className="font-bold py-[20px] border-bottom-1"
+                  className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
                   to="/privacy_policy"
                 >
                   Tài liệu BHXH
                 </Link>
                 <div className="relative">
                   <div
-                    className="font-bold py-[20px] border-bottom-1 w-full flex flex-row items-center justify-between"
+                    className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1 w-full flex flex-row items-center justify-between"
                     onClick={handleToggle}
                   >
                     Tài khoản
@@ -273,12 +274,12 @@ const HeaderPage = () => {
                       onClick={(e) => e.stopPropagation()}
                     >
                       <ul>
-                        <li className="font-bold py-[20px] border-bottom-1 w-full">
+                        <li className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1 w-full">
                           <Link to="/user">Thông tin tài khoản</Link>
                         </li>
                         <li
                           onClick={handleLogout}
-                          className="font-bold py-[20px] border-bottom-1 w-full"
+                          className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1 w-full"
                         >
                           Đăng xuất
                         </li>

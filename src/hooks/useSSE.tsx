@@ -19,13 +19,11 @@ const useSSE = (props: Props) => {
     eventSourceRef.current = eventSource;
 
     eventSource.onopen = () => {
-      console.log("Connected to SSE", props.namespace);
       setConnected(true);
     };
 
     eventSource.onmessage = (event) => {
       const message = JSON.parse(event.data);
-      console.log("Received message", message);
       props.handleMessage(message);
 
       if (message.clientId) {

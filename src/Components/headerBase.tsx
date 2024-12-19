@@ -17,18 +17,18 @@ const HeaderBase = (props: Props) => {
 
   return (
     <div className="fixed top-0 z-10 p-0 container mx-auto">
-      <img src={backgroundHeader} />
+      <img alt="" src={backgroundHeader} />
       <div className="absolute z-10 top-[50%] flex left-4 right-4 justify-between items-center">
         <div className="flex">
           <div>
             {isHome ? (
-              <img src={logo} className="w-7 h-7" />
+              <img alt="" src={logo} className="w-7 h-7" />
             ) : (
               <button
                 type="button"
                 onClick={onBack ? onBack : () => navigate(-1)}
               >
-                <img src={back} className="w-7 h-7" />
+                <img alt="" src={back} className="w-7 h-7" />
               </button>
             )}
           </div>

@@ -45,7 +45,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     props;
   const dateFormat = "DD/MM/YYYY";
   const [districts, setDistricts] = useState<any>([]);
-  console.log(districts);
 
   const [socialInsuranceNumber, setSocialInsuranceNumber] = useState(
     registerInfoBHYT["listInsuredPerson"][index].socialInsuranceNumber
@@ -86,30 +85,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   const [ethnic, setEthnic] = useState(
     registerInfoBHYT["listInsuredPerson"][index].ethnicId
   );
-  // const [oldCardStartDate, setOldCardStartDate] = useState<any>(
-  //   registerInfoBHYT["listInsuredPerson"][index].oldCardStartDate == ""
-  //     ? ""
-  //     : dayjs(
-  //         registerInfoBHYT["listInsuredPerson"][index].oldCardStartDate.trim(),
-  //         "DD/MM/YYYY"
-  //       )
-  // );
-  // const [oldCardEndDate, setOldCardEndDate] = useState<any>(
-  //   registerInfoBHYT["listInsuredPerson"][index].oldCardEndDate == ""
-  //     ? ""
-  //     : dayjs(
-  //         registerInfoBHYT["listInsuredPerson"][index].oldCardEndDate.trim(),
-  //         "DD/MM/YYYY"
-  //       )
-  // );
-  // const [newCardEndDate, setNewCardEndDate] = useState(
-  //   registerInfoBHYT["listInsuredPerson"][index].newCardEndDate == ""
-  //     ? ""
-  //     : dayjs(
-  //         registerInfoBHYT["listInsuredPerson"][index].newCardEndDate.trim(),
-  //         "DD/MM/YYYY"
-  //       )
-  // );
+
   const [newCardStartDate, setNewCardStartDate] = useState<any>(
     registerInfoBHYT["listInsuredPerson"][index].newCardStartDate == ""
       ? ""
@@ -126,7 +102,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   const [medicalDistrictId, setMedicalDistrictId] = useState<any>(
     registerInfoBHYT["listInsuredPerson"][index].medicalDistrictId
   );
-  console.log(medicalDistrictId);
 
   const [hospitalId, setHospitalId] = useState(
     registerInfoBHYT["listInsuredPerson"][index].hospitalId
@@ -141,8 +116,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   const ksDistricts = useRef([]);
   const ksWards = useRef([]);
 
-  // const [selectedProvinceParticipate, setSelectedProvinceParticipate] =
-  //   useState(registerInfoBHYT["listInsuredPerson"][index].insuranceProvinceId);
   const [selectedKSProvince, setSelectedKSProvince] = useState<number>(
     registerInfoBHYT["listInsuredPerson"][index].ksTinhThanhMa
   );
@@ -181,7 +154,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   const [isShowModalbenefitLevel, setIsShowModalbenefitLevel] = useState(false);
 
   const [temp, setTemp] = useState(0);
-  console.log(temp);
 
   const [isLoadingLuckUp, setIsLoadingLuckUp] = useState(false);
 
@@ -501,7 +473,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
       toast.error("Tra cứu mã bảo hiểm thất bại");
       setSocialInsuranceNumber("");
       setIsLoadingLuckUp(false);
-      console.log(error);
     }
   };
 
@@ -581,7 +552,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
                 onSubmitFormData();
               }
             }}
-            className="absolute inset-y-0 start-[90%] top-0 flex items-center"
+            className="absolute inset-y-0 right-[5%] top-0 flex items-center"
           >
             <p className="text-base font-normal text-[#0076B7]">
               {!isLoadingLuckUp ? "Tra cứu" : "Đang tải..."}
@@ -723,13 +694,13 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           <h3 className="text-[#0076B7] text-lg font-medium items-center">
             Tải ảnh CCCD
           </h3>
-          <div
+          {/* <div
             onClick={() => {
               setIsShowModelQR(true);
             }}
           >
             <img alt="image qr" src={imageQR} className="w-8" />
-          </div>
+          </div> */}
         </div>
 
         {
@@ -836,9 +807,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
                       setSize({ width: 200, height: 200 });
                     }, 1000);
-                  } catch (error) {
-                    console.log(error);
-                  }
+                  } catch (error) {}
                 }}
                 allowMultiple={false}
                 styles={{
@@ -1219,68 +1188,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     );
   };
 
-  // const renderBoxOldCard = () => {
-  //   return (
-  //     <div className="flex flex-col">
-  //       <h3 className="text-base font-semibold text-[#0076B7] pb-[24px]">
-  //         Thẻ cũ
-  //       </h3>
-
-  //       <div className="flex flex-col gap-4">
-  //         <div>
-  //           <label className="block text-sm font-normal pb-2 text-gray-900">
-  //             Ngày hiệu lực <samp className="text-red-600">*</samp>
-  //           </label>
-  //           <input
-  //             type="date"
-  //             min={new Date().toISOString().split("T")[0]}
-  //             ref={refs.oldCardStartDate}
-  //             value={oldCardStartDate}
-  //             onChange={(e) => {
-  //               const value = e.target.value;
-
-  //               setOldCardStartDate(value);
-
-  //               registerInfoBHYT["listInsuredPerson"][index].oldCardStartDate =
-  //                 formatDate(value);
-  //             }}
-  //             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
-  //             placeholder="Chọn ngày sinh"
-  //             required
-  //           />
-  //         </div>
-
-  //         <div>
-  //           <label className="block text-sm font-normal pb-2 text-gray-900">
-  //             Ngày hết hiệu lực <samp className="text-red-600">*</samp>
-  //           </label>
-  //           <input
-  //             type="date"
-  //             id="oldCardEndDate"
-  //             ref={refs.oldCardEndDate}
-  //             value={oldCardEndDate}
-  //             onChange={(e) => {
-  //               const value = e.target.value;
-
-  //               setOldCardEndDate(value);
-
-  //               registerInfoBHYT["listInsuredPerson"][index].oldCardEndDate =
-  //                 formatDate(value);
-  //             }}
-  //             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
-  //             placeholder="Chọn ngày sinh"
-  //             required
-  //           />
-  //         </div>
-  //       </div>
-
-  //       {errors.boxOldCard && (
-  //         <div className="mt-2 text-red-500">{errors.boxOldCard}</div>
-  //       )}
-  //     </div>
-  //   );
-  // };
-
   const renderBoxNewCard = () => {
     return (
       <div className="flex flex-col ">
@@ -1362,41 +1269,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     );
   };
 
-  // const renderDistrict = () => {
-  //   return (
-  //     <div>
-  //       <label className="block text-sm font-normal pb-2 text-gray-900">
-  //         Quận huyện khám chữa bệnh
-  //         <samp className="text-red-600"> *</samp>
-  //       </label>
-  //       <Select
-  //         size="large"
-  //         className="w-[100%]"
-  //         dropdownStyle={{ maxWidth: "300px" }}
-  //         showSearch
-  //         ref={refs.medicalDistrictId}
-  //         virtual={false}
-  //         placeholder="Chọn quận huyện"
-  //         value={medicalDistrictId}
-  //         // // // dropdownMatchSelectWidth={false}
-  //         onChange={(value) => {
-  //           setMedicalDistrictId(value);
-
-  //           setHospitalId(0);
-
-  //           registerInfoBHYT["listInsuredPerson"][index].medicalDistrictId =
-  //             value;
-  //         }}
-  //         key={medicalProvinceId}
-  //         filterOption={(input, option) =>
-  //           (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-  //         }
-  //         options={convertListToSelect(districts, "Chọn quận huyện")}
-  //       />
-  //     </div>
-  //   );
-  // };
-
   const renderHispital = () => {
     return (
       <div className="w-full lg1130:w-[49%]">
@@ -1471,36 +1343,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     );
   };
 
-  // const inputProvinceParticipate = () => {
-  //   return (
-  //     <div>
-  //       <label className="block text-sm font-normal text-gray-900 pb-2">
-  //         Tỉnh / Thành phố nơi tham gia BHYT{" "}
-  //         <samp className="text-red-600">*</samp>
-  //       </label>
-  //       <Select
-  //         size="large"
-  //         className="w-[100%]"
-  //         showSearch
-  //         placeholder="Chọn thành phố"
-  //         ref={refs.insuranceProvinceId}
-  //         // // // dropdownMatchSelectWidth={false}
-  //         onChange={(value) => {
-  //           setSelectedProvinceParticipate(value);
-
-  //           registerInfoBHYT["listInsuredPerson"][index].insuranceProvinceId =
-  //             value;
-  //         }}
-  //         value={selectedProvinceParticipate}
-  //         filterOption={(input, option) =>
-  //           (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-  //         }
-  //         options={convertListToSelect(provinces, "Chọn tỉnh thành phố")}
-  //       />
-  //     </div>
-  //   );
-  // };
-
   const inputKSProvinceParticipate = () => {
     return (
       <div className="w-full lg1130:w-[49%]">
@@ -1551,7 +1393,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.selectedKSDistrict}
-          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn quận huyện"
           value={selectedKSDistrict}
           key={selectedKSDistrict}
@@ -1583,7 +1424,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.selectedKSWard}
-          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn phường xã"
           value={selectedKSWard}
           onChange={(value: any) => {
@@ -1637,7 +1477,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           showSearch
           ref={refs.selectedTTProvince}
           placeholder="Chọn tỉnh thành phố"
-          // // // dropdownMatchSelectWidth={false}
           value={selectedTTProvince}
           onChange={(value) => {
             ttDistricts.current = [];
@@ -1673,7 +1512,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.selectedTTDistrict}
-          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn quận huyện"
           value={selectedTTDistrict}
           key={selectedTTDistrict}
@@ -1705,7 +1543,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.selectedTTWard}
-          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn phường xã"
           value={selectedTTWard}
           key={selectedTTWard}
@@ -1757,7 +1594,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           size="large"
           className="w-[100%]"
           showSearch
-          // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn vùng lương"
           ref={refs.vungLuongToiThieuId}
           value={vungLuongToiThieuId}
@@ -1791,7 +1627,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           className="w-[100%]"
           showSearch
           ref={refs.benefitLevel}
-          // // // dropdownMatchSelectWidth={false}
           dropdownStyle={{
             maxWidth: "300px",
           }}
@@ -1850,8 +1685,8 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           }}
         >
           <div className="p-4 w-[100%] relative bg-white">
-            {BenefitLevevlList.map((item) => (
-              <div>
+            {BenefitLevevlList.map((item, index) => (
+              <div key={index}>
                 <div className="pb-2 text-blue-600  text-lg font-normal">
                   - Mức hưởng số {item?.value}
                 </div>
@@ -1865,10 +1700,13 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   };
 
   return (
-    <div className="flex flex-col flex-wrap border border-[#B9BDC1] overflow-hidden rounded-xl">
+    <div
+      key={index}
+      className="flex flex-col flex-wrap border border-[#B9BDC1] overflow-hidden rounded-xl"
+    >
       {renderHeader()}
       {/* Tiền bảo hiểm */}
-      <div className="flex flex-col flex-wrap p-[20px] gap-4 border ">
+      <div className="flex flex-col flex-wrap p-[15px] md:p-[20px] lg:p-[20px] gap-4 border ">
         {renderPrice()}
 
         {renderLine()}
@@ -1909,7 +1747,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
         Thông tin bảo hiểm{" "}
       </h3>
 
-      <div className="flex flex-row flex-wrap justify-between w-full gap-2 p-[20px]">
+      <div className="flex flex-row flex-wrap justify-between w-full gap-2 p-[15px] md:p-[20px] lg:p-[20px]">
         {/* Thẻ mới người tham gia*/}
         {/* {inputProvinceParticipate()} */}
 
@@ -1932,7 +1770,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
       <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
         Địa chỉ khai sinh{" "}
       </h3>
-      <div className="flex flex-row flex-wrap justify-between w-full gap-2 p-[20px]">
+      <div className="flex flex-row flex-wrap justify-between w-full gap-2 p-[15px] md:p-[20px] lg:p-[40px]">
         {/* Tỉnh thành  khai sinh*/}
         {inputKSProvinceParticipate()}
 
@@ -1949,7 +1787,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
       <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
         Địa chỉ thường trú{" "}
       </h3>
-      <div className="flex flex-row flex-wrap justify-between w-full gap-2 p-[20px]">
+      <div className="flex flex-row flex-wrap justify-between w-full gap-2 p-[15px] md:p-[20px] lg:p-[40px]">
         {/* Tỉnh thành thường trú*/}
         {inputTTProvinceParticipants()}
 

@@ -469,7 +469,7 @@ const CardHouseHold = (props: Props) => {
     <div className="rounded-xl flex flex-col flex-wrap border border-[#B9BDC1] overflow-hidden">
       {renderTextHeader()}
 
-      <div className="flex flex-row justify-between flex-wrap p-[40px] gap-3">
+      <div className="flex flex-row justify-between flex-wrap p-[15px] md:p-[20px] lg:p-[40px] gap-3">
         {/* Họ tên chủ hộ */}
         {inputFullNamHouseHoldParticipants()}
 

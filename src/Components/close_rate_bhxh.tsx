@@ -16,8 +16,16 @@ const CloseRateBXH = () => {
       toast.warn("Mức lương làm cơ sở đóng không để trống");
       return false;
     }
-    if (!isValidEmptyString(baseSalary)) {
+    if (!isValidEmptyString(months)) {
       toast.warn("Số tháng còn thiếu không để trống");
+      return false;
+    }
+
+    if (
+      Number(months.replace(/\D/g, "")) <= 0 ||
+      Number(months.replace(/\D/g, "")) > 120
+    ) {
+      toast.warn("Số tháng phải lớn 0 và nhỏ hơn 120");
       return false;
     }
     return true;
@@ -25,10 +33,10 @@ const CloseRateBXH = () => {
 
   return (
     <div className=" drop-shadow">
-      <div className="text-[18px] text-[white] bg-[#0077D5] leading[24px] font-normal p-[20px] rounded-tr-[10px] rounded-tl-[10px]">
+      <div className="text-[16px] md:text-[18px] lg:text-[18px] text-[white] bg-[#0077D5] leading[24px] font-normal p-[15px] md:p-[20px] lg:p-[20px] rounded-tr-[10px] rounded-tl-[10px]">
         Mức đóng BHXH còn thiếu
       </div>
-      <div className="p-5 bg-[white] rounded-br-[10px] rounded-bl-[10px]">
+      <div className="p-3 md:p-4 lg:p-5 bg-[white] rounded-br-[10px] rounded-bl-[10px]">
         <div className="w-full">
           <label className="block text-sm font-light pb-2 text-gray-900">
             Mức lương làm cơ sở đóng <samp className="text-red-600">*</samp>
@@ -94,8 +102,6 @@ const CloseRateBXH = () => {
 
                 if (response.data.status == "200") {
                   toast.success("Tra cứu thành công");
-
-                  console.log(response.data.data[0].salary);
 
                   setValueToPay(response.data.data[0].valueToPay);
                   return;

@@ -42,16 +42,13 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
       );
 
       if (response.data.status == "200" && response.data.message == "SUCCESS") {
-        console.log(response.data.data[0]);
         const data = response.data.data[0];
         setSelectedBankCode(data?.bankBin);
         setBankBranch(data?.bankBranch);
         setBankOwner(data?.bankOwnerName);
         setBankNumber(data?.bankOwnerNumber);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -197,7 +194,6 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
 
         toast.warning("Cập nhật thông tin tài khoản thất bại!");
       } catch (error) {
-        console.log(error);
         toast.warning("Cập nhật thông tin tài khoản thất bại!");
       }
     }

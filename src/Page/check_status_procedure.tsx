@@ -25,7 +25,6 @@ const CheckStatusProcedure = () => {
 
         setDetail(response.data.data[0]);
 
-        console.log(response.data.data[0]);
         setIsLoading(false);
 
         return response.data.data[0];

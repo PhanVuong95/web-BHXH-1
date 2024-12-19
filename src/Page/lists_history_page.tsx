@@ -76,11 +76,6 @@ const ListsHistoryPage: React.FC<ListsHistoryPageProps> = ({ onBack }) => {
   if (loading) {
     return (
       <>
-        {/* <HeaderBase
-          isHome={false}
-          onBack={() => navigate("/history")}
-          title={"Lịch sử đăng ký BHXH TN"}
-        /> */}
         <div className="fixed inset-0 flex items-center justify-center">
           <PulseLoader size={15} loading={true} color="#0076B7" />
         </div>
@@ -135,7 +130,7 @@ const ListsHistoryPage: React.FC<ListsHistoryPageProps> = ({ onBack }) => {
               listOrder.map((item, index) => {
                 return (
                   <Link to={"/history-unpaid/" + item.id} key={index}>
-                    <div className="p-4 bg-white h-full w-full rounded-xl flex flex-row items-center gap-4 border border-[#B9BDC1] overflow-hidden">
+                    <div className="p-4 bg-white h-full w-full rounded-xl flex flex-row items-center border border-[#B9BDC1] overflow-hidden">
                       <div className="flex gap-[10px] w-[47%]">
                         <img src={logo} className="w-16 h-16" alt="Logo" />
                         <div className="title-product flex flex-col">

@@ -30,7 +30,6 @@ const useSignalR = (props: Props) => {
     connection
       .start()
       .then(() => {
-        console.log("Connected to SignalR: ", props.namespace);
         setConnected(true);
       })
       .catch((error) => console.log("SignalR connection error: ", error));
@@ -38,12 +37,10 @@ const useSignalR = (props: Props) => {
     // Listening for messages from the server
     connection.on("msgToClient", props.handleMessage);
     connection.on("message", (message) => {
-      console.log("Message", message);
       setClientId(message);
     });
 
     connection.onclose((error) => {
-      console.log("SignalR connection closed", error);
       setConnected(false);
     });
 
