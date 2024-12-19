@@ -262,7 +262,7 @@ const LoginPage = () => {
                   </div>
                 </div> */}
 
-                {/* <div
+                <div
                   id="google-button-wrapper"
                   style={{ display: "block", maxWidth: "450px", width: "100%" }}
                 ></div>
@@ -275,9 +275,9 @@ const LoginPage = () => {
                     (googleButtonWrapper as HTMLElement)?.click();
                   }}
                   className="custom-google-button"
-                ></div> */}
+                ></div>
 
-                <div id="google-button-wrapper">
+                {/* <div id="google-button-wrapper">
                   <div
                     id="login-with-google"
                     role="button"
@@ -306,7 +306,7 @@ const LoginPage = () => {
                   >
                     Login with Google
                   </div>
-                </div>
+                </div> */}
               </div>
             </FlexBox>
           </Tabs.TabPane>
