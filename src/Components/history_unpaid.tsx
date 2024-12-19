@@ -3,10 +3,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link, useNavigate } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
-import { formatDate } from "../Utils/validateString";
-import { SpecificContext } from "./specificContext";
+import { formatDate } from "../utils/validate_string";
+import { SpecificContext } from "./specific_context";
 import logo from "../assets-src/logo1.png";
-import HeaderTitle from "./HeaderTitle";
+import HeaderTitle from "./header_title";
 
 const HistoryUnpaidPage: React.FunctionComponent = () => {
   const { id, statusName } = useParams();
@@ -15,11 +15,13 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
   const [insuredPerson, setInsuredPerson] = useState<any>();
   const [orderStatusId, setOrderStatusId] = useState<number>(0);
   const specificContext = useContext<any>(SpecificContext);
-  const { setInsuranceOrder } = specificContext;
+  const { insuranceOrder, setInsuranceOrder } = specificContext;
 
   const PENDING = 1001;
   const DONE = 1002;
   const CANCELED = 1003;
+
+  console.log(insuranceOrder);
 
   useEffect(() => {
     axios
@@ -174,12 +176,12 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
           { title: "Chi tiết lịch sử hoạt động bảo hiểm" },
         ]}
       />
-      <div className="py-[60px] relative max-w-[1280px] mx-auto">
-        <div className="flex flex-row flex-row-1 gap-[40px] mb-4 px-2">
+      <div className="py-[20px] md:py-[20px] lg:py-[60px] relative max-w-[1280px] mx-auto">
+        <div className="flex flex-col md:flex-col lg:flex-row flex-row-1 gap-[40px] mb-4 px-2">
           <div className="w-full flex flex-col flex-wrap gap-4 xl:gap-6">
             {headerStatus()}
 
-            <div className=" bg-white rounded-xl flex flex-col gap-6">
+            <div className="bg-white rounded-xl flex flex-col gap-6">
               <div className="flex justify-between rounded-xl overflow-hidden">
                 <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
                   Mã đơn
@@ -226,7 +228,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
                     <p className="text-[#646464] text-lg font-normal">Email</p>
                   </div>
                   <div>
-                    <p className="text-[#2E2E2E] text-lg font-semibold max-w-[180px] text-right">
+                    <p className="text-[#2E2E2E] text-lg font-semibold max-w-[280px] text-right">
                       {orderDetail.email}
                     </p>
                   </div>
@@ -385,6 +387,79 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
                 </div>
               </div>
             </div>
+
+            {orderStatusId == DONE && statusName == "Thành công" ? (
+              <div className="flex flex-row content-center justify-center items-center">
+                <button
+                  onClick={() => {
+                    setInsuranceOrder((prevOrder: any) => ({
+                      ...prevOrder,
+                      id: 0,
+                    }));
+                    setTimeout(() => {
+                      navigate("/register-BHXH");
+                    }, 500);
+                  }}
+                  className="px-[24px] py-3 bg-[#e9c058] w-full rounded-full text-base font-normal text-white text-center"
+                >
+                  Tái hợp đồng bảo hiểm
+                </button>
+              </div>
+            ) : (
+              <div className="mb-0"></div>
+            )}
+
+            {!(orderStatusId == CANCELED || orderStatusId == DONE) && (
+              <div className=" bg-white w-[100%]">
+                <div className="flex flex-row justify-between gap-3">
+                  <div className="flex flex-col gap-1 content-center justify-between w-[49%]">
+                    <p className="block text-lg font-normal text-gray-900">
+                      Tổng thanh toán:
+                    </p>
+                    <h3 className="text-base font-medium text-[#0076B7]">
+                      {orderDetail.finalPrice.toLocaleString("vi-VN")} VND
+                    </h3>
+                  </div>
+                  <div className="flex flex-row content-center justify-center items-center  w-[49%]">
+                    <Link
+                      to={"/buill-detail/" + id}
+                      className="px-[24px] py-3 bg-[#0076B7] w-full rounded-lg text-base font-normal text-white text-center"
+                    >
+                      Tiếp tục
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
+            {orderStatusId == CANCELED && (
+              <div className=" bg-white w-[100%]">
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-row content-center justify-center items-center">
+                    <Link
+                      to={"/register-BHXH"}
+                      className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full  text-base font-normal text-white text-center"
+                    >
+                      Tra cứu lại
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {orderStatusId == DONE && (
+              <div className=" bg-white w-[100%]">
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-row content-center justify-center items-center">
+                    <Link
+                      to={`/check-status-procedure/${orderDetail.id}`}
+                      className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full text-base font-normal text-white text-center"
+                    >
+                      Kiểm tra trạng thái thủ tục
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* --------------------------------------------- */}
@@ -438,79 +513,6 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
             </div>
           </div>
         </div>
-
-        {orderStatusId == DONE && statusName == "Thành công" ? (
-          <div className="flex flex-row content-center justify-center items-center mb-[25%]">
-            <button
-              onClick={() => {
-                setInsuranceOrder((prevOrder: any) => ({
-                  ...prevOrder,
-                  id: 0,
-                }));
-                setTimeout(() => {
-                  navigate("/register-BHXH");
-                }, 100);
-              }}
-              className="px-[24px] py-3 bg-[#e9c058] w-full rounded-full text-base font-normal text-white text-center"
-            >
-              Tái hợp đồng bảo hiểm
-            </button>
-          </div>
-        ) : (
-          <div className="mb-32"></div>
-        )}
-
-        {!(orderStatusId == CANCELED || orderStatusId == DONE) && (
-          <div className=" bg-white w-[100%]">
-            <div className="flex flex-row justify-between gap-3">
-              <div className="flex flex-col gap-1 content-center justify-between w-[49%]">
-                <p className="block text-lg font-normal text-gray-900">
-                  Tổng thanh toán:
-                </p>
-                <h3 className="text-base font-medium text-[#0076B7]">
-                  {orderDetail.finalPrice.toLocaleString("vi-VN")} VND
-                </h3>
-              </div>
-              <div className="flex flex-row content-center justify-center items-center  w-[49%]">
-                <Link
-                  to={"/buill-detail/" + id}
-                  className="px-[24px] py-3 bg-[#0076B7] w-full rounded-lg text-base font-normal text-white text-center"
-                >
-                  Tiếp tục
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
-        {orderStatusId == CANCELED && (
-          <div className=" bg-white w-[100%]">
-            <div className="flex flex-col gap-3">
-              <div className="flex flex-row content-center justify-center items-center">
-                <Link
-                  to={"/register-BHXH"}
-                  className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full  text-base font-normal text-white text-center"
-                >
-                  Tra cứu lại
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {orderStatusId == DONE && (
-          <div className=" bg-white w-[100%]">
-            <div className="flex flex-col gap-3">
-              <div className="flex flex-row content-center justify-center items-center">
-                <Link
-                  to={`/check-status-procedure/${orderDetail.id}`}
-                  className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full text-base font-normal text-white text-center"
-                >
-                  Kiểm tra trạng thái thủ tục
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

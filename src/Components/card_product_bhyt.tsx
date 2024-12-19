@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { formatMoneyVND } from "../Utils/validateString";
+import { formatMoneyVND } from "../utils/validate_string";
 import logo from "../assets-src/logo1.png";
 import { useNavigate } from "react-router-dom";
 

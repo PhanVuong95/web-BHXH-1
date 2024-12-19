@@ -7,7 +7,7 @@ import {
   compareTwoDateString,
   formatMoneyVND,
   isValidEmptyString,
-} from "../Utils/validateString";
+} from "../utils/validate_string";
 import { toast } from "react-toastify";
 import axios from "axios";
 import iconSearch from "../assets/icon/ic_search.svg";

@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { SpecificContext } from "../Components/specificContext";
+import { SpecificContext } from "../components/specific_context";
 import { PulseLoader } from "react-spinners";
 import warningIc from "../assets-src/warning_icon.png";
-import HeaderTitle from "../Components/HeaderTitle";
+import HeaderTitle from "../components/header_title";
 
 const BuillDetailPage: React.FunctionComponent = () => {
   const { id } = useParams();

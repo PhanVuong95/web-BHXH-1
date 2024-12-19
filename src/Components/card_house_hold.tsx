@@ -1,8 +1,8 @@
 import { Input, Select } from "antd";
 import { useRef, useState } from "react";
-import { convertListToSelect } from "../Utils/validateString";
+import { convertListToSelect } from "../utils/validate_string";
 import "../locale/vi";
-import { registerInfoBHYT } from "../Page/BHYT/list_health_insurance";
+import { registerInfoBHYT } from "../pages/bhyt/list_health_insurance_page";
 import { useEffect } from "react";
 import axios from "axios";
 

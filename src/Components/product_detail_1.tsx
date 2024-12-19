@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
-import HeaderTitle from "./HeaderTitle";
+import HeaderTitle from "./header_title";
 
 const ProductDetailPage1: React.FunctionComponent = () => {
   const [imageSrcs, setImageSrcs] = useState<string[]>([]);

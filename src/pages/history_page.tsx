@@ -1,5 +1,5 @@
 import React from "react";
-import { HistoryPageProps } from "../Models";
+import { HistoryPageProps } from "../models";
 
 const HistoryPage: React.FunctionComponent<HistoryPageProps> = ({
   onViewCollaborators,

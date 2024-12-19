@@ -1,11 +1,11 @@
 import { DatePicker, Input, Select } from "antd";
 import { useEffect, useRef, useState } from "react";
 import iconClose from "../assets-src/close_1.png";
-import { registerInfoBHYT } from "../Page/BHYT/list_health_insurance";
+import { registerInfoBHYT } from "../pages/bhyt/list_health_insurance_page";
 import "../locale/vi";
 import locale from "antd/es/date-picker/locale/vi_VN";
 import dayjs from "dayjs";
-import { convertListToSelect, formatDate2 } from "../Utils/validateString";
+import { convertListToSelect, formatDate2 } from "../utils/validate_string";
 import axios from "axios";
 
 interface Props {

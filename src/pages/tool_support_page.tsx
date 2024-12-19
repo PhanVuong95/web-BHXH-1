@@ -1,5 +1,5 @@
-import HeaderTitle from "../Components/HeaderTitle";
-import PensionCalculation from "../Components/pension_calculation";
+import HeaderTitle from "../components/header_title";
+import PensionCalculation from "../components/pension_calculation";
 import iconWithdraw from "../assets/icon/ic_withdraw.svg";
 import iconWithdrawBlue from "../assets/icon/ic_withdraw_blue.svg";
 import iconCloseRate from "../assets/icon/ic_close_rate.svg";
@@ -8,8 +8,8 @@ import iconCalculate from "../assets/icon/ic_calculate.svg";
 import iconCalculateBlue from "../assets/icon/ic_calculate_blue.svg";
 import { useState } from "react";
 import "../locale/vi";
-import WithdrawBHXH from "../Components/withdraw_bhxh";
-import CloseRateBXH from "../Components/close_rate_bhxh";
+import WithdrawBHXH from "../components/withdraw_bhxh";
+import CloseRateBXH from "../components/close_rate_bhxh";
 
 interface itemProps {
   icon: string;

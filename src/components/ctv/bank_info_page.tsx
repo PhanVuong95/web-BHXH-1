@@ -1,7 +1,7 @@
 import { Input, Select } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { convertListToSelectBanks } from "../../Utils/validateString";
+import { convertListToSelectBanks } from "../../utils/validate_string";
 import { toast } from "react-toastify";
 
 interface BankInfoPageProps {

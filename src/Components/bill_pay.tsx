@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { Widthheight } from "../Models";
-import { SpecificContext } from "./specificContext";
+import { Widthheight } from "../models";
+import { SpecificContext } from "./specific_context";
 import { Link } from "react-router-dom";
-import HeaderTitle from "./HeaderTitle";
+import HeaderTitle from "./header_title";
 import { Input } from "antd";
 
 const BillPayPage: React.FC<Widthheight> = () => {

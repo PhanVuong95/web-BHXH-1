@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ListHistoryBHYTProps, Province } from "../../Models";
-import { registerInfoBHYT } from "./list_health_insurance";
+import { ListHistoryBHYTProps, Province } from "../../models";
+import { registerInfoBHYT } from "./list_health_insurance_page";
 import {
   formatMoneyVND,
   isValidCitizenId,
@@ -13,15 +13,15 @@ import {
   isValidHealthInsuranceNumber,
   isValidPhone,
   isValidSocialInsuranceNumber,
-} from "../../Utils/validateString";
-import UserBeneficiaryBHYTPage from "../../Components/card_user_beneficiary_bhyt";
-import UserBuyerPage from "../../Components/card_user_buyer";
+} from "../../utils/validate_string";
+import UserBeneficiaryBHYTPage from "../../components/card_user_beneficiary_bhyt";
+import UserBuyerPage from "../../components/card_user_buyer";
 import { FadeLoader } from "react-spinners";
 import Modal from "react-modal";
-import CardHouseHold from "../../Components/card_house_hold";
-import CardMembersHouseHold from "../../Components/card_members_house_hold";
-import CardObject from "../../Components/card_object";
-import HeaderTitle from "../../Components/HeaderTitle";
+import CardHouseHold from "../../components/card_house_hold";
+import CardMembersHouseHold from "../../components/card_members_house_hold";
+import CardObject from "../../components/card_object";
+import HeaderTitle from "../../components/header_title";
 
 const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
   onBack,

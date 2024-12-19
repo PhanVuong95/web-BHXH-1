@@ -11,11 +11,13 @@ import {
   formatTime,
   isValidEmptyString,
   isValidString,
-} from "../../Utils/validateString";
-import { registerInfoBHYT } from "./list_health_insurance";
+} from "../../utils/validate_string";
+import { registerInfoBHYT } from "./list_health_insurance_page";
+import HeaderTitle from "../../components/header_title";
 
 const InfoDetailBHYT: React.FunctionComponent = () => {
-  const { id } = useParams();
+  const { id, statusName } = useParams();
+
   const [billPay, setBillPay] = useState<any>();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -29,11 +31,13 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
   const renderBackground = (insuranceOrderStatusId: any) => {
     switch (insuranceOrderStatusId) {
       case PENDING:
-        return "bg-[#F4A460]";
+        return "bg-[#FAAD14]";
       case CANCELED:
-        return "bg-[#666666]";
+        return "bg-[#F00]";
       case DONE:
-        return "bg-[#00CD00]";
+        return "bg-[#00BA00]";
+      default:
+        return "bg-[#FAAD14]";
     }
   };
 
@@ -170,81 +174,88 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
 
   const boxBuyer = () => {
     return (
-      <div className="p-4 bg-white rounded-xl flex flex-col gap-4">
-        <div className="flex justify-between">
-          <h3 className="text-base font-medium text-[#0076B7]">Mã đơn</h3>
-          <div className="text-black text-sm font-semibold max-w-[142px] text-right">
+      <div className=" bg-white rounded-xl flex flex-col gap-6">
+        <div className="flex justify-between rounded-xl overflow-hidden">
+          <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
+            Mã đơn
+          </h3>
+          <div className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5] text-right">
             #{billPay?.id}
           </div>
         </div>
 
-        {line()}
-        <div className="flex justify-between">
-          <h3 className="text-base font-medium text-[#0076B7]">
-            Người mua bảo hiểm
-          </h3>
+        <div className="flex flex-row flex-wrap border border-[#B9BDC1] overflow-hidden rounded-xl">
+          <div className="flex justify-between items-center w-full">
+            <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
+              Người mua bảo hiểm
+            </h3>
 
-          {billPay?.insuranceOrderStatusId == PENDING && (
-            <button
-              onClick={() => {
-                navigate("/register-BHYT/", {
-                  state: { data: insurance.current, type: "updated" },
-                });
-              }}
-              className="text-sm text-[#0076B7] underline"
-            >
-              Chỉnh sửa
-            </button>
-          )}
-        </div>
+            {billPay?.insuranceOrderStatusId == PENDING && (
+              <button
+                onClick={() => {
+                  navigate("/register-BHYT/", {
+                    state: { data: insurance.current, type: "updated" },
+                  });
+                }}
+                className="text-base font-semibold text-[#fff] w-full p-[20px] text-right bg-[#0077D5] underline"
+              >
+                Chỉnh sửa
+              </button>
+            )}
+          </div>
 
-        <div className="flex flex-row justify-between w-full">
-          <div>
-            <p className="text-[#646464] text-sm font-normal">Họ và tên</p>
+          <div className="flex flex-row justify-between w-full p-4">
+            <div>
+              <p className="text-[#646464] text-lg font-normal">Họ và tên</p>
+            </div>
+            <div>
+              <p className="text-[#2E2E2E] text-lg font-semibold max-w-[190px] text-right">
+                {billPay?.fullName ? billPay?.fullName.trim() : "Đang tải"}
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-[#2E2E2E] text-sm font-semibold max-w-[190px] text-right">
-              {billPay?.fullName ? billPay?.fullName.trim() : "Đang tải"}
-            </p>
-          </div>
-        </div>
 
-        <div className="flex flex-row justify-between w-full">
-          <div>
-            <p className="text-[#646464] text-sm font-normal">Email</p>
+          <div className="flex flex-row justify-between w-full p-4">
+            <div>
+              <p className="text-[#646464] text-lg font-normal">Email</p>
+            </div>
+            <div>
+              <p className="text-[#2E2E2E] text-lg font-semibold max-w-[190px] text-right">
+                {billPay?.email ? billPay?.email.trim() : "Đang tải"}
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-[#2E2E2E] text-sm font-semibold max-w-[180px] text-right">
-              {billPay?.email ? billPay?.email.trim() : "Đang tải"}
-            </p>
-          </div>
-        </div>
 
-        <div className="flex flex-row justify-between w-full">
-          <div>
-            <p className="text-[#646464] text-sm font-normal">Số điện thoại</p>
+          <div className="flex flex-row justify-between w-full p-4">
+            <div>
+              <p className="text-[#646464] text-lg font-normal">
+                Số điện thoại
+              </p>
+            </div>
+            <div>
+              <p className="text-[#2E2E2E] text-lg font-semibold max-w-[190px] text-right">
+                {billPay?.phone
+                  ? formatPhoneNumber(billPay?.phone.trim())
+                  : "Đang tải"}
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-[#2E2E2E] text-sm font-semibold max-w-[142px] text-right">
-              {billPay?.phone
-                ? formatPhoneNumber(billPay?.phone.trim())
-                : "Đang tải"}
-            </p>
-          </div>
-        </div>
 
-        <div className="flex flex-row justify-between w-full">
-          <div>
-            <p className="text-[#646464] text-sm font-normal">Địa chỉ</p>
-          </div>
-          <div>
-            <p className="text-[#2E2E2E] text-sm font-semibold max-w-[180px] text-right">
-              {`${
-                billPay?.addressDetail ? billPay?.addressDetail.trim() : ""
-              }, ${billPay?.wardName ? billPay?.wardName.trim() : ""}, ${
-                billPay?.districtName ? billPay?.districtName.trim() : ""
-              } ,${billPay?.provinceName ? billPay?.provinceName.trim() : ""}`}
-            </p>
+          <div className="flex flex-row justify-between w-full p-4">
+            <div>
+              <p className="text-[#646464] text-lg font-normal">Địa chỉ</p>
+            </div>
+            <div>
+              <p className="text-[#2E2E2E] text-lg font-semibold max-w-[280px] text-right">
+                {`${
+                  billPay?.addressDetail ? billPay?.addressDetail.trim() : ""
+                }, ${billPay?.wardName ? billPay?.wardName.trim() : ""}, ${
+                  billPay?.districtName ? billPay?.districtName.trim() : ""
+                } ,${
+                  billPay?.provinceName ? billPay?.provinceName.trim() : ""
+                }`}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -261,19 +272,19 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
 
   const boxBeneficiary = (item: any, index: any) => {
     return (
-      <div className="bg-white rounded-xl flex flex-col gap-6 mt-4">
-        {line()}
+      <div className="bg-white rounded-xl flex flex-col border border-[#B9BDC1]">
+        <div className="flex justify-between rounded-tr-xl rounded-tl-xl overflow-hidden">
+          <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
+            Thông tin người số {index + 1} được bảo hiểm
+          </h3>
+        </div>
 
-        <h3 className="text-base font-medium text-[#0076B7]">
-          Thông tin người số {index + 1} được bảo hiểm
-        </h3>
-
-        <div className="flex flex-row justify-between w-full">
+        <div className="flex flex-row justify-between w-full p-4">
           <div>
-            <p className="text-[#646464] text-sm font-normal">Họ và tên</p>
+            <p className="text-[#646464] text-lg font-normal">Họ và tên</p>
           </div>
           <div>
-            <p className="text-[#2E2E2E] text-sm font-semibold max-w-[190px] text-right">
+            <p className="text-[#2E2E2E] text-lg font-semibold max-w-[190px] text-right">
               {!isValidEmptyString(item?.fullName)
                 ? "Chưa cập nhật"
                 : item?.fullName.trim()}
@@ -281,12 +292,12 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
           </div>
         </div>
 
-        <div className="flex flex-row justify-between w-full">
+        <div className="flex flex-row justify-between w-full p-4">
           <div>
-            <p className="text-[#646464] text-sm font-normal">Ngày sinh</p>
+            <p className="text-[#646464] text-lg font-normal">Ngày sinh</p>
           </div>
           <div>
-            <p className="text-[#2E2E2E] text-sm font-semibold max-w-[180px] text-right">
+            <p className="text-[#2E2E2E] text-lg font-semibold max-w-[280px] text-right">
               {!isValidEmptyString(item?.doB)
                 ? "Chưa cập nhật"
                 : item?.doB.trim()}
@@ -294,12 +305,12 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
           </div>
         </div>
 
-        <div className="flex flex-row justify-between w-full">
+        <div className="flex flex-row justify-between w-full p-4">
           <div>
-            <p className="text-[#646464] text-sm font-normal">Số CCCD</p>
+            <p className="text-[#646464] text-lg font-normal">Số CCCD</p>
           </div>
           <div>
-            <p className="text-[#2E2E2E] text-sm font-semibold max-w-[180px] text-right">
+            <p className="text-[#2E2E2E] text-lg font-semibold max-w-[142px] text-right">
               {!isValidEmptyString(item?.citizenId)
                 ? "Chưa cập nhật"
                 : item?.citizenId.trim()}
@@ -307,12 +318,12 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
           </div>
         </div>
 
-        <div className="flex flex-row justify-between w-full">
+        <div className="flex flex-row justify-between w-full p-4">
           <div>
-            <p className="text-[#646464] text-sm font-normal">Giới tính</p>
+            <p className="text-[#646464] text-lg font-normal">Giới tính</p>
           </div>
           <div>
-            <p className="text-[#2E2E2E] text-sm font-semibold max-w-[180px] text-right">
+            <p className="text-[#2E2E2E] text-lg font-semibold max-w-[320px] text-right">
               {!isValidEmptyString(item?.gender)
                 ? "Chưa cập nhật"
                 : item?.gender.trim()}
@@ -320,12 +331,12 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
           </div>
         </div>
 
-        <div className="flex flex-row justify-between w-full">
+        <div className="flex flex-row justify-between w-full p-4">
           <div>
-            <p className="text-[#646464] text-sm font-normal">Mã số BHYT</p>
+            <p className="text-[#646464] text-lg font-normal">Mã số BHYT</p>
           </div>
           <div>
-            <p className="text-[#2E2E2E] text-sm font-semibold max-w-[142px] text-right">
+            <p className="text-[#2E2E2E] text-lg font-semibold max-w-[320px] text-right">
               {!isValidEmptyString(item?.healthInsuranceNumber)
                 ? "Chưa cập nhật"
                 : item?.healthInsuranceNumber}
@@ -333,12 +344,12 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
           </div>
         </div>
 
-        <div className="flex flex-row justify-between w-full">
+        <div className="flex flex-row justify-between w-full p-4">
           <div>
-            <p className="text-[#646464] text-sm font-normal">Số tháng đóng</p>
+            <p className="text-[#646464] text-lg font-normal">Số tháng đóng</p>
           </div>
           <div>
-            <p className="text-[#2E2E2E] text-sm font-semibold max-w-[180px] text-right">
+            <p className="text-[#2E2E2E] text-lg font-semibold max-w-[320px] text-right">
               {!isValidEmptyString(item?.monthInsured)
                 ? "Chưa cập nhật"
                 : item?.monthInsured}{" "}
@@ -347,14 +358,14 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
           </div>
         </div>
 
-        <div className="flex flex-row justify-between w-full">
+        <div className="flex flex-row justify-between w-full p-4">
           <div>
-            <p className="text-[#646464] text-sm font-normal">
+            <p className="text-[#646464] text-lg font-normal">
               Bệnh viện đăng ký
             </p>
           </div>
           <div>
-            <p className="text-[#0076B7] text-sm font-semibold max-w-[180px] text-right">
+            <p className="text-[#2E2E2E] text-lg font-semibold max-w-[320px] text-right">
               {!isValidEmptyString(item?.hospitalName)
                 ? "Chưa cập nhật"
                 : item?.hospitalName}{" "}
@@ -366,12 +377,12 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
           </div>
         </div>
 
-        <div className="flex flex-row justify-between w-full">
+        <div className="flex flex-row justify-between w-full p-4">
           <div>
-            <p className="text-[#646464] text-sm font-normal">Phí bảo hiểm</p>
+            <p className="text-[#646464] text-lg font-normal">Phí bảo hiểm</p>
           </div>
           <div>
-            <p className="text-[#0076B7] text-sm font-semibold max-w-[180px] text-right">
+            <p className="text-[#2E2E2E] text-lg font-semibold max-w-[320px] text-right">
               {item?.price == 0 ? "Chưa cập nhật" : formatMoneyVND(item?.price)}{" "}
               vnđ
             </p>
@@ -387,18 +398,18 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
 
   const boxInfo = () => {
     return (
-      <div className="p-4 bg-white rounded-xl flex flex-col gap-4 mb-2">
-        <h3 className="text-[#0076B7] text-lg font-medium">
+      <div className="max-w-[100%] lg1130:max-w-[400px] lg1130:px-0 h-full w-full overflow-hidden rounded-lg flex flex-col border border-[#B9BDC1] gap-2">
+        <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
           Danh mục sản phẩm
         </h3>
-        <div className="flex gap-[10px]">
-          <img src={logo} className="w-16 h-16" />
+        <div className="flex gap-[10px] p-4">
+          <img alt="" src={logo} className="w-16 h-16" />
 
           <div className="title-product flex flex-col">
             <h3 className="text-[#0076B7] text-lg font-medium">
               {billPay?.insuranceOrderStatusName}
             </h3>
-            <p className="text-[#646464] text-sm font-normal">
+            <p className="text-[#646464] text-lg font-normal">
               {billPay?.listInsuredPerson.length > 0
                 ? billPay?.listInsuredPerson[0].monthInsured
                 : ""}{" "}
@@ -413,17 +424,15 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
           </div>
         </div>
 
-        <hr className="border-dashed border-[1px] text-[#DEE7FE] "></hr>
-
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2 p-4">
           <div className="flex flex-row justify-between w-full">
             <div>
-              <p className="text-[#646464] text-sm font-normal">
+              <p className="text-[#646464] text-lg font-normal">
                 Phương thức thanh toán
               </p>
             </div>
             <div>
-              <p className="text-[#2E2E2E] text-sm font-normal max-w-[180px] text-right">
+              <p className="text-[#2E2E2E] text-lg font-normal max-w-[180px] text-right">
                 Thanh toán VNPAY (Powered ChaiPay)
               </p>
             </div>
@@ -509,48 +518,76 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
   };
 
   return (
-    <div className="pt-20 container mx-auto">
-      {/* <HeaderBase
-        isHome={false}
-        title={"Thông tin chi tiết"}
-        onBack={() => navigate("/list-history-bhyt")}
-      /> */}
-      <div
-        className={`${renderBackground(
-          billPay?.insuranceOrderStatusId
-        )} h-11 flex justify-between px-4 items-center text-white text-base font-normal`}
-      >
-        <div>Trạng thái</div>
-        <div>{billPay?.insuranceOrderStatusName}</div>
-      </div>
-
-      <div className="page-1 flex flex-col gap-4 mb-4">
-        <div className="">
-          {boxBuyer()}
-          {line()}
-        </div>
-
-        {boxInfo()}
-      </div>
-
-      {billPay?.insuranceOrderStatusId == PENDING && boxFooterPayment()}
-
-      {billPay?.insuranceOrderStatusId == CANCELED && lookUpAgain()}
-
-      {billPay?.insuranceOrderStatusId == DONE && (
-        <div className="page-2 bg-white fixed bottom-0 w-[100%]">
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-row content-center justify-center items-center">
-              <Link
-                to={`/check-status-procedure/${billPay?.id}`}
-                className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
-              >
-                Kiểm tra trạng thái thủ tục
-              </Link>
+    <div className="pt-6">
+      <HeaderTitle
+        links={[
+          { title: "Tài khoản" },
+          { title: "Hoạt động" },
+          { title: "Chi tiết lịch sử hoạt động bảo hiểm" },
+        ]}
+      />
+      <div className="py-[20px] md:py-[20px] lg:py-[60px] relative max-w-[1280px] mx-auto">
+        <div className="flex flex-col md:flex-col lg:flex-row flex-row-1 gap-[40px] mb-4 px-2">
+          <div className="w-full flex flex-col flex-wrap gap-4 xl:gap-6">
+            <div
+              className={`${renderBackground(
+                billPay?.insuranceOrderStatusId
+              )}  py-[12px] px-4 flex flex-row items-center justify-between rounded-lg`}
+            >
+              <div className="text-white text-lg font-normal">Trạng thái</div>
+              <div className="text-white text-lg font-semibold">
+                {billPay?.insuranceOrderStatusName}
+              </div>
             </div>
+
+            <div className="flex flex-col md:flex-col lg:flex-row mb-4">
+              <div className="">
+                {boxBuyer()}
+                {line()}
+              </div>
+
+              {billPay?.insuranceOrderStatusId == DONE &&
+              statusName == "Thành công" ? (
+                <div className="flex flex-row content-center justify-center items-center mb-[25%]">
+                  <button
+                    onClick={() => {
+                      registerInfoBHYT.id = 0;
+                      navigate("/register-BHYT/", {
+                        state: { data: insurance.current, type: "register" },
+                      });
+                    }}
+                    className="px-[24px] py-3 bg-[#e9c058] w-full rounded-full text-base font-normal text-white text-center"
+                  >
+                    Tái hợp đồng bảo hiểm
+                  </button>
+                </div>
+              ) : (
+                <div className="mb-0"></div>
+              )}
+            </div>
+
+            {billPay?.insuranceOrderStatusId == PENDING && boxFooterPayment()}
+
+            {billPay?.insuranceOrderStatusId == CANCELED && lookUpAgain()}
+
+            {billPay?.insuranceOrderStatusId == DONE && (
+              <div className="page-2 bg-white fixed bottom-0 w-[100%]">
+                <div className="flex flex-col gap-3">
+                  <div className="flex flex-row content-center justify-center items-center">
+                    <Link
+                      to={`/check-status-procedure/${billPay?.id}`}
+                      className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
+                    >
+                      Kiểm tra trạng thái thủ tục
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
+          {boxInfo()}
         </div>
-      )}
+      </div>
     </div>
   );
 };

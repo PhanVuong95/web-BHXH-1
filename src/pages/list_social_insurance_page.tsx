@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SpecificContext } from "../Components/specificContext";
+import { SpecificContext } from "../components/specific_context";
 import logo from "../assets-src/logo1.png";
 import { toast } from "react-toastify";
-import HeaderTitle from "../Components/HeaderTitle";
+import HeaderTitle from "../components/header_title";
 
 interface Insurance {
   name: string;

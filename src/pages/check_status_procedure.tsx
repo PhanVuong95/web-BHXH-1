@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
-import { formatDate, formatDateByTime } from "../Utils/validateString";
+import { formatDate, formatDateByTime } from "../utils/validate_string";
 
 const CheckStatusProcedure = () => {
   const { id } = useParams();

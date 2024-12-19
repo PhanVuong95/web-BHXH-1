@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FadeLoader } from "react-spinners";
 import Modal from "react-modal";
-import { SpecificContext } from "./specificContext";
+import { SpecificContext } from "./specific_context";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -14,7 +14,7 @@ import {
   isValidEmail,
   isValidEmptyString,
   isValidPhone,
-} from "../Utils/validateString";
+} from "../utils/validate_string";
 import { IDetectedBarcode, Scanner } from "@yudiel/react-qr-scanner";
 import { Input, Select, DatePicker, Checkbox, Slider } from "antd";
 import dayjs from "dayjs";
@@ -25,7 +25,7 @@ import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import lottieScanQR from "../assets-src/lottie_scan_qr.json";
 import CardMembersHouseHoldBHXH from "./card_members_house_hold_bhxh";
-import HeaderTitle from "./HeaderTitle";
+import HeaderTitle from "./header_title";
 
 dayjs.locale("vi");
 dayjs.extend(customParseFormat);
@@ -525,7 +525,7 @@ const RegisterBHXH = () => {
 
   // Update BHXH
   useEffect(() => {
-    if (insuranceOrder.id != 0) {
+    if (insuranceOrder.accountId != 0) {
       const id1 = insuranceOrder.provinceId;
       const id2 = insuranceOrder.districtId;
       const id3 = insuranceOrder.listInsuredPerson[0].ksTinhThanhMa;

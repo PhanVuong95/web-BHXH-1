@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import users from "../assets/user.png";
 import imagesIocn from "../assets/icon/images";
-import { User } from "../Models";
+import { User } from "../models";
 interface ProfilePartnerDetailPageProps {
   user: User;
   onViewCollaborators1: () => void;

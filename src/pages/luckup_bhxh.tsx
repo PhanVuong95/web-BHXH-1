@@ -3,15 +3,15 @@ import { useEffect, useRef, useState } from "react";
 import "../locale/vi";
 import dayjs from "dayjs";
 import locale from "antd/es/date-picker/locale/vi_VN";
-import { convertListToSelect, formatDate2 } from "../Utils/validateString";
+import { convertListToSelect, formatDate2 } from "../utils/validate_string";
 import axios from "axios";
-import { Province } from "../Models";
+import { Province } from "../models";
 import { toast } from "react-toastify";
 import noData from "../assets-src/no_data.png";
 import { FadeLoader } from "react-spinners";
 import Modal from "react-modal";
 import icon from "../assets-src/icon_coppy.png";
-import HeaderTitle from "../Components/HeaderTitle";
+import HeaderTitle from "../components/header_title";
 
 const LuckUpBHXH = () => {
   const [errors, setErrors] = useState<any>({});

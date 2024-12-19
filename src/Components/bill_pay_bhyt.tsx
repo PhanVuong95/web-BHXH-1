@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { formatMoneyVND, formatPhoneNumber } from "../Utils/validateString";
-import HeaderTitle from "./HeaderTitle";
+import { formatMoneyVND, formatPhoneNumber } from "../utils/validate_string";
+import HeaderTitle from "./header_title";
 import { Input } from "antd";
 
 const BillPayBHYTPage: React.FunctionComponent = () => {

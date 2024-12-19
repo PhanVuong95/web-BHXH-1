@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { PulseLoader } from "react-spinners";
-import { formatMoneyVND } from "../../Utils/validateString";
+import { formatMoneyVND } from "../../utils/validate_string";
 import logo from "../../assets-src/logo1.png";
-import { ListsHistoryPageProps, Order } from "../../Models";
+import { ListsHistoryPageProps, Order } from "../../models";
 
 const ListHistoryBHYT: React.FunctionComponent<ListsHistoryPageProps> = ({
   onBack,
@@ -142,7 +142,15 @@ const ListHistoryBHYT: React.FunctionComponent<ListsHistoryPageProps> = ({
 
             {listOrder?.map((item: any, index: any) => {
               return (
-                <Link to={"/info-detail-bhyt/" + item.id} key={index}>
+                <Link
+                  to={
+                    "/info-detail-bhyt/" +
+                    item.id +
+                    "/" +
+                    item.insuranceOrderStatusName
+                  }
+                  key={index}
+                >
                   <div className="p-4 bg-white h-full w-full rounded-xl flex flex-row items-center gap-4 border border-[#B9BDC1] overflow-hidden">
                     <div className="flex gap-[10px]">
                       <img alt="" src={logo} className="w-16 h-16" />

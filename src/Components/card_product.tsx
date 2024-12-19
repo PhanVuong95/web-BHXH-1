@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Widthheight } from "../Models";
+import { Widthheight } from "../models";
 import logo from "../assets-src/logo1.png";
 
 const CardProduct: React.FC<Widthheight> = ({ url }) => {

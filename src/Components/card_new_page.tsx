@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import imgSlider from "../assets-src/image-1002.png";
-import { CardNewPagesProps } from "../Models";
+import { CardNewPagesProps } from "../models";
 
 const CardNewPages: React.FC<CardNewPagesProps> = ({ post }) => {
   return (

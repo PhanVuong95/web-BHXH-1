@@ -1,31 +1,31 @@
 import { ToastContainer } from "react-toastify";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import LayoutPage from "./layout/layoutPage";
-import HomePage from "./Page/homePage";
-import { SpecificProvider } from "./Components/specificContext";
-import ListSocialInsurance from "./Page/list_social_insurance";
-import ListHealthInsurance from "./Page/BHYT/list_health_insurance";
-import ProductDetailPage from "./Components/product_detail";
-import ProductDetailPage1 from "./Components/product_detail_1";
-import BillPayPage from "./Components/bill_pay";
-import BillPayBHYTPage from "./Components/bill_pay_bhyt";
-import BuillDetailPage from "./Page/bill_detail";
-import RegisterBHXH from "./Components/register_bhxh";
-import RegisterBHYT from "./Page/BHYT/register_bhyt";
-import ListsHistoryPage from "./Page/lists_history_page";
-import InfoDetailBHYT from "./Page/BHYT/info_detail_bhyt";
-import ListHistoryBHYT from "./Page/BHYT/list_history_bhyt";
-import CheckStatusProcedure from "./Page/check_status_procedure";
-import HistoryUnpaidPage from "./Components/history_unpaid";
-import ContractPage from "./Page/contract_page";
-import HistoryPage from "./Page/history_page";
-import UserPage from "./Page/user";
-import LoginPage from "./Page/LoginPage";
-import PrivacyPolicyPage from "./Components/privacy_policy";
-import LuckUpBHXH from "./Page/luckup_bhxh";
+import LayoutPage from "./layout/layout_page";
+import HomePage from "./pages/home_page";
+import { SpecificProvider } from "./components/specific_context";
+import ListSocialInsurance from "./pages/list_social_insurance_page";
+import ListHealthInsurance from "./pages/bhyt/list_health_insurance_page";
+import ProductDetailPage from "./components/product_detail";
+import ProductDetailPage1 from "./components/product_detail_1";
+import BillPayPage from "./components/bill_pay";
+import BillPayBHYTPage from "./components/bill_pay_bhyt";
+import BuillDetailPage from "./pages/bill_detail_page";
+import RegisterBHXH from "./components/register_bhxh";
+import RegisterBHYT from "./pages/bhyt/register_bhyt_page";
+import ListsHistoryPage from "./pages/lists_history_page";
+import InfoDetailBHYT from "./pages/bhyt/info_detail_bhyt_page";
+import ListHistoryBHYT from "./pages/bhyt/list_history_bhyt_page";
+import CheckStatusProcedure from "./pages/check_status_procedure";
+import HistoryUnpaidPage from "./components/history_unpaid";
+import ContractPage from "./pages/contract_page";
+import HistoryPage from "./pages/history_page";
+import UserPage from "./pages/user_page";
+import LoginPage from "./pages/login_page";
+import PrivacyPolicyPage from "./components/privacy_policy";
+import LuckUpBHXH from "./pages/luckup_bhxh";
 import { useEffect, useState } from "react";
-import CardNewDetailPages from "./Components/CardNewDetailPages";
-import ToolSupportPage from "./Page/tool_support_page";
+import CardNewDetailPages from "./components/CardNewDetailPages";
+import ToolSupportPage from "./pages/tool_support_page";
 
 function App() {
   const [, setUser] = useState<any>(null);
@@ -161,7 +161,10 @@ function App() {
             path="lists-history"
             element={<ListsHistoryPage onBack={() => navigate(-1)} />}
           />
-          <Route path="info-detail-bhyt/:id" element={<InfoDetailBHYT />} />
+          <Route
+            path="info-detail-bhyt/:id/:statusName"
+            element={<InfoDetailBHYT />}
+          />
           <Route
             path="list-history-bhyt"
             element={<ListHistoryBHYT onBack={() => navigate(-1)} />}
@@ -171,7 +174,7 @@ function App() {
             element={<CheckStatusProcedure />}
           />
           <Route
-            path="history-unpaid/:id"
+            path="history-unpaid/:id/:statusName"
             element={
               <SpecificProvider>
                 <HistoryUnpaidPage />

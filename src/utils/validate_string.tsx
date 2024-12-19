@@ -1,4 +1,4 @@
-import { Bank } from "../Models";
+import { Bank } from "../models";
 
 export const formatMoneyVND = (amount: number): string => {
   try {

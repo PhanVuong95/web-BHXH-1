@@ -1,11 +1,11 @@
 import { Select } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { registerInfoBHYT } from "../Page/BHYT/list_health_insurance";
+import { registerInfoBHYT } from "../pages/bhyt/list_health_insurance_page";
 import {
   convertListToSelectObjectTypeGroup,
   convertListToSelectObjectTypeGroupList,
-} from "../Utils/validateString";
+} from "../utils/validate_string";
 
 interface Props {
   refs?: any;

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { registerInfoBHYT } from "../Page/BHYT/list_health_insurance";
+import { registerInfoBHYT } from "../pages/bhyt/list_health_insurance_page";
 import { Input, Select } from "antd";
-import { convertListToSelect } from "../Utils/validateString";
+import { convertListToSelect } from "../utils/validate_string";
 
 interface Props {
   data: any;

@@ -2,7 +2,7 @@ import parse from "html-react-parser";
 import imgSlider from "../assets-src/image-1002.png";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { PostDetails } from "../Models";
+import { PostDetails } from "../models";
 const CardNewDetailPages = () => {
   const { id } = useParams();
 

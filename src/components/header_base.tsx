@@ -24,12 +24,9 @@ const HeaderBase = (props: Props) => {
             {isHome ? (
               <img alt="" src={logo} className="w-7 h-7" />
             ) : (
-              <button
-                type="button"
-                onClick={onBack ? onBack : () => navigate(-1)}
-              >
+              <div onClick={onBack ? onBack : () => navigate(-1)}>
                 <img alt="" src={back} className="w-7 h-7" />
-              </button>
+              </div>
             )}
           </div>
           <div className="text-[#ffffff] items-center ml-3 font-medium text-lg line-clamp-1">

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { FadeLoader } from "react-spinners";
-import { registerInfoBHYT } from "../Page/BHYT/list_health_insurance";
+import { registerInfoBHYT } from "../pages/bhyt/list_health_insurance_page";
 import {
   convertListToSelect,
   convertListToSelectVungLuong,
@@ -11,7 +11,7 @@ import {
   isValidCitizenId,
   isValidHealthInsuranceNumber,
   isValidSocialInsuranceNumber,
-} from "../Utils/validateString";
+} from "../utils/validate_string";
 import { IDetectedBarcode, Scanner } from "@yudiel/react-qr-scanner";
 import iconClose from "../assets-src/close_1.png";
 import { Input, Select, DatePicker } from "antd";
@@ -23,7 +23,7 @@ import Modal from "react-modal";
 import Lottie from "lottie-react";
 import lottieScanQR from "../assets-src/lottie_scan_qr.json";
 import { motion } from "framer-motion";
-import { BenefitLevevlList } from "../Utils/constants";
+import { BenefitLevevlList } from "../utils/constants";
 import { toast } from "react-toastify";
 
 dayjs.locale("vi");

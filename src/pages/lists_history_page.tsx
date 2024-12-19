@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ListsHistoryPageProps } from "../Models";
+import { ListsHistoryPageProps } from "../models";
 import axios from "axios";
 import { PulseLoader } from "react-spinners";
 import logo from "../assets-src/logo1.png";
@@ -129,7 +129,15 @@ const ListsHistoryPage: React.FC<ListsHistoryPageProps> = ({ onBack }) => {
             ) : (
               listOrder.map((item, index) => {
                 return (
-                  <Link to={"/history-unpaid/" + item.id} key={index}>
+                  <Link
+                    to={
+                      "/history-unpaid/" +
+                      item.id +
+                      "/" +
+                      item.insuranceOrderStatusName
+                    }
+                    key={index}
+                  >
                     <div className="p-4 bg-white h-full w-full rounded-xl flex flex-row items-center border border-[#B9BDC1] overflow-hidden">
                       <div className="flex gap-[10px] w-[47%]">
                         <img src={logo} className="w-16 h-16" alt="Logo" />

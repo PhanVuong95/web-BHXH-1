@@ -2,7 +2,7 @@ import { Tabs, Typography } from "antd";
 import { EQrCodeType } from "../enums";
 import { QRCodeCanvas } from "qrcode.react";
 import { useNavigate } from "react-router-dom";
-import { FlexBox } from "../Components/box/FlexBox";
+import { FlexBox } from "../components/box/FlexBox";
 import { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
 import Swal from "sweetalert2";

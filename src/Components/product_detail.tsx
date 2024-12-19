@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import HeaderTitle from "./HeaderTitle";
+import HeaderTitle from "./header_title";
 
 const ProductDetailPage: React.FunctionComponent = () => {
   const [, setInsurance] = useState<any>();

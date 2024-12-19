@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MyComponentProps } from "../../Models";
+import { MyComponentProps } from "../../models";
 import axios from "axios";
 import { Modal } from "antd";
 import { toast } from "react-toastify";

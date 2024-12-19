@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import imagesIocn from "../../assets/icon/images";
 import axios from "axios";
-import { ItemInfoProps } from "../../Models";
-import { formatMoneyVND } from "../../Utils/validateString";
+import { ItemInfoProps } from "../../models";
+import { formatMoneyVND } from "../../utils/validate_string";
 
 const ReportPartnerPage: React.FC<{ onViewCollaborators: () => void }> = ({
   onViewCollaborators,

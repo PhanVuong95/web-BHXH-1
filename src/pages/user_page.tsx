@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useEffect, useRef, useState } from "react";
 import users from "../assets/user.png";
-import HeaderTitle from "../Components/HeaderTitle";
+import HeaderTitle from "../components/header_title";
 import imagesIocn from "../assets/icon/images";
 import HistoryPage from "./history_page";
 import { useNavigate } from "react-router-dom";
@@ -9,21 +9,21 @@ import Modal from "react-modal";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Input } from "antd";
-import IntroducingPartnersPage from "../Components/ctv/IntroducingPartners";
+import IntroducingPartnersPage from "../components/ctv/introducing_partners";
 import {
   isValidEmptyString,
   isValidEmail,
   isValidPhone,
-} from "../Utils/validateString";
-import ReportPartnerPage from "../Components/ctv/ReportPartnerPage";
-import ListCollabrorates from "../Components/ctv/ListCollabrorates";
-import ProfilePartnerDetailPage from "../Utils/ProfilePartnerDetailPage";
-import { HistoryPageProps, MyComponentProps, User } from "../Models";
-import BankInfoPage from "../Components/ctv/BankInfoPage";
-import RegisterPartnerInfoPage from "../Components/ctv/RegisterPartnerInfo";
+} from "../utils/validate_string";
+import ReportPartnerPage from "../components/ctv/report_partner_page";
+import ListCollabrorates from "../components/ctv/list_collabrorates";
+import ProfilePartnerDetailPage from "./profile_partner_detail_page";
+import { HistoryPageProps, MyComponentProps, User } from "../models";
+import BankInfoPage from "../components/ctv/bank_info_page";
+import RegisterPartnerInfoPage from "../components/ctv/register_partnerInfo";
 import ListsHistoryPage from "./lists_history_page";
-import ListHistoryBHYT from "./BHYT/list_history_bhyt";
-import PrivacyPolicyPage from "../Components/privacy_policy";
+import ListHistoryBHYT from "./bhyt/list_history_bhyt_page";
+import PrivacyPolicyPage from "../components/privacy_policy";
 
 const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
   const [user, setUser] = useState<any>(null);

@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import UserCard from "../Components/user_card";
-import CardNewPage from "../Components/card_new";
+import UserCard from "../components/user_card";
+import CardNewPage from "../components/card_new";
 import { Link } from "react-router-dom";
-import { ProfileContext } from "../Components/user_profile_context";
+import { ProfileContext } from "../components/user_profile_context";
 import banner from "../../assets-src/banner.png";
 import { toast } from "react-toastify";
 

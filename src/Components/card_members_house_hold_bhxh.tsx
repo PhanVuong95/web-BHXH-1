@@ -1,7 +1,7 @@
 import { DatePicker, Input, Select } from "antd";
 import { useEffect, useRef, useState } from "react";
 import iconClose from "../assets-src/close_1.png";
-import { convertListToSelect, formatDate2 } from "../Utils/validateString";
+import { convertListToSelect, formatDate2 } from "../utils/validate_string";
 import "../locale/vi";
 import locale from "antd/es/date-picker/locale/vi_VN";
 import dayjs from "dayjs";
@@ -419,14 +419,13 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
           Thông tin thành viên số {index + 1}
         </div>
         {index != 0 ? (
-          <button
-            type="button"
+          <div
             onClick={() => {
               onClose(index);
             }}
           >
-            <img src={iconClose} className="w-3 h-3" />
-          </button>
+            <img alt="" src={iconClose} className="w-3 h-3" />
+          </div>
         ) : null}
       </div>
 

@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { PulseLoader } from "react-spinners";
-import CardProductBHYT from "../../Components/card_product_bhyt";
-import HeaderTitle from "../../Components/HeaderTitle";
+import CardProductBHYT from "../../components/card_product_bhyt";
+import HeaderTitle from "../../components/header_title";
 
 export let registerInfoBHYT = {
   id: 0,

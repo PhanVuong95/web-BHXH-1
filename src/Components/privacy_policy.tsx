@@ -6,7 +6,7 @@ import image5 from "../assets-src/dieukhoan/image5.jpg";
 import image6 from "../assets-src/dieukhoan/image6.jpg";
 import image7 from "../assets-src/dieukhoan/image7.jpg";
 import image8 from "../assets-src/dieukhoan/image8.jpg";
-import HeaderTitle from "./HeaderTitle";
+import HeaderTitle from "./header_title";
 const PrivacyPolicyPage: React.FunctionComponent = () => {
   return (
     <div>

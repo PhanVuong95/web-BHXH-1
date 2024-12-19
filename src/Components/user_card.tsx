@@ -13,7 +13,7 @@ const UserCard: React.FunctionComponent<UserCardProps> = ({ user }) => {
   return (
     <div className="box-user w-full flex py-[24px] px-[16px] flex justify-between items-center">
       <div className="flex justify-between items-center">
-        <img className="rounded-full w-[50px] h-[50px]" src="" />
+        <img alt="" className="rounded-full w-[50px] h-[50px]" src="" />
 
         <div>
           <p className="text-lg font-semibold">

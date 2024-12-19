@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ItemInfoProps } from "../../Models";
-import imagesIocn from "./../../assets/icon/images";
+import { ItemInfoProps } from "../../models";
+import imagesIocn from "../../assets/icon/images";
 import { Modal } from "antd";
-import { formatMoneyVND } from "../../Utils/validateString";
+import { formatMoneyVND } from "../../utils/validate_string";
 
 const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [listCollabrorates, setListCollabrorates] = useState([]);

@@ -3,9 +3,9 @@
 import { Link } from "react-router-dom";
 import banner from "../assets/banner-2.png";
 import { toast } from "react-toastify";
-import CardNewPages from "./../Components/card_new_page";
+import CardNewPages from "../components/card_new_page";
 import { useEffect, useState } from "react";
-import { Post } from "../Models";
+import { Post } from "../models";
 
 const HomePage = () => {
   // const navigate = useNavigate();
@@ -79,7 +79,7 @@ const HomePage = () => {
                 Tính năng nổi bật
               </div>
             </div>
-            <div className="flex flex-wrap items-center w-full gap-[20px] justify-start md:justify-start lg:justify-center">
+            <div className="flex flex-wrap items-center w-full gap-[20px] justify-between md:justify-center lg:justify-between">
               <Link to="/social-insurance">
                 <div className="items-icon">
                   <div className="items-icon-in">
