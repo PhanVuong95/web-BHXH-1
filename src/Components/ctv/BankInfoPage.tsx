@@ -28,7 +28,7 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
   }, []);
 
   const fetchBankInfo = async () => {
-    const token = localStorage.token;
+    const token = localStorage.accessToken;
 
     try {
       const response = await axios.get(
@@ -159,7 +159,7 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
 
   const onSubmit = async () => {
     if (validate()) {
-      const token = localStorage.token;
+      const token = localStorage.accessToken;
       const bankFind = listBanks.find(
         (item: any) => item?.bin == selectedBankCode
       ) as any;

@@ -10,7 +10,7 @@ const ReportPartnerPage: React.FC<{ onViewCollaborators: () => void }> = ({
   const [report, setReport] = useState<any>();
 
   const fetchReport = async () => {
-    const token = localStorage.token;
+    const token = localStorage.accessToken;
 
     try {
       const response = await axios.get(

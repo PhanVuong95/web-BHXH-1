@@ -1309,7 +1309,7 @@ const RegisterBHXH = () => {
 
   const onSubmitFormData = async () => {
     setIsLoadingLuckUp(true);
-    const token = localStorage.token;
+    const token = localStorage.accessToken;
     const data = {
       name: personName,
       doB: dateStr,
@@ -4104,7 +4104,7 @@ const RegisterBHXH = () => {
           { title: "Đăng ký BHXH Tự nguyện" },
         ]}
       />
-      <div className="container mx-auto max-w-[1280px]">
+      <div className="container mx-auto max-w-[1280px] py-[0px] md:py-[10px] lg:py-[40px]">
         <h3 className="title-top-header">Đăng ký BHXH Tự nguyện</h3>
         <form
           onSubmit={handleSubmit(onSubmit)}

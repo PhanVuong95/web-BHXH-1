@@ -14,7 +14,7 @@ const ProfilePartnerDetailPage: React.FC<ProfilePartnerDetailPageProps> = ({
   const [bankInfo, setBankInfo] = useState<any>();
 
   const fetchBankInfo = async () => {
-    const token = localStorage.token;
+    const token = localStorage.accessToken;
 
     try {
       const response = await axios.get(
