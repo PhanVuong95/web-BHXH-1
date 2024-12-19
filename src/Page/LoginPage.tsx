@@ -44,6 +44,8 @@ const LoginPage = () => {
       if (res.status == "200" && res.message == "SUCCESS" && res.resources) {
         const { accessToken, profile } = res.resources;
 
+        console.log(profile);
+
         // Lưu token vào localStorage
         localStorage.setItem("accessToken", accessToken);
 
@@ -53,11 +55,11 @@ const LoginPage = () => {
         // Lưu token vào cookies
         document.cookie = `accessToken=${accessToken}; path=/; max-age=86400`;
 
-        navigate("/");
+        // navigate("/");
 
-        setTimeout(() => {
-          window.location.reload();
-        }, 100);
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 100);
       }
     });
   }, []);
@@ -72,7 +74,7 @@ const LoginPage = () => {
         type: EQrCodeType.LOGIN_PORTAL,
         disableCallback: true,
       })
-    )}&${"env=TESTING&version=34"}`;
+    )}&${"env=TESTING&version=54"}`;
 
     setLoginDeeplink(link);
   }, [clientId]);
