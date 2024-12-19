@@ -57,7 +57,7 @@ const HomePage = () => {
         <div className="banner-top  h-full">
           <img alt="" src={banner} />
           <div className="flex justify-between items-center user-home mx-auto container">
-            <div className="user-home-content">
+            <div className="user-home-content ">
               <h3>
                 Tham gia <br /> bảo hiểm xã hội tự nguyện
               </h3>
@@ -73,11 +73,13 @@ const HomePage = () => {
           </div>
         </div>
         <div className="main-category-home">
-          <div className="container flex flex-col justify-between items-center category-home gap-y-[60px] py-[60px] px-[10px] max-w-[1280px] mx-auto">
+          <div className="container flex flex-col justify-between items-center category-home gap-y-[20px] md:gap-y-[40px] lg:gap-y-[60px]  py-[30px] md:py-[40px] lg:py-[60px]  px-[10px] max-w-[1280px] mx-auto">
             <div className="title">
-              <h3 className="text-[#2B2B2B]">Tính năng nổi bật</h3>
+              <div className="text-[#2B2B2B] text-[24px] md:text-[28px] lg:text-[32px] font-semibold md:font-bold lg:font-extrabold">
+                Tính năng nổi bật
+              </div>
             </div>
-            <div className="flex flex-wrap justify-between items-center w-full gap-[20px]">
+            <div className="flex flex-wrap items-center w-full gap-[20px] justify-start md:justify-start lg:justify-center">
               <Link to="/social-insurance">
                 <div className="items-icon">
                   <div className="items-icon-in">
@@ -263,7 +265,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="py-10 px-[10px] slider-items-products max-w-[1280px] mx-auto container">
+        <div className="py-10 px-[15px] slider-items-products max-w-[1280px] mx-auto container">
           <div className="slider-items">
             <h3 className="text-base sm:text-[32px] font-bold">
               Tin tức mới nhất

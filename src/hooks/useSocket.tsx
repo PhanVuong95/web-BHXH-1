@@ -24,14 +24,12 @@ const useSocket = (props: Props) => {
     socketNamespace.current = socket;
 
     socket.on("connect", () => {
-      console.log("Socket connected to", props.namespace);
       setConnected(true);
     });
 
     // Lắng nghe sự kiện msgToClient và message
     socket.on("msgToClient", props.handleMessage);
     socket.on("message", (message) => {
-      console.log("Received message:", message);
       setClientId(message);
     });
 
@@ -45,9 +43,6 @@ const useSocket = (props: Props) => {
       socketNamespace.current = null;
     };
   }, [props.namespace, props.handleMessage]);
-
-  console.log("Socket-clientId", clientId);
-  console.log("socketNamespace", socketNamespace.current);
 
   return {
     clientId: connected ? clientId : undefined, // Chỉ trả clientId khi đã kết nối

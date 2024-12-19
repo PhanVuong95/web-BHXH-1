@@ -16,6 +16,11 @@ export default {
     extend: {
       screens: {
         lg1130: "1130px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        xxl: "2560px",
       },
     },
   },

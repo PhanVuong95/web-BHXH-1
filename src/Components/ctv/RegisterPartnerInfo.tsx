@@ -36,7 +36,6 @@ const RegisterPartnerInfoPage: React.FC<MyComponentProps> = ({
 
       if (response.data.status == "200" && response.data.message == "SUCCESS") {
         setIsRegistered(true);
-        // console.log("SUCCESS");
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error: any) {

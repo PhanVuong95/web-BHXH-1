@@ -14,9 +14,6 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [phone, setPhone] = useState("");
 
-  console.log(phone);
-  console.log(isLoading);
-
   const fetchCollabrorates = async () => {
     const token = localStorage.accessToken;
 
@@ -34,9 +31,7 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       if (response.data.status == "200" && response.data.message == "SUCCESS") {
         setListCollabrorates(response.data.data[0]);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -84,12 +79,10 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       ) {
         setReport(response.data.data[0]);
         setPhone(response.data.data[0]?.phone);
-        console.log(response.data);
       }
 
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
     }
   };
@@ -101,7 +94,11 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const itemCollabrotate = (item: CollaboratorItem, index: any) => {
     return (
       <div key={`${index}`} className="flex gap-4 mb-4 rounded-xl bg-white p-3">
-        <img src={item?.photo} className="w-[60px] h-[60px] rounded-full" />
+        <img
+          alt=""
+          src={item?.photo}
+          className="w-[60px] h-[60px] rounded-full"
+        />
 
         <div className="flex flex-col w-[100%] justify-between p-1">
           <div className="text-[18px] font-medium">{item?.fullName}</div>
@@ -116,7 +113,11 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             </div>
             <div className="flex ">
               <div className="text-[#0076B7]">Xem chi tiết</div>
-              <img src={imagesIocn.next} className="w-[18px] h-[18px] ml-2" />
+              <img
+                alt=""
+                src={imagesIocn.next}
+                className="w-[18px] h-[18px] ml-2"
+              />
             </div>
           </div>
         </div>
@@ -128,7 +129,7 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     return (
       <div className="border p-2 rounded-lg border-[#0076B7]">
         <div className="flex items-center">
-          <img src={image} className="w-7 h-7" />
+          <img alt="" src={image} className="w-7 h-7" />
           <div className="text-[16px] ml-2">{title}</div>
         </div>
 

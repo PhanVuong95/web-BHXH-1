@@ -18,8 +18,6 @@ const ProductDetailPage: React.FunctionComponent = () => {
       });
   }, []);
 
-  console.log(insurance);
-
   return (
     <div className="pt-6">
       <HeaderTitle

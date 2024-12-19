@@ -26,7 +26,7 @@ const CardProductBHYT: React.FC<CardProductBHYTProps> = ({ data }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="p-[40px] bg-white w-full rounded-xl flex flex-col gap-4 border-[1px] border-[#D1D1D6]">
+    <div className="p-[10px] md:p-[20px] lg:p-[30px] bg-white w-full rounded-xl flex flex-col gap-4 border-[1px] border-[#D1D1D6]">
       <div className="flex gap-[10px] items-center">
         <img src={logo} className="w-20 h-20" alt="Logo" />
         <div className="title-product flex flex-col gap-2">
@@ -41,14 +41,16 @@ const CardProductBHYT: React.FC<CardProductBHYTProps> = ({ data }) => {
         </div>
       </div>
       <hr className="border-dashed border-[1px] text-[#DEE7FE] " />
-      <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-col gap-4 w-[48%]">
+      <div className="flex flex-col md:flex-row lg:flex-row items-center justify-between">
+        <div className="flex flex-col gap-4 w-[100%] md:w-[48%] lg:w-[48%]">
           <div className="flex flex-row justify-between w-full">
             <div>
-              <p className="text-[#646464] text-sm font-normal">Dành cho</p>
+              <p className="text-[#646464] text-sm font-normal w-[142px]">
+                Dành cho
+              </p>
             </div>
             <div>
-              <p className="text-[#2E2E2E] text-sm font-semibold max-w-[142px] text-right">
+              <p className="text-[#2E2E2E] text-sm font-semibold text-right">
                 {data?.towards}
               </p>
             </div>
@@ -56,12 +58,12 @@ const CardProductBHYT: React.FC<CardProductBHYTProps> = ({ data }) => {
 
           <div className="flex flex-row justify-between w-full">
             <div>
-              <p className="text-[#646464] text-sm font-normal">
+              <p className="text-[#646464] text-sm font-normal w-[142px]">
                 Trợ cấp khám chữa bệnh
               </p>
             </div>
             <div>
-              <p className="text-[#2E2E2E] text-sm font-semibold max-w-[142px] text-right">
+              <p className="text-[#2E2E2E] text-sm font-semibold text-right">
                 {data?.medicalSupport}
               </p>
             </div>
@@ -69,12 +71,12 @@ const CardProductBHYT: React.FC<CardProductBHYTProps> = ({ data }) => {
 
           <div className="flex flex-row justify-between w-full">
             <div>
-              <p className="text-[#646464] text-sm font-normal">
+              <p className="text-[#646464] text-sm font-normal w-[142px]">
                 Giới hạn tuổi
               </p>
             </div>
             <div>
-              <p className="text-[#2E2E2E] text-sm font-semibold max-w-[142px] text-right">
+              <p className="text-[#2E2E2E] text-sm font-semibold text-right">
                 {data?.ageLimit === 0
                   ? "Không giới hạn"
                   : `Trên ${data?.ageLimit} tuổi`}
@@ -83,9 +85,9 @@ const CardProductBHYT: React.FC<CardProductBHYTProps> = ({ data }) => {
           </div>
         </div>
 
-        <div className=" border-dashed border-r-[1px] text-[#DEE7FE] min-h-[130px]"></div>
+        <div className=" border-dashed border-r-[1px] text-[#DEE7FE] md:min-h-[130px] lg:min-h-[130px]"></div>
 
-        <div className="flex flex-col gap-4 w-[48%]">
+        <div className="flex flex-col gap-4 md:w-[48%] lg:w-[48%] mt-4 md:mt-0 lg:mt-0">
           <div>
             <p className="text-[#646464] text-sm font-normal">
               Quyền lợi nổi trội
@@ -124,7 +126,7 @@ const CardProductBHYT: React.FC<CardProductBHYTProps> = ({ data }) => {
           onClick={() => {
             navigate("/product-detail-1/2");
           }}
-          className="py-3 px-[40px] rounded-lg  text-[15px] font-medium text-[#0076B7] border-[1px] border-[#0077D5]"
+          className="py-3 px-[20px] md:px-[40px] lg:px-[40px] rounded-lg  text-[15px] font-medium text-[#0076B7] border-[1px] border-[#0077D5]"
         >
           Xem chi tiết
         </button>
@@ -146,7 +148,7 @@ const CardProductBHYT: React.FC<CardProductBHYTProps> = ({ data }) => {
           //     state: { data: data, type: "register" },
           //   });
           // }}
-          className="py-3 px-[40px] rounded-lg bg-[#0076B7] text-[15px] font-medium text-[#fff]"
+          className="py-3 px-[20px] md:px-[40px] lg:px-[40px] rounded-lg border-[1px] border-[#0076B7] bg-[#0076B7] text-[15px] font-medium text-[#fff]"
         >
           Mua ngay
         </button>

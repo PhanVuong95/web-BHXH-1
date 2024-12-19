@@ -51,10 +51,10 @@ const WithdrawBHXH = () => {
 
   return (
     <div className="flex-[8] drop-shadow">
-      <div className="text-[18px] text-[white] bg-[#0077D5] leading[24px] font-normal p-[20px] rounded-tr-[10px] rounded-tl-[10px]">
+      <div className="text-[16px] md:text-[18px] lg:text-[18px] text-[white] bg-[#0077D5] leading[24px] font-normal p-[15px] md:p-[20px] lg:p-[20px] rounded-tr-[10px] rounded-tl-[10px]">
         Rút BHXH một lần
       </div>
-      <div className="p-5 bg-[white] rounded-br-[10px] rounded-bl-[10px]">
+      <div className="p-3 md:p-4 lg:5 bg-[white] rounded-br-[10px] rounded-bl-[10px]">
         <div className="text-[16px] mb-5">Giai đoạn đóng bảo hiểm xã hội</div>
 
         <div
@@ -81,7 +81,7 @@ const WithdrawBHXH = () => {
 
         {insurancePaymentPeriod.map((_item, index) => {
           return (
-            <div className="flex flex-row gap-10 mb-5">
+            <div className="flex flex-col md:flex-row lg:flex-row gap-5 md:gap-5 lg:gap-10  mb-3 md:mb-4 lg:mb-5">
               <div className="flex-[4]">
                 <div className="w-full">
                   <label className="block text-sm font-light text-gray-900 pb-2">

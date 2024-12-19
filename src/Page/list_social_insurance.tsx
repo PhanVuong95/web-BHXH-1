@@ -110,14 +110,13 @@ const ListSocialInsurance = () => {
   }, [setInsuranceOrder]);
 
   return (
-    <div className="pt-6">
+    <div className="md:pt-6 lg:pt-6">
       <HeaderTitle links={[{ title: "Khai báo BHXH tự nguyện" }]} />
-      <div className="container mx-auto py-[40px] max-w-[1280px] mx-auto">
+      <div className="container mx-auto py-[0px] md:py-[20px] lg:py-[40px] max-w-[1280px] mx-auto">
         <h3 className="title-top-header">Khai báo BHXH tự nguyện</h3>
-        {/* <HeaderBase isHome={false} title={"BHXH tự nguyện"} /> */}
-        <div className="gap-[16px] flex flex-col box-shadow-product product-items border-[1px] border-[#D1D1D6]">
+        <div className=" flex flex-col box-shadow-product product-items border-[1px] border-[#D1D1D6]">
           <div className="flex flex-col gap-8">
-            <div className="p-10 bg-white w-full rounded-xl flex flex-col gap-[20px]">
+            <div className="p-4 md:p-5 lg:p-8 bg-white w-full rounded-xl flex flex-col gap-[20px]">
               <div className="flex gap-[10px]">
                 <img
                   alt="image logo"
@@ -142,16 +141,16 @@ const ListSocialInsurance = () => {
 
               <hr className="border-dashed border-[1px] text-[#DEE7FE] " />
 
-              <div className="flex flex-row items-center justify-between">
-                <div className="flex flex-col gap-4 w-[48%]">
+              <div className="flex flex-col md:flex-row lg:flex-row items-center justify-between">
+                <div className="flex flex-col gap-4 w-[100%] md:w-[48%] lg:w-[48%]">
                   <div className="flex flex-row justify-between w-full">
                     <div>
-                      <p className="text-[#646464] text-sm font-normal">
+                      <p className="text-[#646464] text-sm font-normal w-[140px] md:w-[160px] lg:w-[160px] ">
                         Dành cho
                       </p>
                     </div>
                     <div>
-                      <p className="text-[#2E2E2E] text-sm font-semibold max-w-[142px] text-right">
+                      <p className="text-[#2E2E2E] text-sm font-semibold w-[100%] text-right">
                         {insurance?.towards}
                       </p>
                     </div>
@@ -159,12 +158,12 @@ const ListSocialInsurance = () => {
 
                   <div className="flex flex-row justify-between w-full">
                     <div>
-                      <p className="text-[#646464] text-sm font-normal">
+                      <p className="text-[#646464] text-sm font-normal w-[140px] md:w-[160px] lg:w-[160px]">
                         Hỗ trợ mức đóng
                       </p>
                     </div>
                     <div>
-                      <p className="text-[#2E2E2E] text-sm font-semibold max-w-[142px] text-right">
+                      <p className="text-[#2E2E2E] text-sm font-semibold w-[100%] text-right">
                         {insurance?.supportDiscount}
                       </p>
                     </div>
@@ -172,19 +171,19 @@ const ListSocialInsurance = () => {
 
                   <div className="flex flex-row justify-between w-full">
                     <div>
-                      <p className="text-[#646464] text-sm font-normal">
+                      <p className="text-[#646464] text-sm font-normal w-[140px] md:w-[160px] lg:w-[160px]">
                         Giới hạn tuổi
                       </p>
                     </div>
                     <div>
-                      <p className="text-[#2E2E2E] text-sm font-semibold max-w-[142px] text-right">
+                      <p className="text-[#2E2E2E] text-sm font-semibold w-[100%] text-right">
                         Trên {insurance?.ageLimit} tuổi
                       </p>
                     </div>
                   </div>
                 </div>
-                <div className=" border-dashed border-r-[1px] min-h-[130px] text-[#DEE7FE]"></div>
-                <div className="flex flex-col gap-4 w-[48%]">
+                <div className="border-dashed border-r-[1px] mb-4 md:mb-0 lg:mb-0 md:min-h-[130px] lg:min-h-[130px] text-[#DEE7FE]"></div>
+                <div className="flex flex-col gap-4 w-[100%] md:w-[48%] lg:w-[48%]">
                   <div>
                     <p className="text-[#646464] text-sm font-normal">
                       Quyền lợi nổi trội
@@ -225,7 +224,7 @@ const ListSocialInsurance = () => {
                   onClick={() => {
                     navigate("/product-detail/" + 1001);
                   }}
-                  className="py-3 px-[40px] rounded-lg  text-[15px] font-medium text-[#0076B7] border-[1px] border-[#0077D5]"
+                  className="py-3 px-[15px] md:px-[20px] lg:px-[40px] rounded-lg  text-[15px] font-medium text-[#0076B7] border-[1px] border-[#0077D5]"
                 >
                   Xem chi tiết
                 </button>
@@ -240,7 +239,7 @@ const ListSocialInsurance = () => {
                       toast.info("Bạn cần đăng nhập để sử dụng tính năng này!");
                     }
                   }}
-                  className="py-3 px-[40px] rounded-lg bg-[#0076B7] text-[15px] font-medium text-[#fff]"
+                  className="py-3 px-[40px] rounded-lg border-[1px] border-[#0076B7] bg-[#0076B7] text-[15px] font-medium text-[#fff]"
                 >
                   Mua ngay
                 </button>

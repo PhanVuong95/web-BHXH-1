@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import LayoutPage from "./Layout/layoutPage";
+import LayoutPage from "./layout/layoutPage";
 import HomePage from "./Page/homePage";
 import { SpecificProvider } from "./Components/specificContext";
 import ListSocialInsurance from "./Page/list_social_insurance";
@@ -29,7 +29,6 @@ import ToolSupportPage from "./Page/tool_support_page";
 
 function App() {
   const [user, setUser] = useState<any>(null);
-  console.log(user);
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");

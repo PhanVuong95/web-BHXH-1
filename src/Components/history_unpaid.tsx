@@ -25,8 +25,6 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
     axios
       .get("https://baohiem.dion.vn/insuranceorder/api/Detail-By-VM/" + id)
       .then((response) => {
-        // console.log(response.data.data[0]);
-
         setOrderDetail(response.data.data[0]);
         setInsuredPerson(response.data.data[0].listInsuredPerson[0]);
 
@@ -97,17 +95,12 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
           };
         }
 
-        // console.log("user", storeage);
-
         setInsuranceOrder(storeage);
-        console.log(insuranceOrder);
       })
       .catch((error) => {
         console.error(error);
       });
   }, [id]);
-
-  // console.log("Order :", insuranceOrder);
 
   useEffect(() => {
     axios

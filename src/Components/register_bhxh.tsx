@@ -104,8 +104,6 @@ const RegisterBHXH = () => {
     ksAddressDetail: React.createRef(),
   });
 
-  // console.log(insuranceOrder);
-
   const [members, setMembers] = useState<any>(
     Array.from(
       { length: insuranceOrder.houseHold.houseHoldPeoples.length },
@@ -113,15 +111,11 @@ const RegisterBHXH = () => {
     )
   );
 
-  // console.log(members);
-
   const [vungLuongToiThieuList, setVungLuongToiThieuList] = useState([]);
   const [vungLuongToiThieuId, setVungLuongToiThieuId] = useState(0);
   const [benefitLevel, setBenefitLevel] = useState("");
   const infoInsuranceProvinces = useRef([]);
   const infoInsuranceHospital = useRef([]);
-
-  console.log(benefitLevel);
 
   const [
     selectedMedicalByProvinceParticipant,
@@ -424,29 +418,6 @@ const RegisterBHXH = () => {
     }
   };
 
-  // Cập nhập danh sách bệnh viện khám chữa bênh
-  // useEffect(() => {
-  //   fetchMedicalByHospitalParticipants();
-
-  // }, [selectedMeicalByDistrictParticipant])
-
-  // const fetchMedicalByHospitalParticipants = () => {
-  //   if (selectedMeicalByDistrictParticipant != 0) {
-  //     axios
-  //       .get(
-  //         `https://baohiem.dion.vn/hospital/api/list-hospital-by-provinceId?provinceId=${selectedMeicalByDistrictParticipant}`
-  //       ).then((response) => {
-  //         infoInsuranceHospital.current = response.data.data;
-  //         console.log(infoInsuranceHospital.current);
-
-  //       })
-  //       .catch((error) => {
-  //         infoInsuranceHospital.current = []
-  //         console.error(error);
-  //       });
-  //   }
-  // }
-
   // Cập nhập danh sách quận huyện hộ gia đình
   useEffect(() => {
     fetchHouseholdProvinces();
@@ -688,8 +659,6 @@ const RegisterBHXH = () => {
           insuranceOrder.listInsuredPerson[0].hospitalId
         );
 
-        // console.log(benefitLevel);
-
         //Thông tin chủ hộ
         if (insuranceOrder.houseHold.soGiayToCaNhan != "") {
           setFullNamHouseHoldParticipant(insuranceOrder.houseHold.chuHoTen);
@@ -878,10 +847,8 @@ const RegisterBHXH = () => {
     setImageUrl: React.Dispatch<React.SetStateAction<string>>
   ) => {
     const token = localStorage.getItem("accessToken");
-    // console.log(token);
 
     const file = event.target.files?.[0];
-    console.log(file);
 
     if (file) {
       const formData = new FormData();
@@ -1340,8 +1307,6 @@ const RegisterBHXH = () => {
   const [isSearched, setIsSearched] = useState(false);
   const [btnLoading, setBtnLoading] = useState(false);
   const [isLoadingLuckUp, setIsLoadingLuckUp] = useState(false);
-  console.log(isSearched);
-  console.log(btnLoading);
 
   const onSubmitFormData = async () => {
     setIsLoadingLuckUp(true);
@@ -1396,7 +1361,6 @@ const RegisterBHXH = () => {
       setSocialInsuranceId("");
       setBtnLoading(false);
       setIsLoadingLuckUp(false);
-      console.log(error);
     }
   };
 
@@ -1406,13 +1370,13 @@ const RegisterBHXH = () => {
         <h3 className="text-[#fff] text-lg font-medium">
           Thông tin người tham gia BHXH tự nguyện
         </h3>
-        <div
+        {/* <div
           onClick={() => {
             setIsShowModelQR(true);
           }}
         >
           <img alt="image qr" className="w-12" src={imageQR} />
-        </div>
+        </div> */}
       </div>
     );
   };
@@ -1788,7 +1752,7 @@ const RegisterBHXH = () => {
               calculateFinalPrice();
             }}
           />
-          <div className="absolute inset-y-0 start-[72%] top-0 flex items-center pointer-events-none">
+          <div className="absolute inset-y-0 right-[3%] top-0 flex items-center pointer-events-none">
             <p className="text-base font-normal text-[#767A7F]">vnđ/tháng</p>
           </div>
         </div>
@@ -1891,7 +1855,7 @@ const RegisterBHXH = () => {
             value={supportBudget.toLocaleString("vi-VN")}
             readOnly
           />
-          <div className="absolute inset-y-0 start-[85%] lg1130:start-[90%] top-0 flex items-center pointer-events-none">
+          <div className="absolute inset-y-0 right-[7%] lg:right-[5%] top-0 flex items-center pointer-events-none">
             <p className="text-base font-normal text-[#767A7F]">vnđ</p>
           </div>
         </div>
@@ -3171,7 +3135,7 @@ const RegisterBHXH = () => {
             {/* Header thông tin người tham gia */}
             {boxHeaderParticipants()}
 
-            <div className="p-[40px] flex flex-row flex-wrap justify-between gap-3">
+            <div className="p-[15px] md:p-[20px] lg:p-[40px] flex flex-row flex-wrap justify-between gap-3">
               {/* Tên người tham gia */}
               {inputFullNameParticipants()}
 
@@ -3205,7 +3169,7 @@ const RegisterBHXH = () => {
             <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
               Địa chỉ khai sinh
             </h3>
-            <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+            <div className="p-[15px] md:p-[20px] lg:p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
               {/* Tỉnh thành */}
               {inputKSProvinceParticipate()}
 
@@ -3225,7 +3189,7 @@ const RegisterBHXH = () => {
               Địa chỉ thường trú
             </h3>
 
-            <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+            <div className="p-[15px] md:p-[20px] lg:p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
               {/* Tỉnh thành */}
               {inputTTProvinceParticipants()}
 
@@ -3245,7 +3209,7 @@ const RegisterBHXH = () => {
               Thông tin bảo hiểm{" "}
             </h3>
 
-            <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+            <div className="p-[15px] md:p-[20px] lg:p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
               {/* Vùng lương tối thiểu */}
               {inputAreaSalaryParticipants()}
 
@@ -3332,7 +3296,7 @@ const RegisterBHXH = () => {
                 Thông tin hộ gia đình{" "}
               </h3>
 
-              <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+              <div className="p-[15px] md:p-[20px] lg:p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
                 {/* Họ tên chủ hộ */}
                 {inputFullNamHouseHoldParticipants()}
 
@@ -3364,7 +3328,6 @@ const RegisterBHXH = () => {
                 {inputAddressDetailHKHouseHoldParticipants()}
 
                 {members.map((item: any, index: any) => {
-                  console.log(item);
                   return (
                     <CardMembersHouseHoldBHXH
                       key={`member_${index}`}
@@ -3462,7 +3425,7 @@ const RegisterBHXH = () => {
 
         <div
           ref={participantRefs.uploadCCCD}
-          className="flex flex-col gap-2 justify-between w-[100%] p-[40px]"
+          className="flex flex-col gap-2 justify-between w-[100%] p-[15px] md:p-[20px] lg:p-[40px]"
         >
           <div className="flex flex-col gap-3 w-[100%]">
             <div className="flex flex-col gap-2 w-[100%]">
@@ -3668,7 +3631,6 @@ const RegisterBHXH = () => {
           className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
           placeholder="Nhập tên của bạn"
           onChange={(e) => {
-            console.log(e.target.value);
             setBuyerName(e.target.value);
             setInsuranceOrder((prevOrder: any) => ({
               ...prevOrder,
@@ -3844,7 +3806,7 @@ const RegisterBHXH = () => {
         <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
           Thông tin người mua
         </h3>
-        <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+        <div className="p-[15px] md:p-[20px] lg:p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
           {/* Số điện thoại */}
           {inputPhoneBuyer()}
 
@@ -4106,9 +4068,7 @@ const RegisterBHXH = () => {
 
                     setSize({ width: 200, height: 200 });
                   }, 1000);
-                } catch (error: any) {
-                  console.log(error);
-                }
+                } catch (error: any) {}
               }}
               allowMultiple={false}
               styles={{
@@ -4146,10 +4106,7 @@ const RegisterBHXH = () => {
         ]}
       />
       <div className="container mx-auto max-w-[1280px]">
-        {/* <HeaderBase isHome={false} title={"Đăng ký BHXH Tự nguyện"} /> */}
-        <h3 className="py-[40px] mx-4 text-[42px] text-black font-bold">
-          Đăng ký BHXH Tự nguyện
-        </h3>
+        <h3 className="title-top-header">Đăng ký BHXH Tự nguyện</h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-row gap-4  flex-row-2"

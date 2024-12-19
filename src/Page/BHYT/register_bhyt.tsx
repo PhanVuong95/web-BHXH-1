@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -850,7 +849,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
               Quy tắc giảm phí cùng hộ gia đình:
             </p>
 
-            <ul className="list-disc px-[40px] py-[20px]">
+            <ul className="list-disc px-[35px] md:px-[40px] lg:px-[40px] py-[15px] md:py-[20px] lg:py-[20px]">
               <li>
                 <p className="text-sm font-normal">
                   Cung cấp toàn bộ thẻ CCCD gắn chip điện tử những người tham
@@ -890,7 +889,6 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
 
     if (response.data.message == "CREATED" && response.data.status == "201") {
       const result = response.data.data[0];
-      console.log("result", result);
       registerInfoBHYT["id"] = result.id;
       registerInfoBHYT["insuranceId"] = result.insuranceId;
       registerInfoBHYT["accountId"] = result.accountId;
@@ -922,7 +920,6 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
 
     if (response.data.message == "CREATED" && response.data.status == "201") {
       registerInfoBHYT["id"] = response.data.data[0];
-      console.log("registerInfoBHYT", registerInfoBHYT["id"]);
     }
 
     toast.success("Cập nhật thành công");
@@ -1037,11 +1034,10 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
   return (
     <div className="pt-6">
       <HeaderTitle links={[{ title: "Khai báo BHYT tự nguyện" }]} />
-      <div className="max-w-[1280px] mx-auto pt-[60px]">
+      <div className="max-w-[1280px] mx-auto md:pt-[20px] lg:pt-[40px]">
         <h3 className="title-top-header lg1130:px-0 px-[20px]">
           Khai báo BHYT tự nguyện
         </h3>
-        {/* {renderHeader()} */}
         <div className="flex flex-row gap-[40px] flex-wrap">
           <div className="flex flex-col gap-4 max-w-[100%] lg1130:px-0 px-[20px] lg1130:max-w-[840px] w-full">
             <div className=" bg-white rounded-xl flex flex-col gap-6">
@@ -1077,8 +1073,9 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
 
             {beneficiaries.map((beneficiary, index) => (
               <UserBeneficiaryBHYTPage
+                key={`${index}`}
                 index={index}
-                price={state.data.price}
+                price={state?.data?.price}
                 onClose={(index) => {
                   beneficiaries.splice(index, 1);
                   setBeneficiaries([...beneficiaries]);
@@ -1102,14 +1099,14 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
               <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
                 Thông tin thẻ BHYT
               </h3>
-              <div className="pt-[40px] px-[40px]">
+              <div className="pt-[20px] md:pt-[40px] lg:pt-[40px] px-[15px] md:px-[40px] lg:px-[40px]">
                 <p className="text-sm font-normal text-[#000]">
                   Thông tin BHXH sẽ được cập nhật trên ứng dụng{" "}
                   <strong className="text-[#0076B7] font-bold">VSSID </strong>
                   trong 15 ngày làm việc.
                 </p>
               </div>
-              <div className="flex gap-2 p-[40px]">
+              <div className="flex gap-2 p-[15px] md:p-[40px] lg:p-[40px]">
                 <input
                   type="checkbox"
                   onChange={() => {
@@ -1141,9 +1138,6 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
 
         {modalLoading()}
       </div>
-      <button className="" onClick={onBack}>
-        Quay lại
-      </button>
     </div>
   );
 };

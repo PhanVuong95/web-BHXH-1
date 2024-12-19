@@ -279,7 +279,7 @@ const UserBuyerPage = (props: Props) => {
   return (
     <div className=" bg-white rounded-xl flex flex-row flex-wrap border border-[#B9BDC1] overflow-hidden">
       {renderTextHeader()}
-      <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+      <div className="p-[15px] md:p-[20px] lg:p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
         {renderFullName()}
 
         {renderInputPhone()}

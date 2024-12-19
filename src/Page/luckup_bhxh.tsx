@@ -31,8 +31,6 @@ const LuckUpBHXH = () => {
   const [isSearched, setIsSearched] = useState(false);
   const [btnLoading, setBtnLoading] = useState(false);
 
-  console.log(temp);
-
   // Danh sách tỉnh thành
   useEffect(() => {
     axios
@@ -416,7 +414,7 @@ const LuckUpBHXH = () => {
                 Nhập thông tin
               </h3>
 
-              <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+              <div className="p-[15px] md:p-[20px] lg:p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
                 {renderFullName()}
 
                 {renderDob()}
@@ -430,7 +428,7 @@ const LuckUpBHXH = () => {
                 Địa chỉ khai sinh
               </h3>
 
-              <div className="p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+              <div className="p-[15px] md:p-[20px] lg:p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
                 {/* Tỉnh thành  khai sinh*/}
                 {inputKSProvinceParticipate()}
 
@@ -454,7 +452,6 @@ const LuckUpBHXH = () => {
             <div>Mã BHXH của bạn</div>
             <div
               onClick={() => {
-                console.log("abc");
                 navigator.clipboard.writeText(socialInsuranceCode);
               }}
               className="flex shadow-[0px_2px_6px_0px_rgba(20,20,21,0.14)] py-2 px-2 rounded-xl justify-between items-center"

@@ -45,7 +45,6 @@ const CardNewDetailPages = () => {
 
   // Extracting the first post data from the response
   const postData = post.data[0];
-  console.log(postData);
 
   return (
     <div className="py-[60px] max-w-[1280px] mx-auto container">

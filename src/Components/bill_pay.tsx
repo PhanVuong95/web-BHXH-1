@@ -13,7 +13,6 @@ const BillPayPage: React.FC<Widthheight> = () => {
   const [districtName, setDistrictName] = useState("");
   const [wardeName, setWardeName] = useState("");
   const [selectedCheckbox, setSelectedCheckbox] = useState("");
-  console.log(selectedCheckbox);
 
   const handleCheckboxChange = (value: any) => {
     setSelectedCheckbox(value);
@@ -67,7 +66,6 @@ const BillPayPage: React.FC<Widthheight> = () => {
       });
 
       const data = await response.json();
-      console.log("Response:", data);
     } catch (error) {
       console.error("Error:", error);
     }
