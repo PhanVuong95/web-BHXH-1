@@ -55,11 +55,11 @@ const LoginPage = () => {
         // Lưu token vào cookies
         document.cookie = `accessToken=${accessToken}; path=/; max-age=86400`;
 
-        // navigate("/");
+        navigate("/");
 
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 100);
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
       }
     });
   }, []);
