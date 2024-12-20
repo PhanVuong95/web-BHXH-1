@@ -6,7 +6,7 @@ const HistoryPage: React.FunctionComponent<HistoryPageProps> = ({
   onViewBHYT,
 }) => {
   return (
-    <div className="bg-white page min-h-[70vh] flex flex-col gap-4 !pt-[95px] max-w-[1000px] mx-auto">
+    <div className="bg-white page  flex flex-col gap-4  max-w-[1000px] mx-auto">
       <button>
         <div
           className="flex flex-row p-4  link-butoon"

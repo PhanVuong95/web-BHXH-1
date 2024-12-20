@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
 import clsx from "clsx";
 import users from "../assets/user.png";
 import imagesIocn from "../assets/icon/images";
+import Modal from "react-modal";
+import logo from "../assets/logo.png";
 
 const HeaderPage = () => {
   const [isSideMenuOpen, setMenu] = useState(false);
   const [activeLink, setActiveLink] = useState("");
-
+  const [isShowModalRegister, setIsShowModalRegister] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
@@ -62,6 +65,51 @@ const HeaderPage = () => {
     localStorage.removeItem("currentUser");
 
     setUser(null);
+  };
+
+  const ModalLogin = () => {
+    return (
+      <Modal
+        isOpen={isShowModalRegister}
+        onRequestClose={() => setIsShowModalRegister(false)}
+        style={{
+          content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            border: "none",
+            padding: 0,
+            width: "600px",
+            height: "655px",
+            overflow: "auto",
+            zIndex: 100000,
+          },
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+          },
+        }}
+      >
+        <div className="p-4 w-[100%] h-[100%] relative bg-white">
+          <div className="flex items-center justify-center	">
+            <img alt="" src={logo} width={60} height={60} />
+            <div className="font-bold ml-4 text-[#0077D5]">Nộp BHXH</div>
+          </div>
+
+          <div
+            onClick={() => {
+              setIsShowModalRegister(false);
+              navigate("/register");
+            }}
+          >
+            Đăng ký ngay
+          </div>
+        </div>
+      </Modal>
+    );
   };
 
   return (
@@ -309,7 +357,7 @@ const HeaderPage = () => {
               {/* avtar img */}
               <div className="relative">
                 <img
-                  className="rounded-full avatar-img cursor-pointer"
+                  className="rounded-full cursor-pointer w-[40px] md:w-[50px] lg:w-[60px]"
                   src={user && user.photo ? user.photo : users}
                   alt="avatar-img"
                   onClick={toggleDropdown}
@@ -320,7 +368,7 @@ const HeaderPage = () => {
                     <div className="user-car1">
                       <Link
                         to="user"
-                        className="user-car-button"
+                        className="user-car-button p-[10px] md:p-[10px] lg:p-[15px]"
                         onClick={() => setIsDropdownOpen(false)}
                       >
                         <div className="border-icon">
@@ -352,7 +400,7 @@ const HeaderPage = () => {
                         Thông tin tài khoản
                       </Link>
                       <div
-                        className="user-car-button"
+                        className="user-car-button p-[10px] md:p-[10px] lg:p-[15px]"
                         onClick={() => setIsDropdownOpen(false)}
                       >
                         <svg
@@ -386,10 +434,10 @@ const HeaderPage = () => {
                             fill="#0077D5"
                           />
                         </svg>
-                        <p>Chát với chúng tôi</p>
+                        <p>Chat với chúng tôi</p>
                       </div>
                       <div
-                        className="user-car-button text-white bg-[#0077D5;]"
+                        className="user-car-button text-white bg-[#0077D5;] p-[10px] md:p-[10px] lg:p-[15px]"
                         onClick={() => {
                           handleLogout();
                           setIsDropdownOpen(false);
@@ -403,13 +451,18 @@ const HeaderPage = () => {
               </div>
             </section>
           ) : (
-            <Link
-              to="/login"
-              className="text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-bold rounded-[10px]"
+            <div
+              // to="/login"
+              onClick={() => {
+                setIsShowModalRegister(!isShowModalRegister);
+              }}
+              className="cursor-pointer text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-bold rounded-[10px]"
             >
               Đăng nhập
-            </Link>
+            </div>
           )}
+
+          {ModalLogin()}
         </nav>
       </nav>
     </div>

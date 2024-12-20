@@ -29,7 +29,6 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
   const [user, setUser] = useState<any>(null);
   const [activeContent, setActiveContent] = useState<React.ReactNode>(null);
   const [activeButton, setActiveButton] = useState<string>("");
-
   const [currentStep, setCurrentStep] = useState(1);
 
   const handleNext = () => {
@@ -52,6 +51,9 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
     if (profile) {
       setUser(JSON.parse(profile));
     }
+
+    setActiveContent(<AccountInfo user={JSON.parse(profile ?? "")} />);
+    setActiveButton("Account Info");
   }, []);
 
   const handleLogout = () => {
@@ -105,12 +107,12 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
   return (
     <div className="pt-6">
       <HeaderTitle links={[{ title: "Thông tin tài khoản" }]} />
-      <div className="container px-3 xl:px-0  py-[40px] mx-auto items-start flex flex-col lg:flex-row gap-[40px] max-w-[1280px]">
-        <div className="w-full p-[20px] lg:w-1/2 bg-blue-500 user-card-border border-[1px] border-[#B9BDC1]">
-          <section className="flex items-center flex-col gap-4">
+      <div className="container px-3 xl:px-0 md:py-[20px] lg:py-[40px] mx-auto items-start flex flex-col lg:flex-row gap-[20px] md:gap-[30px] lg:gap-[40px] max-w-[1280px]">
+        <div className="w-full p-[10px] md:p-[15px] lg:p-[20px] lg:w-1/2 bg-blue-500 user-card-border border-[1px] border-[#B9BDC1]">
+          <div className="flex items-center flex-col gap-4">
             <div className="relative">
               <img
-                className="rounded-full avatar-img cursor-pointer"
+                className="rounded-full cursor-pointer w-[60px]  md:w-[80px] lg:w-[100px]"
                 src={user && user.photo ? user.photo : users}
                 alt="avatar-img"
               />
@@ -130,7 +132,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             <div
               className={`user-car-button ${
                 activeButton === "Account Info" ? "active" : ""
-              }`}
+              } p-[10px] md:p-[15px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Account Info")}
             >
               <div className="border-icon">
@@ -164,7 +166,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             <div
               className={`user-car-button ${
                 activeButton === "Activities" ? "active" : ""
-              }`}
+              } p-[10px] md:p-[15px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Activities")}
             >
               <div className="border-icon">
@@ -191,7 +193,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
               <div
                 className={`user-car-button ${
                   activeButton === "Partner Info" ? "active" : ""
-                }`}
+                } p-[10px] md:p-[15px] md:p-[15px]`}
                 onClick={() => handleDropdownItemClick("Partner Info")}
               >
                 <div className="border-icon">
@@ -227,7 +229,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
               <div
                 className={`user-car-button ${
                   activeButton === "Register Partner Info" ? "active" : ""
-                }`}
+                } p-[10px] md:p-[15px] md:p-[15px]`}
                 onClick={() => handleDropdownItemClick("Register Partner Info")}
               >
                 <div className="border-icon">
@@ -263,7 +265,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             <div
               className={`user-car-button ${
                 activeButton === "Guidelines" ? "active" : ""
-              }`}
+              } p-[10px] md:p-[15px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Guidelines")}
             >
               <div className="border-icon">
@@ -305,7 +307,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             <div
               className={`user-car-button ${
                 activeButton === "Terms" ? "active" : ""
-              }`}
+              } p-[10px] md:p-[15px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Terms")}
             >
               <div className="border-icon">
@@ -339,7 +341,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             <div
               className={`user-car-button ${
                 activeButton === "Chat" ? "active" : ""
-              }`}
+              } p-[10px] md:p-[15px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Chat")}
             >
               <svg
@@ -373,26 +375,25 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
                   fill="#0077D5"
                 />
               </svg>
-              <p>Chát với chúng tôi</p>
+              <p>Chat với chúng tôi</p>
             </div>
             <div
-              className="user-car-button text-white bg-[#0077D5;]"
+              className="user-car-button text-white bg-[#0077D5;] p-[10px] md:p-[15px] md:p-[15px]"
               onClick={handleLogout}
             >
               <p className="text-center w-full">Đăng xuất</p>
             </div>
-          </section>
+          </div>
         </div>
-        <div className="w-full user-card-border border-[1px] border-[#B9BDC1]">
-          {" "}
+        <div className="w-full user-card-border border-[1px] border-[#B9BDC1] ">
           {activeContent ? (
             activeContent
           ) : (
-            <div className="flex w-full items-center justify-center p-[20px]">
+            <div className="flex w-full items-center justify-center p-[20px] h-[300px] md:h-[400px] lg:h-[770px]">
               <img
                 src="https://cdn.haitrieu.com/wp-content/uploads/2022/07/logo-bao-hiem-xa-hoi-viet-nam.png"
                 alt=""
-                width="80%"
+                width="40%"
               />
             </div>
           )}
@@ -433,25 +434,31 @@ interface AccountInfoProps {
 const AccountInfo: React.FC<AccountInfoProps> = ({ user }) => {
   return (
     <section className="rounded-[10px] overflow-hidden">
-      <div className="top-account min-h-[200px] relative">
-        <img src={imagesIocn.banner} alt="" className="w-full h-full" />
-        <div className="p-[20px] flex flex-row items-center gap-2 absolute bottom-0 left-0">
+      <div className="top-account relative">
+        <img
+          src={imagesIocn.banner}
+          alt=""
+          className="h-[130px] md:h-[200px] lg:h-[200px]"
+        />
+        <div className="p-[20px] flex flex-row items-center gap-5 bottom-4 md:bottom-8 lg:bottom-8 absolute  left-0">
           <img
-            className="rounded-full avatar-img cursor-pointer border-[2px] border-white"
+            className="rounded-full cursor-pointer border-[2px] border-white w-[50px] md:w-[60px] lg:w-[70px]"
             src={user && user.photo ? user.photo : users}
             alt="avatar-img"
           />
           <div className="user">
-            <div className="flex flex-col items-center gap-1 name-user">
-              <span className="text-white font-medium ">{user?.fullName}</span>
+            <div className="flex flex-col items-start gap-1">
+              <span className="text-white text-[16px] md:text-[18px] lg:text-[20px] font-medium ">
+                {user?.fullName}
+              </span>
             </div>
-            <p className="text-[#D1D1D6] text-[14px] font-normal float-right phone-user">
+            <p className="text-white text-[14px] font-normal float-left phone-user">
               {user?.phone}
             </p>
           </div>
         </div>
       </div>
-      <div className="bot-account bg-white p-[20px] sm:p-[40px] flex flex-col gap-[20px]">
+      <div className="bot-account bg-white p-[15px] md:p-[15px] lg:p-[20px] sm:p-[40px] flex flex-col gap-[20px]">
         <h3 className="text-lg font-bold text-black">Thông tin cá nhân</h3>
         <hr className="border-t-3 border-dashed border-gray-400" />
         <div className="flex flex-row max-w-[296px]">
@@ -459,7 +466,7 @@ const AccountInfo: React.FC<AccountInfoProps> = ({ user }) => {
             <p className="text-lg font-normal text-[#797D77]">Giới tính</p>
           </div>
           <div className="w-[50%]">
-            {/* <p className="text-lg font-normal text-black">Nam</p> */}
+            <p className="text-lg font-normal text-black"> {user?.fullName}</p>
           </div>
         </div>
         <div className="flex flex-row max-w-[296px]">
@@ -467,7 +474,7 @@ const AccountInfo: React.FC<AccountInfoProps> = ({ user }) => {
             <p className="text-lg font-normal text-[#797D77]">Ngày sinh</p>
           </div>
           <div className="w-[50%]">
-            {/* <p className="text-lg font-normal text-black">20/09/2000</p> */}
+            {/* <p className="text-lg font-normal text-black">{user?.fullName}</p> */}
           </div>
         </div>
         <div className="flex flex-row max-w-[296px]">
@@ -622,7 +629,7 @@ const PartnerInfo: React.FC<AccountInfoProps> = ({ user }) => {
           </button>
         ))}
       </div>
-      <div className="user-car-button-1">
+      <div>
         {/* Hiển thị nội dung dựa trên activeContent */}
         {tabs[activeTab]?.content}
       </div>
@@ -638,15 +645,15 @@ const RegisterPartnerInfo: React.FC<MyComponentProps> = ({ handleNext }) => {
 
 // Components navbar Guidelines------------------------------------------------------------------------
 const Guidelines = () => (
-  <div className="p-1">
-    <PrivacyPolicyPage />
+  <div className="p-1 max-h-[770px] overflow-scroll">
+    <PrivacyPolicyPage hideHeader />
   </div>
 );
 
 // Components navbar Terms--------------------------------------------------------------------------------
 const Terms = () => (
-  <div className="p-1">
-    <PrivacyPolicyPage />
+  <div className="p-1 max-h-[770px] overflow-scroll">
+    <PrivacyPolicyPage hideHeader />
   </div>
 );
 

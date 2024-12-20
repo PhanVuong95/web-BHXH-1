@@ -35,7 +35,7 @@ const ReportPartnerPage: React.FC<{ onViewCollaborators: () => void }> = ({
 
   const ItemInfo = ({ title, value, subtitle, image }: ItemInfoProps) => {
     return (
-      <div className="border p-2 rounded-lg border-[#0076B7]">
+      <div className="border p-4 rounded-lg border-[#0076B7]">
         <div className="flex items-center">
           <img alt="" src={image} className="w-7 h-7" />
           <div className="text-[16px] ml-2">{title}</div>

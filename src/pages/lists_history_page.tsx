@@ -87,14 +87,14 @@ const ListsHistoryPage: React.FC<ListsHistoryPageProps> = ({ onBack }) => {
     <>
       <div className="">
         <div className="mx-auto p-2">
-          <div className="mb-4 flex space-x-4 p-1 bg-white rounded-lg shadow-md border border-[#B9BDC1] overflow-hidden">
+          <div className="mb-4 flex space-x-4 p-2 bg-white rounded-lg shadow-md border border-[#B9BDC1] overflow-hidden">
             <button
               onClick={() => {
                 setListOrder([]);
                 setLoading(true);
                 setOpenTab(1);
               }}
-              className={`flex-1 py-2 px-[24px] rounded-md text-base focus:outline-none focus:shadow-outline-blue transition-all duration-300 ${
+              className={`flex-1 py-3 px-[24px] rounded-md text-base focus:outline-none focus:shadow-outline-blue transition-all duration-300 ${
                 openTab === 1 ? "bg-blue-600 text-white" : ""
               }`}
             >

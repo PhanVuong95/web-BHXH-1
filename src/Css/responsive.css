@@ -492,7 +492,6 @@
 .user-car-button {
   width: 100%;
   display: flex;
-  padding: 18px;
   flex-direction: row;
   align-items: center;
   gap: 18px;

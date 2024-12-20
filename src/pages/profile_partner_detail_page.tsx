@@ -88,7 +88,7 @@ const ProfilePartnerDetailPage: React.FC<ProfilePartnerDetailPageProps> = ({
           <div className="h-[1px] w-[100%] bg-[#D1D1D6] mt-4"></div>
 
           <div className="text-[17px] font-normal mt-5 flex">
-            <div className="text-[17px]  w-[120px] font-normal text-[#797D77]">
+            <div className="text-[17px] w-[230px] font-normal text-[#797D77]">
               Chi nhánh
             </div>
             <div className="">
@@ -99,7 +99,7 @@ const ProfilePartnerDetailPage: React.FC<ProfilePartnerDetailPageProps> = ({
           <div className="h-[1px] w-[100%] bg-[#D1D1D6] mt-4"></div>
 
           <div className="text-[17px] font-normal mt-5 flex">
-            <div className="text-[17px]  w-[120px] font-normal text-[#797D77] w-30">
+            <div className="text-[17px]   w-[230px] font-normal text-[#797D77] w-30">
               Tên chủ TK
             </div>
             <div className="">
@@ -110,7 +110,7 @@ const ProfilePartnerDetailPage: React.FC<ProfilePartnerDetailPageProps> = ({
           <div className="h-[1px] w-[100%] bg-[#D1D1D6] mt-4"></div>
 
           <div className="text-[17px] font-normal mt-5 flex">
-            <div className="text-[17px] w-[120px] font-normal text-[#797D77] w-30">
+            <div className="text-[17px]  w-[230px] font-normal text-[#797D77] w-30">
               Số tài khoản
             </div>
             <div className="">

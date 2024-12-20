@@ -26,6 +26,7 @@ import LuckUpBHXH from "./pages/luckup_bhxh";
 import { useEffect, useState } from "react";
 import CardNewDetailPages from "./components/CardNewDetailPages";
 import ToolSupportPage from "./pages/tool_support_page";
+import RegisterPage from "./pages/register_page";
 
 function App() {
   const [, setUser] = useState<any>(null);
@@ -102,7 +103,8 @@ function App() {
               />
             }
           />
-          <Route path="login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route
             path="social-insurance"
             element={
@@ -181,9 +183,9 @@ function App() {
               </SpecificProvider>
             }
           />
-          <Route path="/privacy_policy" element={<PrivacyPolicyPage />} />
-          <Route path="/luckup-bhxh" element={<LuckUpBHXH />} />
-          <Route path="/new-detail/:id" element={<CardNewDetailPages />} />
+          <Route path="privacy_policy" element={<PrivacyPolicyPage />} />
+          <Route path="luckup-bhxh" element={<LuckUpBHXH />} />
+          <Route path="new-detail/:id" element={<CardNewDetailPages />} />
           <Route path="tool-support" element={<ToolSupportPage />} />
         </Route>
       </Routes>
