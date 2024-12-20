@@ -6,15 +6,30 @@ import users from "../assets/user.png";
 import imagesIocn from "../assets/icon/images";
 import Modal from "react-modal";
 import logo from "../assets/logo.png";
+import google from "../assets/google.png";
+import zalo from "../assets/zalo.png";
+import { Input, Typography } from "antd";
+import { EQrCodeType } from "../enums";
+import { FlexBox } from "./box/FlexBox";
+import { QRCodeCanvas } from "qrcode.react";
+import * as signalR from "@microsoft/signalr";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { setTimeout } from "timers/promises";
 
 const HeaderPage = () => {
   const [isSideMenuOpen, setMenu] = useState(false);
   const [activeLink, setActiveLink] = useState("");
-  const [isShowModalRegister, setIsShowModalRegister] = useState(false);
+  const [isShowModalLogin, setIsShowModalLogin] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const [clientId, setConnectionIds] = useState<string | null>(null);
+  const [loginDeeplink, setLoginDeeplink] = useState<any>();
+  const [isLoginZalo, setIsLoginZalo] = useState(false);
   const navigate = useNavigate();
+  // Quản lý trạng thái đăng nhập
+  const [user, setUser] = useState<any>(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
@@ -23,6 +38,162 @@ const HeaderPage = () => {
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
+
+  // đăng nhập google
+  useEffect(() => {
+    if (window.google) {
+      window.google.accounts.id.initialize({
+        client_id:
+          "110872706346-2usv0onovmio1n2ikh181t412923e3kl.apps.googleusercontent.com",
+        callback: handleCredentialResponse,
+        ux_mode: "popup",
+      });
+
+      const wrapper = document.getElementById("google-button-wrapper");
+      if (wrapper) {
+        window.google.accounts.id.renderButton(wrapper, {
+          theme: "outline",
+          size: "large",
+        });
+      } else {
+        console.error("Google button wrapper not found in DOM");
+      }
+    } else {
+      console.error("Google SDK not loaded");
+    }
+  }, []);
+
+  const handleCredentialResponse = (response: any) => {
+    if (!response || !response.credential) {
+      Swal.fire(
+        "Đăng nhập thất bại",
+        "Vui lòng kiểm tra lại thông tin đăng nhập!",
+        "error"
+      );
+      return;
+    }
+
+    const responsePayload = decodeJwtResponse(response.credential);
+
+    const user = {
+      id: responsePayload.sub,
+      fullName: responsePayload.name,
+      photo: responsePayload.picture,
+      email: responsePayload.email,
+    };
+
+    loginWithGoogle(user);
+  };
+
+  const loginWithGoogle = async (user: any) => {
+    try {
+      const response = await axios.post(
+        `https://baohiem.dion.vn/account/api/sign-in-google`,
+        user,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const responseData = response.data;
+
+      if (responseData.status == 200 && responseData.message == "SUCCESS") {
+        const data = responseData.resources;
+
+        // Lưu token vào localStorage và cookie
+        localStorage.setItem("currentUser", JSON.stringify(data));
+        localStorage.setItem("accessToken", data.accessToken);
+        document.cookie = `accessToken=${data.accessToken}; path=/; secure; HttpOnly`;
+        localStorage.setItem("profile", JSON.stringify(data.profile));
+
+        Swal.fire({
+          title: "Đăng nhập thành công",
+          html: `Chào mừng <b>${data.fullname || ""}</b> quay trở lại.`,
+          icon: "success",
+        }).then(() => {
+          // Chuyển trạng thái đã đăng nhập
+          // updateLoginStatus(true);
+          window.location.href = "/";
+        });
+      } else if (
+        responseData.status === 400 &&
+        responseData.message === "BAD_REQUEST"
+      ) {
+        Swal.fire("Đăng nhập thất bại", responseData.title, "warning");
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire("Đăng nhập thất bại", "Vui lòng thử lại!", "error");
+    }
+  };
+
+  const decodeJwtResponse = (token: string) => {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
+    );
+
+    return JSON.parse(jsonPayload);
+  };
+
+  useEffect(() => {
+    const connection = new signalR.HubConnectionBuilder()
+      .withUrl(`wss://baohiem.dion.vn/login-portal`, {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets,
+      })
+      .build();
+
+    connection
+      .start()
+      .then(() => {})
+      .catch((err) => console.error("Connection error:", err));
+
+    connection.on("SendConnectionId", (ConnectionId) => {
+      setConnectionIds(ConnectionId);
+    });
+
+    connection.on("SignIn", (res) => {
+      if (res.status == "200" && res.message == "SUCCESS" && res.resources) {
+        const { accessToken, profile } = res.resources;
+
+        toast.success("Đăng nhập tài khoản thành công");
+
+        // Lưu token vào localStorage
+        localStorage.setItem("accessToken", accessToken);
+
+        // Lưu thông tin profile vào localStorage
+        localStorage.setItem("profile", JSON.stringify(profile));
+
+        // Lưu token vào cookies
+        document.cookie = `accessToken=${accessToken}; path=/; max-age=86400`;
+
+        setUser(profile);
+        setIsShowModalLogin(false);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const link = `https://zalo.me/s/3118469885204258242/login/portal?state=${btoa(
+      JSON.stringify({
+        data: {
+          body: { clientId },
+          pathname: "/my/user/login-portal",
+        },
+        type: EQrCodeType.LOGIN_PORTAL,
+        disableCallback: true,
+      })
+    )}&${"env=TESTING&version=54"}`;
+
+    setLoginDeeplink(link);
+  }, [clientId]);
 
   const navLinks = [
     {
@@ -47,9 +218,6 @@ const HeaderPage = () => {
     },
   ];
 
-  // Quản lý trạng thái đăng nhập
-  const [user, setUser] = useState<any>(null);
-
   useEffect(() => {
     // Kiểm tra xem người dùng đã đăng nhập chưa
     const profile = localStorage.getItem("profile");
@@ -67,11 +235,149 @@ const HeaderPage = () => {
     setUser(null);
   };
 
+  const formLoginAccount = () => {
+    return (
+      <div>
+        <div className="flex flex-col gap-5">
+          <div className="w-full">
+            <label className="block text-sm font-light text-gray-900 pb-3">
+              Email <samp className="text-red-600">*</samp>
+            </label>
+            <Input
+              type="text"
+              className="text-gray-900 h-[48px] text-sm rounded-lg block w-full p-3 custom-input"
+              style={{
+                border: 0,
+                backgroundColor: "#F7F6FB",
+              }}
+              placeholder="Nhập email của bạn"
+            />
+          </div>
+
+          <div className="w-full">
+            <label className="block text-sm font-light text-gray-900 pb-3">
+              Mật khẩu <span className="text-red-600">*</span>
+            </label>
+            <Input.Password
+              className="text-gray-900 h-[48px] text-sm rounded-lg  w-full p-3 custom-input"
+              style={{
+                border: "none",
+                backgroundColor: "#F7F6FB",
+                borderRadius: "8px",
+              }}
+              placeholder="Nhập mật khẩu của bạn"
+            />
+          </div>
+
+          <div className="flex w-[100%]">
+            <div className="cursor-pointer w-full text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-[#000] font-normal rounded-[10px]">
+              Quên mật khẩu
+            </div>
+            <div className="cursor-pointer w-full text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-normal rounded-[10px]">
+              Đăng nhập
+            </div>
+          </div>
+
+          <div className="text-center text-[14px] text-[#5F5F5F] font-light">
+            Hoặc
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const qrLoginZalo = () => {
+    return (
+      <FlexBox
+        style={{
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <QRCodeCanvas
+          size={1000}
+          style={{ height: "auto", maxWidth: 220, width: "100%" }}
+          value={loginDeeplink}
+        />
+        <Typography style={{ paddingTop: 20 }}>
+          Quét QR code để đăng nhập
+        </Typography>
+      </FlexBox>
+    );
+  };
+
+  const handleCustomGoogleClick = () => {
+    // if (window.google) {
+    //   window.google.accounts.id.initialize({
+    //     client_id:
+    //       "110872706346-2usv0onovmio1n2ikh181t412923e3kl.apps.googleusercontent.com",
+    //     callback: handleCredentialResponse,
+    //     ux_mode: "popup",
+    //   });
+    //   const wrapper = document.getElementById("google-button-wrapper");
+    //   if (wrapper) {
+    //     window.google.accounts.id.renderButton(wrapper, {
+    //       theme: "outline",
+    //       size: "large",
+    //     });
+    //   } else {
+    //     console.error("Google button wrapper not found in DOM");
+    //   }
+    // } else {
+    //   console.error("Google SDK not loaded");
+    // }
+    // setTimeout(1000, () => {
+    //   const googleButtonWrapper = document.querySelector(
+    //     "#google-button-wrapper > div[role='button']"
+    //   );
+    //   (googleButtonWrapper as HTMLElement)?.click();
+    // });
+  };
+
+  const btnLoginGoogle = () => {
+    return (
+      <button
+        onClick={handleCustomGoogleClick}
+        className="flex w-full items-center justify-center bg-[#F7F6FB] py-[10px] rounded-[10px]"
+      >
+        <span className="mr-2">Tiếp tục với Google</span>
+        <img alt="" src={google} width={20} height={20} />
+      </button>
+    );
+  };
+
+  const btnLoginZalo = () => {
+    return (
+      <button
+        onClick={() => {
+          setIsLoginZalo(true);
+        }}
+        className="flex  w-full items-center justify-center bg-[#F7F6FB]  py-[10px] rounded-[10px]"
+      >
+        <span className="mr-2">Tiếp tục với Zalo</span>
+        <img alt="" src={zalo} width={20} height={20} />
+      </button>
+    );
+  };
+
+  const btnLoginByAccount = () => {
+    return (
+      <button
+        onClick={() => {
+          setIsLoginZalo(false);
+        }}
+        className="flex  w-full items-center justify-center bg-[#F7F6FB]  py-[10px] rounded-[10px]"
+      >
+        <span className="mr-2">Đăng nhập với tài khoản</span>
+      </button>
+    );
+  };
+
   const ModalLogin = () => {
     return (
       <Modal
-        isOpen={isShowModalRegister}
-        onRequestClose={() => setIsShowModalRegister(false)}
+        isOpen={isShowModalLogin}
+        onRequestClose={() => setIsShowModalLogin(false)}
         style={{
           content: {
             top: "50%",
@@ -84,7 +390,7 @@ const HeaderPage = () => {
             border: "none",
             padding: 0,
             width: "600px",
-            height: "655px",
+
             overflow: "auto",
             zIndex: 100000,
           },
@@ -93,19 +399,36 @@ const HeaderPage = () => {
           },
         }}
       >
-        <div className="p-4 w-[100%] h-[100%] relative bg-white">
-          <div className="flex items-center justify-center	">
+        <div className="flex flex-col p-8 w-[100%] h-[100%] relative bg-white gap-5">
+          <div className="flex items-center justify-center">
             <img alt="" src={logo} width={60} height={60} />
             <div className="font-bold ml-4 text-[#0077D5]">Nộp BHXH</div>
           </div>
 
-          <div
-            onClick={() => {
-              setIsShowModalRegister(false);
-              navigate("/register");
-            }}
-          >
-            Đăng ký ngay
+          <div className="flex items-center justify-center text-[20px] font-bold">
+            Chào mừng bạn đến với Bảo hiểm Việt
+          </div>
+
+          {/* Form Login */}
+          {isLoginZalo ? qrLoginZalo() : formLoginAccount()}
+
+          {/* btn Login */}
+          <div className="flex justify-between gap-[20px]">
+            {btnLoginGoogle()}
+            {!isLoginZalo ? btnLoginZalo() : btnLoginByAccount()}
+          </div>
+
+          <div className="flex justify-center mt-[60px]">
+            <div className="mr-4">Chưa có tài khoản?</div>
+            <div
+              className="text-[#0077D5] underline cursor-pointer"
+              onClick={() => {
+                setIsShowModalLogin(false);
+                navigate("/register");
+              }}
+            >
+              Đăng ký ngay
+            </div>
           </div>
         </div>
       </Modal>
@@ -451,18 +774,32 @@ const HeaderPage = () => {
               </div>
             </section>
           ) : (
-            <div
-              // to="/login"
+            <button
               onClick={() => {
-                setIsShowModalRegister(!isShowModalRegister);
+                setIsShowModalLogin(!isShowModalLogin);
               }}
               className="cursor-pointer text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-bold rounded-[10px]"
             >
               Đăng nhập
-            </div>
+            </button>
           )}
 
           {ModalLogin()}
+
+          {/* <div
+            id="google-button-wrapper"
+            style={{ display: "none", maxWidth: "450px", width: "100%" }}
+          ></div>
+          <div
+            id="login-with-google"
+            onClick={() => {
+              const googleButtonWrapper = document.querySelector(
+                "#google-button-wrapper > div[role='button']"
+              );
+              (googleButtonWrapper as HTMLElement)?.click();
+            }}
+            className="custom-google-button"
+          ></div> */}
         </nav>
       </nav>
     </div>

@@ -203,20 +203,20 @@ const RegisterPage = () => {
             />
           </div>
 
-          <div className="cursor-pointer text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-normal rounded-[10px]">
-            Đăng ký
-          </div>
-
-          <div
+          <button
             onClick={() => {
               setIsShowModalOTP(true);
             }}
-            className="flex justify-center mt-4"
+            className="cursor-pointer text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-normal rounded-[10px]"
           >
+            Đăng ký
+          </button>
+
+          <div className="flex justify-center mt-4">
             <div className="text-[16px] font-normal">Bạn đã có tài khoản?</div>
-            <div className="text-[16px] cursor-pointer text-[#2a65c7] font-normal ml-3 underline">
+            <button className="text-[16px] cursor-pointer text-[#2a65c7] font-normal ml-3 underline">
               Đăng nhập
-            </div>
+            </button>
           </div>
 
           {ModalLogin()}

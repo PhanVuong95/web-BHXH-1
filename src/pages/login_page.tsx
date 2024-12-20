@@ -44,8 +44,6 @@ const LoginPage = () => {
       if (res.status == "200" && res.message == "SUCCESS" && res.resources) {
         const { accessToken, profile } = res.resources;
 
-        console.log(profile);
-
         // Lưu token vào localStorage
         localStorage.setItem("accessToken", accessToken);
 
