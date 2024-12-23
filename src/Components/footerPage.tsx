@@ -196,7 +196,13 @@ const FooterPage = () => {
         </div>
       </div>
       <div className="footer-bot bg-black text-center py-2">
-        <p>© 2024, Baohiemviet. Powered by baohiemviet</p>
+        <p>
+          Copyrights ©️ DNP Group. Powered by
+          <a target="_blank" rel="noopener noreferrer" href="https://dion.vn/">
+            {" "}
+            Dion.vn
+          </a>
+        </p>
       </div>
     </div>
   );

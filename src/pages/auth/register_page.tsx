@@ -1,17 +1,20 @@
-import HeaderTitle from "../components/header_title";
+import HeaderTitle from "../../components/header_title";
 import { Carousel, Input } from "antd";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import slider from "../assets/slider_register.png";
+import slider from "../../assets/slider_register.png";
+import slider1 from "../../assets/slider_register1.png";
+import slider2 from "../../assets/slider_register2.png";
 import { useState } from "react";
 import Modal from "react-modal";
-import close from "../assets/close.png";
+import close from "../../assets/close.png";
 import type { GetProps } from "antd";
 type OTPProps = GetProps<typeof Input.OTP>;
 
 const RegisterPage = () => {
   const [isShowModalOTP, setIsShowModalOTP] = useState(false);
+  const listImageSlider = [slider, slider1, slider2];
 
   const onChange: OTPProps["onChange"] = (text) => {
     console.log("onChange:", text);
@@ -26,7 +29,7 @@ const RegisterPage = () => {
     onInput,
   };
 
-  const ModalLogin = () => {
+  const renderModalOTP = () => {
     return (
       <Modal
         isOpen={isShowModalOTP}
@@ -93,33 +96,19 @@ const RegisterPage = () => {
       <div className="container flex gap-8 mx-auto py-[0px] md:py-[30px] lg:py-[40px] max-w-[1280px]">
         <div className="flex-[6] flex flex-col w-[50%] h-[700px] pt-[100px]">
           <Carousel infinite draggable className="custom-carousel h-[500px]">
-            <div className="flex justify-center items-center h-full">
-              <img
-                alt=""
-                className="mx-auto"
-                src={slider}
-                width={350}
-                height={345}
-              />
-            </div>
-            <div className="flex justify-center items-center h-full">
-              <img
-                alt=""
-                className="mx-auto"
-                src={slider}
-                width={350}
-                height={345}
-              />
-            </div>
-            <div className="flex justify-center items-center h-full">
-              <img
-                alt=""
-                className="mx-auto"
-                src={slider}
-                width={350}
-                height={345}
-              />
-            </div>
+            {listImageSlider.map((item) => {
+              return (
+                <div className="flex justify-center items-center h-full">
+                  <img
+                    alt=""
+                    className="mx-auto"
+                    src={item}
+                    width={448}
+                    height={345}
+                  />
+                </div>
+              );
+            })}
           </Carousel>
         </div>
         <div
@@ -219,7 +208,7 @@ const RegisterPage = () => {
             </button>
           </div>
 
-          {ModalLogin()}
+          {renderModalOTP()}
         </div>
       </div>
     </div>

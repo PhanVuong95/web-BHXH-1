@@ -385,7 +385,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             </div>
           </div>
         </div>
-        <div className="w-full user-card-border border-[1px] border-[#B9BDC1] ">
+        <div className="w-full user-card-border border-[1px] border-[#B9BDC1] mb-4 ">
           {activeContent ? (
             activeContent
           ) : (
@@ -604,12 +604,12 @@ const PartnerInfo: React.FC<AccountInfoProps> = ({ user }) => {
   ];
 
   return (
-    <div className="flex flex-col gap-5 p-[20px]">
+    <div className="flex flex-col gap-5 p-[10px] md:p-[15px] lg:p-[20px] ">
       <div className="flex border-b flex-wrap">
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            className={`flex-1 px-[12px] py-[24px] text-center border-b-2  font-medium text-lg ${
+            className={`flex-1 px-[12px] py-[15px] md:py-[24px] lg:py-[24px] text-center border-b-2  font-medium text-[14px] md:text-[18px] lg:text-[18px] ${
               activeTab === tab.id
                 ? "border-blue-500 text-blue-500"
                 : "border-transparent text-gray-500 hover:text-blue-500"

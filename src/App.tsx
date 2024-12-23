@@ -26,7 +26,8 @@ import LuckUpBHXH from "./pages/luckup_bhxh";
 import { useEffect, useState } from "react";
 import CardNewDetailPages from "./components/CardNewDetailPages";
 import ToolSupportPage from "./pages/tool_support_page";
-import RegisterPage from "./pages/register_page";
+import RegisterPage from "./pages/auth/register_page";
+import ForgotPasswordPage from "./pages/auth/forgot_password_page";
 
 function App() {
   const [, setUser] = useState<any>(null);
@@ -62,15 +63,14 @@ function App() {
     <>
       <ToastContainer
         style={{
-          width: "25%",
+          maxWidth: "350px",
           borderRadius: "20px",
           marginTop: "40px",
-          marginLeft: "10%",
         }}
         toastStyle={{
           borderRadius: "7px",
         }}
-        position="top-right"
+        position="top-center"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -105,6 +105,7 @@ function App() {
           />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route
             path="social-insurance"
             element={

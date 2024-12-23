@@ -86,7 +86,7 @@ const ListsHistoryPage: React.FC<ListsHistoryPageProps> = ({ onBack }) => {
   return (
     <>
       <div className="">
-        <div className="mx-auto p-2">
+        <div className="mx-auto p-4">
           <div className="mb-4 flex space-x-4 p-2 bg-white rounded-lg shadow-md border border-[#B9BDC1] overflow-hidden">
             <button
               onClick={() => {
@@ -221,7 +221,7 @@ const ListsHistoryPage: React.FC<ListsHistoryPageProps> = ({ onBack }) => {
           </div>
         </div>
         <button
-          className="m-2 border py-3 w-[30%] rounded-xl border-[#FF0000]"
+          className="m-4 border py-3 w-[30%] rounded-xl border-[#FF0000]"
           onClick={onBack}
         >
           <div className="text-[#FF0000] font-bold text-[16px]">Quay lại</div>

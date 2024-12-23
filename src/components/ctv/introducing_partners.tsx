@@ -89,7 +89,9 @@ const IntroducingPartnersPage = () => {
   return (
     <div className="w-full flex flex-col items-center justify-center gap-5">
       <div className="flex flex-col gap-4">
-        <h3 className="text-[20px] font-bold">Mã Cộng tác viên Zalo min app</h3>
+        <h3 className="text-[14px] md:text-[20px] lg:text-[20px] text-center font-bold">
+          Mã Cộng tác viên Zalo min app
+        </h3>
 
         <input
           type="text"
@@ -114,7 +116,6 @@ const IntroducingPartnersPage = () => {
       </div>
 
       <div className="flex flex-col gap-4">
-        <h3 className="text-[20px] font-bold">Mã Cộng tác viên Zalo min app</h3>
         <div className="w-full flex flex-col items-center justify-center">
           <div className="rounded-lg p-8 bg-[#EFEFEF] items-center justify-center flex">
             {linkQRCode != "400" ? (

@@ -14,9 +14,7 @@ import { FlexBox } from "./box/FlexBox";
 import { QRCodeCanvas } from "qrcode.react";
 import * as signalR from "@microsoft/signalr";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
 import axios from "axios";
-import { setTimeout } from "timers/promises";
 
 const HeaderPage = () => {
   const [isSideMenuOpen, setMenu] = useState(false);
@@ -53,7 +51,7 @@ const HeaderPage = () => {
       if (wrapper) {
         window.google.accounts.id.renderButton(wrapper, {
           theme: "outline",
-          size: "large",
+          size: "small",
         });
       } else {
         console.error("Google button wrapper not found in DOM");
@@ -65,11 +63,7 @@ const HeaderPage = () => {
 
   const handleCredentialResponse = (response: any) => {
     if (!response || !response.credential) {
-      Swal.fire(
-        "Đăng nhập thất bại",
-        "Vui lòng kiểm tra lại thông tin đăng nhập!",
-        "error"
-      );
+      toast.error("Đăng nhập thất bại");
       return;
     }
 
@@ -108,24 +102,17 @@ const HeaderPage = () => {
         document.cookie = `accessToken=${data.accessToken}; path=/; secure; HttpOnly`;
         localStorage.setItem("profile", JSON.stringify(data.profile));
 
-        Swal.fire({
-          title: "Đăng nhập thành công",
-          html: `Chào mừng <b>${data.fullname || ""}</b> quay trở lại.`,
-          icon: "success",
-        }).then(() => {
-          // Chuyển trạng thái đã đăng nhập
-          // updateLoginStatus(true);
-          window.location.href = "/";
-        });
+        toast.success("Đăng nhập tài khoản thành công");
+        setIsShowModalLogin(false);
+        setUser(data.profile);
       } else if (
         responseData.status === 400 &&
         responseData.message === "BAD_REQUEST"
       ) {
-        Swal.fire("Đăng nhập thất bại", responseData.title, "warning");
+        toast.error("Đăng nhập thất bại");
       }
     } catch (error) {
-      console.error(error);
-      Swal.fire("Đăng nhập thất bại", "Vui lòng thử lại!", "error");
+      toast.error("Đăng nhập thất bại");
     }
   };
 
@@ -270,12 +257,18 @@ const HeaderPage = () => {
           </div>
 
           <div className="flex w-[100%]">
-            <div className="cursor-pointer w-full text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-[#000] font-normal rounded-[10px]">
+            <button
+              onClick={() => {
+                setIsShowModalLogin(false);
+                navigate("/forgot-password");
+              }}
+              className="cursor-pointer w-full text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-[#000] font-normal rounded-[10px]"
+            >
               Quên mật khẩu
-            </div>
-            <div className="cursor-pointer w-full text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-normal rounded-[10px]">
+            </button>
+            <button className="cursor-pointer w-full text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-normal rounded-[10px]">
               Đăng nhập
-            </div>
+            </button>
           </div>
 
           <div className="text-center text-[14px] text-[#5F5F5F] font-light">
@@ -307,31 +300,17 @@ const HeaderPage = () => {
   };
 
   const handleCustomGoogleClick = () => {
-    // if (window.google) {
-    //   window.google.accounts.id.initialize({
-    //     client_id:
-    //       "110872706346-2usv0onovmio1n2ikh181t412923e3kl.apps.googleusercontent.com",
-    //     callback: handleCredentialResponse,
-    //     ux_mode: "popup",
-    //   });
-    //   const wrapper = document.getElementById("google-button-wrapper");
-    //   if (wrapper) {
-    //     window.google.accounts.id.renderButton(wrapper, {
-    //       theme: "outline",
-    //       size: "large",
-    //     });
-    //   } else {
-    //     console.error("Google button wrapper not found in DOM");
-    //   }
-    // } else {
-    //   console.error("Google SDK not loaded");
-    // }
-    // setTimeout(1000, () => {
-    //   const googleButtonWrapper = document.querySelector(
-    //     "#google-button-wrapper > div[role='button']"
-    //   );
-    //   (googleButtonWrapper as HTMLElement)?.click();
-    // });
+    console.log("dsadsa");
+
+    const googleButtonWrapper = document.querySelector(
+      "#google-button-wrapper > div > div > div"
+    );
+
+    if (googleButtonWrapper) {
+      (googleButtonWrapper as HTMLElement).click();
+    } else {
+      console.log("Phần tử không tồn tại.");
+    }
   };
 
   const btnLoginGoogle = () => {
@@ -390,7 +369,6 @@ const HeaderPage = () => {
             border: "none",
             padding: 0,
             width: "600px",
-
             overflow: "auto",
             zIndex: 100000,
           },
@@ -435,10 +413,31 @@ const HeaderPage = () => {
     );
   };
 
+  const renderGoogleLogin = () => {
+    return (
+      <div>
+        <div
+          id="google-button-wrapper"
+          style={{ display: "none", maxWidth: "450px", width: "100%" }}
+        ></div>
+        <div
+          id="login-with-google"
+          onClick={() => {
+            const googleButtonWrapper = document.querySelector(
+              "#google-button-wrapper > div[role='button']"
+            );
+            (googleButtonWrapper as HTMLElement)?.click();
+          }}
+          className="custom-google-button"
+        ></div>
+      </div>
+    );
+  };
+
   return (
     <div className=" fixed header-page border border-b-[#B9BDC1]">
       <nav className="bg-[#fff] border-gray-200 container mx-auto">
-        <nav className="flex justify-between  items-center py-2 sm:py-[20px] max-w-[1280px] mx-auto">
+        <nav className="flex flex-row justify-between  items-center py-2 sm:py-[20px] max-w-[1280px] mx-auto">
           <div className="flex items-center gap-8">
             <section className="flex items-center gap-4">
               {/* menu */}
@@ -476,6 +475,9 @@ const HeaderPage = () => {
               </Link>
             </section>
           </div>
+
+          {renderGoogleLogin()}
+
           <div className="flex items-center gap-4 nav-link">
             {navLinks.map((d, i) => (
               <Link
@@ -511,18 +513,15 @@ const HeaderPage = () => {
                 <div className="flex items-center gap-4 user-phone">
                   <div className="user">
                     <div className="flex flex-row items-center name-user">
-                      <span className="text-black font-medium">
-                        {/* Xin chào, ${user.fullName} */}
-                      </span>
+                      <span className="text-black font-medium">hello</span>
                     </div>
                     <p className="text-[#595959] text-[14px] font-normal float-right phone-user-1">
                       0364 123 456
                     </p>
                   </div>
-                  {/* avtar img */}
+
                   <img
                     className="rounded-full avatar-img"
-                    // src="https://i.pravatar.cc/150?img=52"
                     src={user && user.photo ? user.photo : users}
                     alt="avatar-img"
                   />
@@ -564,36 +563,54 @@ const HeaderPage = () => {
               </div>
               <div className="navbar-menu-mobile">
                 <Link
+                  onClick={() => {
+                    setMenu(false);
+                  }}
                   className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
                   to="/social-insurance"
                 >
                   Khai báo BHXH tự nguyện
                 </Link>
                 <Link
+                  onClick={() => {
+                    setMenu(false);
+                  }}
                   className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
                   to="/health-insurance"
                 >
                   Mua BHYT tự nguyện
                 </Link>
                 <Link
+                  onClick={() => {
+                    setMenu(false);
+                  }}
                   className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
                   to="/tool-support"
                 >
                   Công cụ hỗ trợ
                 </Link>
                 <Link
+                  onClick={() => {
+                    setMenu(false);
+                  }}
                   className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
                   to="/"
                 >
                   Điều chỉnh thông tin BHXH
                 </Link>
                 <Link
+                  onClick={() => {
+                    setMenu(false);
+                  }}
                   className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
                   to="/"
                 >
                   Liên hệ chúng tôi
                 </Link>
                 <Link
+                  onClick={() => {
+                    setMenu(false);
+                  }}
                   className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
                   to="/privacy_policy"
                 >
@@ -646,10 +663,20 @@ const HeaderPage = () => {
                     >
                       <ul>
                         <li className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1 w-full">
-                          <Link to="/user">Thông tin tài khoản</Link>
+                          <Link
+                            onClick={() => {
+                              setMenu(false);
+                            }}
+                            to="/user"
+                          >
+                            Thông tin tài khoản
+                          </Link>
                         </li>
                         <li
-                          onClick={handleLogout}
+                          onClick={() => {
+                            setMenu(false);
+                            handleLogout();
+                          }}
                           className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1 w-full"
                         >
                           Đăng xuất
@@ -678,7 +705,7 @@ const HeaderPage = () => {
                 </p>
               </div>
               {/* avtar img */}
-              <div className="relative">
+              <div>
                 <img
                   className="rounded-full cursor-pointer w-[40px] md:w-[50px] lg:w-[60px]"
                   src={user && user.photo ? user.photo : users}
@@ -687,7 +714,7 @@ const HeaderPage = () => {
                 />
                 {/* Dropdown menu */}
                 {isDropdownOpen && (
-                  <div className="absolute right-0 top-[50px] bg-white rounded shadow-lg z-10 user-card overflow-hidden">
+                  <div className="absolute right-[-1020px]  md:right-[20px] lg:right-[80px] top-[90px] bg-white rounded shadow-lg z-10 user-card overflow-hidden">
                     <div className="user-car1">
                       <Link
                         to="user"
@@ -759,7 +786,7 @@ const HeaderPage = () => {
                         </svg>
                         <p>Chat với chúng tôi</p>
                       </div>
-                      <div
+                      <button
                         className="user-car-button text-white bg-[#0077D5;] p-[10px] md:p-[10px] lg:p-[15px]"
                         onClick={() => {
                           handleLogout();
@@ -767,7 +794,7 @@ const HeaderPage = () => {
                         }}
                       >
                         <p className="text-center w-full">Đăng xuất</p>
-                      </div>
+                      </button>
                     </div>
                   </div>
                 )}
@@ -785,21 +812,6 @@ const HeaderPage = () => {
           )}
 
           {ModalLogin()}
-
-          {/* <div
-            id="google-button-wrapper"
-            style={{ display: "none", maxWidth: "450px", width: "100%" }}
-          ></div>
-          <div
-            id="login-with-google"
-            onClick={() => {
-              const googleButtonWrapper = document.querySelector(
-                "#google-button-wrapper > div[role='button']"
-              );
-              (googleButtonWrapper as HTMLElement)?.click();
-            }}
-            className="custom-google-button"
-          ></div> */}
         </nav>
       </nav>
     </div>

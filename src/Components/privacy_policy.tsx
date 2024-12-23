@@ -18,7 +18,7 @@ const PrivacyPolicyPage = (props: Props) => {
       {!props.hideHeader && (
         <HeaderTitle links={[{ title: "Tài liệu Bảo hiểm Xã hội" }]} />
       )}
-      <div className="mx-3 max-w-[1280px]  xl:mx-auto flex flex-col gap-8 my-4 border border-[#B9BDC1] overflow-hidden rounded-lg p-[20px]">
+      <div className="mx-3 max-w-[1280px]  xl:mx-auto flex flex-col gap-8 my-4 overflow-hidden rounded-lg p-[20px]">
         <img alt="" src={image1} className="w-full" />
         <img alt="" src={image2} className="w-full" />
         <img alt="" src={image3} className="w-full" />
