@@ -85,9 +85,10 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     registerInfoBHYT["listInsuredPerson"][index].ethnicId
   );
 
-  const [newCardStartDate, setNewCardStartDate] = useState<any>(
-    formatDate(new Date())
-  );
+  // const [newCardStartDate, setNewCardStartDate] = useState<any>(
+  //   formatDate(new Date())
+  // );
+
   const frontImageInputRef = useRef<HTMLInputElement>(null);
   const backImageInputRef = useRef<HTMLInputElement>(null);
   const [medicalProvinceId, setMedicalProvinceId] = useState<any>(
@@ -1182,49 +1183,49 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     );
   };
 
-  const renderBoxNewCard = () => {
-    return (
-      <div className="flex flex-col ">
-        <h3 className="text-base font-semibold text-[#0076B7] pb-[24px]">
-          Thẻ mới{" "}
-          <span className="text-xs font-normal text-[#F00]">
-            (ngày hiệu lực dự kiến)
-          </span>
-        </h3>
+  // const renderBoxNewCard = () => {
+  //   return (
+  //     <div className="flex flex-col ">
+  //       <h3 className="text-base font-semibold text-[#0076B7] pb-[24px]">
+  //         Thẻ mới{" "}
+  //         <span className="text-xs font-normal text-[#F00]">
+  //           (ngày hiệu lực dự kiến)
+  //         </span>
+  //       </h3>
 
-        <div className="flex flex-col gap-4">
-          <div>
-            <label className="block text-sm font-normal pb-2 text-gray-900">
-              Ngày hiệu lực <samp className="text-red-600">*</samp>
-            </label>
+  //       <div className="flex flex-col gap-4">
+  //         <div>
+  //           <label className="block text-sm font-normal pb-2 text-gray-900">
+  //             Ngày hiệu lực <samp className="text-red-600">*</samp>
+  //           </label>
 
-            <DatePicker
-              type="date"
-              size="large"
-              locale={locale}
-              className="w-[100%]"
-              ref={refs.newCardStartDate}
-              value={newCardStartDate}
-              placeholder="dd/mm/yyyy"
-              onChange={(e) => {
-                const dateObject = dayjs(e.toString());
-                const dateStr = `${dateObject
-                  .date()
-                  .toString()
-                  .padStart(2, "0")}/${(dateObject.month() + 1)
-                  .toString()
-                  .padStart(2, "0")}/${dateObject.year()}`;
-                setNewCardStartDate(dayjs(dateStr, dateFormat));
-                registerInfoBHYT["listInsuredPerson"][index].newCardStartDate =
-                  dateStr;
-              }}
-              format={dateFormat}
-            />
-          </div>
-        </div>
-      </div>
-    );
-  };
+  //           <DatePicker
+  //             type="date"
+  //             size="large"
+  //             locale={locale}
+  //             className="w-[100%]"
+  //             ref={refs.newCardStartDate}
+  //             value={newCardStartDate}
+  //             placeholder="dd/mm/yyyy"
+  //             onChange={(e) => {
+  //               const dateObject = dayjs(e.toString());
+  //               const dateStr = `${dateObject
+  //                 .date()
+  //                 .toString()
+  //                 .padStart(2, "0")}/${(dateObject.month() + 1)
+  //                 .toString()
+  //                 .padStart(2, "0")}/${dateObject.year()}`;
+  //               setNewCardStartDate(dayjs(dateStr, dateFormat));
+  //               registerInfoBHYT["listInsuredPerson"][index].newCardStartDate =
+  //                 dateStr;
+  //             }}
+  //             format={dateFormat}
+  //           />
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   const renderProvince = () => {
     return (

@@ -1,16 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import UserCard from "../components/user_card";
 import CardNewPage from "../components/card_new";
 import { Link } from "react-router-dom";
-import { ProfileContext, useProfile } from "../components/user_profile_context";
+import { useProfile } from "../components/user_profile_context";
 import banner from "../../assets-src/banner.png";
 import { toast } from "react-toastify";
 
 const HomePage: React.FunctionComponent = () => {
-  // const profieContext = useContext<any>(ProfileContext);
-  // const { userProfile } = profieContext;
-
   const { userProfile } = useProfile();
 
   return (

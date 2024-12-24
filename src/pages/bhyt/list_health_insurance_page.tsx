@@ -4,6 +4,7 @@ import { PulseLoader } from "react-spinners";
 import CardProductBHYT from "../../components/card_product_bhyt";
 import HeaderTitle from "../../components/header_title";
 import { BASE_URL } from "../../utils/constants";
+import { formatDate } from "../../utils/validate_string";
 
 export let registerInfoBHYT = {
   id: 0,
@@ -71,7 +72,7 @@ export let registerInfoBHYT = {
       oldCardStartDate: "",
       oldCardEndDate: "",
       newCardEndDate: "",
-      newCardStartDate: "",
+      newCardStartDate: formatDate(new Date()),
       price: 0,
       hospitalId: 0,
       provinceId: 0,
