@@ -12,6 +12,7 @@ import { FadeLoader } from "react-spinners";
 import Modal from "react-modal";
 import icon from "../assets-src/icon_coppy.png";
 import HeaderTitle from "../components/header_title";
+import { BASE_URL } from "../utils/constants";
 
 const LuckUpBHXH = () => {
   const [errors, setErrors] = useState<any>({});
@@ -34,7 +35,7 @@ const LuckUpBHXH = () => {
   // Danh sách tỉnh thành
   useEffect(() => {
     axios
-      .get("https://baohiem.dion.vn/province/api/list")
+      .get(`${BASE_URL}/province/api/list`)
       .then((response) => {
         setProvinces(response.data.data);
       })
@@ -52,7 +53,7 @@ const LuckUpBHXH = () => {
     if (selectedKSProvince !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
+          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
         )
         .then((response) => {
           ksDistricts.current = response.data.data;
@@ -78,7 +79,7 @@ const LuckUpBHXH = () => {
     if (selectedKSDistrict !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
+          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
         )
         .then((response) => {
           ksWards.current = response.data.data;
@@ -322,7 +323,7 @@ const LuckUpBHXH = () => {
     };
     try {
       const response = await axios.post(
-        "https://baohiem.dion.vn/InsuranceOrder/api/search-social-insurance-number",
+        `${BASE_URL}/InsuranceOrder/api/search-social-insurance-number`,
         data,
         {
           headers: {
@@ -374,7 +375,7 @@ const LuckUpBHXH = () => {
   const modalLoading = () => {
     return (
       <>
-        <Modal isOpen={btnLoading} style={styleModal} ariaHideApp={false}>
+        <Modal ariaHideApp={false} isOpen={btnLoading} style={styleModal}>
           <div className="w-[400px] h-[750px] relative flex justify-center items-center">
             <FadeLoader height={10} width={3} loading={true} color="#ffffff" />
           </div>

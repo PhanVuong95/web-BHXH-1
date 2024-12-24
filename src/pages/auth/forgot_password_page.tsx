@@ -29,6 +29,7 @@ const ForgotPasswordPage = () => {
   const renderModalOTP = () => {
     return (
       <Modal
+        ariaHideApp={false}
         isOpen={isShowModalOTP}
         onRequestClose={() => setIsShowModalOTP(false)}
         style={{

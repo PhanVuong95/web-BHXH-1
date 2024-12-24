@@ -6,6 +6,7 @@ import {
   convertListToSelectObjectTypeGroup,
   convertListToSelectObjectTypeGroupList,
 } from "../utils/validate_string";
+import { BASE_URL } from "../utils/constants";
 
 interface Props {
   refs?: any;
@@ -25,7 +26,7 @@ const CardObject = (props: Props) => {
 
   useEffect(() => {
     axios
-      .get("https://baohiem.dion.vn/nhomloaidoituong/api/list")
+      .get(`${BASE_URL}/nhomloaidoituong/api/list`)
       .then((response) => {
         setObjectTypeGroupList(response.data.data);
       })
@@ -42,7 +43,7 @@ const CardObject = (props: Props) => {
     if (selectedObjectTypeGroup !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/loaidoituong/api/listbynhomloaidoituongid?nhomloaidoituongid=${selectedObjectTypeGroupList}`
+          `${BASE_URL}/loaidoituong/api/listbynhomloaidoituongid?nhomloaidoituongid=${selectedObjectTypeGroupList}`
         )
         .then((response) => {
           setObjectTypeGroup(response.data.data);

@@ -3,6 +3,7 @@ import imagesIocn from "../../assets/icon/images";
 import axios from "axios";
 import { ItemInfoProps } from "../../models";
 import { formatMoneyVND } from "../../utils/validate_string";
+import { BASE_URL } from "../../utils/constants";
 
 const ReportPartnerPage: React.FC<{ onViewCollaborators: () => void }> = ({
   onViewCollaborators,
@@ -14,7 +15,7 @@ const ReportPartnerPage: React.FC<{ onViewCollaborators: () => void }> = ({
 
     try {
       const response = await axios.get(
-        `https://baohiem.dion.vn/report/api/report-overview`,
+        `${BASE_URL}/report/api/report-overview`,
         {
           headers: {
             "Content-Type": "application/json",

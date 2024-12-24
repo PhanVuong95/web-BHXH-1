@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import iconSearch from "../assets/icon/ic_search.svg";
 import iconRefresh from "../assets/icon/ic_refresh.svg";
+import { BASE_URL } from "../utils/constants";
 
 const WithdrawBHXH = () => {
   const [insurancePaymentPeriod, setInsurancePaymentPeriod] = useState([
@@ -234,7 +235,7 @@ const WithdrawBHXH = () => {
                 };
 
                 const response = await axios.post(
-                  "https://baohiem.dion.vn/insurance/api/calculate-insurance-one-time",
+                  `${BASE_URL}/insurance/api/calculate-insurance-one-time`,
                   data,
                   {
                     headers: {

@@ -161,7 +161,7 @@ const FooterPage = () => {
                 </Link>
 
                 <Link
-                  to="mailto:info@audi.vn"
+                  to="mailto:info@baohiem.app"
                   className="flex flex-row gap-1 items-center"
                 >
                   <svg
@@ -188,7 +188,7 @@ const FooterPage = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                  <span>Email: info@audi.vn</span>
+                  <span>Email: info@baohiem.app</span>
                 </Link>
               </div>
             </div>
@@ -197,7 +197,8 @@ const FooterPage = () => {
       </div>
       <div className="footer-bot bg-black text-center py-2">
         <p>
-          Copyrights ©️ DNP Group. Powered by
+          <span className="text-[#fffff]">©</span> CÔNG TY CỔ PHẦN PHÁT TRIỂN
+          CÔNG NGHỆ SỐ DNP. Powered by
           <a target="_blank" rel="noopener noreferrer" href="https://dion.vn/">
             {" "}
             Dion.vn

@@ -4,6 +4,7 @@ import { ItemInfoProps } from "../../models";
 import imagesIocn from "../../assets/icon/images";
 import { Modal } from "antd";
 import { formatMoneyVND } from "../../utils/validate_string";
+import { BASE_URL } from "../../utils/constants";
 
 const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [listCollabrorates, setListCollabrorates] = useState([]);
@@ -19,7 +20,7 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
     try {
       const response = await axios.get(
-        `https://baohiem.dion.vn/account/api/get-list-contributor`,
+        `${BASE_URL}/account/api/get-list-contributor`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -64,7 +65,7 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
     try {
       const response = await axios.get(
-        `https://baohiem.dion.vn/report/api/report-order-contributor?accountId=${collaboratorId}`,
+        `${BASE_URL}/report/api/report-order-contributor?accountId=${collaboratorId}`,
         {
           headers: {
             "Content-Type": "application/json",

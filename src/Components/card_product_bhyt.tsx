@@ -1,7 +1,7 @@
-import { toast } from "react-toastify";
 import { formatMoneyVND } from "../utils/validate_string";
 import logo from "../assets-src/logo1.png";
 import { useNavigate } from "react-router-dom";
+import { useModalLogin } from "../context/auth_context";
 
 interface InsuranceBenefit {
   name: string;
@@ -24,6 +24,7 @@ interface CardProductBHYTProps {
 
 const CardProductBHYT: React.FC<CardProductBHYTProps> = ({ data }) => {
   const navigate = useNavigate();
+  const { setIsShowModalLogin } = useModalLogin();
 
   return (
     <div className="p-[10px] md:p-[20px] lg:p-[30px] bg-white w-full rounded-xl flex flex-col gap-4 border-[1px] border-[#D1D1D6]">
@@ -139,15 +140,9 @@ const CardProductBHYT: React.FC<CardProductBHYTProps> = ({ data }) => {
                 state: { data: data, type: "register" },
               });
             } else {
-              navigate("/login");
-              toast.info("Bạn cần đăng nhập để sử dụng tính năng này");
+              setIsShowModalLogin(true);
             }
           }}
-          // onClick={() => {
-          //   navigate("/register-BHYT/", {
-          //     state: { data: data, type: "register" },
-          //   });
-          // }}
           className="py-3 px-[20px] md:px-[40px] lg:px-[40px] rounded-lg border-[1px] border-[#0076B7] bg-[#0076B7] text-[15px] font-medium text-[#fff]"
         >
           Mua ngay

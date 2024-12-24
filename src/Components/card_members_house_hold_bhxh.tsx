@@ -7,6 +7,7 @@ import locale from "antd/es/date-picker/locale/vi_VN";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 dayjs.locale("vi");
 dayjs.extend(customParseFormat);
 
@@ -52,7 +53,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
     if (selectedMemberProvince !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${selectedMemberProvince}`
+          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedMemberProvince}`
         )
         .then((response) => {
           memberDistricts.current = response.data.data;
@@ -76,7 +77,7 @@ const CardMembersHouseHoldBHXH = (props: Props) => {
     if (selectedMemberDistrict !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${selectedMemberDistrict}`
+          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedMemberDistrict}`
         )
         .then((response) => {
           memberWards.current = response.data.data;

@@ -24,12 +24,15 @@ import RegisterPartnerInfoPage from "../components/ctv/register_partnerInfo";
 import ListsHistoryPage from "./lists_history_page";
 import ListHistoryBHYT from "./bhyt/list_history_bhyt_page";
 import PrivacyPolicyPage from "../components/privacy_policy";
+import { BASE_URL } from "../utils/constants";
+import { useProfile } from "../components/user_profile_context";
 
 const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
-  const [user, setUser] = useState<any>(null);
   const [activeContent, setActiveContent] = useState<React.ReactNode>(null);
   const [activeButton, setActiveButton] = useState<string>("");
   const [currentStep, setCurrentStep] = useState(1);
+  const { userProfile, setUserProfile } = useProfile();
+  const navigate = useNavigate();
 
   const handleNext = () => {
     setCurrentStep((prevStep) => {
@@ -46,27 +49,24 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
   };
 
   useEffect(() => {
-    const profile = localStorage.getItem("profile");
-
-    if (profile) {
-      setUser(JSON.parse(profile));
+    if (userProfile == null) {
+      navigate("/");
     }
-
-    setActiveContent(<AccountInfo user={JSON.parse(profile ?? "")} />);
+    setActiveContent(<AccountInfo user={userProfile} />);
     setActiveButton("Account Info");
-  }, []);
+  }, [userProfile]);
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("profile");
-    setUser(null);
+    setUserProfile(null);
   };
 
   const handleDropdownItemClick = (item: string) => {
     setActiveButton(item);
     switch (item) {
       case "Account Info":
-        setActiveContent(<AccountInfo user={user} />);
+        setActiveContent(<AccountInfo user={userProfile} />);
         break;
       case "Activities":
         setActiveContent(
@@ -79,7 +79,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
         );
         break;
       case "Partner Info":
-        setActiveContent(<PartnerInfo user={user} />);
+        setActiveContent(<PartnerInfo user={userProfile} />);
         break;
       case "Register Partner Info":
         setActiveContent(
@@ -113,7 +113,9 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             <div className="relative">
               <img
                 className="rounded-full cursor-pointer w-[60px]  md:w-[80px] lg:w-[100px]"
-                src={user && user.photo ? user.photo : users}
+                src={
+                  userProfile && userProfile.photo ? userProfile.photo : users
+                }
                 alt="avatar-img"
               />
             </div>
@@ -122,11 +124,11 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
                 <span className="text-[#0077D5] font-normal">Xin chào!</span>
                 <span className="text-black font-medium ">
                   {/* {user.username} */}
-                  {user?.fullName}
+                  {userProfile?.fullName}
                 </span>
               </div>
               <p className="text-[#D1D1D6] text-[14px] font-normal float-right phone-user">
-                {user?.phone}
+                {userProfile?.phone}
               </p>
             </div>
             <div
@@ -164,7 +166,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
               Thông tin tài khoản
             </div>
             <div
-              className={`user-car-button ${
+              className={`user-car-button cursor-pointer ${
                 activeButton === "Activities" ? "active" : ""
               } p-[10px] md:p-[15px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Activities")}
@@ -189,9 +191,9 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
               </div>
               Hoạt động
             </div>
-            {user?.roleId === 1003 && (
+            {userProfile?.roleId === 1003 && (
               <div
-                className={`user-car-button ${
+                className={`user-car-button cursor-pointer ${
                   activeButton === "Partner Info" ? "active" : ""
                 } p-[10px] md:p-[15px] md:p-[15px]`}
                 onClick={() => handleDropdownItemClick("Partner Info")}
@@ -225,9 +227,9 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
                 Thông tin đối tác
               </div>
             )}
-            {user?.roleId === 1002 && (
+            {userProfile?.roleId === 1002 && (
               <div
-                className={`user-car-button ${
+                className={`user-car-button cursor-pointer ${
                   activeButton === "Register Partner Info" ? "active" : ""
                 } p-[10px] md:p-[15px] md:p-[15px]`}
                 onClick={() => handleDropdownItemClick("Register Partner Info")}
@@ -263,7 +265,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             )}
 
             <div
-              className={`user-car-button ${
+              className={`user-car-button cursor-pointer ${
                 activeButton === "Guidelines" ? "active" : ""
               } p-[10px] md:p-[15px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Guidelines")}
@@ -305,7 +307,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
               Tài liệu hướng dẫn
             </div>
             <div
-              className={`user-car-button ${
+              className={`user-car-button cursor-pointer ${
                 activeButton === "Terms" ? "active" : ""
               } p-[10px] md:p-[15px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Terms")}
@@ -339,7 +341,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
               Điều kiện và điều khoản sử dụng dịch vụ
             </div>
             <div
-              className={`user-car-button ${
+              className={`user-car-button cursor-pointer ${
                 activeButton === "Chat" ? "active" : ""
               } p-[10px] md:p-[15px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Chat")}
@@ -378,7 +380,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
               <p>Chat với chúng tôi</p>
             </div>
             <div
-              className="user-car-button text-white bg-[#0077D5;] p-[10px] md:p-[15px] md:p-[15px]"
+              className="cursor-pointer user-car-button text-white bg-[#0077D5;] p-[10px] md:p-[15px] md:p-[15px]"
               onClick={handleLogout}
             >
               <p className="text-center w-full">Đăng xuất</p>
@@ -705,7 +707,7 @@ const RegisterCollaborate = () => {
 
       try {
         const response = await axios.post(
-          `https://baohiem.dion.vn/account/api/upload-file`,
+          `${BASE_URL}/account/api/upload-file`,
           formData,
           {
             headers: {
@@ -844,7 +846,7 @@ const RegisterCollaborate = () => {
                 <div className="icon-1">
                   {frontImageUrl ? (
                     <img
-                      src={`https://baohiem.dion.vn${frontImageUrl}`}
+                      src={`${BASE_URL}${frontImageUrl}`}
                       alt="Mặt trước"
                       className="w-[100%] h-[100px] object-center rounded-lg "
                     />
@@ -922,7 +924,7 @@ const RegisterCollaborate = () => {
                 <div className="icon-1">
                   {backImageUrl ? (
                     <img
-                      src={`https://baohiem.dion.vn${backImageUrl}`}
+                      src={`${BASE_URL}${backImageUrl}`}
                       alt="Mặt sau"
                       className="w-[100%] h-[100px] object-center rounded-lg"
                     />
@@ -1116,7 +1118,7 @@ const RegisterCollaborate = () => {
 
       try {
         const response = await axios.post(
-          `https://baohiem.dion.vn/account/api/register-contributor`,
+          `${BASE_URL}/account/api/register-contributor`,
           data,
           {
             headers: {

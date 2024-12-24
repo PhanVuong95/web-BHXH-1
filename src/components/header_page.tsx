@@ -15,19 +15,23 @@ import { QRCodeCanvas } from "qrcode.react";
 import * as signalR from "@microsoft/signalr";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useModalLogin } from "../context/auth_context";
+import { BASE_URL } from "../utils/constants";
+import { useProfile } from "./user_profile_context";
 
 const HeaderPage = () => {
   const [isSideMenuOpen, setMenu] = useState(false);
   const [activeLink, setActiveLink] = useState("");
-  const [isShowModalLogin, setIsShowModalLogin] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [clientId, setConnectionIds] = useState<string | null>(null);
   const [loginDeeplink, setLoginDeeplink] = useState<any>();
   const [isLoginZalo, setIsLoginZalo] = useState(false);
   const navigate = useNavigate();
-  // Quản lý trạng thái đăng nhập
-  const [user, setUser] = useState<any>(null);
+  const { isShowModalLogin, setIsShowModalLogin } = useModalLogin();
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const { userProfile, setUserProfile } = useProfile();
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
@@ -82,7 +86,7 @@ const HeaderPage = () => {
   const loginWithGoogle = async (user: any) => {
     try {
       const response = await axios.post(
-        `https://baohiem.dion.vn/account/api/sign-in-google`,
+        `${BASE_URL}/account/api/sign-in-google`,
         user,
         {
           headers: {
@@ -104,7 +108,7 @@ const HeaderPage = () => {
 
         toast.success("Đăng nhập tài khoản thành công");
         setIsShowModalLogin(false);
-        setUser(data.profile);
+        setUserProfile(data.profile);
       } else if (
         responseData.status === 400 &&
         responseData.message === "BAD_REQUEST"
@@ -161,11 +165,68 @@ const HeaderPage = () => {
         // Lưu token vào cookies
         document.cookie = `accessToken=${accessToken}; path=/; max-age=86400`;
 
-        setUser(profile);
+        setUserProfile(profile);
         setIsShowModalLogin(false);
       }
     });
   }, []);
+
+  const onSubmitLogin = async () => {
+    try {
+      if (userName == "") {
+        toast.warning("Vui lòng nhập tên đăng nhập / Email");
+        return;
+      }
+
+      if (password == "") {
+        toast.warning("Vui lòng nhập password");
+        return;
+      }
+
+      const data = {
+        username: userName,
+        password: password,
+      };
+
+      const response = await axios.post(
+        `${BASE_URL}/account/api/login-web`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.data.status == "200") {
+        const data = response.data.resources;
+
+        // Lưu token vào localStorage và cookie
+        localStorage.setItem("currentUser", JSON.stringify(data));
+        localStorage.setItem("accessToken", data.accessToken);
+        document.cookie = `accessToken=${data.accessToken}; path=/; secure; HttpOnly`;
+        localStorage.setItem("profile", JSON.stringify(data.profile));
+
+        toast.success("Đăng nhập tài khoản thành công");
+        setIsShowModalLogin(false);
+        setUserProfile(data.profile);
+      }
+
+      if (response.data.status == "001") {
+        toast.info("Tài khoản không tồn tại");
+      }
+
+      if (response.data.status == "002") {
+        toast.info("Mật khẩu không chính xác");
+      }
+
+      if (response.data.status == "400") {
+        toast.info("Đăng nhập thất bại, vui lòng thử lại sau");
+      }
+    } catch (error) {
+      toast.info("Đăng nhập thất bại, vui lòng thử lại sau");
+    }
+  };
 
   useEffect(() => {
     const link = `https://zalo.me/s/3118469885204258242/login/portal?state=${btoa(
@@ -210,7 +271,7 @@ const HeaderPage = () => {
     const profile = localStorage.getItem("profile");
 
     if (profile) {
-      setUser(JSON.parse(profile));
+      setUserProfile(JSON.parse(profile));
     }
   }, []);
 
@@ -218,8 +279,7 @@ const HeaderPage = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("profile");
     localStorage.removeItem("currentUser");
-
-    setUser(null);
+    setUserProfile(null);
   };
 
   const formLoginAccount = () => {
@@ -228,7 +288,7 @@ const HeaderPage = () => {
         <div className="flex flex-col gap-5">
           <div className="w-full">
             <label className="block text-sm font-light text-gray-900 pb-3">
-              Email <samp className="text-red-600">*</samp>
+              Tên đăng nhập / Email <samp className="text-red-600">*</samp>
             </label>
             <Input
               type="text"
@@ -237,7 +297,11 @@ const HeaderPage = () => {
                 border: 0,
                 backgroundColor: "#F7F6FB",
               }}
-              placeholder="Nhập email của bạn"
+              placeholder="Nhập ---"
+              value={userName}
+              onChange={(e) => {
+                setUserName(e.target.value);
+              }}
             />
           </div>
 
@@ -253,6 +317,10 @@ const HeaderPage = () => {
                 borderRadius: "8px",
               }}
               placeholder="Nhập mật khẩu của bạn"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </div>
 
@@ -266,7 +334,12 @@ const HeaderPage = () => {
             >
               Quên mật khẩu
             </button>
-            <button className="cursor-pointer w-full text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-normal rounded-[10px]">
+            <button
+              onClick={() => {
+                onSubmitLogin();
+              }}
+              className="cursor-pointer w-full text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-normal rounded-[10px]"
+            >
               Đăng nhập
             </button>
           </div>
@@ -300,8 +373,6 @@ const HeaderPage = () => {
   };
 
   const handleCustomGoogleClick = () => {
-    console.log("dsadsa");
-
     const googleButtonWrapper = document.querySelector(
       "#google-button-wrapper > div > div > div"
     );
@@ -356,16 +427,17 @@ const HeaderPage = () => {
     return (
       <Modal
         isOpen={isShowModalLogin}
+        ariaHideApp={false}
         onRequestClose={() => setIsShowModalLogin(false)}
         style={{
           content: {
-            top: "50%",
+            top: "55%",
             left: "50%",
             right: "auto",
             bottom: "auto",
             marginRight: "-50%",
             transform: "translate(-50%, -50%)",
-            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
             border: "none",
             padding: 0,
             width: "600px",
@@ -373,7 +445,7 @@ const HeaderPage = () => {
             zIndex: 100000,
           },
           overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
           },
         }}
       >
@@ -467,12 +539,13 @@ const HeaderPage = () => {
                 </svg>
               </div>
               {/* logo */}
-              <Link
-                to={"/"}
+              <a
+                target="_blank"
+                href={"https://dnpgroup.com.vn/"}
                 className="text-[24px] font-semibold flex items-center gap-3 text-[#0077D5] logo"
               >
                 <img src={imagesIocn.logo} alt="" className="w-20" />
-              </Link>
+              </a>
             </section>
           </div>
 
@@ -522,7 +595,11 @@ const HeaderPage = () => {
 
                   <img
                     className="rounded-full avatar-img"
-                    src={user && user.photo ? user.photo : users}
+                    src={
+                      userProfile && userProfile.photo
+                        ? userProfile.photo
+                        : users
+                    }
                     alt="avatar-img"
                   />
                 </div>
@@ -688,7 +765,7 @@ const HeaderPage = () => {
               </div>
             </section>
           </div>
-          {user ? (
+          {userProfile ? (
             <section className="flex items-center gap-4">
               <div className="user">
                 <div className="flex items-center flex-wrap gap-1 name-user justify-end">
@@ -697,24 +774,26 @@ const HeaderPage = () => {
                   </span>
                   <span className="text-black font-medium text-lg">
                     {/* {user.username} */}
-                    {user.fullName}
+                    {userProfile.fullName}
                   </span>
                 </div>
                 <p className="text-[#D1D1D6] text-[14px] font-normal float-right phone-user">
-                  {user.phone}
+                  {userProfile.phone}
                 </p>
               </div>
               {/* avtar img */}
-              <div>
+              <div className="relative">
                 <img
-                  className="rounded-full cursor-pointer w-[40px] md:w-[50px] lg:w-[60px]"
-                  src={user && user.photo ? user.photo : users}
+                  className="rounded-full  cursor-pointer w-[40px] md:w-[50px] lg:w-[60px]"
+                  src={
+                    userProfile && userProfile.photo ? userProfile.photo : users
+                  }
                   alt="avatar-img"
                   onClick={toggleDropdown}
                 />
                 {/* Dropdown menu */}
                 {isDropdownOpen && (
-                  <div className="absolute right-[-1020px]  md:right-[20px] lg:right-[80px] top-[90px] bg-white rounded shadow-lg z-10 user-card overflow-hidden">
+                  <div className="absolute right-[-1020px]  md:right-[0px] lg:right-[0px] top-[70px] bg-white rounded shadow-lg z-10 user-card overflow-hidden">
                     <div className="user-car1">
                       <Link
                         to="user"

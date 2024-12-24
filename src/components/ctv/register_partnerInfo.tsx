@@ -4,6 +4,7 @@ import axios from "axios";
 import { Modal } from "antd";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../utils/constants";
 
 const RegisterPartnerInfoPage: React.FC<MyComponentProps> = ({
   handleNext,
@@ -18,7 +19,7 @@ const RegisterPartnerInfoPage: React.FC<MyComponentProps> = ({
 
     try {
       const response = await axios.get(
-        `https://baohiem.dion.vn/account/api/check-register-contributor`,
+        `${BASE_URL}/account/api/check-register-contributor`,
         {
           headers: {
             "Content-Type": "multipart/form-data",

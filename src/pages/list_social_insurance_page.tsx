@@ -3,8 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SpecificContext } from "../components/specific_context";
 import logo from "../assets-src/logo1.png";
-import { toast } from "react-toastify";
 import HeaderTitle from "../components/header_title";
+import { BASE_URL } from "../utils/constants";
+import { useModalLogin } from "../context/auth_context";
 
 interface Insurance {
   name: string;
@@ -20,10 +21,11 @@ const ListSocialInsurance = () => {
   const [insurance, setInsurance] = useState<Insurance | null>(null);
   const { setInsuranceOrder } = specificContext;
   const navigate = useNavigate();
+  const { setIsShowModalLogin } = useModalLogin();
 
   useEffect(() => {
     axios
-      .get("https://baohiem.dion.vn/insurance/api/detail-viewmodel?id=1001")
+      .get(`${BASE_URL}/insurance/api/detail-viewmodel?id=1001`)
       .then((response) => {
         setInsurance(response.data.data[0]);
       })
@@ -235,8 +237,7 @@ const ListSocialInsurance = () => {
                     if (token) {
                       navigate("/register-BHXH");
                     } else {
-                      navigate("/login");
-                      toast.info("Bạn cần đăng nhập để sử dụng tính năng này!");
+                      setIsShowModalLogin(true);
                     }
                   }}
                   className="py-3 px-[40px] rounded-lg border-[1px] border-[#0076B7] bg-[#0076B7] text-[15px] font-medium text-[#fff]"

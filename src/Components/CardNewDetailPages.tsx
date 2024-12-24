@@ -3,6 +3,7 @@ import imgSlider from "../assets-src/image-1002.png";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PostDetails } from "../models";
+import { BASE_URL } from "../utils/constants";
 const CardNewDetailPages = () => {
   const { id } = useParams();
 
@@ -13,9 +14,7 @@ const CardNewDetailPages = () => {
   useEffect(() => {
     const fetchPostDetail = async () => {
       try {
-        const response = await fetch(
-          `https://baohiem.dion.vn/post/api/detailPost/${id}`
-        );
+        const response = await fetch(`${BASE_URL}/post/api/detailPost/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch post details");
         }
@@ -49,14 +48,14 @@ const CardNewDetailPages = () => {
   return (
     <div className="py-[60px] max-w-[1280px] mx-auto container">
       <img
-        className="aspect-[100/2] object-cover max-h-[300px] rounded-lg"
+        className="aspect-[100/2] object-cover h-[300px] rounded-lg"
         src={(postData as any).photo ? (postData as any).photo : imgSlider}
         alt="img-slider"
       />
-      <h3 className="text-base py-4 sm:text-[32px] font-bold leading-10">
+      <h3 className="text-base py-4 text-justify sm:text-[32px] font-bold leading-10">
         {postData.name}
       </h3>
-      <div className="flex flex-col items-center text-left gap-2 html-text-fomat">
+      <div className="flex flex-col text-justify items-center text-left gap-2 html-text-fomat">
         {parse(postData.text)}
       </div>
     </div>

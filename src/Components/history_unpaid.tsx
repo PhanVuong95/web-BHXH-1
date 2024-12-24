@@ -7,6 +7,7 @@ import { formatDate } from "../utils/validate_string";
 import { SpecificContext } from "./specific_context";
 import logo from "../assets-src/logo1.png";
 import HeaderTitle from "./header_title";
+import { BASE_URL } from "../utils/constants";
 
 const HistoryUnpaidPage: React.FunctionComponent = () => {
   const { id, statusName } = useParams();
@@ -25,7 +26,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     axios
-      .get("https://baohiem.dion.vn/insuranceorder/api/Detail-By-VM/" + id)
+      .get(`${BASE_URL}/insuranceorder/api/Detail-By-VM/` + id)
       .then((response) => {
         setOrderDetail(response.data.data[0]);
         setInsuredPerson(response.data.data[0].listInsuredPerson[0]);
@@ -106,9 +107,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     axios
-      .get(
-        "https://baohiem.dion.vn/insuranceorder/api/check-order-status/" + id
-      )
+      .get(`${BASE_URL}/insuranceorder/api/check-order-status/` + id)
       .then((response) => {
         setOrderStatusId(response.data.data[0]);
       })

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 export const ACCESS_TOKEN_KEY = "accessToken";
 
@@ -126,7 +127,7 @@ const LoginPage = () => {
   const loginWithGoogle = async (user: any) => {
     try {
       const response = await axios.post(
-        `https://baohiem.dion.vn/account/api/sign-in-google`,
+        `${BASE_URL}/account/api/sign-in-google`,
         user,
         {
           headers: {

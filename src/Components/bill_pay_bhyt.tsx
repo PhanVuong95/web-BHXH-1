@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { formatMoneyVND, formatPhoneNumber } from "../utils/validate_string";
 import HeaderTitle from "./header_title";
 import { Input } from "antd";
+import { BASE_URL } from "../utils/constants";
 
 const BillPayBHYTPage: React.FunctionComponent = () => {
   const { id } = useParams();
@@ -24,7 +25,7 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     axios
-      .get("  https://baohiem.dion.vn/insuranceorder/api/detail-by-vm/" + id)
+      .get(`${BASE_URL}/insuranceorder/api/detail-by-vm/` + id)
       .then((response) => {
         setBillPay(response.data.data[0]);
         setLoading(false);

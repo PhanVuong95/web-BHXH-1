@@ -1,6 +1,6 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://baohiem.dion.vn/",
+  baseURL: "https://portal-bhxh.dnpgroup.com.vn/",
 });
 export default instance;

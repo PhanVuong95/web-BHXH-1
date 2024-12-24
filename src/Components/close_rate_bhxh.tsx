@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import iconSearch from "../assets/icon/ic_search.svg";
 import iconRefresh from "../assets/icon/ic_refresh.svg";
+import { BASE_URL } from "../utils/constants";
 
 const CloseRateBXH = () => {
   const [baseSalary, setBaseSalary] = useState<string>("");
@@ -84,7 +85,7 @@ const CloseRateBXH = () => {
             onClick={async () => {
               if (validateForm2()) {
                 const response = await axios.get(
-                  `https://baohiem.dion.vn/insurance/api/calculate-payment-missing-year?salary=${baseSalary.replace(
+                  `${BASE_URL}/insurance/api/calculate-payment-missing-year?salary=${baseSalary.replace(
                     /\D/g,
                     ""
                   )}&monthsLeft=${months.replace(/\D/g, "")}`,

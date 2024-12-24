@@ -26,6 +26,7 @@ import Lottie from "lottie-react";
 import lottieScanQR from "../assets-src/lottie_scan_qr.json";
 import CardMembersHouseHoldBHXH from "./card_members_house_hold_bhxh";
 import HeaderTitle from "./header_title";
+import { BASE_URL } from "../utils/constants";
 
 dayjs.locale("vi");
 dayjs.extend(customParseFormat);
@@ -223,7 +224,7 @@ const RegisterBHXH = () => {
   // Load lại tất cả danh sách tỉnh thành
   useEffect(() => {
     axios
-      .get("https://baohiem.dion.vn/province/api/list")
+      .get(`${BASE_URL}/province/api/list`)
       .then((response) => {
         // Load tỉnh thành người mua
         buyerProvinces.current = response.data.data;
@@ -259,7 +260,7 @@ const RegisterBHXH = () => {
     if (selectedBuyerProvince !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${selectedBuyerProvince}`
+          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedBuyerProvince}`
         )
         .then((response) => {
           buyerDistricts.current = response.data.data;
@@ -285,7 +286,7 @@ const RegisterBHXH = () => {
     if (selectedBuyerDistrict !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${selectedBuyerDistrict}`
+          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedBuyerDistrict}`
         )
         .then((response) => {
           buyerWards.current = response.data.data;
@@ -308,7 +309,7 @@ const RegisterBHXH = () => {
     if (selectedKSProvince !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
+          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
         )
         .then((response) => {
           ksDistricts.current = response.data.data;
@@ -334,7 +335,7 @@ const RegisterBHXH = () => {
     if (selectedKSDistrict !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
+          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
         )
         .then((response) => {
           ksWards.current = response.data.data;
@@ -357,7 +358,7 @@ const RegisterBHXH = () => {
     if (selectedTTProvince !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${selectedTTProvince}`
+          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTProvince}`
         )
         .then((response) => {
           ttDistricts.current = response.data.data;
@@ -381,7 +382,7 @@ const RegisterBHXH = () => {
     if (selectedTTDistrict !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${selectedTTDistrict}`
+          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTDistrict}`
         )
         .then((response) => {
           ttWards.current = response.data.data;
@@ -404,7 +405,7 @@ const RegisterBHXH = () => {
     if (selectedMedicalByProvinceParticipant !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/hospital/api/list-hospital-by-provinceId?provinceId=${selectedMedicalByProvinceParticipant}`
+          `${BASE_URL}/hospital/api/list-hospital-by-provinceId?provinceId=${selectedMedicalByProvinceParticipant}`
         )
         .then((response) => {
           infoInsuranceHospital.current = response.data.data;
@@ -426,7 +427,7 @@ const RegisterBHXH = () => {
     if (selectedHouseholdProvince !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${selectedHouseholdProvince}`
+          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedHouseholdProvince}`
         )
         .then((response) => {
           householdDistricts.current = response.data.data;
@@ -450,7 +451,7 @@ const RegisterBHXH = () => {
     if (selectedHouseholdDistrict !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${selectedHouseholdDistrict}`
+          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedHouseholdDistrict}`
         )
         .then((response) => {
           householdWards.current = response.data.data;
@@ -473,7 +474,7 @@ const RegisterBHXH = () => {
     if (selectedTTHouseholdProvince !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${selectedTTHouseholdProvince}`
+          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTHouseholdProvince}`
         )
         .then((response) => {
           householdTTDistricts.current = response.data.data;
@@ -497,7 +498,7 @@ const RegisterBHXH = () => {
     if (selectedTTHouseholdDistrict !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${selectedTTHouseholdDistrict}`
+          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTHouseholdDistrict}`
         )
         .then((response) => {
           householdTTWards.current = response.data.data;
@@ -513,7 +514,7 @@ const RegisterBHXH = () => {
 
   useEffect(() => {
     axios
-      .get(`https://baohiem.dion.vn/VungLuongToiThieu/api/List`)
+      .get(`${BASE_URL}/VungLuongToiThieu/api/List`)
       .then((response) => {
         setVungLuongToiThieuList(response.data.data);
       })
@@ -550,28 +551,28 @@ const RegisterBHXH = () => {
           response7,
         ] = await Promise.all([
           axios.get(
-            `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${id1}`
+            `${BASE_URL}/district/api/list-by-provinceId?provinceId=${id1}`
           ),
           axios.get(
-            `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${id2}`
-          ),
-
-          axios.get(
-            `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${id3}`
-          ),
-          axios.get(
-            `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${id4}`
+            `${BASE_URL}/ward/api/list-by-districtId?districtId=${id2}`
           ),
 
           axios.get(
-            `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${id5}`
+            `${BASE_URL}/district/api/list-by-provinceId?provinceId=${id3}`
           ),
           axios.get(
-            `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${id6}`
+            `${BASE_URL}/ward/api/list-by-districtId?districtId=${id4}`
           ),
 
           axios.get(
-            `https://baohiem.dion.vn/hospital/api/list-hospital-by-provinceId?provinceId=${id7}`
+            `${BASE_URL}/district/api/list-by-provinceId?provinceId=${id5}`
+          ),
+          axios.get(
+            `${BASE_URL}/ward/api/list-by-districtId?districtId=${id6}`
+          ),
+
+          axios.get(
+            `${BASE_URL}/hospital/api/list-hospital-by-provinceId?provinceId=${id7}`
           ),
         ]);
 
@@ -590,17 +591,17 @@ const RegisterBHXH = () => {
           const [response8, response9, response10, response11] =
             await Promise.all([
               axios.get(
-                `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${id8}`
+                `${BASE_URL}/district/api/list-by-provinceId?provinceId=${id8}`
               ),
               axios.get(
-                `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${id9}`
+                `${BASE_URL}/ward/api/list-by-districtId?districtId=${id9}`
               ),
 
               axios.get(
-                `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${id10}`
+                `${BASE_URL}/district/api/list-by-provinceId?provinceId=${id10}`
               ),
               axios.get(
-                `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${id11}`
+                `${BASE_URL}/ward/api/list-by-districtId?districtId=${id11}`
               ),
             ]);
 
@@ -731,7 +732,7 @@ const RegisterBHXH = () => {
 
   useEffect(() => {
     axios
-      .get(`https://baohiem.dion.vn/ethnic/api/list`)
+      .get(`${BASE_URL}/ethnic/api/list`)
       .then((response) => {
         setEthnicLists(response.data.data);
       })
@@ -855,7 +856,7 @@ const RegisterBHXH = () => {
 
       try {
         const response = await axios.post(
-          "https://baohiem.dion.vn/account/api/upload-file",
+          `${BASE_URL}/account/api/upload-file`,
           formData,
           {
             headers: {
@@ -1229,7 +1230,7 @@ const RegisterBHXH = () => {
     const token = localStorage.getItem("accessToken");
     try {
       const response = await axios.post(
-        "https://baohiem.dion.vn/insuranceorder/api/add-order",
+        `${BASE_URL}/insuranceorder/api/add-order`,
         insuranceOrder,
         {
           headers: {
@@ -1278,7 +1279,7 @@ const RegisterBHXH = () => {
     const token = localStorage.getItem("accessToken");
     try {
       const response = await axios.post(
-        "https://baohiem.dion.vn/insuranceorder/api/update-order",
+        `${BASE_URL}/insuranceorder/api/update-order`,
         insuranceOrder,
         {
           headers: {
@@ -1320,7 +1321,7 @@ const RegisterBHXH = () => {
     };
     try {
       const response = await axios.post(
-        `https://baohiem.dion.vn/InsuranceOrder/api/search-social-insurance-number`,
+        `${BASE_URL}/InsuranceOrder/api/search-social-insurance-number`,
         data,
         {
           headers: {
@@ -3437,7 +3438,7 @@ const RegisterBHXH = () => {
                 <div className="icon-1">
                   {frontImageUrl ? (
                     <img
-                      src={`https://baohiem.dion.vn${frontImageUrl}`}
+                      src={`${BASE_URL}${frontImageUrl}`}
                       alt="Mặt trước"
                       className="w-[100%] h-[200px] object-center rounded-lg "
                     />
@@ -3515,7 +3516,7 @@ const RegisterBHXH = () => {
                 <div className="icon-1">
                   {backImageUrl ? (
                     <img
-                      src={`https://baohiem.dion.vn${backImageUrl}`}
+                      src={`${BASE_URL}${backImageUrl}`}
                       alt="Mặt sau"
                       className="w-[100%] h-[200px] object-center rounded-lg"
                     />
@@ -3911,6 +3912,7 @@ const RegisterBHXH = () => {
     return (
       <>
         <Modal
+          ariaHideApp={false}
           isOpen={
             isUploadingPhotoCitizenFont ||
             isUploadingPhotoCitizenBack ||
@@ -3940,10 +3942,10 @@ const RegisterBHXH = () => {
     return (
       <>
         <Modal
+          ariaHideApp={false}
           isOpen={isShowModelQR}
           onRequestClose={() => setIsShowModelQR(false)}
           style={customStyles}
-          ariaHideApp={false}
           contentLabel="QR Code"
         >
           <div className="w-[400px] h-[750px] relative">

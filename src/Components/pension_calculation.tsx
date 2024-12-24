@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import iconSearch from "../assets/icon/ic_search.svg";
 import iconRefresh from "../assets/icon/ic_refresh.svg";
+import { BASE_URL } from "../utils/constants";
 
 const PensionCalculation = () => {
   const [gender, setGender] = useState("");
@@ -266,7 +267,7 @@ const PensionCalculation = () => {
                 };
 
                 const response = await axios.post(
-                  "https://baohiem.dion.vn/insurance/api/calculate-monthly-pension",
+                  `${BASE_URL}/insurance/api/calculate-monthly-pension`,
                   data,
                   {
                     headers: {

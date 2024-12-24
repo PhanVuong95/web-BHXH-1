@@ -14,6 +14,7 @@ import {
 } from "../../utils/validate_string";
 import { registerInfoBHYT } from "./list_health_insurance_page";
 import HeaderTitle from "../../components/header_title";
+import { BASE_URL } from "../../utils/constants";
 
 const InfoDetailBHYT: React.FunctionComponent = () => {
   const { id, statusName } = useParams();
@@ -43,7 +44,7 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
 
   useEffect(() => {
     axios
-      .get("https://baohiem.dion.vn/insuranceorder/api/detail-by-vm/" + id)
+      .get(`${BASE_URL}/insuranceorder/api/detail-by-vm/` + id)
       .then((response) => {
         const data = response.data.data[0];
 
@@ -158,7 +159,7 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
   useEffect(() => {
     axios
       .get(
-        "https://baohiem.dion.vn/insurance/api/list-paging-viewmodel?pageIndex=1&Pageize=100&insuranceTypeId=1002"
+        `${BASE_URL}/insurance/api/list-paging-viewmodel?pageIndex=1&Pageize=100&insuranceTypeId=1002`
       )
       .then((response) => {
         const data = response.data.data.filter(

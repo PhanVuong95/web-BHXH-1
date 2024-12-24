@@ -14,7 +14,7 @@ interface Props {
 
 const PrivacyPolicyPage = (props: Props) => {
   return (
-    <div>
+    <div className="pt-3 md:pt-6 lg:pt-6">
       {!props.hideHeader && (
         <HeaderTitle links={[{ title: "Tài liệu Bảo hiểm Xã hội" }]} />
       )}

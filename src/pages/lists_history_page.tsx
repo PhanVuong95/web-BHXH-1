@@ -4,6 +4,7 @@ import { ListsHistoryPageProps } from "../models";
 import axios from "axios";
 import { PulseLoader } from "react-spinners";
 import logo from "../assets-src/logo1.png";
+import { BASE_URL } from "../utils/constants";
 
 // Define an interface for the order item
 interface OrderItem {
@@ -31,7 +32,7 @@ const ListsHistoryPage: React.FC<ListsHistoryPageProps> = ({ onBack }) => {
   useEffect(() => {
     axios
       .get(
-        "https://baohiem.dion.vn/insuranceorder/api/list-by-insuranceId?insuranceId=1001",
+        `${BASE_URL}/insuranceorder/api/list-by-insuranceId?insuranceId=1001`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import CardNewPages from "../components/card_new_page";
 import { useEffect, useState } from "react";
 import { Post } from "../models";
+import { BASE_URL } from "../utils/constants";
 
 const HomePage = () => {
   // const navigate = useNavigate();
@@ -28,7 +29,7 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://baohiem.dion.vn/post/api/listPaging-post?pageIndex=${pageIndex}&pageSize=${pageSize}`
+          `${BASE_URL}/post/api/listPaging-post?pageIndex=${pageIndex}&pageSize=${pageSize}`
         );
         const jsonData = await response.json();
 
@@ -273,58 +274,6 @@ const HomePage = () => {
           </div>
           <div>
             <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-[25px]">
-              {/* <Swiper
-              slidesPerView={1.1}
-              spaceBetween={20}
-              loop={true}
-              breakpoints={{
-                375: {
-                  slidesPerView: 1.1,
-                },
-                414: {
-                  slidesPerView: 1.2,
-                },
-                768: {
-                  slidesPerView: 2.2,
-                },
-                1024: {
-                  slidesPerView: 3.6,
-                },
-              }}
-              pagination={{
-                clickable: true,
-              }}
-              className="mySwiper"
-            >
-              <SwiperSlide>
-                <CardNewPage />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardNewPage />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardNewPage />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardNewPage />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardNewPage />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardNewPage />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardNewPage />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardNewPage />
-              </SwiperSlide>
-              <SwiperSlide>
-                <CardNewPage />
-              </SwiperSlide>
-            </Swiper> */}
-
               {posts.length > 0 ? (
                 posts.map((post, index) => (
                   <CardNewPages post={post} index={index + 1} />

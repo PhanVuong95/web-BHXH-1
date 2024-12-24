@@ -23,7 +23,7 @@ import Modal from "react-modal";
 import Lottie from "lottie-react";
 import lottieScanQR from "../assets-src/lottie_scan_qr.json";
 import { motion } from "framer-motion";
-import { BenefitLevevlList } from "../utils/constants";
+import { BASE_URL, BenefitLevevlList } from "../utils/constants";
 import { toast } from "react-toastify";
 
 dayjs.locale("vi");
@@ -86,12 +86,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   );
 
   const [newCardStartDate, setNewCardStartDate] = useState<any>(
-    registerInfoBHYT["listInsuredPerson"][index].newCardStartDate == ""
-      ? ""
-      : dayjs(
-          registerInfoBHYT["listInsuredPerson"][index].newCardStartDate.trim(),
-          "DD/MM/YYYY"
-        )
+    formatDate(new Date())
   );
   const frontImageInputRef = useRef<HTMLInputElement>(null);
   const backImageInputRef = useRef<HTMLInputElement>(null);
@@ -176,7 +171,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   // Load lại tất cả danh sách tỉnh thành
   useEffect(() => {
     axios
-      .get("https://baohiem.dion.vn/province/api/list")
+      .get(`${BASE_URL}/province/api/list`)
       .then((response) => {
         // Load tỉnh thành thường trú người tham gia
         ttProvinces.current = response.data.data;
@@ -195,7 +190,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   useEffect(() => {
     axios
-      .get(`https://baohiem.dion.vn/VungLuongToiThieu/api/List`)
+      .get(`${BASE_URL}/VungLuongToiThieu/api/List`)
       .then((response) => {
         setVungLuongToiThieuList(response.data.data);
       })
@@ -214,7 +209,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     if (selectedKSProvince !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
+          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
         )
         .then((response) => {
           ksDistricts.current = response.data.data;
@@ -240,7 +235,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     if (selectedKSDistrict !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
+          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
         )
         .then((response) => {
           ksWards.current = response.data.data;
@@ -263,7 +258,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     if (selectedTTProvince !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/district/api/list-by-provinceId?provinceId=${selectedTTProvince}`
+          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTProvince}`
         )
         .then((response) => {
           ttDistricts.current = response.data.data;
@@ -287,7 +282,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     if (selectedTTDistrict !== 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/ward/api/list-by-districtId?districtId=${selectedTTDistrict}`
+          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTDistrict}`
         )
         .then((response) => {
           ttWards.current = response.data.data;
@@ -307,7 +302,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     if (medicalProvinceId != "0" || medicalProvinceId != 0) {
       axios
         .get(
-          `https://baohiem.dion.vn/hospital/api/list-hospital-by-provinceId?provinceId=${medicalProvinceId}`
+          `${BASE_URL}/hospital/api/list-hospital-by-provinceId?provinceId=${medicalProvinceId}`
         )
         .then((response) => {
           setListHospitals(response.data.data);
@@ -323,7 +318,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   //   if (medicalDistrictId != "0" || medicalDistrictId != 0) {
   //     axios
   //       .get(
-  //         `https://baohiem.dion.vn/hospital/api/list-hospital-by-districtId?districtId=${medicalDistrictId}`
+  //         `${BASE_URL}/hospital/api/list-hospital-by-districtId?districtId=${medicalDistrictId}`
   //       ).then((response) => {
   //         setListHospitals(response.data.data);
   //       })
@@ -346,7 +341,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
       try {
         const response = await axios.post(
-          "https://baohiem.dion.vn/account/api/upload-file",
+          `${BASE_URL}/account/api/upload-file`,
           formData,
           {
             headers: {
@@ -447,7 +442,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     };
     try {
       const response = await axios.post(
-        "https://baohiem.dion.vn/InsuranceOrder/api/search-social-insurance-number",
+        `${BASE_URL}/InsuranceOrder/api/search-social-insurance-number`,
         data,
         {
           headers: {
@@ -847,7 +842,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
                 <div className="icon-1">
                   {photoCitizenFront ? (
                     <img
-                      src={`https://baohiem.dion.vn${photoCitizenFront}`}
+                      src={`${BASE_URL}${photoCitizenFront}`}
                       alt="Mặt trước"
                       className="w-[100%] h-[100px] object-center rounded-lg"
                     />
@@ -928,7 +923,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
                   <div className="icon-1">
                     {photoCitizenBack ? (
                       <img
-                        src={`https://baohiem.dion.vn${photoCitizenBack}`}
+                        src={`${BASE_URL}${photoCitizenBack}`}
                         alt="Mặt sau"
                         className="w-[100%] h-[100px] object-center rounded-lg"
                       />
@@ -1333,6 +1328,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
         <Modal
           isOpen={isUploadingPhotoCitizenFont || isUploadingPhotoCitizenBack}
           style={styleModal}
+          ariaHideApp={false}
         >
           <div className="w-[400px] h-[750px] relative flex justify-center items-center">
             <FadeLoader height={10} width={3} loading={true} color="#ffffff" />
@@ -1662,6 +1658,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
         <Modal
           isOpen={isShowModalbenefitLevel}
+          ariaHideApp={false}
           onRequestClose={() => setIsShowModalbenefitLevel(false)}
           style={{
             content: {
@@ -1739,7 +1736,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
         {renderLine()}
 
         {/* Thẻ mới */}
-        {renderBoxNewCard()}
+        {/* {renderBoxNewCard()} */}
       </div>
 
       <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">

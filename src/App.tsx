@@ -20,7 +20,6 @@ import HistoryUnpaidPage from "./components/history_unpaid";
 import ContractPage from "./pages/contract_page";
 import HistoryPage from "./pages/history_page";
 import UserPage from "./pages/user_page";
-import LoginPage from "./pages/login_page";
 import PrivacyPolicyPage from "./components/privacy_policy";
 import LuckUpBHXH from "./pages/luckup_bhxh";
 import { useEffect, useState } from "react";
@@ -28,6 +27,9 @@ import CardNewDetailPages from "./components/CardNewDetailPages";
 import ToolSupportPage from "./pages/tool_support_page";
 import RegisterPage from "./pages/auth/register_page";
 import ForgotPasswordPage from "./pages/auth/forgot_password_page";
+import { ModalLoginProvider } from "./context/auth_context";
+import VerifyAccountPage from "./pages/common/verify_account_page";
+import { ProfileProvider } from "./components/user_profile_context";
 
 function App() {
   const [, setUser] = useState<any>(null);
@@ -82,7 +84,16 @@ function App() {
         theme="light"
       />
       <Routes>
-        <Route path="/" element={<LayoutPage key="layout" />}>
+        <Route
+          path="/"
+          element={
+            <ModalLoginProvider>
+              <ProfileProvider>
+                <LayoutPage key="layout" />
+              </ProfileProvider>
+            </ModalLoginProvider>
+          }
+        >
           <Route index element={<HomePage />} />
           <Route path="contract" element={<ContractPage />} />
           <Route
@@ -103,7 +114,7 @@ function App() {
               />
             }
           />
-          <Route path="/login" element={<LoginPage />} />
+          {/* <Route path="/login" element={<LoginPage />} /> */}
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route
@@ -188,6 +199,10 @@ function App() {
           <Route path="luckup-bhxh" element={<LuckUpBHXH />} />
           <Route path="new-detail/:id" element={<CardNewDetailPages />} />
           <Route path="tool-support" element={<ToolSupportPage />} />
+          <Route
+            path="xac-thuc-tai-khoan-thanh-cong"
+            element={<VerifyAccountPage />}
+          />
         </Route>
       </Routes>
     </>

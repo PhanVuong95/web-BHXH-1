@@ -17,6 +17,12 @@
           "-moz-appearance"
         ]
       }
+    ],
+    "axe/name-role-value": [
+      "default",
+      {
+        "link-name": "off"
+      }
     ]
   }
 }
