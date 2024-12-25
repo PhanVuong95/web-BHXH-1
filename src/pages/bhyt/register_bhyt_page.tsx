@@ -533,11 +533,11 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
         }
       }
 
-      if (registerInfoBHYT["listInsuredPerson"][index].newCardStartDate == "") {
-        toast.warn("Ngày hiệu lực của thẻ mới không được để trống");
-        scrollToElement(beneficiaries[index].newCardStartDate, 2);
-        return false;
-      }
+      // if (registerInfoBHYT["listInsuredPerson"][index].newCardStartDate == "") {
+      //   toast.warn("Ngày hiệu lực của thẻ mới không được để trống");
+      //   scrollToElement(beneficiaries[index].newCardStartDate, 2);
+      //   return false;
+      // }
 
       // if (registerInfoBHYT['listInsuredPerson'][index].insuranceProvinceId == 0) {
       //   toast.warn(
