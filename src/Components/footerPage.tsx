@@ -63,15 +63,15 @@ const FooterPage = () => {
             </div>
           </div>
           <div className="footer-top-2 footer-top-col flex flex-col gap-4">
-            <h3 className="text-[20px] text-white font-semibold">
+            <h3 className="text-[20px] text-white font-bold">
               Đăng ký nhận tin
             </h3>
             <div className="input-email">
-              <p className="text-base text-white pb-2 w-full max-w-[375px]">
+              <p className="text-[16px] font-light text-white pb-2 w-full max-w-[375px]">
                 Gửi Email của bạn để nhận được những thông tin mới nhất từ chúng
                 tôi
               </p>
-              <div className="email-input">
+              <div className="email-input mt-3">
                 <div className="relative">
                   <input
                     type="email"
@@ -124,14 +124,18 @@ const FooterPage = () => {
                   </div>
 
                   <div>
-                    <p>Địa chỉ: D27 Dreamland - 107 Xuân La,</p>
-                    <p>Phường Xuân Tảo, Quận Bắc Từ Liêm, Hà Nội</p>
+                    <p className="text-[16px] font-light text-white pb-2 w-full max-w-[375px]">
+                      Địa chỉ: D27 Dreamland - 107 Xuân La,
+                    </p>
+                    <p className="text-[16px] font-light text-white pb-2 w-full max-w-[375px]">
+                      Phường Xuân Tảo, Quận Bắc Từ Liêm, Hà Nội
+                    </p>
                   </div>
                 </Link>
 
                 <Link
                   to="phone:info@audi.vn"
-                  className="flex flex-row gap-1 items-center"
+                  className="flex flex-row gap-1 items-center mt-1"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -157,12 +161,14 @@ const FooterPage = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                  <span>Hotline: 190088807</span>
+                  <span className="text-[16px] font-light text-white w-full max-w-[375px]">
+                    Hotline: 190088807
+                  </span>
                 </Link>
 
                 <Link
                   to="mailto:info@baohiem.app"
-                  className="flex flex-row gap-1 items-center"
+                  className="flex flex-row gap-1 items-center mt-1"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -188,17 +194,18 @@ const FooterPage = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                  <span>Email: info@baohiem.app</span>
+                  <span className="text-[16px] items-center font-light text-white w-full max-w-[375px]">
+                    Email: info@baohiem.app
+                  </span>
                 </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="footer-bot bg-black text-center py-2">
-        <p>
-          <span className="text-[#fffff]">©</span> CÔNG TY CỔ PHẦN PHÁT TRIỂN
-          CÔNG NGHỆ SỐ DNP. Powered by
+      <div className="footer-bot bg-black text-center p-3">
+        <p className="text-[#fffff] font-extralight">
+          <span>©</span> CÔNG TY CỔ PHẦN PHÁT TRIỂN CÔNG NGHỆ SỐ DNP. Powered by
           <a target="_blank" rel="noopener noreferrer" href="https://dion.vn/">
             {" "}
             Dion.vn

@@ -10,6 +10,11 @@ import type { GetProps } from "antd";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
+import {
+  isValidEmptyString,
+  isValidPassword,
+} from "../../utils/validate_string";
+import { useNavigate } from "react-router-dom";
 type OTPProps = GetProps<typeof Input.OTP>;
 
 const ForgotPasswordPage = () => {
@@ -18,7 +23,12 @@ const ForgotPasswordPage = () => {
   const [userName, setUserName] = useState("");
   const [isLoadingSendOTP, setIsLoadingSendOTP] = useState(false);
   const [otp, setOtp] = useState("");
-  const [isLoadingcheckOTP, setIsLoadingCheckOTP] = useState(false);
+  const [isLoadingCheckOTP, setIsLoadingCheckOTP] = useState(false);
+  const [isValidateOTPSuccess, setValidateOTPSuccess] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const onChange: OTPProps["onChange"] = (text) => {
     console.log("onChange:", text);
@@ -34,9 +44,138 @@ const ForgotPasswordPage = () => {
   };
 
   const onSendOTP = async () => {
-    setIsLoadingSendOTP(true);
+    try {
+      setIsLoadingSendOTP(true);
+
+      const response = await axios.post(
+        `${BASE_URL}/account/api/send-forgot-password?value=${userName}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      switch (response.data.status) {
+        case "204":
+          toast.info("OTP đã được gửi");
+          break;
+        case "404":
+          toast.info("Email hoặc số điện thoại không hợp lệ");
+          break;
+        case "003":
+          toast.info("Email không tồn tại");
+          break;
+        case "002":
+          toast.info("Số điện thoại không tồn tại");
+          break;
+        case "001":
+          toast.info("Gửi SMS thất bại");
+          break;
+        case "200":
+          if (response.data.data[0] == "SEND_SMS_SUCCESS") {
+            toast.success("Gửi SMS OTP thành công");
+            setIsShowModalOTP(true);
+          }
+          if (response.data.data[0] == "SEND_EMAIL_SUCCESS") {
+            toast.success("Gửi Email OTP thành công");
+          }
+          break;
+
+        default:
+          toast.info("Gửi SMS thất bại");
+          break;
+      }
+
+      setIsLoadingSendOTP(false);
+    } catch (error) {
+      setIsLoadingSendOTP(false);
+    }
+  };
+
+  const checkOTP = async () => {
+    if (otp.length == 6) {
+      try {
+        setIsLoadingCheckOTP(true);
+
+        const response = await axios.post(
+          `${BASE_URL}/Account/api/check-otp?value=${otp}&phone=${userName}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.data.status != "200") {
+          setOtp("");
+        }
+
+        switch (response.data.status) {
+          case "200":
+            toast.success(
+              "Xác thực OTP thành công, Vui lòng thay đổi mật khẩu bên dưới"
+            );
+            setIsShowModalOTP(false);
+            setValidateOTPSuccess(true);
+            break;
+          case "099":
+            toast.info("Nhập sai OTP quá nhiều lần");
+
+            break;
+          case "098":
+            toast.info("OTP không chính xác");
+            break;
+          case "003":
+            toast.info("Số điện thoại không tồn tài");
+            break;
+          case "006":
+            toast.info("Nhập sai OTP quá nhiều lần");
+            break;
+          case "005":
+            toast.info("OTP đã hết hạn");
+            break;
+          case "004":
+            toast.info("OTP không chính xác");
+            break;
+          default:
+            toast.info("Xác thực OTP thất bại");
+            break;
+        }
+
+        setIsLoadingCheckOTP(false);
+      } catch (error) {}
+    } else {
+      setOtp("");
+      toast.info("Vui lòng nhập đầy đủ OTP");
+      setIsLoadingCheckOTP(false);
+    }
+  };
+
+  const validateFormChangePassword = () => {
+    if (!isValidEmptyString(password)) {
+      toast.info("Mật khẩu không được để trống");
+      return false;
+    }
+
+    if (!isValidPassword(password)) {
+      toast.warning(
+        "Mật khẩu phải ít nhất 8 ký tự, chữ in hoa, chữ thường, số"
+      );
+      return false;
+    }
+
+    if (confirmPassword != password) {
+      toast.warning("Mật khẩu không trùng khớp");
+      return false;
+    }
+
+    return true;
+  };
+
+  const onSubmitChangePassword = async () => {
     const response = await axios.post(
-      `${BASE_URL}/account/api/send-forgot-password?value=${userName}`,
+      `${BASE_URL}/Account/api/reset-password?newPassword=${password}&value=${otp}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -44,36 +183,13 @@ const ForgotPasswordPage = () => {
       }
     );
 
-    if (response.data.status == "204") {
-      toast.info("OTP đã được gửi");
-    } else if (response.data.status == "003") {
-      toast.info("Email không tồn tại");
-    } else if (response.data.status == "002") {
-      toast.info("Số điện thoại không tồn tại");
-    } else if (response.data.status == "001") {
-      toast.info("Gửi SMS thất bại");
-    } else if (
-      response.data.status == "200" &&
-      response.data.data[0] == "SEND_SMS_SUCCESS"
-    ) {
-      toast.info("Gửi SMS OTP thành công");
-      setIsShowModalOTP(true);
-    } else if (
-      response.data.status == "200" &&
-      response.data.data[0] == "SEND_EMAIL_SUCCESS"
-    ) {
-      toast.info("Gửi Email OTP thành công");
+    if (response.data.status == "200") {
+      toast.success("Đổi mật khẩu thành công");
+      navigate("/");
     }
 
-    setIsLoadingSendOTP(false);
-  };
-
-  const checkOTP = () => {
-    if (otp.length == 6) {
-      try {
-      } catch (error) {}
-    } else {
-      toast.info("Vui lòng nhập đầy đủ OTP");
+    if (response.data.status != "200") {
+      toast.success("Đổi mật khẩu thất bại, vui lòng thử lại sau");
     }
   };
 
@@ -128,10 +244,11 @@ const ForgotPasswordPage = () => {
           />
 
           <Button
+            loading={isLoadingCheckOTP}
             onClick={() => {
-              setIsShowModalOTP(false);
+              checkOTP();
             }}
-            className="cursor-pointer text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-normal rounded-[10px]"
+            className="cursor-pointer h-[44px] text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-normal rounded-[10px]"
           >
             Xác thực
           </Button>
@@ -145,8 +262,8 @@ const ForgotPasswordPage = () => {
       <HeaderTitle links={[{ title: "Quên mật khẩu" }]} />
 
       <div className="container flex flex-col md:flex-col lg:flex-row gap-8 mx-auto py-[0px] md:py-[30px] lg:py-[40px] max-w-[1280px]">
-        <div className="flex-[6] hidden md:hidden lg:block  flex flex-col w-[50%] h-[700px] pt-[100px]">
-          <Carousel infinite draggable className="custom-carousel h-[500px]">
+        <div className="flex-[6] hidden md:hidden lg:block  flex flex-col w-[50%] h-[300px] pt-[100px]">
+          <Carousel infinite draggable className="custom-carousel h-[300px]">
             {listImageSlider.map((item) => {
               return (
                 <div className="flex justify-center items-center h-full">
@@ -154,7 +271,7 @@ const ForgotPasswordPage = () => {
                     alt=""
                     className="mx-auto"
                     src={item}
-                    width={448}
+                    width={300}
                     height={345}
                   />
                 </div>
@@ -172,75 +289,87 @@ const ForgotPasswordPage = () => {
             Quên mật khẩu
           </h2>
 
-          <div className="w-full">
-            <label className="block text-sm font-light text-gray-900 pb-3">
-              Email hoặc số điện thoại đăng ký{" "}
-              <samp className="text-red-600">*</samp>
-            </label>
-            <Input
-              type="text"
-              className="text-gray-900 h-[48px] text-sm rounded-lg block w-full p-3 custom-input"
-              style={{
-                border: 0,
-                backgroundColor: "#F7F6FB",
-              }}
-              placeholder="Nhập email của bạn"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
-          </div>
-          <Button
-            loading={isLoadingSendOTP}
-            onClick={() => {
-              if (userName == "") {
-                toast.warning("Vui lòng nhập Email hoặc số điện thoại");
-                return;
-              }
-              // Gửi yêu cầu
-              onSendOTP();
-            }}
-            className="w-[180px] h-[44px] py-2 px-[15px] md:px-[15px] lg:px-[15px] rounded-lg  text-[15px] font-medium text-[#0076B7] border-[1px] border-[#0077D5]"
-          >
-            Xác thực
-          </Button>
+          {!isValidateOTPSuccess ? (
+            <div className="flex flex-col gap-4">
+              <div className="w-full">
+                <label className="block text-sm font-light text-gray-900 pb-3">
+                  Email hoặc số điện thoại đăng ký{" "}
+                  <samp className="text-red-600">*</samp>
+                </label>
+                <Input
+                  type="text"
+                  className="text-gray-900 h-[48px] text-sm rounded-lg block w-full p-3 custom-input"
+                  style={{
+                    border: 0,
+                    backgroundColor: "#F7F6FB",
+                  }}
+                  placeholder="Nhập email của bạn"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+              </div>
+              <Button
+                loading={isLoadingSendOTP}
+                onClick={() => {
+                  if (userName == "") {
+                    toast.warning("Vui lòng nhập Email hoặc số điện thoại");
+                    return;
+                  }
+                  // Gửi yêu cầu
+                  onSendOTP();
+                }}
+                className="w-[180px] h-[44px] py-2 px-[15px] md:px-[15px] lg:px-[15px] rounded-lg  text-[15px] font-medium text-[#0076B7] border-[1px] border-[#0077D5]"
+              >
+                Xác thực
+              </Button>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-4">
+              <div className="w-full">
+                <label className="block text-sm font-light text-gray-900 pb-3">
+                  Mật khẩu <span className="text-red-600">*</span>
+                </label>
+                <Input.Password
+                  className="text-gray-900 h-[48px] text-sm rounded-lg  w-full p-3 custom-input"
+                  style={{
+                    border: "none",
+                    backgroundColor: "#F7F6FB",
+                    borderRadius: "8px",
+                  }}
+                  placeholder="Nhập mật khẩu của bạn"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="w-full">
+                <label className="block text-sm font-light text-gray-900 pb-3">
+                  Xác nhận mật khẩu mới <samp className="text-red-600">*</samp>
+                </label>
+                <Input.Password
+                  className="text-gray-900 h-[48px] text-sm rounded-lg w-full p-3 custom-input"
+                  style={{
+                    border: 0,
+                    backgroundColor: "#F7F6FB",
+                    borderRadius: "8px",
+                  }}
+                  placeholder="Nhập lại mật khẩu"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </div>
 
-          {/* <div className="w-full">
-            <label className="block text-sm font-light text-gray-900 pb-3">
-              Mật khẩu <span className="text-red-600">*</span>
-            </label>
-            <Input.Password
-              className="text-gray-900 h-[48px] text-sm rounded-lg  w-full p-3 custom-input"
-              style={{
-                border: "none",
-                backgroundColor: "#F7F6FB",
-                borderRadius: "8px",
-              }}
-              placeholder="Nhập mật khẩu của bạn"
-            />
-          </div>
-          <div className="w-full">
-            <label className="block text-sm font-light text-gray-900 pb-3">
-              Xác nhận mật khẩu mới <samp className="text-red-600">*</samp>
-            </label>
-            <Input.Password
-              className="text-gray-900 h-[48px] text-sm rounded-lg w-full p-3 custom-input"
-              style={{
-                border: 0,
-                backgroundColor: "#F7F6FB",
-                borderRadius: "8px",
-              }}
-              placeholder="Nhập lại mật khẩu"
-            />
-          </div> */}
-
-          {/* <button
-            onClick={() => {
-              setIsShowModalOTP(true);
-            }}
-            className="cursor-pointer text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-normal rounded-[10px]"
-          >
-            Hoàn tất
-          </button> */}
+              <button
+                onClick={() => {
+                  if (validateFormChangePassword()) {
+                    onSubmitChangePassword();
+                  }
+                }}
+                className="cursor-pointer text-center text-[12px] sm:text-[15px] p-[10px] sm:px-[40px] sm:py-[12px] text-white bg-[#0077D5] font-normal rounded-[10px]"
+              >
+                Hoàn tất
+              </button>
+            </div>
+          )}
 
           <div className="flex flex-col flex-grow justify-end mt-20">
             <div className="flex items-center justify-center">

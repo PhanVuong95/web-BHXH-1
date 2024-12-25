@@ -19,7 +19,7 @@ import CheckStatusProcedure from "./pages/check_status_procedure";
 import HistoryUnpaidPage from "./components/history_unpaid";
 import ContractPage from "./pages/contract_page";
 import HistoryPage from "./pages/history_page";
-import UserPage from "./pages/user_page";
+import UserPage from "./pages/user/user_page";
 import PrivacyPolicyPage from "./components/privacy_policy";
 import LuckUpBHXH from "./pages/luckup_bhxh";
 import { useEffect, useState } from "react";
@@ -30,6 +30,7 @@ import ForgotPasswordPage from "./pages/auth/forgot_password_page";
 import { ModalLoginProvider } from "./context/auth_context";
 import VerifyAccountPage from "./pages/common/verify_account_page";
 import { ProfileProvider } from "./components/user_profile_context";
+import ChangePasswordPage from "./pages/auth/change_password_page";
 
 function App() {
   const [, setUser] = useState<any>(null);
@@ -203,6 +204,7 @@ function App() {
             path="xac-thuc-tai-khoan-thanh-cong"
             element={<VerifyAccountPage />}
           />
+          <Route path="/quen-mat-khau" element={<ChangePasswordPage />} />
         </Route>
       </Routes>
     </>

@@ -44,7 +44,7 @@ export interface User {
 }
 
 export interface MyComponentProps {
-  handleNext: () => void; // Define the type for handleNext
+  handleNext: () => void;
 }
 
 export interface HistoryPageProps {
