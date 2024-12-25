@@ -6,7 +6,7 @@ const CardNewPages: React.FC<CardNewPagesProps> = ({ post }) => {
   return (
     <div className="card_new_page">
       <img
-        className="aspect-[3/2] object-cover"
+        className="h-[200px] w-[100%] object-cover"
         src={(post as any).photo ? (post as any).photo : imgSlider}
         alt="img-slider"
       />
@@ -25,7 +25,7 @@ const CardNewPages: React.FC<CardNewPagesProps> = ({ post }) => {
             {post.description}
           </p>
           <Link to={`/new-detail/${post.id}`} className="link-button">
-            <p>Xem thêm</p>
+            <p className="text-[16px] text-[#0076B7]">Xem thêm</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"

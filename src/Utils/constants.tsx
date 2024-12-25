@@ -147,3 +147,11 @@ export const RoleAccount = {
   USER: "1002",
   CTV: "1003",
 };
+
+export const RoleName = {
+  "1001": "Admin",
+  "1002": "Người dùng",
+  "1003": "Cộng tác viên",
+};
+
+export type RoleNameKey = keyof typeof RoleName;

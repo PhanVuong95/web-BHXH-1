@@ -235,11 +235,11 @@ const RegisterPage = () => {
             width: "600px",
             height: "300px",
             overflow: "auto",
-            zIndex: 100000,
+            zIndex: 100,
             boxShadow: "0px 4px 60px 0px rgba(0, 0, 0, 0.5)",
           },
           overlay: {
-            zIndex: 99999,
+            zIndex: 99,
             backgroundColor: "rgba(0, 0, 0, 0.5)",
           },
         }}
@@ -283,11 +283,11 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="pt-3 md:pt-6 lg:pt-6">
+    <div className="md:pt-6 lg:pt-6">
       <HeaderTitle links={[{ title: "Đăng ký" }]} />
 
-      <div className="container flex gap-8 mx-auto py-[0px] md:py-[30px] lg:py-[40px] max-w-[1280px]">
-        <div className="flex-[6] flex flex-col w-[50%] h-[700px] pt-[100px]">
+      <div className="container flex flex-col md:flex-col lg:flex-row gap-8 mx-auto py-[0px] md:py-[30px] lg:py-[40px] max-w-[1280px]">
+        <div className="flex-[6] hidden md:hidden lg:block  flex flex-col w-[50%] h-[700px] pt-[100px]">
           <Carousel infinite draggable className="custom-carousel h-[500px]">
             {listImageSlider.map((item, index) => {
               return (
@@ -306,7 +306,7 @@ const RegisterPage = () => {
           </Carousel>
         </div>
         <div
-          className="flex-[6] flex flex-col gap-[20px] p-[40px] bg-[white] rounded-[8px]"
+          className="flex-[6] flex flex-col gap-[20px] m-4 p-[15px] md:p-[20px] lg:p-[40px] bg-[white] rounded-[8px]"
           style={{
             boxShadow: "0px 4px 60px 0px rgba(0, 0, 0, 0.1)",
           }}
@@ -449,13 +449,6 @@ const RegisterPage = () => {
           >
             Đăng ký
           </Button>
-
-          {/* <div className="flex justify-center mt-4">
-            <div className="text-[16px] font-normal">Bạn đã có tài khoản?</div>
-            <button className="text-[16px] cursor-pointer text-[#2a65c7] font-normal ml-3 underline">
-              Đăng nhập
-            </button>
-          </div> */}
 
           {renderModalOTP()}
         </div>

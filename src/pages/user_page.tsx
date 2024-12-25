@@ -24,7 +24,7 @@ import RegisterPartnerInfoPage from "../components/ctv/register_partnerInfo";
 import ListsHistoryPage from "./lists_history_page";
 import ListHistoryBHYT from "./bhyt/list_history_bhyt_page";
 import PrivacyPolicyPage from "../components/privacy_policy";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL, RoleName, RoleNameKey } from "../utils/constants";
 import { useProfile } from "../components/user_profile_context";
 
 const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
@@ -52,7 +52,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
     if (userProfile == null) {
       navigate("/");
     }
-    setActiveContent(<AccountInfo user={userProfile} />);
+    setActiveContent(<AccountInfo />);
     setActiveButton("Account Info");
   }, [userProfile]);
 
@@ -66,7 +66,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
     setActiveButton(item);
     switch (item) {
       case "Account Info":
-        setActiveContent(<AccountInfo user={userProfile} />);
+        setActiveContent(<AccountInfo />);
         break;
       case "Activities":
         setActiveContent(
@@ -433,7 +433,27 @@ interface AccountInfoProps {
   user: User;
 }
 
-const AccountInfo: React.FC<AccountInfoProps> = ({ user }) => {
+const AccountInfo: React.FC<any> = () => {
+  const [userDetail, setUserDetail] = useState<any>();
+
+  const fetchUserDetail = async () => {
+    const token = localStorage.getItem("accessToken");
+
+    const response = await axios.get(`${BASE_URL}/account/api/get-profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.data.status == "200") {
+      setUserDetail(response.data.data[0]);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserDetail();
+  }, []);
+
   return (
     <section className="rounded-[10px] overflow-hidden">
       <div className="top-account relative">
@@ -445,17 +465,17 @@ const AccountInfo: React.FC<AccountInfoProps> = ({ user }) => {
         <div className="p-[20px] flex flex-row items-center gap-5 bottom-4 md:bottom-8 lg:bottom-8 absolute  left-0">
           <img
             className="rounded-full cursor-pointer border-[2px] border-white w-[50px] md:w-[60px] lg:w-[70px]"
-            src={user && user.photo ? user.photo : users}
+            src={userDetail && userDetail.photo ? userDetail.photo : users}
             alt="avatar-img"
           />
           <div className="user">
             <div className="flex flex-col items-start gap-1">
               <span className="text-white text-[16px] md:text-[18px] lg:text-[20px] font-medium ">
-                {user?.fullName}
+                {userDetail?.fullName}
               </span>
             </div>
             <p className="text-white text-[14px] font-normal float-left phone-user">
-              {user?.phone}
+              {userDetail?.phone}
             </p>
           </div>
         </div>
@@ -465,18 +485,14 @@ const AccountInfo: React.FC<AccountInfoProps> = ({ user }) => {
         <hr className="border-t-3 border-dashed border-gray-400" />
         <div className="flex flex-row max-w-[296px]">
           <div className="w-[50%]">
-            <p className="text-lg font-normal text-[#797D77]">Giới tính</p>
+            <p className="text-lg font-normal text-[#797D77]">Họ và tên</p>
           </div>
           <div className="w-[50%]">
-            <p className="text-lg font-normal text-black"> {user?.fullName}</p>
-          </div>
-        </div>
-        <div className="flex flex-row max-w-[296px]">
-          <div className="w-[50%]">
-            <p className="text-lg font-normal text-[#797D77]">Ngày sinh</p>
-          </div>
-          <div className="w-[50%]">
-            {/* <p className="text-lg font-normal text-black">{user?.fullName}</p> */}
+            <p className="text-lg font-normal text-black">
+              {!isValidEmptyString(userDetail?.fullName)
+                ? "Chưa cập nhật"
+                : userDetail?.fullName}
+            </p>
           </div>
         </div>
         <div className="flex flex-row max-w-[296px]">
@@ -484,7 +500,48 @@ const AccountInfo: React.FC<AccountInfoProps> = ({ user }) => {
             <p className="text-lg font-normal text-[#797D77]">Điện thoại</p>
           </div>
           <div className="w-[50%]">
-            {/* <p className="text-lg font-normal text-black">+81 0364 123 456</p> */}
+            <p className="text-lg font-normal text-black">
+              {!isValidEmptyString(userDetail?.phone)
+                ? "Chưa cập nhật"
+                : userDetail?.phone}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-row max-w-[296px]">
+          <div className="w-[50%]">
+            <p className="text-lg font-normal text-[#797D77]">Email</p>
+          </div>
+          <div className="w-[50%]">
+            <p className="text-lg font-normal text-black">
+              {!isValidEmptyString(userDetail?.email)
+                ? "Chưa cập nhật"
+                : userDetail?.email}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-row max-w-[296px]">
+          <div className="w-[50%]">
+            <p className="text-lg font-normal text-[#797D77]">Địa chỉ</p>
+          </div>
+          <div className="w-[50%]">
+            <p className="text-lg font-normal text-black">
+              {!isValidEmptyString(userDetail?.addressDetail)
+                ? "Chưa cập nhật"
+                : userDetail?.addressDetail}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-row max-w-[296px]">
+          <div className="w-[50%]">
+            <p className="text-lg font-normal text-[#797D77]">Loại tài khoản</p>
+          </div>
+          <div className="w-[50%]">
+            <p className="text-lg font-normal text-black">
+              {RoleName[userDetail?.roleId.toString() as RoleNameKey]}
+            </p>
           </div>
         </div>
       </div>

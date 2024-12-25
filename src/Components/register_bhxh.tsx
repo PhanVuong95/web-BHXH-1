@@ -3920,7 +3920,7 @@ const RegisterBHXH = () => {
           }
           style={styleModal}
         >
-          <div className="w-[400px] h-[750px] relative flex justify-center items-center">
+          <div className="w-[2560px] h-[1050px] relative flex justify-center items-center">
             <FadeLoader height={10} width={3} loading={true} color="#ffffff" />
           </div>
         </Modal>

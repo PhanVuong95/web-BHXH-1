@@ -1311,7 +1311,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "rgba(0, 0, 0, 0.3)",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
       border: "none",
       padding: 0,
       display: "flex",
@@ -1331,7 +1331,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           style={styleModal}
           ariaHideApp={false}
         >
-          <div className="w-[400px] h-[750px] relative flex justify-center items-center">
+          <div className="w-[2560px] h-[1050px] relative flex justify-center items-center">
             <FadeLoader height={10} width={3} loading={true} color="#ffffff" />
           </div>
         </Modal>
@@ -1663,21 +1663,21 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           onRequestClose={() => setIsShowModalbenefitLevel(false)}
           style={{
             content: {
-              top: "50%",
+              top: "55%",
               left: "50%",
               right: "auto",
               bottom: "auto",
               marginRight: "-50%",
               transform: "translate(-50%, -50%)",
-              backgroundColor: "rgba(0, 0, 0, 0.3)",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
               border: "none",
               padding: 0,
-              width: "90%",
-              height: "75%",
+              maxWidth: "700px",
+              maxHeight: "80%",
               overflow: "auto",
             },
             overlay: {
-              backgroundColor: "rgba(0, 0, 0, 0.3)",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
             },
           }}
         >

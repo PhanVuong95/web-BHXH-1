@@ -292,7 +292,7 @@ const HeaderPage = () => {
             </label>
             <Input
               type="text"
-              className="text-gray-900 h-[48px] text-sm rounded-lg block w-full p-3 custom-input"
+              className="text-gray-900  h-[40px] md:h-[48px] lg:h-[48px] text-sm rounded-lg block w-full p-3 custom-input"
               style={{
                 border: 0,
                 backgroundColor: "#F7F6FB",
@@ -310,7 +310,7 @@ const HeaderPage = () => {
               Mật khẩu <span className="text-red-600">*</span>
             </label>
             <Input.Password
-              className="text-gray-900 h-[48px] text-sm rounded-lg  w-full p-3 custom-input"
+              className="text-gray-900 h-[40px] md:h-[48px] lg:h-[48px] text-sm rounded-lg  w-full p-3 custom-input"
               style={{
                 border: "none",
                 backgroundColor: "#F7F6FB",
@@ -390,7 +390,7 @@ const HeaderPage = () => {
         onClick={handleCustomGoogleClick}
         className="flex w-full items-center justify-center bg-[#F7F6FB] py-[10px] rounded-[10px]"
       >
-        <span className="mr-2">Tiếp tục với Google</span>
+        <span className="mr-2 text-[15px]">Tiếp tục với Google</span>
         <img alt="" src={google} width={20} height={20} />
       </button>
     );
@@ -404,7 +404,7 @@ const HeaderPage = () => {
         }}
         className="flex  w-full items-center justify-center bg-[#F7F6FB]  py-[10px] rounded-[10px]"
       >
-        <span className="mr-2">Tiếp tục với Zalo</span>
+        <span className="mr-2 text-[15px]">Tiếp tục với Zalo</span>
         <img alt="" src={zalo} width={20} height={20} />
       </button>
     );
@@ -418,7 +418,7 @@ const HeaderPage = () => {
         }}
         className="flex  w-full items-center justify-center bg-[#F7F6FB]  py-[10px] rounded-[10px]"
       >
-        <span className="mr-2">Đăng nhập với tài khoản</span>
+        <span className="mr-2 text-[15px]">Đăng nhập với tài khoản</span>
       </button>
     );
   };
@@ -440,22 +440,27 @@ const HeaderPage = () => {
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             border: "none",
             padding: 0,
-            width: "600px",
+            maxWidth: "600px",
             overflow: "auto",
-            zIndex: 100000,
+            zIndex: 100,
           },
           overlay: {
+            zIndex: 99,
             backgroundColor: "rgba(0, 0, 0, 0.5)",
           },
         }}
       >
-        <div className="flex flex-col p-8 w-[100%] h-[100%] relative bg-white gap-5">
+        <div className="flex flex-col p-4 md:p-8 ld:p-8 w-[380px]  md:w-[600px] lg:w-[600px] h-[100%] relative bg-white gap-5 rounded-lg">
           <div className="flex items-center justify-center">
-            <img alt="" src={logo} width={60} height={60} />
+            <img
+              alt=""
+              src={logo}
+              className="w-[50px] md:w-[60px] lg:w-[60px] h-[50px] md:h-[60px] lg:h-[60px]"
+            />
             <div className="font-bold ml-4 text-[#0077D5]">Nộp BHXH</div>
           </div>
 
-          <div className="flex items-center justify-center text-[20px] font-bold">
+          <div className="flex items-center justify-center text-center text-[15px] md:text-[20px] lg:text-[20px] font-bold">
             Chào mừng bạn đến với Bảo hiểm Việt
           </div>
 
@@ -463,12 +468,12 @@ const HeaderPage = () => {
           {isLoginZalo ? qrLoginZalo() : formLoginAccount()}
 
           {/* btn Login */}
-          <div className="flex justify-between gap-[20px]">
+          <div className="flex flex-col md:flex-row lg:flex-row justify-between gap-[20px]">
             {btnLoginGoogle()}
             {!isLoginZalo ? btnLoginZalo() : btnLoginByAccount()}
           </div>
 
-          <div className="flex justify-center mt-[60px]">
+          <div className="flex justify-center mt-[20px] md:mt-[40px] lg:mt-[60px]">
             <div className="mr-4">Chưa có tài khoản?</div>
             <div
               className="text-[#0077D5] underline cursor-pointer"

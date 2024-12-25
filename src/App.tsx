@@ -65,7 +65,7 @@ function App() {
     <>
       <ToastContainer
         style={{
-          maxWidth: "350px",
+          maxWidth: "380px",
           borderRadius: "20px",
           marginTop: "40px",
         }}
