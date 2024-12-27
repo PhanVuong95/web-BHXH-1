@@ -4102,7 +4102,7 @@ const RegisterBHXH = () => {
     <div className="pt-6">
       <HeaderTitle
         links={[
-          { title: "Khai báo BHXH tự nguyện" },
+          { title: "Mua BHXH tự nguyện" },
           { title: "Đăng ký BHXH Tự nguyện" },
         ]}
       />

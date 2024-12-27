@@ -63,11 +63,11 @@ const HomePage = () => {
                 Tham gia <br /> bảo hiểm xã hội tự nguyện
               </h3>
               <p>
-                Nộp BHXH là nền tảng hỗ trợ nộp bảo hiểm xã hội tự nguyện, bảo
-                hiểm y tế trực tuyến, giúp bạn dễ dàng quản lý và đóng BHXH,
-                BHYT mọi lúc, mọi nơi. Chúng tôi cam kết mang đến sự tiện lợi,
-                minh bạch và an toàn trong từng giao dịch. Đồng hành cùng bạn
-                trong việc xây dựng tương lai bền vững.
+                DNP Điểm Thu BHXH là nền tảng hỗ trợ nộp bảo hiểm xã hội tự
+                nguyện, bảo hiểm y tế trực tuyến, giúp bạn dễ dàng quản lý và
+                đóng BHXH, BHYT mọi lúc, mọi nơi. Chúng tôi cam kết mang đến sự
+                tiện lợi, minh bạch và an toàn trong từng giao dịch. Đồng hành
+                cùng bạn trong việc xây dựng tương lai bền vững.
               </p>
               <button>Xem ngay</button>
             </div>
@@ -276,7 +276,11 @@ const HomePage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-[25px]">
               {posts.length > 0 ? (
                 posts.map((post, index) => (
-                  <CardNewPages post={post} index={index + 1} />
+                  <CardNewPages
+                    key={`CardNewPages_${index}`}
+                    post={post}
+                    index={index + 1}
+                  />
                 ))
               ) : (
                 <p>Không có bài đăng nào.</p>
@@ -288,6 +292,7 @@ const HomePage = () => {
                 display: "flex",
                 justifyContent: "center",
                 marginTop: "20px",
+                gap: "20px",
               }}
             >
               <button
@@ -302,12 +307,16 @@ const HomePage = () => {
                   key={i}
                   onClick={() => handlePageChange(i + 1)}
                   style={{
-                    margin: "0 5px",
-                    padding: "5px 10px",
-                    backgroundColor: pageIndex === i + 1 ? "blue" : "white",
+                    width: "32px",
+                    height: "32px",
+                    fontSize: "14px",
+                    fontWeight: "lighter",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: pageIndex === i + 1 ? "#0077D5" : "white",
                     color: pageIndex === i + 1 ? "white" : "black",
-                    border: "1px solid #ddd",
                     cursor: "pointer",
+                    borderRadius: "32px",
                   }}
                 >
                   {i + 1}

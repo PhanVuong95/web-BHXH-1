@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import users from "../../assets/user.png";
 import HeaderTitle from "../../components/header_title";
 import { useNavigate } from "react-router-dom";
@@ -13,12 +13,19 @@ import RegisterPartnerInfo from "./components/register_partner_info";
 import Guidelines from "./components/guid_lines";
 import PartnerInfo from "./components/partner_info";
 import Activities from "./components/activities";
+import camera from "../../assets/icon/camera.svg";
+import axios from "axios";
+import { BASE_URL } from "../../utils/constants";
+import { toast } from "react-toastify";
+import { validUrlImage } from "../../utils/validate_string";
 
 const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
   const [activeContent, setActiveContent] = useState<React.ReactNode>(null);
   const [activeButton, setActiveButton] = useState<string>("");
   const [currentStep, setCurrentStep] = useState(1);
   const { userProfile, setUserProfile } = useProfile();
+  const changeAvatarInputRef = useRef<HTMLInputElement>(null);
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleNext = () => {
@@ -94,6 +101,61 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
     }
   };
 
+  const onChangeAvatar = () => {
+    if (changeAvatarInputRef?.current) {
+      changeAvatarInputRef.current.click();
+    }
+  };
+
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const token = localStorage.getItem("accessToken");
+
+    const file = event.target.files?.[0];
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        setIsUploadingAvatar(true);
+
+        const response = await axios.post(
+          `${BASE_URL}/account/api/change-avatar`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.data.status == "200") {
+          setUserProfile((prev: any) => {
+            return {
+              ...prev,
+              photo: response.data.data[0].photoUrl,
+            };
+          });
+
+          localStorage.setItem("profile", JSON.stringify(userProfile));
+        } else {
+          console.info("Cập nhật ảnh thất bại");
+        }
+
+        setIsUploadingAvatar(false);
+      } catch (error) {
+        console.info("Cập nhật ảnh thất bại");
+        setIsUploadingAvatar(false);
+      }
+    } else {
+      toast.warning("Bạn đã hủy chọn ảnh");
+      setIsUploadingAvatar(false);
+    }
+  };
+
   return (
     <div className="pt-6">
       <HeaderTitle links={[{ title: "Thông tin tài khoản" }]} />
@@ -101,19 +163,46 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
         <div className="w-full p-[10px] md:p-[15px] lg:p-[20px] lg:w-1/2 bg-blue-500 user-card-border border-[1px] border-[#B9BDC1]">
           <div className="flex items-center flex-col gap-4">
             <div className="relative">
-              <img
-                className="rounded-full cursor-pointer w-[60px]  md:w-[80px] lg:w-[100px]"
-                src={
-                  userProfile && userProfile.photo ? userProfile.photo : users
-                }
-                alt="avatar-img"
-              />
+              <button>
+                {isUploadingAvatar ? (
+                  <div className="rounded-full animate-puls w-[60px] h-[60px]  md:w-[80px] md:h-[80px] lg:w-[100px] lg:h-[100px] bg-gray-200"></div>
+                ) : (
+                  <img
+                    className="rounded-full cursor-pointer w-[60px] h-[60px]  md:w-[80px] md:h-[80px] lg:w-[100px] lg:h-[100px]"
+                    src={
+                      userProfile && userProfile.photo
+                        ? validUrlImage(userProfile.photo)
+                        : users
+                    }
+                    alt="avatar-img"
+                  />
+                )}
+
+                <div
+                  onClick={() => {
+                    onChangeAvatar();
+                  }}
+                  className={`flex ${
+                    userProfile?.description == "Web-App" ? "" : "hidden"
+                  } cursor-pointer absolute right-[0px] drop-shadow bottom-[0px] items-center justify-center bg-[#fff] w-[35px] h-[35px] rounded-full`}
+                >
+                  <img alt="" src={camera} width={18} height={18} />
+                </div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={changeAvatarInputRef}
+                  style={{ display: "none" }}
+                  onChange={(event) => {
+                    handleImageUpload(event);
+                  }}
+                />
+              </button>
             </div>
             <div className="user">
               <div className="flex flex-col items-center gap-1 name-user">
                 <span className="text-[#0077D5] font-normal">Xin chào!</span>
                 <span className="text-black font-medium ">
-                  {/* {user.username} */}
                   {userProfile?.fullName}
                 </span>
               </div>

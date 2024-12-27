@@ -18,6 +18,7 @@ import axios from "axios";
 import { useModalLogin } from "../context/auth_context";
 import { BASE_URL } from "../utils/constants";
 import { useProfile } from "./user_profile_context";
+import { validUrlImage } from "../utils/validate_string";
 
 const HeaderPage = () => {
   const [isSideMenuOpen, setMenu] = useState(false);
@@ -40,6 +41,12 @@ const HeaderPage = () => {
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    if (isLoginZalo) {
+      setIsLoginZalo(false);
+    }
+  }, [isShowModalLogin]);
 
   // đăng nhập google
   useEffect(() => {
@@ -135,7 +142,7 @@ const HeaderPage = () => {
 
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()
-      .withUrl(`wss://baohiem.dion.vn/login-portal`, {
+      .withUrl(`${BASE_URL}/login-portal`, {
         skipNegotiation: true,
         transport: signalR.HttpTransportType.WebSockets,
       })
@@ -169,7 +176,7 @@ const HeaderPage = () => {
         setIsShowModalLogin(false);
       }
     });
-  }, []);
+  }, [isShowModalLogin]);
 
   const onSubmitLogin = async () => {
     try {
@@ -202,7 +209,7 @@ const HeaderPage = () => {
         const data = response.data.resources;
 
         // Lưu token vào localStorage và cookie
-        localStorage.setItem("currentUser", JSON.stringify(data));
+        // localStorage.setItem("currentUser", JSON.stringify(data));
         localStorage.setItem("accessToken", data.accessToken);
         document.cookie = `accessToken=${data.accessToken}; path=/; secure; HttpOnly`;
         localStorage.setItem("profile", JSON.stringify(data.profile));
@@ -249,7 +256,7 @@ const HeaderPage = () => {
       link: "/",
     },
     {
-      labe: "Khai báo BHXH tự nguyện ",
+      labe: "Mua BHXH tự nguyện",
       link: "/social-insurance",
     },
     {
@@ -457,7 +464,9 @@ const HeaderPage = () => {
               src={logo}
               className="w-[50px] md:w-[60px] lg:w-[60px] h-[50px] md:h-[60px] lg:h-[60px]"
             />
-            <div className="font-bold ml-4 text-[#0077D5]">Nộp BHXH</div>
+            <div className="font-bold ml-4 text-[#0077D5]">
+              DNP Điểm Thu BHXH
+            </div>
           </div>
 
           <div className="flex items-center justify-center text-center text-[15px] md:text-[20px] lg:text-[20px] font-bold">
@@ -560,7 +569,7 @@ const HeaderPage = () => {
             {navLinks.map((d, i) => (
               <Link
                 key={i}
-                className={`block py-[10px] px-[20px] font-normal ${
+                className={`block text-[16px] py-[10px] px-[20px] font-normal ${
                   activeLink === d.link || (activeLink === "" && d.link === "/")
                     ? "active"
                     : ""
@@ -651,7 +660,7 @@ const HeaderPage = () => {
                   className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1"
                   to="/social-insurance"
                 >
-                  Khai báo BHXH tự nguyện
+                  Mua BHXH tự nguyện
                 </Link>
                 <Link
                   onClick={() => {
@@ -789,9 +798,11 @@ const HeaderPage = () => {
               {/* avtar img */}
               <div className="relative">
                 <img
-                  className="rounded-full  cursor-pointer w-[40px] md:w-[50px] lg:w-[60px]"
+                  className="rounded-full  cursor-pointer w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[60px] lg:h-[60px]"
                   src={
-                    userProfile && userProfile.photo ? userProfile.photo : users
+                    userProfile && userProfile.photo
+                      ? validUrlImage(userProfile.photo)
+                      : users
                   }
                   alt="avatar-img"
                   onClick={toggleDropdown}

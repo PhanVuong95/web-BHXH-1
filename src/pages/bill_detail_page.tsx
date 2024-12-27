@@ -126,7 +126,7 @@ const BuillDetailPage: React.FunctionComponent = () => {
     <div className="w-full pt-6">
       <HeaderTitle
         links={[
-          { title: "Khai báo BHXH tự nguyện" },
+          { title: "Mua BHXH tự nguyện" },
           { title: "Đăng ký BHXH Tự nguyện" },
           { title: "Xác nhận đăng ký BHXH tự nguyện " },
         ]}

@@ -113,10 +113,11 @@ const ListSocialInsurance = () => {
 
   return (
     <div className="md:pt-6 lg:pt-6">
-      <HeaderTitle links={[{ title: "Khai báo BHXH tự nguyện" }]} />
+      <HeaderTitle links={[{ title: "Mua BHXH tự nguyện" }]} />
       <div className="container mx-auto py-[0px] md:py-[20px] lg:py-[40px] max-w-[1280px] mx-auto">
-        <h3 className="title-top-header">Khai báo BHXH tự nguyện</h3>
-        <div className=" flex flex-col box-shadow-product product-items border-[1px] border-[#D1D1D6]">
+        <h3 className="title-top-header">Mua BHXH tự nguyện</h3>
+
+        <div className="flex flex-col box-shadow-product product-items border-[1px] border-[#D1D1D6]">
           <div className="flex flex-col gap-8">
             <div className="p-4 md:p-5 lg:p-8 bg-white w-full rounded-xl flex flex-col gap-[20px]">
               <div className="flex gap-[10px]">

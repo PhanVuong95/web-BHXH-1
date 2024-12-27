@@ -70,7 +70,7 @@ const BillPayPage: React.FC<Widthheight> = () => {
     <div className="pt-6">
       <HeaderTitle
         links={[
-          { title: "Khai báo BHXH tự nguyện" },
+          { title: "Mua BHXH tự nguyện" },
           { title: "Xác nhận đăng ký BHXH tự nguyện" },
         ]}
       />

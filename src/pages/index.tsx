@@ -61,7 +61,7 @@ const HomePage: React.FunctionComponent = () => {
               </div>
             </div>
             <div>
-              <p className="text-center text-sm">Khai báo BHXH tự nguyện</p>
+              <p className="text-center text-sm">Mua BHXH tự nguyện</p>
             </div>
           </div>
         </Link>

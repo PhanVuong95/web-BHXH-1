@@ -51,16 +51,9 @@ const FooterPage = () => {
                     </clipPath>
                   </defs>
                 </svg>
-                {/* Nộp BHXH */}
               </Link>
             </div>
-            <div className="logo-content max-w-[370px] w-full">
-              {/* <p className="text-base text-white">
-                Lorem Ipsum has been the industry's standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book.
-              </p> */}
-            </div>
+            <div className="logo-content max-w-[370px] w-full"></div>
           </div>
           <div className="footer-top-2 footer-top-col flex flex-col gap-4">
             <h3 className="text-[20px] text-white font-bold">

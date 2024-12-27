@@ -23,7 +23,7 @@ const ProductDetailPage: React.FunctionComponent = () => {
     <div className="pt-6">
       <HeaderTitle
         links={[
-          { title: "Khai báo BHXH tự nguyện" },
+          { title: "Mua BHXH tự nguyện" },
           { title: "Giới thiệu BHXH Tự nguyện" },
         ]}
       />

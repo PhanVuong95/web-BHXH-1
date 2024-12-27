@@ -1,4 +1,6 @@
 import { Bank } from "../models";
+import logo from "../assets-src/logo.png";
+import { BASE_URL } from "./constants";
 
 export const formatMoneyVND = (amount: number): string => {
   try {
@@ -295,3 +297,17 @@ export const convertListToSelectBanks = (data: any, placeholer: any) => {
   });
   return list;
 };
+
+export function validUrlImage(url: string) {
+  try {
+    if (url.includes("https://")) {
+      return url.replace(/\\/g, "/").replace(/\\/g, "/");
+    }
+    if (url == "" || undefined) {
+      return logo;
+    }
+    return `${BASE_URL}${url}`.replace(/\\/g, "/").toLocaleLowerCase();
+  } catch {
+    return `${BASE_URL}${url}`.replace(/\\/g, "/").toLocaleLowerCase();
+  }
+}

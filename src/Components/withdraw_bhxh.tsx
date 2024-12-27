@@ -82,7 +82,10 @@ const WithdrawBHXH = () => {
 
         {insurancePaymentPeriod.map((_item, index) => {
           return (
-            <div className="flex flex-col md:flex-row lg:flex-row gap-5 md:gap-5 lg:gap-10  mb-3 md:mb-4 lg:mb-5">
+            <div
+              key={`${insurancePaymentPeriod}_${index}}`}
+              className="flex flex-col md:flex-row lg:flex-row gap-5 md:gap-5 lg:gap-10  mb-3 md:mb-4 lg:mb-5"
+            >
               <div className="flex-[4]">
                 <div className="w-full">
                   <label className="block text-sm font-light text-gray-900 pb-2">
