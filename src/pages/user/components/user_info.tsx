@@ -3,10 +3,15 @@ import axios from "axios";
 import { BASE_URL, RoleName, RoleNameKey } from "../../../utils/constants";
 import imagesIocn from "../../../assets/icon/images";
 import users from "../../../assets/user.png";
-import { isValidEmptyString } from "../../../utils/validate_string";
+import {
+  isValidEmptyString,
+  validUrlImage,
+} from "../../../utils/validate_string";
+import { useProfile } from "../../../components/user_profile_context";
 
 const AccountInfo: React.FC<any> = () => {
   const [userDetail, setUserDetail] = useState<any>();
+  const { userProfile } = useProfile();
 
   const fetchUserDetail = async () => {
     const token = localStorage.getItem("accessToken");
@@ -36,8 +41,12 @@ const AccountInfo: React.FC<any> = () => {
         />
         <div className="p-[20px] flex flex-row items-center gap-5 bottom-4 md:bottom-8 lg:bottom-8 absolute  left-0">
           <img
-            className="rounded-full cursor-pointer border-[2px] border-white w-[50px] md:w-[60px] lg:w-[70px]"
-            src={userDetail && userDetail.photo ? userDetail.photo : users}
+            className="rounded-full cursor-pointer border-[2px] border-white w-[50px] h-[50px] md:w-[60px]  md:h-[60px] lg:w-[70px] lg:h-[70px]"
+            src={
+              userProfile && userProfile.photo
+                ? validUrlImage(userProfile.photo)
+                : users
+            }
             alt="avatar-img"
           />
           <div className="user">
