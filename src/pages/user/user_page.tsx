@@ -141,13 +141,14 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
           });
 
           localStorage.setItem("profile", JSON.stringify(userProfile));
+          toast.success("Cập nhật ảnh thành công");
         } else {
-          console.info("Cập nhật ảnh thất bại");
+          toast.warning("Cập nhật ảnh thất bại");
         }
 
         setIsUploadingAvatar(false);
       } catch (error) {
-        console.info("Cập nhật ảnh thất bại");
+        toast.warning("Cập nhật ảnh thất bại");
         setIsUploadingAvatar(false);
       }
     } else {

@@ -236,7 +236,7 @@ const HeaderPage = () => {
   };
 
   useEffect(() => {
-    const link = `https://zalo.me/s/3118469885204258242/login/portal?state=${btoa(
+    const link = `https://zalo.me/s/3091964383674543126/login/portal?state=${btoa(
       JSON.stringify({
         data: {
           body: { clientId },
@@ -245,7 +245,7 @@ const HeaderPage = () => {
         type: EQrCodeType.LOGIN_PORTAL,
         disableCallback: true,
       })
-    )}&${"env=TESTING&version=54"}`;
+    )}`;
 
     setLoginDeeplink(link);
   }, [clientId]);

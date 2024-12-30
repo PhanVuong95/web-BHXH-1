@@ -50,17 +50,6 @@ const ProductDetailPage: React.FunctionComponent = () => {
             )}
           </div>
         </div>
-        {/* <footer className="bg-white fixed bottom-0 left-0 w-full py-3 ">
-          <div className="flex justify-center w-[90%] mx-auto max-w-[1280px] ">
-            <Link
-              className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center mb-3"
-              type="submit"
-              to="/register-BHXH"
-            >
-              Mua ngay
-            </Link>
-          </div>
-        </footer> */}
       </div>
     </div>
   );
