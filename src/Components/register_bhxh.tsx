@@ -219,7 +219,8 @@ const RegisterBHXH = () => {
     buyerAddressDetail: useRef<any>(null),
   };
 
-  const [isHadBHXH, setIsHadBHXH] = useState(false);
+  const [isNotHaveBHXH, setIsNoteHaveBHXH] = useState(false);
+  const [isSameBirthAddress, setIsSameBirthAddress] = useState(false);
 
   // Load lại tất cả danh sách tỉnh thành
   useEffect(() => {
@@ -614,7 +615,7 @@ const RegisterBHXH = () => {
           insuranceOrder.houseHold.soGiayToCaNhan = "";
         }
 
-        setIsHadBHXH(
+        setIsNoteHaveBHXH(
           insuranceOrder.houseHold.soGiayToCaNhan == "" ? true : false
         );
 
@@ -1019,7 +1020,7 @@ const RegisterBHXH = () => {
       scrollToElement(participantRefs.hospitalExaminationParticipant);
       return false;
     }
-    if (isHadBHXH) {
+    if (isNotHaveBHXH) {
       if (
         !(
           socialInsuranceId.length == 0 ||
@@ -1422,7 +1423,6 @@ const RegisterBHXH = () => {
           ref={participantRefs.provinceParticipate}
           placeholder="Chọn thành phố"
           value={selectedInsuranceProvinceId.current}
-          // // // // dropdownMatchSelectWidth={false}
           onChange={handleProvinceChange}
           key={selectedInsuranceProvinceId.current}
           filterOption={(input, option) =>
@@ -1545,7 +1545,7 @@ const RegisterBHXH = () => {
                 onSubmitFormData();
               }
             }}
-            className="absolute inset-y-0 start-[79%] top-0 flex items-center"
+            className="absolute inset-y-0 right-[3%] top-0 flex items-center"
           >
             <p className="text-base font-normal text-[#0076B7]">
               {!isLoadingLuckUp ? "Tra cứu" : "Đang tải..."}
@@ -1627,7 +1627,6 @@ const RegisterBHXH = () => {
           dropdownStyle={{ maxWidth: "300px" }}
           ref={participantRefs.ethnicParticipant}
           showSearch
-          // // // // dropdownMatchSelectWidth={false}
           placeholder="Chọn dân tộc"
           value={ethnic}
           onChange={(value) => {
@@ -2836,247 +2835,6 @@ const RegisterBHXH = () => {
     );
   };
 
-  // const inputCCCDMember = (index: any) => {
-  //   return (
-  //     <div>
-  //       <label className="block text-sm font-normal text-gray-900 pb-2">
-  //         Số CCCD <samp className="text-red-600">*</samp>
-  //       </label>
-  //       <Input
-  //         type="text"
-  //         maxLength={12}
-  //         ref={members[index].citizenId}
-  //         defaultValue={
-  //           insuranceOrder.houseHold.houseHoldPeoples[index].citizenId
-  //         }
-  //         className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
-  //         placeholder="Nhập CCCD"
-  //         onChange={(e) => {
-  //           insuranceOrder.houseHold.houseHoldPeoples[index].citizenId =
-  //             e.target.value;
-  //         }}
-  //       />
-  //     </div>
-  //   );
-  // };
-
-  // const inputGenderMemder = (index: any) => {
-  //   return (
-  //     <div>
-  //       <label className="block text-sm font-normal text-gray-900 pb-2">
-  //         Giới tính <samp className="text-red-600">*</samp>
-  //       </label>
-  //       <Select
-  //         size="large"
-  //         className="w-[100%]"
-  //         placeholder="Chọn giới tính"
-  //         ref={members[index].gender}
-  //         defaultValue={insuranceOrder.houseHold.houseHoldPeoples[index].gender}
-  //         // // // dropdownMatchSelectWidth={false}
-  //         onChange={(value) => {
-  //           insuranceOrder.houseHold.houseHoldPeoples[index].gender = value;
-  //         }}
-  //         key={gender}
-  //         filterOption={(input, option) =>
-  //           (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-  //         }
-  //         options={[
-  //           { value: "", label: "Chọn giới tính" },
-  //           { value: "Nam", label: "Nam" },
-  //           { value: "Nữ", label: "Nữ" },
-  //         ]}
-  //       />
-  //     </div>
-  //   );
-  // };
-
-  // const inputFullNameMember = (index: any) => {
-  //   return (
-  //     <div>
-  //       <label className="block text-sm font-normal text-gray-900 pb-2">
-  //         Họ và tên <samp className="text-red-600">*</samp>
-  //       </label>
-  //       <Input
-  //         type="text"
-  //         ref={members[index].name}
-  //         defaultValue={insuranceOrder.houseHold.houseHoldPeoples[index].name}
-  //         className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
-  //         placeholder="Họ và tên"
-  //         onChange={(e) => {
-  //           insuranceOrder.houseHold.houseHoldPeoples[index].name =
-  //             e.target.value;
-  //         }}
-  //       />
-  //     </div>
-  //   );
-  // };
-
-  // const inputRelationshipMember = (index: any) => {
-  //   return (
-  //     <div>
-  //       <label className="block text-sm font-normal text-gray-900 pb-2">
-  //         Mối quan hệ <samp className="text-red-600">*</samp>
-  //       </label>
-  //       <Select
-  //         size="large"
-  //         className="w-[100%]"
-  //         showSearch
-  //         ref={members[index].relationShipId}
-  //         placeholder="Chọn mối quan hệ"
-  //         // // // dropdownMatchSelectWidth={false}
-  //         defaultValue={
-  //           insuranceOrder.houseHold.houseHoldPeoples[index].relationShipId
-  //         }
-  //         onChange={(value) => {
-  //           insuranceOrder.houseHold.houseHoldPeoples[index].relationShipId =
-  //             value;
-  //         }}
-  //         key={gender}
-  //         filterOption={(input, option) =>
-  //           (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-  //         }
-  //         options={[
-  //           { value: "", label: "Chọn mối quan hệ" },
-  //           { value: "00", label: "Chủ hộ" },
-  //           { value: "01", label: "Vợ" },
-  //           { value: "02", label: "Chồng" },
-  //           { value: "03", label: "Bố" },
-  //           { value: "04", label: "Mẹ" },
-  //           { value: "05", label: "Em" },
-  //           { value: "06", label: "Anh" },
-  //           { value: "07", label: "Chị" },
-  //           { value: "08", label: "Con" },
-  //           { value: "09", label: "Cháu" },
-  //           { value: "10", label: "Ông" },
-  //           { value: "11", label: "Bà" },
-  //           { value: "12", label: "Cô" },
-  //           { value: "13", label: "Dì" },
-  //           { value: "14", label: "Chú" },
-  //           { value: "15", label: "Thím" },
-  //           { value: "16", label: "Bác" },
-  //           { value: "17", label: "Cậu" },
-  //           { value: "18", label: "Mợ" },
-  //           { value: "19", label: "Con dâu" },
-  //           { value: "20", label: "Con rể" },
-  //           { value: "21", label: "Chắt" },
-  //           { value: "99", label: "Khác" },
-  //         ]}
-  //       />
-  //     </div>
-  //   );
-  // };
-
-  // const inputDobMember = (index: any) => {
-  //   return (
-  //     <div>
-  //       <label className="block text-sm font-normal text-gray-900 pb-2">
-  //         Ngày sinh <samp className="text-red-600">*</samp>
-  //       </label>
-  //       <DatePicker
-  //         type="date"
-  //         size="large"
-  //         locale={locale}
-  //         className="w-[100%]"
-  //         ref={members[index].doB}
-  //         placeholder="dd/mm/yyyy"
-  //         defaultValue={
-  //           insuranceOrder.houseHold.houseHoldPeoples[index].doB == ""
-  //             ? ""
-  //             : dayjs(
-  //                 insuranceOrder.houseHold.houseHoldPeoples[index].doB,
-  //                 dateFormat
-  //               )
-  //         }
-  //         onChange={(value) => {
-  //           const dateObject = dayjs(value.toString());
-  //           const dateStr = `${dateObject
-  //             .date()
-  //             .toString()
-  //             .padStart(2, "0")}/${(dateObject.month() + 1)
-  //             .toString()
-  //             .padStart(2, "0")}/${dateObject.year()}`;
-
-  //           insuranceOrder.houseHold.houseHoldPeoples[index].doB = dateStr;
-  //         }}
-  //         format={dateFormat}
-  //         maxDate={dayjs(formatDate2(new Date()), dateFormat)}
-  //       />
-  //     </div>
-  //   );
-  // };
-
-  // const inputEthnicMember = (index: any) => {
-  //   return (
-  //     <div>
-  //       <label className="block text-sm font-normal pb-2 text-gray-900">
-  //         Dân tộc <samp className="text-red-600">*</samp>
-  //       </label>
-  //       <Select
-  //         size="large"
-  //         className="w-[100%]"
-  //         ref={members[index].ethnicId}
-  //         dropdownStyle={{ maxWidth: "300px" }}
-  //         showSearch
-  //         // // // dropdownMatchSelectWidth={false}
-  //         placeholder="Chọn dân tộc"
-  //         defaultValue={
-  //           insuranceOrder.houseHold.houseHoldPeoples[index].ethnicId
-  //         }
-  //         onChange={(value) => {
-  //           insuranceOrder.houseHold.houseHoldPeoples[index].ethnicId = value;
-  //         }}
-  //         filterOption={(input, option) =>
-  //           (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
-  //         }
-  //         options={convertListToSelect(ethnicLists, "Chọn dân tộc")}
-  //       />
-  //     </div>
-  //   );
-  // };
-
-  // const boxhHouseHoldParticipants = (index: any, onClose: any) => {
-  //   return (
-  //     <div
-  //       key={`${index}`}
-  //       className="p-4 rounded-xl flex flex-col gap-6 border border-gray-300 w-full"
-  //     >
-  //       <div className="flex justify-between">
-  //         <div className="text-[#0076B7] text-sm font-medium">
-  //           Thông tin thành viên số {index + 1}
-  //         </div>
-  //         {index != 0 ? (
-  //           <button
-  //             type="button"
-  //             onClick={() => {
-  //               onClose(index);
-  //             }}
-  //           >
-  //             <img src={iconClose} className="w-3 h-3" />
-  //           </button>
-  //         ) : null}
-  //       </div>
-
-  //       {/* Số CCCD thành viên  */}
-  //       {inputCCCDMember(index)}
-
-  //       {/* Dân tộc */}
-  //       {inputEthnicMember(index)}
-
-  //       {/* Giới tính thành viên */}
-  //       {inputGenderMemder(index)}
-
-  //       {/* Họ tên */}
-  //       {inputFullNameMember(index)}
-
-  //       {/* Mối quan hệ */}
-  //       {inputRelationshipMember(index)}
-
-  //       {/* Ngày sinh */}
-  //       {inputDobMember(index)}
-  //     </div>
-  //   );
-  // };
-
   const buttonAddMember = () => {
     return (
       <button
@@ -3124,6 +2882,75 @@ const RegisterBHXH = () => {
           </svg>
         </div>
       </button>
+    );
+  };
+
+  const checkBoxSameBirthAddress = () => {
+    return (
+      <Checkbox
+        checked={isSameBirthAddress}
+        onChange={() => {
+          if (!isSameBirthAddress) {
+            ttProvinces.current = ksProvinces.current;
+            ttDistricts.current = ksDistricts.current;
+            ttWards.current = ksWards.current;
+
+            setSelectedTTProvince(selectedKSProvince);
+            setSelectedTTDistrict(selectedKSDistrict);
+            setSelectedTTWard(selectedKSWard);
+            setTTAddressDetail(ksAddressDetail);
+
+            // Set vào provider
+            setInsuranceOrder((prevOrder: any) => ({
+              ...prevOrder,
+              listInsuredPerson: prevOrder.listInsuredPerson.map(
+                (person: any, index: any) =>
+                  index === 0
+                    ? {
+                        ...person,
+                        provinceId: selectedKSProvince,
+                        districtId: selectedKSDistrict,
+                        wardId: selectedKSWard,
+                        addressDetail: ksAddressDetail,
+                      }
+                    : person
+              ),
+            }));
+          } else {
+            // reset Field
+            ttProvinces.current = [];
+            ttDistricts.current = [];
+            ttWards.current = [];
+
+            setSelectedTTProvince(0);
+            setSelectedTTDistrict(0);
+            setSelectedTTWard(0);
+            setTTAddressDetail("");
+
+            // Set vào provider
+            setInsuranceOrder((prevOrder: any) => ({
+              ...prevOrder,
+              listInsuredPerson: prevOrder.listInsuredPerson.map(
+                (person: any, index: any) =>
+                  index === 0
+                    ? {
+                        ...person,
+                        provinceId: 0,
+                        districtId: 0,
+                        wardId: 0,
+                        addressDetail: "",
+                      }
+                    : person
+              ),
+            }));
+          }
+
+          setIsSameBirthAddress(!isSameBirthAddress);
+        }}
+        className="w-full"
+      >
+        <div className="font-normal text-base">Giống địa chỉ khai sinh</div>
+      </Checkbox>
     );
   };
 
@@ -3190,6 +3017,9 @@ const RegisterBHXH = () => {
             </h3>
 
             <div className="p-[15px] md:p-[20px] lg:p-[40px] flex flex-row flex-wrap justify-between w-full gap-2">
+              {/* Checkbox */}
+              {checkBoxSameBirthAddress()}
+
               {/* Tỉnh thành */}
               {inputTTProvinceParticipants()}
 
@@ -3231,9 +3061,9 @@ const RegisterBHXH = () => {
           </div>
 
           <Checkbox
-            checked={isHadBHXH}
+            checked={isNotHaveBHXH}
             onChange={() => {
-              if (isHadBHXH) {
+              if (isNotHaveBHXH) {
                 setSocialInsuranceId("");
 
                 setInsuranceOrder((prevOrder: any) => ({
@@ -3279,18 +3109,18 @@ const RegisterBHXH = () => {
                 }));
               }
 
-              setIsHadBHXH(!isHadBHXH);
+              setIsNoteHaveBHXH(!isNotHaveBHXH);
             }}
           >
             <div className="font-normal text-base">
-              Người tham gia có mã BHXH
+              Bạn chưa có bảo hiểm xã hội
             </div>
           </Checkbox>
 
           {/* Số BHXH */}
-          {isHadBHXH && inputBHXHParticipants()}
+          {!isNotHaveBHXH && inputBHXHParticipants()}
 
-          {!isHadBHXH && (
+          {isNotHaveBHXH && (
             <div className="flex flex-row flex-wrap border rounded-xl border-[#B9BDC1] overflow-hidden">
               <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
                 Thông tin hộ gia đình{" "}

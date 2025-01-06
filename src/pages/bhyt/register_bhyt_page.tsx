@@ -946,7 +946,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
 
   const renderFooter = () => {
     return (
-      <div className="page-2 bg-white">
+      <div className="mb-5 bg-white">
         <div className="flex flex-col gap-3">
           <div className="flex flex-row content-center justify-between">
             <p className="block text-sm font-normal text-gray-900">
@@ -1135,13 +1135,13 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
                 </label>
               </div>
             </div>
+
+            {renderFooter()}
           </div>
           <div className="max-w-[100%] lg1130:max-w-[400px] lg1130:px-0 px-[20px] w-full">
             {renderAttachedFiles()}
           </div>
         </div>
-
-        {renderFooter()}
 
         {modalLoading()}
       </div>

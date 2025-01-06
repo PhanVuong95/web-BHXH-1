@@ -418,6 +418,7 @@ const CardMembersHouseHold = (props: Props) => {
         {index != 0 ? (
           <button
             type="button"
+            className="cursor-pointer"
             onClick={() => {
               onClose(index);
             }}

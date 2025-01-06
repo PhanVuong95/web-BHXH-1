@@ -14,7 +14,7 @@ import {
 } from "../utils/validate_string";
 import { IDetectedBarcode, Scanner } from "@yudiel/react-qr-scanner";
 import iconClose from "../assets-src/close_1.png";
-import { Input, Select, DatePicker } from "antd";
+import { Input, Select, DatePicker, Checkbox } from "antd";
 import dayjs from "dayjs";
 import "../locale/vi";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -168,6 +168,8 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
         return `${formatMoneyVND(price * 0.4)} đ`;
     }
   };
+
+  const [isSameBirthAddress, setIsSameBirthAddress] = useState(false);
 
   // Load lại tất cả danh sách tỉnh thành
   useEffect(() => {
@@ -505,7 +507,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   const renderInputsocialInsuranceNumber = () => {
     return (
       <div>
-        <label className="block text-sm font-normal pb-2 text-gray-900">
+        <label className="block text-sm font-normal pb-2 text-gray-900 mt-3">
           Số BHXH
         </label>
         <div className="relative">
@@ -536,7 +538,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
                 setErrors({ ...errors, ...{ socialInsuranceNumber: null } });
               }
             }}
-            className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5              "
+            className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5"
             placeholder="Nhập số BHXH"
             required
           />
@@ -547,7 +549,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
                 onSubmitFormData();
               }
             }}
-            className="absolute inset-y-0 right-[5%] top-0 flex items-center"
+            className="absolute cursor-pointer inset-y-0 right-[3%] top-0 flex items-center"
           >
             <p className="text-base font-normal text-[#0076B7]">
               {!isLoadingLuckUp ? "Tra cứu" : "Đang tải..."}
@@ -1696,6 +1698,55 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     );
   };
 
+  const checkBoxSameBirthAddress = () => {
+    return (
+      <Checkbox
+        checked={isSameBirthAddress}
+        onChange={() => {
+          if (!isSameBirthAddress) {
+            ttProvinces.current = ksProvinces.current;
+            ttDistricts.current = ksDistricts.current;
+            ttWards.current = ksWards.current;
+
+            setSelectedTTProvince(selectedKSProvince);
+            setSelectedTTDistrict(selectedKSDistrict);
+            setSelectedTTWard(selectedKSWard);
+            setTTAddressDetail(ksAddressDetail);
+
+            registerInfoBHYT["listInsuredPerson"][index].provinceId =
+              selectedKSProvince;
+            registerInfoBHYT["listInsuredPerson"][index].districtId =
+              selectedKSDistrict;
+            registerInfoBHYT["listInsuredPerson"][index].wardId =
+              selectedKSWard;
+            registerInfoBHYT["listInsuredPerson"][index].addressDetail =
+              ksAddressDetail;
+          } else {
+            // reset Field
+            ttProvinces.current = [];
+            ttDistricts.current = [];
+            ttWards.current = [];
+
+            setSelectedTTProvince(0);
+            setSelectedTTDistrict(0);
+            setSelectedTTWard(0);
+            setTTAddressDetail("");
+          }
+
+          setIsSameBirthAddress(!isSameBirthAddress);
+
+          registerInfoBHYT["listInsuredPerson"][index].provinceId = 0;
+          registerInfoBHYT["listInsuredPerson"][index].districtId = 0;
+          registerInfoBHYT["listInsuredPerson"][index].wardId = 0;
+          registerInfoBHYT["listInsuredPerson"][index].addressDetail = "";
+        }}
+        className="w-full"
+      >
+        <div className="font-normal text-base">Giống địa chỉ khai sinh</div>
+      </Checkbox>
+    );
+  };
+
   return (
     <div
       key={index}
@@ -1709,7 +1760,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
         {renderLine()}
 
         {/* Note */}
-        {renderNote()}
+        {/* {renderNote()} */}
 
         {/* CCCD */}
         {renderCitizenId()}
@@ -1765,7 +1816,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
       </div>
 
       <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
-        Địa chỉ khai sinh{" "}
+        Địa chỉ khai sinh
       </h3>
       <div className="flex flex-row flex-wrap justify-between w-full gap-2 p-[15px] md:p-[20px] lg:p-[40px]">
         {/* Tỉnh thành  khai sinh*/}
@@ -1782,9 +1833,12 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
       </div>
 
       <h3 className="text-base font-semibold text-[#fff] w-full p-[20px] bg-[#0077D5]">
-        Địa chỉ thường trú{" "}
+        Địa chỉ thường trú
       </h3>
       <div className="flex flex-row flex-wrap justify-between w-full gap-2 p-[15px] md:p-[20px] lg:p-[40px]">
+        {/* Check box*/}
+        {checkBoxSameBirthAddress()}
+
         {/* Tỉnh thành thường trú*/}
         {inputTTProvinceParticipants()}
 
@@ -1807,9 +1861,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           <li>
             <p className="text-sm font-normal">
               Tra cứu mã số BHXH bằng thông tin khai sinh{" "}
-              {/* <span className="text-[#0076B7] font-semibold underline">
-              tại đây
-            </span> */}
             </p>
           </li>
         </ul>
