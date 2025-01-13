@@ -1731,14 +1731,14 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
             setSelectedTTDistrict(0);
             setSelectedTTWard(0);
             setTTAddressDetail("");
+
+            registerInfoBHYT["listInsuredPerson"][index].provinceId = 0;
+            registerInfoBHYT["listInsuredPerson"][index].districtId = 0;
+            registerInfoBHYT["listInsuredPerson"][index].wardId = 0;
+            registerInfoBHYT["listInsuredPerson"][index].addressDetail = "";
           }
 
           setIsSameBirthAddress(!isSameBirthAddress);
-
-          registerInfoBHYT["listInsuredPerson"][index].provinceId = 0;
-          registerInfoBHYT["listInsuredPerson"][index].districtId = 0;
-          registerInfoBHYT["listInsuredPerson"][index].wardId = 0;
-          registerInfoBHYT["listInsuredPerson"][index].addressDetail = "";
         }}
         className="w-full"
       >
