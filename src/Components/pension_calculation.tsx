@@ -55,7 +55,7 @@ const PensionCalculation = () => {
   };
 
   return (
-    <div className="flex-[8] drop-shadow">
+    <div>
       <div className="text-[16px] md:text-[18px] lg:text-[18px] text-[white] bg-[#0077D5] leading[24px] font-normal p-[15px] md:p-[20px] lg:p-[20px] rounded-tr-[10px] rounded-tl-[10px]">
         Tính toán lương hưu
       </div>

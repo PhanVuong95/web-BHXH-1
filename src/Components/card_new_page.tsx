@@ -4,7 +4,11 @@ import { CardNewPagesProps } from "../models";
 
 const CardNewPages: React.FC<CardNewPagesProps> = ({ post }) => {
   return (
-    <div className="card_new_page">
+    <div
+      className="card_new_page"
+      data-aos="fade-up"
+      data-aos-anchor-placement="top-center"
+    >
       <img
         className="h-[200px] w-[100%] object-cover"
         src={(post as any).photo ? (post as any).photo : imgSlider}

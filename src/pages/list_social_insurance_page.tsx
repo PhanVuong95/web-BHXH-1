@@ -6,6 +6,7 @@ import logo from "../assets-src/logo1.png";
 import HeaderTitle from "../components/header_title";
 import { BASE_URL } from "../utils/constants";
 import { useModalLogin } from "../context/auth_context";
+import { motion } from "framer-motion";
 
 interface Insurance {
   name: string;
@@ -117,7 +118,12 @@ const ListSocialInsurance = () => {
       <div className="container mx-auto py-[0px] md:py-[20px] lg:py-[40px] max-w-[1280px] mx-auto">
         <h3 className="title-top-header">Mua BHXH tự nguyện</h3>
 
-        <div className="flex flex-col box-shadow-product product-items border-[1px] border-[#D1D1D6]">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col box-shadow-product product-items border-[1px] border-[#D1D1D6]"
+        >
           <div className="flex flex-col gap-8">
             <div className="p-4 md:p-5 lg:p-8 bg-white w-full rounded-xl flex flex-col gap-[20px]">
               <div className="flex gap-[10px]">
@@ -248,7 +254,7 @@ const ListSocialInsurance = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

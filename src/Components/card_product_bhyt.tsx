@@ -2,6 +2,7 @@ import { formatMoneyVND } from "../utils/validate_string";
 import logo from "../assets-src/logo1.png";
 import { useNavigate } from "react-router-dom";
 import { useModalLogin } from "../context/auth_context";
+import { motion } from "framer-motion";
 
 interface InsuranceBenefit {
   name: string;
@@ -27,7 +28,12 @@ const CardProductBHYT: React.FC<CardProductBHYTProps> = ({ data }) => {
   const { setIsShowModalLogin } = useModalLogin();
 
   return (
-    <div className="p-[10px] md:p-[20px] lg:p-[30px] bg-white w-full rounded-xl flex flex-col gap-4 border-[1px] border-[#D1D1D6]">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="p-[10px] md:p-[20px] lg:p-[30px] bg-white w-full rounded-xl flex flex-col gap-4 border-[1px] border-[#D1D1D6]"
+    >
       <div className="flex gap-[10px] items-center">
         <img src={logo} className="w-20 h-20" alt="Logo" />
         <div className="title-product flex flex-col gap-2">
@@ -148,7 +154,7 @@ const CardProductBHYT: React.FC<CardProductBHYTProps> = ({ data }) => {
           Mua ngay
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

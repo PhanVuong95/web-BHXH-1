@@ -31,9 +31,18 @@ import { ModalLoginProvider } from "./context/auth_context";
 import VerifyAccountPage from "./pages/common/verify_account_page";
 import { ProfileProvider } from "./components/user_profile_context";
 import ChangePasswordPage from "./pages/auth/change_password_page";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function App() {
   const [, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 650,
+      once: true,
+    });
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");

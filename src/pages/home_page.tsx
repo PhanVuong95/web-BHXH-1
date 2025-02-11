@@ -55,21 +55,26 @@ const HomePage = () => {
   return (
     <div className=" bg-white">
       <div className="home-page bg-white">
-        <div className="banner-top  h-full">
+        <div className="banner-top  h-full relative">
           <img alt="" src={banner} />
-          <div className="flex justify-between items-center user-home mx-auto container">
-            <div className="user-home-content ">
-              <h3>
+          <div className="flex justify-between items-center user-home mx-auto container absolute top-[40%] md:top-[52%] lg:top-[40%] ">
+            <div
+              className="flex flex-col gap-4 lg:gap-8 items-start"
+              data-aos="zoom-in"
+            >
+              <p className="text-white font-semibold text-md md:text-lg lg:text-2xl">
                 Tham gia <br /> bảo hiểm xã hội tự nguyện
-              </h3>
-              <p>
+              </p>
+              <p className="text-white font-light text-sm md:text-sm lg:text-lg md:w-[50%] ">
                 DNP Điểm Thu BHXH là nền tảng hỗ trợ nộp bảo hiểm xã hội tự
                 nguyện, bảo hiểm y tế trực tuyến, giúp bạn dễ dàng quản lý và
                 đóng BHXH, BHYT mọi lúc, mọi nơi. Chúng tôi cam kết mang đến sự
                 tiện lợi, minh bạch và an toàn trong từng giao dịch. Đồng hành
                 cùng bạn trong việc xây dựng tương lai bền vững.
               </p>
-              <button>Xem ngay</button>
+              <button className="flex px-[15px] md:px-[18px] py-[10px] md:py-[12px] text-sm md:text-md justify-center items-center gap-[10px] rounded-[10px] border-[1px] border-[solid] border-[#0076b7] bg-[#fff]">
+                Xem ngay
+              </button>
             </div>
           </div>
         </div>
@@ -80,7 +85,10 @@ const HomePage = () => {
                 Tính năng nổi bật
               </div>
             </div>
-            <div className="flex flex-wrap items-center w-full gap-[20px] justify-between md:justify-center lg:justify-between">
+            <div
+              data-aos="zoom-out-down"
+              className="flex flex-wrap items-center w-full gap-[20px] justify-between md:justify-center lg:justify-between"
+            >
               <Link to="/social-insurance">
                 <div className="items-icon">
                   <div className="items-icon-in">
