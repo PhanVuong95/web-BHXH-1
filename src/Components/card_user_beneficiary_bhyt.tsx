@@ -569,23 +569,6 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     return <hr className="border-dashed border-[1px] text-[#DEE7FE] "></hr>;
   };
 
-  const renderNote = () => {
-    return (
-      <div className="flex flex-col gap-1 p-4">
-        <p className="text-sm font-normal text-gray-900">
-          Trường hợp không có số BHXH vui lòng
-        </p>
-        <ul className="list-disc px-4">
-          <li>
-            <p className="text-sm font-normal">
-              Điền số CCCD và Đính kèm ảnh CCCD
-            </p>
-          </li>
-        </ul>
-      </div>
-    );
-  };
-
   const renderCitizenId = () => {
     return (
       <div>
@@ -691,15 +674,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
           <h3 className="text-[#0076B7] text-lg font-medium items-center">
             Tải ảnh CCCD
           </h3>
-          {/* <div
-            onClick={() => {
-              setIsShowModelQR(true);
-            }}
-          >
-            <img alt="image qr" src={imageQR} className="w-8" />
-          </div> */}
         </div>
-
         {
           <Modal
             isOpen={isShowModelQR}

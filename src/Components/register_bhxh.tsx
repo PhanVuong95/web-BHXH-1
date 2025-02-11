@@ -1003,12 +1003,6 @@ const RegisterBHXH = () => {
       return false;
     }
 
-    // if (benefitLevel == "") {
-    //   toast.warn("Mức hưởng không được để trống");
-    //   scrollToElement(participantRefs.benefitLevelParticipant)
-    //   return false;
-    // }
-
     if (selectedMedicalByProvinceParticipant == 0) {
       toast.warn("Tỉnh thành khám chữa bệnh không được để trống");
       scrollToElement(participantRefs.medicalByProvinceParticipant);
@@ -1020,7 +1014,7 @@ const RegisterBHXH = () => {
       scrollToElement(participantRefs.hospitalExaminationParticipant);
       return false;
     }
-    if (isNotHaveBHXH) {
+    if (!isNotHaveBHXH) {
       if (
         !(
           socialInsuranceId.length == 0 ||
