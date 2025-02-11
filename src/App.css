@@ -270,14 +270,15 @@ body {
 }
 
 .no-spin {
-  -moz-appearance: textfield; /* Firefox */
+  -moz-appearance: textfield;
+  appearance: textfield; /* Firefox */
 }
 
 .selectCustom {
   box-sizing: border-box;
   -webkit-appearance: none;
-  appearance: none;
   -moz-appearance: none;
+  appearance: none;
   background-image: url("https://www.svgrepo.com/show/80156/down-arrow.svg");
   background-repeat: no-repeat;
   background-size: 10px 10px;

@@ -964,7 +964,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
                   onSubmitFormData();
                 }
               }}
-              className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
+              className="px-[24px] py-3 w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
             >
               Tiếp tục
             </button>

@@ -115,7 +115,7 @@ const ListSocialInsurance = () => {
   return (
     <div className="md:pt-6 lg:pt-6">
       <HeaderTitle links={[{ title: "Mua BHXH tự nguyện" }]} />
-      <div className="container mx-auto py-[0px] md:py-[20px] lg:py-[40px] max-w-[1280px] mx-auto">
+      <div className="container py-[0px] md:py-[20px] lg:py-[40px] max-w-[1280px] mx-auto">
         <h3 className="title-top-header">Mua BHXH tự nguyện</h3>
 
         <motion.div
