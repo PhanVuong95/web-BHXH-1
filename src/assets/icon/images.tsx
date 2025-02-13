@@ -14,7 +14,7 @@ import coppy from "./copy-copy.png";
 import logo from "./logo-bh.jpg";
 import logoIcon from "./ioc.jpg";
 
-const imagesIocn = {
+const imagesIcon = {
   icon1,
   icon2,
   icon3,
@@ -32,4 +32,4 @@ const imagesIocn = {
   logoIcon,
 };
 
-export default imagesIocn;
+export default imagesIcon;

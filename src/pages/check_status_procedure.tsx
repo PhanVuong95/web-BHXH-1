@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 import { formatDate, formatDateByTime } from "../utils/validate_string";
-import { BASE_URL } from "../utils/constants";
+import { APP_CONFIG } from "../utils/constants";
 
 const CheckStatusProcedure = () => {
   const { id } = useParams();
@@ -15,7 +15,7 @@ const CheckStatusProcedure = () => {
       const token = localStorage.getItem("accessToken");
       try {
         const response = await axios.get(
-          `${BASE_URL}/InsuranceOrder/api/check-status-procedure/${id}`,
+          `${APP_CONFIG.BASE_URL}/InsuranceOrder/api/check-status-procedure/${id}`,
           {
             headers: {
               "Content-Type": "multipart/form-data",

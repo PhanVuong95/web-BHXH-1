@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { SpecificContext } from "../components/specific_context";
 import logo from "../assets-src/logo1.png";
 import HeaderTitle from "../components/header_title";
-import { BASE_URL } from "../utils/constants";
 import { useModalLogin } from "../context/auth_context";
 import { motion } from "framer-motion";
+import { APP_CONFIG } from "../utils/constants";
 
 interface Insurance {
   name: string;
@@ -26,7 +26,7 @@ const ListSocialInsurance = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/insurance/api/detail-viewmodel?id=1001`)
+      .get(`${APP_CONFIG.BASE_URL}/insurance/api/detail-viewmodel?id=1001`)
       .then((response) => {
         setInsurance(response.data.data[0]);
       })

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets-src/logo1.png";
-
 import { useParams } from "react-router-dom";
 import {
   formatDate,
@@ -14,7 +13,7 @@ import {
 } from "../../utils/validate_string";
 import { registerInfoBHYT } from "./list_health_insurance_page";
 import HeaderTitle from "../../components/header_title";
-import { BASE_URL } from "../../utils/constants";
+import { APP_CONFIG } from "../../utils/constants";
 
 const InfoDetailBHYT: React.FunctionComponent = () => {
   const { id, statusName } = useParams();
@@ -44,7 +43,7 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/insuranceorder/api/detail-by-vm/` + id)
+      .get(`${APP_CONFIG.BASE_URL}/insuranceorder/api/detail-by-vm/` + id)
       .then((response) => {
         const data = response.data.data[0];
 
@@ -159,7 +158,7 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
   useEffect(() => {
     axios
       .get(
-        `${BASE_URL}/insurance/api/list-paging-viewmodel?pageIndex=1&Pageize=100&insuranceTypeId=1002`
+        `${APP_CONFIG.BASE_URL}/insurance/api/list-paging-viewmodel?pageIndex=1&Pageize=100&insuranceTypeId=1002`
       )
       .then((response) => {
         const data = response.data.data.filter(
@@ -487,7 +486,7 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
           <div className="flex flex-row content-center justify-center items-center">
             <Link
               to={`/buill-detail/${id}`}
-              className="px-[20px] py-2 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-lg font-normal text-white text-center"
+              className="px-[20px] py-2 w-full rounded-full bg-[#0076B7] text-lg font-normal text-white text-center"
             >
               Tiếp tục
             </Link>
@@ -508,7 +507,7 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
                   state: { data: insurance.current, type: "updated" },
                 });
               }}
-              className="px-[20px] py-2 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-lg font-normal text-white text-center"
+              className="px-[20px] py-2 w-full rounded-full bg-[#0076B7] text-lg font-normal text-white text-center"
             >
               Tra cứu lại
             </button>
@@ -577,7 +576,7 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
                   <div className="flex flex-row content-center justify-center items-center">
                     <Link
                       to={`/check-status-procedure/${billPay?.id}`}
-                      className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
+                      className="px-[24px] py-3 w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
                     >
                       Kiểm tra trạng thái thủ tục
                     </Link>

@@ -15,9 +15,9 @@ import PartnerInfo from "./components/partner_info";
 import Activities from "./components/activities";
 import camera from "../../assets/icon/camera.svg";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
 import { toast } from "react-toastify";
 import { validUrlImage } from "../../utils/validate_string";
+import { APP_CONFIG } from "../../utils/constants";
 
 const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
   const [activeContent, setActiveContent] = useState<React.ReactNode>(null);
@@ -122,7 +122,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
         setIsUploadingAvatar(true);
 
         const response = await axios.post(
-          `${BASE_URL}/account/api/change-avatar`,
+          `${APP_CONFIG.BASE_URL}/account/api/change-avatar`,
           formData,
           {
             headers: {
@@ -214,7 +214,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             <div
               className={`user-car-button ${
                 activeButton === "Account Info" ? "active" : ""
-              } p-[10px] md:p-[15px] md:p-[15px]`}
+              } p-[10px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Account Info")}
             >
               <div className="border-icon">
@@ -248,7 +248,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             <div
               className={`user-car-button cursor-pointer ${
                 activeButton === "Activities" ? "active" : ""
-              } p-[10px] md:p-[15px] md:p-[15px]`}
+              } p-[10px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Activities")}
             >
               <div className="border-icon">
@@ -275,7 +275,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
               <div
                 className={`user-car-button cursor-pointer ${
                   activeButton === "Partner Info" ? "active" : ""
-                } p-[10px] md:p-[15px] md:p-[15px]`}
+                } p-[10px] md:p-[15px]`}
                 onClick={() => handleDropdownItemClick("Partner Info")}
               >
                 <div className="border-icon">
@@ -311,7 +311,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
               <div
                 className={`user-car-button cursor-pointer ${
                   activeButton === "Register Partner Info" ? "active" : ""
-                } p-[10px] md:p-[15px] md:p-[15px]`}
+                } p-[10px] md:p-[15px]`}
                 onClick={() => handleDropdownItemClick("Register Partner Info")}
               >
                 <div className="border-icon">
@@ -347,7 +347,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             <div
               className={`user-car-button cursor-pointer ${
                 activeButton === "Guidelines" ? "active" : ""
-              } p-[10px] md:p-[15px] md:p-[15px]`}
+              } p-[10px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Guidelines")}
             >
               <div className="border-icon">
@@ -389,7 +389,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             <div
               className={`user-car-button cursor-pointer ${
                 activeButton === "Terms" ? "active" : ""
-              } p-[10px] md:p-[15px] md:p-[15px]`}
+              } p-[10px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Terms")}
             >
               <div className="border-icon">
@@ -423,7 +423,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             <div
               className={`user-car-button cursor-pointer ${
                 activeButton === "Chat" ? "active" : ""
-              } p-[10px] md:p-[15px] md:p-[15px]`}
+              } p-[10px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Chat")}
             >
               <svg
@@ -462,7 +462,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
             <div
               className={`user-car-button cursor-pointer ${
                 activeButton === "Change Password" ? "active" : ""
-              } p-[10px] md:p-[15px] md:p-[15px]`}
+              } p-[10px] md:p-[15px]`}
               onClick={() => handleDropdownItemClick("Change Password")}
             >
               <svg
@@ -495,7 +495,7 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
               <p>Đổi mật khẩu</p>
             </div>
             <div
-              className="cursor-pointer user-car-button text-white bg-[#0077D5;] p-[10px] md:p-[15px] md:p-[15px]"
+              className="cursor-pointer user-car-button text-white bg-[#0077D5;] p-[10px] md:p-[15px]"
               onClick={handleLogout}
             >
               <p className="text-center w-full">Đăng xuất</p>

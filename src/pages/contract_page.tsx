@@ -4,13 +4,11 @@ const ContractPage: React.FunctionComponent = () => {
   const [imageSrcs, setImageSrcs] = useState<string[]>([]);
 
   useEffect(() => {
-    // Gán giá trị imageSrcs trong useEffect
     setImageSrcs([]);
   }, []);
 
   return (
     <div>
-      {/* <HeaderBase isHome={false} title={"Hợp đồng"} /> */}
       <div className="p-4 mt-20 mb-28">
         <div className="bg-white flex flex-wrap items-center justify-center min-h-[95vh]">
           {imageSrcs.length > 0 ? (

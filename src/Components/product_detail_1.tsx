@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import HeaderTitle from "./header_title";
-import { BASE_URL } from "../utils/constants";
+import { APP_CONFIG } from "../utils/constants";
 
 const ProductDetailPage1: React.FunctionComponent = () => {
   const [imageSrcs, setImageSrcs] = useState<string[]>([]);
@@ -10,15 +10,15 @@ const ProductDetailPage1: React.FunctionComponent = () => {
   useEffect(() => {
     // Gán giá trị imageSrcs trong useEffect
     setImageSrcs([
-      `${BASE_URL}/files/upload/account/1019/23397296-cdbe-4ee4-a94a-ddcbd9acdaf9.png`,
-      `${BASE_URL}/files/upload/account/1019/1990eeec-efc5-4cff-8c6a-68055ce9652e.png`,
+      `${APP_CONFIG.BASE_URL}/files/upload/account/1019/23397296-cdbe-4ee4-a94a-ddcbd9acdaf9.png`,
+      `${APP_CONFIG.BASE_URL}/files/upload/account/1019/1990eeec-efc5-4cff-8c6a-68055ce9652e.png`,
     ]);
   }, []);
 
   useEffect(() => {
     axios
       .get(
-        `${BASE_URL}/insurance/api/list-paging-viewmodel?pageIndex=1&PageSizes=100&insuranceTypeId=1002`
+        `${APP_CONFIG.BASE_URL}/insurance/api/list-paging-viewmodel?pageIndex=1&PageSizes=100&insuranceTypeId=1002`
       )
       .then((response) => {
         const data = response.data.data.filter(

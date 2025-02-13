@@ -6,7 +6,7 @@ const VerifyAccountPage = () => {
 
   return (
     <div className="pt-3 md:pt-6 lg:pt-6">
-      <div className="container flex flex-col gap-5 justify-center items-center mx-auto py-[0px] md:py-[20px] lg:py-[40px] max-w-[1280px] mx-auto h-[500px]">
+      <div className="container flex flex-col gap-5 justify-center items-center py-[0px] md:py-[20px] lg:py-[40px] max-w-[1280px] mx-auto h-[500px]">
         <img alt="" src={imageSuccess} width={150} height={150} />
 
         <div className="text-[20px]">Xác thực tài khoản thành công</div>

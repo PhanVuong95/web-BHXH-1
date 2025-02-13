@@ -9,12 +9,12 @@ import Modal from "react-modal";
 import type { GetProps } from "antd";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
 import {
   isValidEmptyString,
   isValidPassword,
 } from "../../utils/validate_string";
 import { useNavigate } from "react-router-dom";
+import { APP_CONFIG } from "../../utils/constants";
 type OTPProps = GetProps<typeof Input.OTP>;
 
 const ForgotPasswordPage = () => {
@@ -48,7 +48,7 @@ const ForgotPasswordPage = () => {
       setIsLoadingSendOTP(true);
 
       const response = await axios.post(
-        `${BASE_URL}/account/api/send-forgot-password?value=${userName}`,
+        `${APP_CONFIG.BASE_URL}/account/api/send-forgot-password?value=${userName}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -99,7 +99,7 @@ const ForgotPasswordPage = () => {
         setIsLoadingCheckOTP(true);
 
         const response = await axios.post(
-          `${BASE_URL}/Account/api/check-otp?value=${otp}&phone=${userName}`,
+          `${APP_CONFIG.BASE_URL}/Account/api/check-otp?value=${otp}&phone=${userName}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -175,7 +175,7 @@ const ForgotPasswordPage = () => {
 
   const onSubmitChangePassword = async () => {
     const response = await axios.post(
-      `${BASE_URL}/Account/api/reset-password?newPassword=${password}&value=${otp}`,
+      `${APP_CONFIG.BASE_URL}/Account/api/reset-password?newPassword=${password}&value=${otp}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -262,7 +262,7 @@ const ForgotPasswordPage = () => {
       <HeaderTitle links={[{ title: "Quên mật khẩu" }]} />
 
       <div className="container flex flex-col md:flex-col lg:flex-row gap-8 mx-auto py-[0px] md:py-[30px] lg:py-[40px] max-w-[1280px]">
-        <div className="flex-[6] hidden md:hidden lg:block  flex flex-col w-[50%] h-[300px] pt-[100px]">
+        <div className="flex-[6] hidden md:hidden lg:block flex-col w-[50%] h-[300px] pt-[100px]">
           <Carousel infinite draggable className="custom-carousel h-[300px]">
             {listImageSlider.map((item) => {
               return (

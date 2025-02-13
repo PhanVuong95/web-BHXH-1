@@ -10,7 +10,7 @@ const HeaderTitle: React.FC<BreadcrumbProps> = ({ links }) => {
           <h3 className="text-white text-base font-normal">Trang chủ</h3>
         </a>
         {links.map((link, index) => {
-          const isLast = index === links.length - 1; // Kiểm tra nếu là phần tử cuối cùng
+          const isLast = index === links.length - 1;
           return (
             <div key={index} className="flex items-center gap-3">
               <svg

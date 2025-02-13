@@ -5,7 +5,7 @@ import html2canvas from "html2canvas";
 import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import imagesIocn from "../../assets/icon/images";
-import { BASE_URL } from "../../utils/constants";
+import { APP_CONFIG } from "../../utils/constants";
 
 const IntroducingPartnersPage = () => {
   const [linkQRCode, setLinkQRCode] = useState<string>("");
@@ -17,7 +17,7 @@ const IntroducingPartnersPage = () => {
     const token = localStorage.accessToken;
     try {
       const response = await axios.get(
-        `${BASE_URL}/account/api/get-contributor-code?type=web`,
+        `${APP_CONFIG.BASE_URL}/account/api/get-contributor-code?type=web`,
         {
           headers: {
             "Content-Type": "multipart/form-data",

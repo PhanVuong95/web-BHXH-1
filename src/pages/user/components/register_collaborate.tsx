@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../../utils/constants";
 import { Input } from "antd";
 import Modal from "react-modal";
 import imagesIocn from "../../../assets/icon/images";
@@ -11,6 +10,7 @@ import {
   isValidPhone,
 } from "../../../utils/validate_string";
 import { toast } from "react-toastify";
+import { APP_CONFIG } from "../../../utils/constants";
 
 const RegisterCollaborate = () => {
   const [frontImageUrl, setFrontImageUrl] = useState<string>("");
@@ -45,7 +45,7 @@ const RegisterCollaborate = () => {
 
       try {
         const response = await axios.post(
-          `${BASE_URL}/account/api/upload-file`,
+          `${APP_CONFIG.BASE_URL}/account/api/upload-file`,
           formData,
           {
             headers: {
@@ -184,7 +184,7 @@ const RegisterCollaborate = () => {
                 <div className="icon-1">
                   {frontImageUrl ? (
                     <img
-                      src={`${BASE_URL}${frontImageUrl}`}
+                      src={`${APP_CONFIG.BASE_URL}${frontImageUrl}`}
                       alt="Mặt trước"
                       className="w-[100%] h-[100px] object-center rounded-lg "
                     />
@@ -262,7 +262,7 @@ const RegisterCollaborate = () => {
                 <div className="icon-1">
                   {backImageUrl ? (
                     <img
-                      src={`${BASE_URL}${backImageUrl}`}
+                      src={`${APP_CONFIG.BASE_URL}${backImageUrl}`}
                       alt="Mặt sau"
                       className="w-[100%] h-[100px] object-center rounded-lg"
                     />
@@ -377,7 +377,7 @@ const RegisterCollaborate = () => {
           </div>
 
           <button
-            className="px-[24px]  mt-6 py-2 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
+            className="px-[24px]  mt-6 py-2 bg-[#0076B7] w-full rounded-full  text-base font-normal text-white text-center"
             type="submit"
           >
             Đồng ý
@@ -456,7 +456,7 @@ const RegisterCollaborate = () => {
 
       try {
         const response = await axios.post(
-          `${BASE_URL}/account/api/register-contributor`,
+          `${APP_CONFIG.BASE_URL}/account/api/register-contributor`,
           data,
           {
             headers: {

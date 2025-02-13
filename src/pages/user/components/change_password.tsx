@@ -6,8 +6,8 @@ import {
 } from "../../../utils/validate_string";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { BASE_URL } from "../../../utils/constants";
 import { Button, Input } from "antd";
+import { APP_CONFIG } from "../../../utils/constants";
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -66,7 +66,7 @@ const ChangePassword = () => {
       };
 
       const response = await axios.post(
-        `${BASE_URL}/account/api/change-password`,
+        `${APP_CONFIG.BASE_URL}/account/api/change-password`,
         data,
         {
           headers: {

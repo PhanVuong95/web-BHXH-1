@@ -5,7 +5,7 @@ import { SpecificContext } from "./specific_context";
 import { Link } from "react-router-dom";
 import HeaderTitle from "./header_title";
 import { Input } from "antd";
-import { BASE_URL } from "../utils/constants";
+import { APP_CONFIG } from "../utils/constants";
 
 const BillPayPage: React.FC<Widthheight> = () => {
   const specificContext = useContext<any>(SpecificContext);
@@ -21,7 +21,10 @@ const BillPayPage: React.FC<Widthheight> = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/province/api/detail/` + insuranceOrder.provinceId)
+      .get(
+        `${APP_CONFIG.BASE_URL}/province/api/detail/` +
+          insuranceOrder.provinceId
+      )
       .then((response) => {
         setProvinceName(response.data.data[0].name);
       })
@@ -29,7 +32,10 @@ const BillPayPage: React.FC<Widthheight> = () => {
         console.error(error);
       });
     axios
-      .get(`${BASE_URL}/district/api/detail/` + insuranceOrder.districtId)
+      .get(
+        `${APP_CONFIG.BASE_URL}/district/api/detail/` +
+          insuranceOrder.districtId
+      )
       .then((response) => {
         setDistrictName(response.data.data[0].name);
       })
@@ -37,7 +43,7 @@ const BillPayPage: React.FC<Widthheight> = () => {
         console.error(error);
       });
     axios
-      .get(`${BASE_URL}/ward/api/detail/` + insuranceOrder.wardId)
+      .get(`${APP_CONFIG.BASE_URL}/ward/api/detail/` + insuranceOrder.wardId)
       .then((response) => {
         setWardeName(response.data.data[0].name);
       })
@@ -49,7 +55,7 @@ const BillPayPage: React.FC<Widthheight> = () => {
   const [referrerCode, setReferrerCode] = useState("");
   const handleCheck = async () => {
     const token = localStorage.getItem("accessToken");
-    const url = `https://baohiemxahoi.dion.vn/insuranceOrder/api/create-payment?orderId=${insuranceOrder.wardId}&referrerCode=${referrerCode}`;
+    const url = `${APP_CONFIG.BASE_URL}/insuranceOrder/api/create-payment?orderId=${insuranceOrder.wardId}&referrerCode=${referrerCode}`;
 
     try {
       const response = await fetch(url, {
@@ -339,7 +345,7 @@ const BillPayPage: React.FC<Widthheight> = () => {
             <Link
               to={"/buill-detail/" + insuranceOrder.id}
               onClick={handleCheck}
-              className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
+              className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full text-base font-normal text-white text-center"
             >
               Tiếp tục
             </Link>

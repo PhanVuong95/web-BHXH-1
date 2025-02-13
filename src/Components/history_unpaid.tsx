@@ -7,7 +7,7 @@ import { formatDate } from "../utils/validate_string";
 import { SpecificContext } from "./specific_context";
 import logo from "../assets-src/logo1.png";
 import HeaderTitle from "./header_title";
-import { BASE_URL } from "../utils/constants";
+import { APP_CONFIG } from "../utils/constants";
 
 const HistoryUnpaidPage: React.FunctionComponent = () => {
   const { id, statusName } = useParams();
@@ -26,7 +26,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/insuranceorder/api/Detail-By-VM/` + id)
+      .get(`${APP_CONFIG.BASE_URL}/insuranceorder/api/Detail-By-VM/` + id)
       .then((response) => {
         setOrderDetail(response.data.data[0]);
         setInsuredPerson(response.data.data[0].listInsuredPerson[0]);
@@ -107,7 +107,7 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/insuranceorder/api/check-order-status/` + id)
+      .get(`${APP_CONFIG.BASE_URL}/insuranceorder/api/check-order-status/` + id)
       .then((response) => {
         setOrderStatusId(response.data.data[0]);
       })

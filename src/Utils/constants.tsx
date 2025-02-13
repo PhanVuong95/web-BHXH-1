@@ -1,5 +1,11 @@
 // export const BASE_URL = "https://dev-baohiem.dion.vn"
-export const BASE_URL = "https://portal-bhxh.dnpgroup.com.vn";
+// export const BASE_URL = "https://portal-bhxh.dnpgroup.com.vn";
+export const APP_CONFIG = {
+  BASE_URL: __CONFIG_APP__.VITE_BASE_URL,
+  ZALO_ID: __CONFIG_APP__.VITE_ZALO_ID,
+  ZALO_BHV_ID: __CONFIG_APP__.VITE_ZALO_BHV_ID,
+  VIET_QR_URI: __CONFIG_APP__.VITE_VIET_QR_URI,
+};
 
 export const listEthnics = [
   { name: "Kinh" },

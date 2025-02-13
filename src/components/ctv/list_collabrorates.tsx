@@ -4,7 +4,7 @@ import { ItemInfoProps } from "../../models";
 import imagesIocn from "../../assets/icon/images";
 import { Modal } from "antd";
 import { formatMoneyVND } from "../../utils/validate_string";
-import { BASE_URL } from "../../utils/constants";
+import { APP_CONFIG } from "../../utils/constants";
 
 const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [listCollabrorates, setListCollabrorates] = useState([]);
@@ -20,7 +20,7 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
     try {
       const response = await axios.get(
-        `${BASE_URL}/account/api/get-list-contributor`,
+        `${APP_CONFIG.BASE_URL}/account/api/get-list-contributor`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
     try {
       const response = await axios.get(
-        `${BASE_URL}/report/api/report-order-contributor?accountId=${collaboratorId}`,
+        `${APP_CONFIG.BASE_URL}/report/api/report-order-contributor?accountId=${collaboratorId}`,
         {
           headers: {
             "Content-Type": "application/json",

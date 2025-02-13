@@ -12,7 +12,7 @@ import { FadeLoader } from "react-spinners";
 import Modal from "react-modal";
 import icon from "../assets-src/icon_coppy.png";
 import HeaderTitle from "../components/header_title";
-import { BASE_URL } from "../utils/constants";
+import { APP_CONFIG } from "../utils/constants";
 
 const LuckUpBHXH = () => {
   const [errors, setErrors] = useState<any>({});
@@ -35,7 +35,7 @@ const LuckUpBHXH = () => {
   // Danh sách tỉnh thành
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/province/api/list`)
+      .get(`${APP_CONFIG.BASE_URL}/province/api/list`)
       .then((response) => {
         setProvinces(response.data.data);
       })
@@ -53,7 +53,7 @@ const LuckUpBHXH = () => {
     if (selectedKSProvince !== 0) {
       axios
         .get(
-          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
+          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
         )
         .then((response) => {
           ksDistricts.current = response.data.data;
@@ -79,7 +79,7 @@ const LuckUpBHXH = () => {
     if (selectedKSDistrict !== 0) {
       axios
         .get(
-          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
+          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
         )
         .then((response) => {
           ksWards.current = response.data.data;
@@ -323,7 +323,7 @@ const LuckUpBHXH = () => {
     };
     try {
       const response = await axios.post(
-        `${BASE_URL}/InsuranceOrder/api/search-social-insurance-number`,
+        `${APP_CONFIG.BASE_URL}/InsuranceOrder/api/search-social-insurance-number`,
         data,
         {
           headers: {
@@ -395,7 +395,7 @@ const LuckUpBHXH = () => {
               onSubmitFormData();
             }
           }}
-          className="px-[20px] py-2 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
+          className="px-[20px] py-2 w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
         >
           Tra cứu
         </button>
@@ -406,7 +406,6 @@ const LuckUpBHXH = () => {
   return (
     <div className="pt-6">
       <HeaderTitle links={[{ title: "Tra cứu Bảo hiểm Xã hội" }]} />
-
       <div className="px-3 xl:px-0 flex flex-col gap-4 py-[60px] max-w-[1280px] w-full mx-auto">
         <div className="flex flex-col gap-4">
           <div className=" bg-white rounded-xl flex flex-row flex-wrap justify-between gap-4">

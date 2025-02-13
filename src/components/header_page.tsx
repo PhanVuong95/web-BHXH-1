@@ -16,9 +16,9 @@ import * as signalR from "@microsoft/signalr";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useModalLogin } from "../context/auth_context";
-import { BASE_URL } from "../utils/constants";
 import { useProfile } from "./user_profile_context";
 import { validUrlImage } from "../utils/validate_string";
+import { APP_CONFIG } from "../utils/constants";
 
 const HeaderPage = () => {
   const [isSideMenuOpen, setMenu] = useState(false);
@@ -93,7 +93,7 @@ const HeaderPage = () => {
   const loginWithGoogle = async (user: any) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/account/api/sign-in-google`,
+        `${APP_CONFIG.BASE_URL}/account/api/sign-in-google`,
         user,
         {
           headers: {
@@ -142,7 +142,7 @@ const HeaderPage = () => {
 
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder()
-      .withUrl(`${BASE_URL}/login-portal`, {
+      .withUrl(`${APP_CONFIG.BASE_URL}/login-portal`, {
         skipNegotiation: true,
         transport: signalR.HttpTransportType.WebSockets,
       })
@@ -196,7 +196,7 @@ const HeaderPage = () => {
       };
 
       const response = await axios.post(
-        `${BASE_URL}/account/api/login-web`,
+        `${APP_CONFIG.BASE_URL}/account/api/login-web`,
         data,
         {
           headers: {
@@ -236,7 +236,7 @@ const HeaderPage = () => {
   };
 
   useEffect(() => {
-    const link = `https://zalo.me/s/3091964383674543126/login/portal?state=${btoa(
+    const link = `${APP_CONFIG.ZALO_ID}/login/portal?state=${btoa(
       JSON.stringify({
         data: {
           body: { clientId },
@@ -753,7 +753,7 @@ const HeaderPage = () => {
                       onClick={(e) => e.stopPropagation()}
                     >
                       <ul>
-                        <li className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1 w-full">
+                        <li className="ml-4 font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1 w-full">
                           <Link
                             onClick={() => {
                               setMenu(false);
@@ -768,7 +768,7 @@ const HeaderPage = () => {
                             setMenu(false);
                             handleLogout();
                           }}
-                          className="font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1 w-full"
+                          className="ml-4 font-medium py-[10px] md:py-[15px] lg:py-[20px] border-bottom-1 w-full"
                         >
                           Đăng xuất
                         </li>
@@ -796,7 +796,7 @@ const HeaderPage = () => {
                 </p>
               </div>
               {/* avtar img */}
-              <div className="relative">
+              <div className="lg:relative md:relative">
                 <img
                   className="rounded-full  cursor-pointer w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[60px] lg:h-[60px]"
                   src={
@@ -807,9 +807,10 @@ const HeaderPage = () => {
                   alt="avatar-img"
                   onClick={toggleDropdown}
                 />
+
                 {/* Dropdown menu */}
                 {isDropdownOpen && (
-                  <div className="absolute right-[-1020px]  md:right-[0px] lg:right-[0px] top-[70px] bg-white rounded shadow-lg z-10 user-card overflow-hidden">
+                  <div className="absolute right-[0px] w-[260px] md:w-[300px] lg:w-[300px] md:right-[0px] lg:right-[0px] top-[70px] md:top-[70px] lg:top-[70px] bg-white rounded shadow-lg z-10 user-card overflow-hidden !p-4 !sm:w-[280px]">
                     <div className="user-car1">
                       <Link
                         to="user"

@@ -2,13 +2,13 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import HeaderTitle from "../../components/header_title";
 import { Button, Input } from "antd";
 import { useState } from "react";
-import { BASE_URL } from "../../utils/constants";
 import { toast } from "react-toastify";
 import {
   isValidEmptyString,
   isValidPassword,
 } from "../../utils/validate_string";
 import axios from "axios";
+import { APP_CONFIG } from "../../utils/constants";
 
 const ChangePasswordPage = () => {
   const [searchParams] = useSearchParams();
@@ -45,7 +45,7 @@ const ChangePasswordPage = () => {
       setIsLoadingChangePassword(true);
 
       const response = await axios.post(
-        `${BASE_URL}/Account/api/reset-password?newPassword=${password}&value=${hashCode}`,
+        `${APP_CONFIG.BASE_URL}/Account/api/reset-password?newPassword=${password}&value=${hashCode}`,
         {
           headers: {
             "Content-Type": "application/json",

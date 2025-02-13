@@ -29,6 +29,9 @@
       {
         "nested-interactive": "off"
       }
-    ]
+    ],
+    "typescript-config/is-valid": "off",
+    "typescript-config/consistent-casing": "off",
+    "typescript-config/strict": "off"
   }
 }

@@ -19,7 +19,7 @@ import {
   isValidUserName,
 } from "../../utils/validate_string";
 import axios from "axios";
-import { BASE_URL } from "../../utils/constants";
+import { APP_CONFIG } from "../../utils/constants";
 
 const RegisterPage = () => {
   const [isShowModalOTP, setIsShowModalOTP] = useState(false);
@@ -115,7 +115,7 @@ const RegisterPage = () => {
       };
 
       const response = await axios.post(
-        `${BASE_URL}/account/api/register`,
+        `${APP_CONFIG.BASE_URL}/account/api/register`,
         data,
         {
           headers: {
@@ -161,7 +161,7 @@ const RegisterPage = () => {
       try {
         setLoadingSendOtp(true);
         const response = await axios.post(
-          `${BASE_URL}/account/api/verify-register-otp?accountId=${userId}&OTPCode=${otp}`,
+          `${APP_CONFIG.BASE_URL}/account/api/verify-register-otp?accountId=${userId}&OTPCode=${otp}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -287,7 +287,7 @@ const RegisterPage = () => {
       <HeaderTitle links={[{ title: "Đăng ký" }]} />
 
       <div className="container flex flex-col md:flex-col lg:flex-row gap-8 mx-auto py-[0px] md:py-[30px] lg:py-[40px] max-w-[1280px]">
-        <div className="flex-[6] hidden md:hidden lg:block  flex flex-col w-[50%] h-[700px] pt-[100px]">
+        <div className="flex-[6] hidden md:hidden lg:block flex-col w-[50%] h-[700px] pt-[100px]">
           <Carousel infinite draggable className="custom-carousel h-[500px]">
             {listImageSlider.map((item, index) => {
               return (

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { formatMoneyVND, formatPhoneNumber } from "../utils/validate_string";
 import HeaderTitle from "./header_title";
 import { Input } from "antd";
-import { BASE_URL } from "../utils/constants";
+import { APP_CONFIG } from "../utils/constants";
 
 const BillPayBHYTPage: React.FunctionComponent = () => {
   const { id } = useParams();
@@ -25,7 +25,7 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/insuranceorder/api/detail-by-vm/` + id)
+      .get(`${APP_CONFIG.BASE_URL}/insuranceorder/api/detail-by-vm/` + id)
       .then((response) => {
         setBillPay(response.data.data[0]);
         setLoading(false);
@@ -37,9 +37,10 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
   }, []);
 
   const [referrerCode, setReferrerCode] = useState("");
+
   const handleCheck = async () => {
     const token = localStorage.getItem("accessToken");
-    const url = `https://baohiemxahoi.dion.vn/insuranceOrder/api/create-payment?orderId=${id}&referrerCode=${referrerCode}`;
+    const url = `${APP_CONFIG.BASE_URL}/insuranceOrder/api/create-payment?orderId=${id}&referrerCode=${referrerCode}`;
 
     try {
       const response = await fetch(url, {

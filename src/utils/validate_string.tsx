@@ -1,6 +1,6 @@
 import { Bank } from "../models";
 import logo from "../assets-src/logo.png";
-import { BASE_URL } from "./constants";
+import { APP_CONFIG } from "./constants";
 
 export const formatMoneyVND = (amount: number): string => {
   try {
@@ -306,8 +306,12 @@ export function validUrlImage(url: string) {
     if (url == "" || undefined) {
       return logo;
     }
-    return `${BASE_URL}${url}`.replace(/\\/g, "/").toLocaleLowerCase();
+    return `${APP_CONFIG.BASE_URL}${url}`
+      .replace(/\\/g, "/")
+      .toLocaleLowerCase();
   } catch {
-    return `${BASE_URL}${url}`.replace(/\\/g, "/").toLocaleLowerCase();
+    return `${APP_CONFIG.BASE_URL}${url}`
+      .replace(/\\/g, "/")
+      .toLocaleLowerCase();
   }
 }

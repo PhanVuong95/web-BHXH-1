@@ -1,26 +1,34 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BASE_URL, RoleName, RoleNameKey } from "../../../utils/constants";
-import imagesIocn from "../../../assets/icon/images";
+import { APP_CONFIG, RoleName, RoleNameKey } from "../../../utils/constants";
+import imagesIcon from "../../../assets/icon/images";
 import users from "../../../assets/user.png";
 import {
   isValidEmptyString,
   validUrlImage,
 } from "../../../utils/validate_string";
 import { useProfile } from "../../../components/user_profile_context";
+import iconEdit from "../../../assets/icon/ic_edit.png";
+import ModalChangeInfoProfile from "./modal_change_info_profile";
+import ModalChangeInfoCTV from "./modal_change_info_ctv";
 
 const AccountInfo: React.FC<any> = () => {
   const [userDetail, setUserDetail] = useState<any>();
   const { userProfile } = useProfile();
+  const [isOpenModalEditProfile, setOpenModalEditProfile] = useState(false);
+  const [isOpenModalEditCTV, setOpenModalEditCTV] = useState(false);
 
   const fetchUserDetail = async () => {
     const token = localStorage.getItem("accessToken");
 
-    const response = await axios.get(`${BASE_URL}/account/api/get-profile`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axios.get(
+      `${APP_CONFIG.BASE_URL}/account/api/get-profile`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     if (response.data.status == "200") {
       setUserDetail(response.data.data[0]);
@@ -31,11 +39,218 @@ const AccountInfo: React.FC<any> = () => {
     fetchUserDetail();
   }, []);
 
+  const profileInfo = () => {
+    return (
+      <div className="flex flex-col gap-[15px] md:gap-[15px] lg:gap-[20px]">
+        <div className="flex justify-between">
+          <h3 className="text-md md:text-lg lg:text-lg font-bold text-black">
+            Thông tin cá nhân
+          </h3>
+
+          <button
+            onClick={() => {
+              setOpenModalEditProfile(true);
+            }}
+          >
+            <img src={iconEdit} width={30} height={30} alt="iconEdit" />
+          </button>
+        </div>
+
+        <hr className="border-t-3 border-dashed border-gray-400" />
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              Họ và tên
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              {!isValidEmptyString(userDetail?.fullName)
+                ? "Chưa cập nhật"
+                : userDetail?.fullName}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              Ngày sinh
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              Chưa cập nhật
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              CCCD
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              Chưa cập nhật
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              Điện thoại
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              {!isValidEmptyString(userDetail?.phone)
+                ? "Chưa cập nhật"
+                : userDetail?.phone}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              Email
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              {!isValidEmptyString(userDetail?.email)
+                ? "Chưa cập nhật"
+                : userDetail?.email}
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              Địa chỉ
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              {!isValidEmptyString(userDetail?.addressDetail)
+                ? "Chưa cập nhật"
+                : userDetail?.addressDetail}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              Loại tài khoản
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              {RoleName[userDetail?.roleId.toString() as RoleNameKey]}
+            </p>
+          </div>
+        </div>
+
+        <ModalChangeInfoProfile
+          isShowModal={isOpenModalEditProfile}
+          setIsShowModal={(value) => {
+            setOpenModalEditProfile(value);
+          }}
+        />
+      </div>
+    );
+  };
+
+  const infoCTV = () => {
+    return (
+      <div className="flex flex-col gap-[15px] md:gap-[15px] lg:gap-[20px]  mt-5">
+        <div className="flex justify-between">
+          <h3 className="text-md md:text-lg lg:text-lg font-bold text-black">
+            Thông tin CTV
+          </h3>
+
+          <button
+            onClick={() => {
+              setOpenModalEditCTV(true);
+            }}
+          >
+            <img src={iconEdit} width={30} height={30} alt="iconEdit" />
+          </button>
+        </div>
+
+        <hr className="border-t-3 border-dashed border-gray-400" />
+
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              Tên ngân hàng
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              Chưa cập nhật
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              Chi nhánh
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              Chưa cập nhật
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              Chủ tài khoản
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              Chưa cập nhật
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              Số tài khoản
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              Chưa cập nhật
+            </p>
+          </div>
+        </div>
+
+        <ModalChangeInfoCTV
+          isShowModal={isOpenModalEditCTV}
+          setIsShowModal={(value) => {
+            setOpenModalEditCTV(value);
+          }}
+        />
+      </div>
+    );
+  };
+
   return (
     <section className="rounded-[10px] overflow-hidden">
       <div className="top-account relative">
         <img
-          src={imagesIocn.banner}
+          src={imagesIcon.banner}
           alt=""
           className="h-[130px] md:h-[200px] lg:h-[200px]"
         />
@@ -61,70 +276,9 @@ const AccountInfo: React.FC<any> = () => {
           </div>
         </div>
       </div>
-      <div className="bot-account bg-white p-[15px] md:p-[15px] lg:p-[20px] sm:p-[40px] flex flex-col gap-[20px]">
-        <h3 className="text-lg font-bold text-black">Thông tin cá nhân</h3>
-        <hr className="border-t-3 border-dashed border-gray-400" />
-        <div className="flex flex-row max-w-[296px]">
-          <div className="w-[50%]">
-            <p className="text-lg font-normal text-[#797D77]">Họ và tên</p>
-          </div>
-          <div className="w-[50%]">
-            <p className="text-lg font-normal text-black">
-              {!isValidEmptyString(userDetail?.fullName)
-                ? "Chưa cập nhật"
-                : userDetail?.fullName}
-            </p>
-          </div>
-        </div>
-        <div className="flex flex-row max-w-[296px]">
-          <div className="w-[50%]">
-            <p className="text-lg font-normal text-[#797D77]">Điện thoại</p>
-          </div>
-          <div className="w-[50%]">
-            <p className="text-lg font-normal text-black">
-              {!isValidEmptyString(userDetail?.phone)
-                ? "Chưa cập nhật"
-                : userDetail?.phone}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-row max-w-[296px]">
-          <div className="w-[50%]">
-            <p className="text-lg font-normal text-[#797D77]">Email</p>
-          </div>
-          <div className="w-[50%]">
-            <p className="text-lg font-normal text-black">
-              {!isValidEmptyString(userDetail?.email)
-                ? "Chưa cập nhật"
-                : userDetail?.email}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-row max-w-[296px]">
-          <div className="w-[50%]">
-            <p className="text-lg font-normal text-[#797D77]">Địa chỉ</p>
-          </div>
-          <div className="w-[50%]">
-            <p className="text-lg font-normal text-black">
-              {!isValidEmptyString(userDetail?.addressDetail)
-                ? "Chưa cập nhật"
-                : userDetail?.addressDetail}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-row max-w-[296px]">
-          <div className="w-[50%]">
-            <p className="text-lg font-normal text-[#797D77]">Loại tài khoản</p>
-          </div>
-          <div className="w-[50%]">
-            <p className="text-lg font-normal text-black">
-              {RoleName[userDetail?.roleId.toString() as RoleNameKey]}
-            </p>
-          </div>
-        </div>
+      <div className="bot-account bg-white p-[15px] md:p-[15px] lg:p-[20px] sm:p-[40px] ">
+        {profileInfo()}
+        {infoCTV()}
       </div>
     </section>
   );

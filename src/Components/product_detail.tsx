@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import HeaderTitle from "./header_title";
-import { BASE_URL } from "../utils/constants";
+import { APP_CONFIG } from "../utils/constants";
 
 const ProductDetailPage: React.FunctionComponent = () => {
   const [, setInsurance] = useState<any>();
@@ -9,7 +9,7 @@ const ProductDetailPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/insurance/api/detail-viewmodel?id=1001`)
+      .get(`${APP_CONFIG.BASE_URL}/insurance/api/detail-viewmodel?id=1001`)
       .then((response) => {
         setInsurance(response.data.data[0]);
         setDetailSrcs(response.data.data[0].info);

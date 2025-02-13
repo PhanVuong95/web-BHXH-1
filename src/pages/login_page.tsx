@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import * as signalR from "@microsoft/signalr";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
+import { APP_CONFIG } from "../utils/constants";
 
 export const ACCESS_TOKEN_KEY = "accessToken";
 
@@ -64,7 +64,7 @@ const LoginPage = () => {
   }, []);
 
   useEffect(() => {
-    const link = `https://zalo.me/s/3118469885204258242/login/portal?state=${btoa(
+    const link = `${APP_CONFIG.ZALO_BHV_ID}/login/portal?state=${btoa(
       JSON.stringify({
         data: {
           body: { clientId },
@@ -127,7 +127,7 @@ const LoginPage = () => {
   const loginWithGoogle = async (user: any) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/account/api/sign-in-google`,
+        `${APP_CONFIG.BASE_URL}/account/api/sign-in-google`,
         user,
         {
           headers: {

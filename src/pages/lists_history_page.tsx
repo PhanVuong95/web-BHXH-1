@@ -4,9 +4,7 @@ import { ListsHistoryPageProps } from "../models";
 import axios from "axios";
 import { PulseLoader } from "react-spinners";
 import logo from "../assets-src/logo1.png";
-import { BASE_URL } from "../utils/constants";
-
-// Define an interface for the order item
+import { APP_CONFIG } from "../utils/constants";
 interface OrderItem {
   id: string;
   insuranceName: string;
@@ -14,9 +12,9 @@ interface OrderItem {
   finalPrice: number;
   insuranceOrderStatusId: number;
   insuranceOrderStatusName: string;
-  createdTime: string; // Assuming this is a string; change if necessary
+  createdTime: string;
   fullName: string;
-  statusColor?: string; // Optional property
+  statusColor?: string;
 }
 
 const ListsHistoryPage: React.FC<ListsHistoryPageProps> = ({ onBack }) => {
@@ -32,7 +30,7 @@ const ListsHistoryPage: React.FC<ListsHistoryPageProps> = ({ onBack }) => {
   useEffect(() => {
     axios
       .get(
-        `${BASE_URL}/insuranceorder/api/list-by-insuranceId?insuranceId=1001`,
+        `${APP_CONFIG.BASE_URL}/insuranceorder/api/list-by-insuranceId?insuranceId=1001`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

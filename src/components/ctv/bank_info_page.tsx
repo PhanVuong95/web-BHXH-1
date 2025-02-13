@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { convertListToSelectBanks } from "../../utils/validate_string";
 import { toast } from "react-toastify";
-import { BASE_URL } from "../../utils/constants";
+import { APP_CONFIG } from "../../utils/constants";
 
 interface BankInfoPageProps {
   onBack1: () => void;
@@ -19,7 +19,7 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
 
   useEffect(() => {
     axios
-      .get(`https://api.vietqr.io/v2/banks`)
+      .get(`${APP_CONFIG.VIET_QR_URI}`)
       .then((response) => {
         setListBanks(response.data.data);
       })
@@ -33,7 +33,7 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
 
     try {
       const response = await axios.get(
-        `${BASE_URL}/account/api/get-bank-info`,
+        `${APP_CONFIG.BASE_URL}/account/api/get-bank-info`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -175,7 +175,7 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
 
       try {
         const response = await axios.post(
-          `${BASE_URL}/account/api/update-bank-info`,
+          `${APP_CONFIG.BASE_URL}/account/api/update-bank-info`,
           data,
           {
             headers: {

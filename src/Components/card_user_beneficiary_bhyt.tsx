@@ -19,12 +19,12 @@ import dayjs from "dayjs";
 import "../locale/vi";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import locale from "antd/es/date-picker/locale/vi_VN";
-import Modal from "react-modal";
 import Lottie from "lottie-react";
 import lottieScanQR from "../assets-src/lottie_scan_qr.json";
 import { motion } from "framer-motion";
-import { BASE_URL, BenefitLevevlList } from "../utils/constants";
+import { APP_CONFIG, BenefitLevevlList } from "../utils/constants";
 import { toast } from "react-toastify";
+import Modal from "react-modal";
 
 dayjs.locale("vi");
 dayjs.extend(customParseFormat);
@@ -174,7 +174,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   // Load lại tất cả danh sách tỉnh thành
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/province/api/list`)
+      .get(`${APP_CONFIG.BASE_URL}/province/api/list`)
       .then((response) => {
         // Load tỉnh thành thường trú người tham gia
         ttProvinces.current = response.data.data;
@@ -193,7 +193,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/VungLuongToiThieu/api/List`)
+      .get(`${APP_CONFIG.BASE_URL}/VungLuongToiThieu/api/List`)
       .then((response) => {
         setVungLuongToiThieuList(response.data.data);
       })
@@ -212,7 +212,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     if (selectedKSProvince !== 0) {
       axios
         .get(
-          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
+          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
         )
         .then((response) => {
           ksDistricts.current = response.data.data;
@@ -238,7 +238,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     if (selectedKSDistrict !== 0) {
       axios
         .get(
-          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
+          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
         )
         .then((response) => {
           ksWards.current = response.data.data;
@@ -261,7 +261,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     if (selectedTTProvince !== 0) {
       axios
         .get(
-          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTProvince}`
+          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTProvince}`
         )
         .then((response) => {
           ttDistricts.current = response.data.data;
@@ -285,7 +285,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     if (selectedTTDistrict !== 0) {
       axios
         .get(
-          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTDistrict}`
+          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTDistrict}`
         )
         .then((response) => {
           ttWards.current = response.data.data;
@@ -305,7 +305,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     if (medicalProvinceId != "0" || medicalProvinceId != 0) {
       axios
         .get(
-          `${BASE_URL}/hospital/api/list-hospital-by-provinceId?provinceId=${medicalProvinceId}`
+          `${APP_CONFIG.BASE_URL}/hospital/api/list-hospital-by-provinceId?provinceId=${medicalProvinceId}`
         )
         .then((response) => {
           setListHospitals(response.data.data);
@@ -321,7 +321,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
   //   if (medicalDistrictId != "0" || medicalDistrictId != 0) {
   //     axios
   //       .get(
-  //         `${BASE_URL}/hospital/api/list-hospital-by-districtId?districtId=${medicalDistrictId}`
+  //         `${APP_CONFIG.BASE_URL}/hospital/api/list-hospital-by-districtId?districtId=${medicalDistrictId}`
   //       ).then((response) => {
   //         setListHospitals(response.data.data);
   //       })
@@ -344,7 +344,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
 
       try {
         const response = await axios.post(
-          `${BASE_URL}/account/api/upload-file`,
+          `${APP_CONFIG.BASE_URL}/account/api/upload-file`,
           formData,
           {
             headers: {
@@ -445,7 +445,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
     };
     try {
       const response = await axios.post(
-        `${BASE_URL}/InsuranceOrder/api/search-social-insurance-number`,
+        `${APP_CONFIG.BASE_URL}/InsuranceOrder/api/search-social-insurance-number`,
         data,
         {
           headers: {
@@ -820,7 +820,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
                 <div className="icon-1">
                   {photoCitizenFront ? (
                     <img
-                      src={`${BASE_URL}${photoCitizenFront}`}
+                      src={`${APP_CONFIG.BASE_URL}${photoCitizenFront}`}
                       alt="Mặt trước"
                       className="w-[100%] h-[100px] object-center rounded-lg"
                     />
@@ -901,7 +901,7 @@ const UserBeneficiaryBHYTPage = (props: Props) => {
                   <div className="icon-1">
                     {photoCitizenBack ? (
                       <img
-                        src={`${BASE_URL}${photoCitizenBack}`}
+                        src={`${APP_CONFIG.BASE_URL}${photoCitizenBack}`}
                         alt="Mặt sau"
                         className="w-[100%] h-[100px] object-center rounded-lg"
                       />

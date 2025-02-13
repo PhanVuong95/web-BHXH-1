@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { registerInfoBHYT } from "../pages/bhyt/list_health_insurance_page";
 import { Input, Select } from "antd";
 import { convertListToSelect } from "../utils/validate_string";
-import { BASE_URL } from "../utils/constants";
+import { APP_CONFIG } from "../utils/constants";
 
 interface Props {
   data: any;
@@ -31,7 +31,7 @@ const UserBuyerPage = (props: Props) => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/province/api/list`)
+      .get(`${APP_CONFIG.BASE_URL}/province/api/list`)
       .then((response) => {
         setProvinces(response.data.data);
       })
@@ -46,7 +46,7 @@ const UserBuyerPage = (props: Props) => {
     if (selectedProvince !== 0) {
       axios
         .get(
-          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedProvince}`
+          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedProvince}`
         )
         .then((response) => {
           setDistricts(response.data.data);
@@ -62,7 +62,7 @@ const UserBuyerPage = (props: Props) => {
     if (selectedDistrict !== 0) {
       axios
         .get(
-          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedDistrict}`
+          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedDistrict}`
         )
         .then((response) => {
           setWards(response.data.data);

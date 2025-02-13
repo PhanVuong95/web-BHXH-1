@@ -3,7 +3,7 @@ import imgSlider from "../assets-src/image-1002.png";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PostDetails } from "../models";
-import { BASE_URL } from "../utils/constants";
+import { APP_CONFIG } from "../utils/constants";
 const CardNewDetailPages = () => {
   const { id } = useParams();
 
@@ -14,7 +14,9 @@ const CardNewDetailPages = () => {
   useEffect(() => {
     const fetchPostDetail = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/post/api/detailPost/${id}`);
+        const response = await fetch(
+          `${APP_CONFIG.BASE_URL}/post/api/detailPost/${id}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch post details");
         }
@@ -55,7 +57,7 @@ const CardNewDetailPages = () => {
       <h3 className="text-base py-4 text-justify sm:text-[32px] font-bold leading-10">
         {postData.name}
       </h3>
-      <div className="flex flex-col text-justify items-center text-left gap-2 html-text-fomat">
+      <div className="flex flex-col text-justify items-center gap-2 html-text-fomat">
         {parse(postData.text)}
       </div>
     </div>

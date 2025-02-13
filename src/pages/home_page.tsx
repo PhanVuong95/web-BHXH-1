@@ -1,25 +1,14 @@
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import CardNewPage from "../Components/card_new";
 import { Link } from "react-router-dom";
-import banner from "../assets/banner-2.png";
+import banner from "@/assets/banner-2.png";
 import { toast } from "react-toastify";
 import CardNewPages from "../components/card_new_page";
 import { useEffect, useState } from "react";
 import { Post } from "../models";
-import { BASE_URL } from "../utils/constants";
+import { APP_CONFIG } from "../utils/constants";
+
+console.log(__CONFIG_APP__);
 
 const HomePage = () => {
-  // const navigate = useNavigate();
-
-  // const handleClick = (e: any) => {
-  //   const token = localStorage.getItem("accessToken");
-  //   if (!token) {
-  //     e.preventDefault();
-  //     navigate("/login");
-  //     toast.info("Bạn cần đăng nhập để sử dụng tính năng này!");
-  //   }
-  // };
-
   const [posts, setPosts] = useState<Post[]>([]);
   const [pageIndex, setPageIndex] = useState(1);
   const [pageSize] = useState(10);
@@ -29,7 +18,7 @@ const HomePage = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${BASE_URL}/post/api/listPaging-post?pageIndex=${pageIndex}&pageSize=${pageSize}`
+          `${APP_CONFIG.BASE_URL}/post/api/listPaging-post?pageIndex=${pageIndex}&pageSize=${pageSize}`
         );
         const jsonData = await response.json();
 
@@ -79,7 +68,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className="main-category-home">
-          <div className="container flex flex-col justify-between items-center category-home gap-y-[20px] md:gap-y-[40px] lg:gap-y-[60px]  py-[30px] md:py-[40px] lg:py-[60px]  px-[10px] max-w-[1280px] mx-auto">
+          <div className="container flex flex-col justify-between items-center category-home gap-y-[30px] md:gap-y-[40px] lg:gap-y-[60px]  py-[30px] md:py-[40px] lg:py-[60px]  px-[15px] max-w-[1280px] mx-auto">
             <div className="title">
               <div className="text-[#2B2B2B] text-[24px] md:text-[28px] lg:text-[32px] font-semibold md:font-bold lg:font-extrabold">
                 Tính năng nổi bật
@@ -87,7 +76,7 @@ const HomePage = () => {
             </div>
             <div
               data-aos="zoom-out-down"
-              className="flex flex-wrap items-center w-full gap-[20px] justify-between md:justify-center lg:justify-between"
+              className="flex flex-wrap items-center w-full gap-[20px] justify-evenly md:justify-center lg:justify-between"
             >
               <Link to="/social-insurance">
                 <div className="items-icon">

@@ -26,7 +26,7 @@ import Lottie from "lottie-react";
 import lottieScanQR from "../assets-src/lottie_scan_qr.json";
 import CardMembersHouseHoldBHXH from "./card_members_house_hold_bhxh";
 import HeaderTitle from "./header_title";
-import { BASE_URL } from "../utils/constants";
+import { APP_CONFIG } from "../utils/constants";
 
 dayjs.locale("vi");
 dayjs.extend(customParseFormat);
@@ -225,7 +225,7 @@ const RegisterBHXH = () => {
   // Load lại tất cả danh sách tỉnh thành
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/province/api/list`)
+      .get(`${APP_CONFIG.BASE_URL}/province/api/list`)
       .then((response) => {
         // Load tỉnh thành người mua
         buyerProvinces.current = response.data.data;
@@ -261,7 +261,7 @@ const RegisterBHXH = () => {
     if (selectedBuyerProvince !== 0) {
       axios
         .get(
-          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedBuyerProvince}`
+          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedBuyerProvince}`
         )
         .then((response) => {
           buyerDistricts.current = response.data.data;
@@ -287,7 +287,7 @@ const RegisterBHXH = () => {
     if (selectedBuyerDistrict !== 0) {
       axios
         .get(
-          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedBuyerDistrict}`
+          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedBuyerDistrict}`
         )
         .then((response) => {
           buyerWards.current = response.data.data;
@@ -310,7 +310,7 @@ const RegisterBHXH = () => {
     if (selectedKSProvince !== 0) {
       axios
         .get(
-          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
+          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
         )
         .then((response) => {
           ksDistricts.current = response.data.data;
@@ -336,7 +336,7 @@ const RegisterBHXH = () => {
     if (selectedKSDistrict !== 0) {
       axios
         .get(
-          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
+          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
         )
         .then((response) => {
           ksWards.current = response.data.data;
@@ -359,7 +359,7 @@ const RegisterBHXH = () => {
     if (selectedTTProvince !== 0) {
       axios
         .get(
-          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTProvince}`
+          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTProvince}`
         )
         .then((response) => {
           ttDistricts.current = response.data.data;
@@ -383,7 +383,7 @@ const RegisterBHXH = () => {
     if (selectedTTDistrict !== 0) {
       axios
         .get(
-          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTDistrict}`
+          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTDistrict}`
         )
         .then((response) => {
           ttWards.current = response.data.data;
@@ -406,7 +406,7 @@ const RegisterBHXH = () => {
     if (selectedMedicalByProvinceParticipant !== 0) {
       axios
         .get(
-          `${BASE_URL}/hospital/api/list-hospital-by-provinceId?provinceId=${selectedMedicalByProvinceParticipant}`
+          `${APP_CONFIG.BASE_URL}/hospital/api/list-hospital-by-provinceId?provinceId=${selectedMedicalByProvinceParticipant}`
         )
         .then((response) => {
           infoInsuranceHospital.current = response.data.data;
@@ -428,7 +428,7 @@ const RegisterBHXH = () => {
     if (selectedHouseholdProvince !== 0) {
       axios
         .get(
-          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedHouseholdProvince}`
+          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedHouseholdProvince}`
         )
         .then((response) => {
           householdDistricts.current = response.data.data;
@@ -452,7 +452,7 @@ const RegisterBHXH = () => {
     if (selectedHouseholdDistrict !== 0) {
       axios
         .get(
-          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedHouseholdDistrict}`
+          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedHouseholdDistrict}`
         )
         .then((response) => {
           householdWards.current = response.data.data;
@@ -475,7 +475,7 @@ const RegisterBHXH = () => {
     if (selectedTTHouseholdProvince !== 0) {
       axios
         .get(
-          `${BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTHouseholdProvince}`
+          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTHouseholdProvince}`
         )
         .then((response) => {
           householdTTDistricts.current = response.data.data;
@@ -499,7 +499,7 @@ const RegisterBHXH = () => {
     if (selectedTTHouseholdDistrict !== 0) {
       axios
         .get(
-          `${BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTHouseholdDistrict}`
+          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTHouseholdDistrict}`
         )
         .then((response) => {
           householdTTWards.current = response.data.data;
@@ -515,7 +515,7 @@ const RegisterBHXH = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/VungLuongToiThieu/api/List`)
+      .get(`${APP_CONFIG.BASE_URL}/VungLuongToiThieu/api/List`)
       .then((response) => {
         setVungLuongToiThieuList(response.data.data);
       })
@@ -552,28 +552,28 @@ const RegisterBHXH = () => {
           response7,
         ] = await Promise.all([
           axios.get(
-            `${BASE_URL}/district/api/list-by-provinceId?provinceId=${id1}`
+            `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${id1}`
           ),
           axios.get(
-            `${BASE_URL}/ward/api/list-by-districtId?districtId=${id2}`
-          ),
-
-          axios.get(
-            `${BASE_URL}/district/api/list-by-provinceId?provinceId=${id3}`
-          ),
-          axios.get(
-            `${BASE_URL}/ward/api/list-by-districtId?districtId=${id4}`
+            `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${id2}`
           ),
 
           axios.get(
-            `${BASE_URL}/district/api/list-by-provinceId?provinceId=${id5}`
+            `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${id3}`
           ),
           axios.get(
-            `${BASE_URL}/ward/api/list-by-districtId?districtId=${id6}`
+            `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${id4}`
           ),
 
           axios.get(
-            `${BASE_URL}/hospital/api/list-hospital-by-provinceId?provinceId=${id7}`
+            `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${id5}`
+          ),
+          axios.get(
+            `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${id6}`
+          ),
+
+          axios.get(
+            `${APP_CONFIG.BASE_URL}/hospital/api/list-hospital-by-provinceId?provinceId=${id7}`
           ),
         ]);
 
@@ -592,17 +592,17 @@ const RegisterBHXH = () => {
           const [response8, response9, response10, response11] =
             await Promise.all([
               axios.get(
-                `${BASE_URL}/district/api/list-by-provinceId?provinceId=${id8}`
+                `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${id8}`
               ),
               axios.get(
-                `${BASE_URL}/ward/api/list-by-districtId?districtId=${id9}`
+                `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${id9}`
               ),
 
               axios.get(
-                `${BASE_URL}/district/api/list-by-provinceId?provinceId=${id10}`
+                `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${id10}`
               ),
               axios.get(
-                `${BASE_URL}/ward/api/list-by-districtId?districtId=${id11}`
+                `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${id11}`
               ),
             ]);
 
@@ -733,7 +733,7 @@ const RegisterBHXH = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/ethnic/api/list`)
+      .get(`${APP_CONFIG.BASE_URL}/ethnic/api/list`)
       .then((response) => {
         setEthnicLists(response.data.data);
       })
@@ -857,7 +857,7 @@ const RegisterBHXH = () => {
 
       try {
         const response = await axios.post(
-          `${BASE_URL}/account/api/upload-file`,
+          `${APP_CONFIG.BASE_URL}/account/api/upload-file`,
           formData,
           {
             headers: {
@@ -1225,7 +1225,7 @@ const RegisterBHXH = () => {
     const token = localStorage.getItem("accessToken");
     try {
       const response = await axios.post(
-        `${BASE_URL}/insuranceorder/api/add-order`,
+        `${APP_CONFIG.BASE_URL}/insuranceorder/api/add-order`,
         insuranceOrder,
         {
           headers: {
@@ -1274,7 +1274,7 @@ const RegisterBHXH = () => {
     const token = localStorage.getItem("accessToken");
     try {
       const response = await axios.post(
-        `${BASE_URL}/insuranceorder/api/update-order`,
+        `${APP_CONFIG.BASE_URL}/insuranceorder/api/update-order`,
         insuranceOrder,
         {
           headers: {
@@ -1316,7 +1316,7 @@ const RegisterBHXH = () => {
     };
     try {
       const response = await axios.post(
-        `${BASE_URL}/InsuranceOrder/api/search-social-insurance-number`,
+        `${APP_CONFIG.BASE_URL}/InsuranceOrder/api/search-social-insurance-number`,
         data,
         {
           headers: {
@@ -3262,7 +3262,7 @@ const RegisterBHXH = () => {
                 <div className="icon-1">
                   {frontImageUrl ? (
                     <img
-                      src={`${BASE_URL}${frontImageUrl}`}
+                      src={`${APP_CONFIG.BASE_URL}${frontImageUrl}`}
                       alt="Mặt trước"
                       className="w-[100%] h-[200px] object-center rounded-lg "
                     />
@@ -3340,7 +3340,7 @@ const RegisterBHXH = () => {
                 <div className="icon-1">
                   {backImageUrl ? (
                     <img
-                      src={`${BASE_URL}${backImageUrl}`}
+                      src={`${APP_CONFIG.BASE_URL}${backImageUrl}`}
                       alt="Mặt sau"
                       className="w-[100%] h-[200px] object-center rounded-lg"
                     />
@@ -3701,7 +3701,7 @@ const RegisterBHXH = () => {
           </div>
           <div className="flex flex-row content-center justify-center items-center">
             <button
-              className="px-[24px] py-3 bg-[#0076B7] w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
+              className="px-[24px] py-3 w-full rounded-full bg-[#0076B7] text-base font-normal text-white text-center"
               type="submit"
             >
               Tiếp tục

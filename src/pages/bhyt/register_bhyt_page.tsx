@@ -22,7 +22,7 @@ import CardHouseHold from "../../components/card_house_hold";
 import CardMembersHouseHold from "../../components/card_members_house_hold";
 import CardObject from "../../components/card_object";
 import HeaderTitle from "../../components/header_title";
-import { BASE_URL } from "../../utils/constants";
+import { APP_CONFIG } from "../../utils/constants";
 
 const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
   onBack,
@@ -192,7 +192,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/ethnic/api/list`)
+      .get(`${APP_CONFIG.BASE_URL}/ethnic/api/list`)
       .then((response) => {
         setEthnicLists(response.data.data);
       })
@@ -203,7 +203,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/province/api/list`)
+      .get(`${APP_CONFIG.BASE_URL}/province/api/list`)
       .then((response) => {
         setProvinces(response.data.data);
       })
@@ -761,7 +761,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
 
       try {
         const response = await axios.post(
-          `${BASE_URL}/account/api/upload-file`,
+          `${APP_CONFIG.BASE_URL}/account/api/upload-file`,
           formData,
           {
             headers: {
@@ -839,7 +839,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
           {fileUpload && (
             <div className="flex items-center">
               <img
-                src={`${BASE_URL}${fileUpload}`}
+                src={`${APP_CONFIG.BASE_URL}${fileUpload}`}
                 alt="Ảnh "
                 className="w-[100%] object-center rounded-lg"
                 onClick={() => handleUploadFileClick(fileUploadUrl)}
@@ -880,7 +880,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
 
   const onCreate = async (token: any) => {
     const response = await axios.post(
-      `${BASE_URL}/insuranceorder/api/add-order`,
+      `${APP_CONFIG.BASE_URL}/insuranceorder/api/add-order`,
       registerInfoBHYT,
       {
         headers: {
@@ -911,7 +911,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
 
   const onUpdate = async (token: any) => {
     const response = await axios.post(
-      `${BASE_URL}/insuranceorder/api/update-insuranceOrder`,
+      `${APP_CONFIG.BASE_URL}/insuranceorder/api/update-insuranceOrder`,
       registerInfoBHYT,
       {
         headers: {

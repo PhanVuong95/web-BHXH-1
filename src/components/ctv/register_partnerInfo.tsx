@@ -4,7 +4,7 @@ import axios from "axios";
 import { Modal } from "antd";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import { BASE_URL } from "../../utils/constants";
+import { APP_CONFIG } from "../../utils/constants";
 
 const RegisterPartnerInfoPage: React.FC<MyComponentProps> = ({
   handleNext,
@@ -19,7 +19,7 @@ const RegisterPartnerInfoPage: React.FC<MyComponentProps> = ({
 
     try {
       const response = await axios.get(
-        `${BASE_URL}/account/api/check-register-contributor`,
+        `${APP_CONFIG.BASE_URL}/account/api/check-register-contributor`,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -63,23 +63,21 @@ const RegisterPartnerInfoPage: React.FC<MyComponentProps> = ({
       <Modal
         open={isShowModal}
         onCancel={() => setIsShowModal(false)}
-        footer={null} // No footer
+        footer={null}
         centered
         bodyStyle={{
           backgroundColor: "#fff",
           borderRadius: "15px",
           padding: 0,
           width: "100%",
-          maxWidth: "400px",
-          maxHeight: "312px",
           overflow: "auto",
         }}
         maskStyle={{
           backgroundColor: "rgba(0, 0, 0, 0.3)",
         }}
       >
-        <div className="p-4 w-[100%] bg-white items-center justify-center rounded-xl max-w-[400px]">
-          <div className="flex items-center justify-center w-full">
+        <div className="">
+          <div className="flex items-center p-4 w-[100%] bg-white justify-center rounded-xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="80"
@@ -121,6 +119,7 @@ const RegisterPartnerInfoPage: React.FC<MyComponentProps> = ({
               />
             </svg>
           </div>
+
           <div className="text-center text-[18px] font-semibold  mt-3">
             Bạn chưa đủ điều kiện đăng ký <br /> cộng tác viên
           </div>

@@ -1,12 +1,4 @@
-/* @font-face {
-  font-family: "Segoe UI";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Segoe UI"),
-    url("../src/assets/font/segoeuithis.ttf") format("ttf");
-} */
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
-/* @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"); */
 
 body {
   font-family: "Lexend", serif;
