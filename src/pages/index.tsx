@@ -1,7 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import UserCard from "../components/user_card";
-import CardNewPage from "../components/card_new";
+import CardNewPage from "./new/components/card_new";
 import { Link } from "react-router-dom";
 import { useProfile } from "../components/user_profile_context";
 import banner from "../../assets-src/banner.png";

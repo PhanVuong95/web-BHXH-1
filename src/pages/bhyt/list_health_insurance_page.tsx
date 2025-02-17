@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { PulseLoader } from "react-spinners";
-import CardProductBHYT from "../../components/card_product_bhyt";
+import CardProductBHYT from "./components/card_product_bhyt";
 import HeaderTitle from "../../components/header_title";
 import { formatDate } from "../../utils/validate_string";
 import { APP_CONFIG } from "../../utils/constants";
@@ -283,12 +283,11 @@ const ListHealthInsurance: React.FunctionComponent = () => {
 
   if (isLoading) {
     return (
-      <>
-        {/* <HeaderBase isHome={false} title={"BHYT tự nguyện"} /> */}
+      <div>
         <div className="fixed inset-0 flex items-center justify-center">
           <PulseLoader size={15} loading={true} color="#0076B7" />
         </div>
-      </>
+      </div>
     );
   }
 

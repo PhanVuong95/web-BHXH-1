@@ -77,16 +77,11 @@ const ListHistoryBHYT: React.FunctionComponent<ListsHistoryPageProps> = ({
 
   if (loading) {
     return (
-      <>
-        {/* <HeaderBase
-          isHome={false}
-          onBack={() => navigate("/history")}
-          title={"Lịch sử đăng ký BHYT TN"}
-        /> */}
+      <div>
         <div className="fixed inset-0 flex items-center justify-center">
           <PulseLoader size={15} loading={true} color="#0076B7" />
         </div>
-      </>
+      </div>
     );
   }
 

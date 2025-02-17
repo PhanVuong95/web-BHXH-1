@@ -1,7 +1,7 @@
 import { useState, ReactNode, ReactElement } from "react";
 
 interface TabsProps {
-  children: ReactElement[]; // Array of React elements (assuming all are Tab components)
+  children: ReactElement[];
 }
 
 export function Tabs({ children }: TabsProps) {

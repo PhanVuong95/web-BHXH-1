@@ -1,4 +1,4 @@
-import PrivacyPolicyPage from "../../../components/privacy_policy";
+import PrivacyPolicyPage from "../../common/privacy_policy";
 
 const Terms = () => (
   <div className="p-1 max-h-[770px] overflow-scroll">

@@ -86,7 +86,7 @@ export interface Post {
   id: number;
 }
 
-export interface CardNewPagesProps {
+export interface CardNewHomeProps {
   post: Post;
   index: number;
 }

@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import HeaderPage from "../components/header_page";
-import FooterPage from "../components/footerPage";
+import FooterPage from "../components/footer_page";
 
 const LayoutPage = () => {
   return (

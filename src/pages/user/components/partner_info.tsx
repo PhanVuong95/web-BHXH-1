@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { User } from "../../../models";
-import IntroducingPartnersPage from "../../../components/ctv/introducing_partners";
-import BankInfoPage from "../../../components/ctv/bank_info_page";
+import IntroducingPartnersPage from "../../ctv/introducing_partners";
+import BankInfoPage from "../../ctv/bank_info_page";
 import ProfilePartnerDetailPage from "../../profile_partner_detail_page";
-import ListCollabrorates from "../../../components/ctv/list_collabrorates";
-import ReportPartnerPage from "../../../components/ctv/report_partner_page";
+import ListCollabrorates from "../../ctv/list_collabrorates";
+import ReportPartnerPage from "../../ctv/report_partner_page";
 
 interface AccountInfoProps {
   user: User;

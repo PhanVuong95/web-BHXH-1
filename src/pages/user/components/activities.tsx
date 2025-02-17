@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { HistoryPageProps } from "../../../models";
-import ListsHistoryPage from "../../lists_history_page";
+import ListsHistoryPage from "../../bhxh/list_bhxh_history_page";
 import ListHistoryBHYT from "../../bhyt/list_history_bhyt_page";
-import HistoryPage from "../../history_page";
+import HistoryPage from "../../common/history_page";
 
 const Activities: React.FunctionComponent<HistoryPageProps> = () => {
   const [currentPage, setCurrentPage] = useState("history");

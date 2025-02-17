@@ -1,30 +1,30 @@
 import { ToastContainer } from "react-toastify";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import LayoutPage from "./layout/layout_page";
-import HomePage from "./pages/home_page";
+import HomePage from "./pages/home/home_page";
 import { SpecificProvider } from "./components/specific_context";
-import ListSocialInsurance from "./pages/list_social_insurance_page";
+import ListSocialInsurance from "./pages/bhxh/list_bhxh_page";
 import ListHealthInsurance from "./pages/bhyt/list_health_insurance_page";
-import ProductDetailPage from "./components/product_detail";
-import ProductDetailPage1 from "./components/product_detail_1";
-import BillPayPage from "./components/bill_pay";
-import BillPayBHYTPage from "./components/bill_pay_bhyt";
-import BuillDetailPage from "./pages/bill_detail_page";
-import RegisterBHXH from "./components/register_bhxh";
+import IntroductBHXH from "./pages/bhxh/introduct-bhxh";
+import IntroductBHYT from "./pages/bhyt/introduct-bhyt";
+import BillPayBHXHPage from "./pages/bhxh/bill_pay-bhxh";
+import BillPayBHYTPage from "./pages/bhyt/bill_pay_bhyt";
+import BuillDetailPage from "./pages/common/bill_detail_page";
+import RegisterBHXH from "./pages/bhxh/register_bhxh";
 import RegisterBHYT from "./pages/bhyt/register_bhyt_page";
-import ListsHistoryPage from "./pages/lists_history_page";
+import ListsHistoryPage from "./pages/bhxh/list_bhxh_history_page";
 import InfoDetailBHYT from "./pages/bhyt/info_detail_bhyt_page";
 import ListHistoryBHYT from "./pages/bhyt/list_history_bhyt_page";
-import CheckStatusProcedure from "./pages/check_status_procedure";
-import HistoryUnpaidPage from "./components/history_unpaid";
-import ContractPage from "./pages/contract_page";
-import HistoryPage from "./pages/history_page";
+import CheckStatusProcedure from "./pages/common/check_status_procedure";
+import HistoryUnpaidPage from "./pages/common/history_unpaid_page";
+import ContractPage from "./pages/common/contract_page";
+import HistoryPage from "./pages/common/history_page";
 import UserPage from "./pages/user/user_page";
-import PrivacyPolicyPage from "./components/privacy_policy";
-import LuckUpBHXH from "./pages/luckup_bhxh";
+import PrivacyPolicyPage from "./pages/common/privacy_policy";
+import LuckUpBHXH from "./pages/common/luckup_bhxh";
 import { useEffect, useState } from "react";
-import CardNewDetailPages from "./components/CardNewDetailPages";
-import ToolSupportPage from "./pages/tool_support_page";
+import CardNewDetailPage from "./pages/new/card_new_detail_page";
+import ToolSupportPage from "./pages/tool-support/tool_support_page";
 import RegisterPage from "./pages/auth/register_page";
 import ForgotPasswordPage from "./pages/auth/forgot_password_page";
 import { ModalLoginProvider } from "./context/auth_context";
@@ -124,7 +124,6 @@ function App() {
               />
             }
           />
-          {/* <Route path="/login" element={<LoginPage />} /> */}
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route
@@ -137,19 +136,19 @@ function App() {
           />
           <Route path="health-insurance" element={<ListHealthInsurance />} />
           <Route
-            path="product-detail/:id"
+            path="introduct-bhxh"
             element={
               <SpecificProvider>
-                <ProductDetailPage />
+                <IntroductBHXH />
               </SpecificProvider>
             }
           />
-          <Route path="product-detail-1/:id" element={<ProductDetailPage1 />} />
+          <Route path="introduct-bhyt" element={<IntroductBHYT />} />
           <Route
-            path="buill-pay/:id"
+            path="bill-pay-bhxh/:id"
             element={
               <SpecificProvider>
-                <BillPayPage w={""} h={""} url={""} />
+                <BillPayBHXHPage w={""} h={""} url={""} />
               </SpecificProvider>
             }
           />
@@ -207,7 +206,7 @@ function App() {
           />
           <Route path="privacy_policy" element={<PrivacyPolicyPage />} />
           <Route path="luckup-bhxh" element={<LuckUpBHXH />} />
-          <Route path="new-detail/:id" element={<CardNewDetailPages />} />
+          <Route path="new-detail/:id" element={<CardNewDetailPage />} />
           <Route path="tool-support" element={<ToolSupportPage />} />
           <Route
             path="xac-thuc-tai-khoan-thanh-cong"

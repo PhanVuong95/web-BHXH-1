@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { APP_CONFIG, RoleName, RoleNameKey } from "../../../utils/constants";
+import {
+  APP_CONFIG,
+  RoleAccount,
+  RoleName,
+  RoleNameKey,
+} from "../../../utils/constants";
 import imagesIcon from "../../../assets/icon/images";
 import users from "../../../assets/user.png";
 import {
+  formatDate2,
   isValidEmptyString,
   validUrlImage,
 } from "../../../utils/validate_string";
@@ -11,14 +17,30 @@ import { useProfile } from "../../../components/user_profile_context";
 import iconEdit from "../../../assets/icon/ic_edit.png";
 import ModalChangeInfoProfile from "./modal_change_info_profile";
 import ModalChangeInfoCTV from "./modal_change_info_ctv";
+import ModalChangeEmail from "./modal_change_email";
+import ModalChangePhone from "./modal_change_phone";
+import ModalVerifyOTPEmail from "./modal_verify_otp_email";
+import ModalVerifyOTPPhone from "./modal_verify_otp_phone";
 
 const AccountInfo: React.FC<any> = () => {
   const [userDetail, setUserDetail] = useState<any>();
   const { userProfile } = useProfile();
+
   const [isOpenModalEditProfile, setOpenModalEditProfile] = useState(false);
   const [isOpenModalEditCTV, setOpenModalEditCTV] = useState(false);
+  const [isOpenModalEditEmail, setOpenModalEditEmail] = useState(false);
+  const [isOpenModalEditPhone, setOpenModalEditPhone] = useState(false);
+  const [isOpenModalVerifyOTPEmail, setOpenModalVerifyOTPEmail] =
+    useState(false);
+  const [isOpenModalVerifyOTPPhone, setOpenModalVerifyOTPPhone] =
+    useState(false);
 
+  const [listBanks, setListBanks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Thông tin cá nhân
   const fetchUserDetail = async () => {
+    setIsLoading(true);
     const token = localStorage.getItem("accessToken");
 
     const response = await axios.get(
@@ -32,16 +54,127 @@ const AccountInfo: React.FC<any> = () => {
 
     if (response.data.status == "200") {
       setUserDetail(response.data.data[0]);
+      setIsLoading(false);
+    }
+  };
+
+  // Danh sách ngân hàng
+  const fetchListBanks = async () => {
+    const response = await axios.get(`https://api.vietqr.io/v2/banks`);
+    if (response.data.code == "00") {
+      setListBanks(response.data.data);
     }
   };
 
   useEffect(() => {
     fetchUserDetail();
+    fetchListBanks();
   }, []);
+
+  const contractInfo = () => {
+    return (
+      <div className="flex flex-col gap-[15px] md:gap-[15px] lg:gap-[20px]">
+        <div className="flex justify-between">
+          <h3 className="text-md md:text-lg lg:text-lg font-bold text-black">
+            Thông tin liên hệ
+          </h3>
+        </div>
+
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              Email
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              {!isValidEmptyString(userDetail?.email)
+                ? "Chưa cập nhật"
+                : userDetail?.email}
+            </p>
+          </div>
+
+          <button
+            onClick={() => {
+              setOpenModalEditEmail(true);
+            }}
+          >
+            <img src={iconEdit} width={30} height={30} alt="iconEdit" />
+          </button>
+        </div>
+
+        <div className="flex flex-row gap-2">
+          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
+              Số điện thoại
+            </p>
+          </div>
+          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
+            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
+              {!isValidEmptyString(userDetail?.phone)
+                ? "Chưa cập nhật"
+                : userDetail?.phone}
+            </p>
+          </div>
+
+          <button
+            onClick={() => {
+              setOpenModalEditPhone(true);
+            }}
+          >
+            <img src={iconEdit} width={30} height={30} alt="iconEdit" />
+          </button>
+        </div>
+
+        {/* Modal */}
+        {!isLoading && (
+          <div>
+            {/* Change Email */}
+            <ModalChangeEmail
+              isShowModal={isOpenModalEditEmail}
+              setIsShowModal={(value) => {
+                setOpenModalEditEmail(value);
+              }}
+              setIsShowModalVerifyOTPEmail={(value) => {
+                setOpenModalVerifyOTPEmail(value);
+              }}
+              emailValue={userDetail?.email}
+            />
+
+            <ModalVerifyOTPEmail
+              isShowModal={isOpenModalVerifyOTPEmail}
+              setIsShowModal={(value) => {
+                setOpenModalVerifyOTPEmail(value);
+              }}
+            />
+
+            {/* Change Phone */}
+            <ModalChangePhone
+              isShowModal={isOpenModalEditPhone}
+              setIsShowModal={(value) => {
+                setOpenModalEditPhone(value);
+              }}
+              setIsShowModalVerifyOTPPhone={(value) => {
+                setOpenModalVerifyOTPPhone(value);
+              }}
+              phoneValue={userDetail?.phone}
+            />
+
+            <ModalVerifyOTPPhone
+              isShowModal={isOpenModalVerifyOTPPhone}
+              setIsShowModal={(value) => {
+                setOpenModalVerifyOTPPhone(value);
+              }}
+            />
+          </div>
+        )}
+      </div>
+    );
+  };
 
   const profileInfo = () => {
     return (
-      <div className="flex flex-col gap-[15px] md:gap-[15px] lg:gap-[20px]">
+      <div className="flex flex-col gap-[15px] md:gap-[15px] lg:gap-[20px] mt-8">
         <div className="flex justify-between">
           <h3 className="text-md md:text-lg lg:text-lg font-bold text-black">
             Thông tin cá nhân
@@ -80,7 +213,9 @@ const AccountInfo: React.FC<any> = () => {
           </div>
           <div className="flex-[8] md:flex-[9] lg:flex-[9]">
             <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
-              Chưa cập nhật
+              {!isValidEmptyString(userDetail?.dob)
+                ? "Chưa cập nhật"
+                : formatDate2(new Date(userDetail.dob))}
             </p>
           </div>
         </div>
@@ -93,40 +228,13 @@ const AccountInfo: React.FC<any> = () => {
           </div>
           <div className="flex-[8] md:flex-[9] lg:flex-[9]">
             <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
-              Chưa cập nhật
+              {!isValidEmptyString(userDetail?.citizenId)
+                ? "Chưa cập nhật"
+                : userDetail?.citizenId}
             </p>
           </div>
         </div>
 
-        <div className="flex flex-row gap-2">
-          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
-            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
-              Điện thoại
-            </p>
-          </div>
-          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
-            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
-              {!isValidEmptyString(userDetail?.phone)
-                ? "Chưa cập nhật"
-                : userDetail?.phone}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-row gap-2">
-          <div className="flex-[4] md:flex-[3] lg:flex-[3]">
-            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
-              Email
-            </p>
-          </div>
-          <div className="flex-[8] md:flex-[9] lg:flex-[9]">
-            <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
-              {!isValidEmptyString(userDetail?.email)
-                ? "Chưa cập nhật"
-                : userDetail?.email}
-            </p>
-          </div>
-        </div>
         <div className="flex flex-row gap-2">
           <div className="flex-[4] md:flex-[3] lg:flex-[3]]">
             <p className="text-[18px] md:text-lg lg:text-lg font-normal text-[#797D77]">
@@ -155,19 +263,26 @@ const AccountInfo: React.FC<any> = () => {
           </div>
         </div>
 
-        <ModalChangeInfoProfile
-          isShowModal={isOpenModalEditProfile}
-          setIsShowModal={(value) => {
-            setOpenModalEditProfile(value);
-          }}
-        />
+        {!isLoading && (
+          <ModalChangeInfoProfile
+            isShowModal={isOpenModalEditProfile}
+            setIsShowModal={(value) => {
+              setOpenModalEditProfile(value);
+            }}
+            profile={{
+              dob: userDetail?.dob,
+              addressDetail: userDetail?.addressDetail,
+              citizenId: userDetail?.citizenId,
+            }}
+          />
+        )}
       </div>
     );
   };
 
   const infoCTV = () => {
     return (
-      <div className="flex flex-col gap-[15px] md:gap-[15px] lg:gap-[20px]  mt-5">
+      <div className="flex flex-col gap-[15px] md:gap-[15px] lg:gap-[20px] mt-8">
         <div className="flex justify-between">
           <h3 className="text-md md:text-lg lg:text-lg font-bold text-black">
             Thông tin CTV
@@ -192,7 +307,9 @@ const AccountInfo: React.FC<any> = () => {
           </div>
           <div className="flex-[8] md:flex-[9] lg:flex-[9]">
             <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
-              Chưa cập nhật
+              {!isValidEmptyString(userDetail?.bankName)
+                ? "Chưa cập nhật"
+                : userDetail?.bankName}
             </p>
           </div>
         </div>
@@ -205,7 +322,9 @@ const AccountInfo: React.FC<any> = () => {
           </div>
           <div className="flex-[8] md:flex-[9] lg:flex-[9]">
             <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
-              Chưa cập nhật
+              {!isValidEmptyString(userDetail?.bankBranch)
+                ? "Chưa cập nhật"
+                : userDetail?.bankBranch}
             </p>
           </div>
         </div>
@@ -218,7 +337,9 @@ const AccountInfo: React.FC<any> = () => {
           </div>
           <div className="flex-[8] md:flex-[9] lg:flex-[9]">
             <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
-              Chưa cập nhật
+              {!isValidEmptyString(userDetail?.bankOwnerName)
+                ? "Chưa cập nhật"
+                : userDetail?.bankOwnerName}
             </p>
           </div>
         </div>
@@ -231,23 +352,34 @@ const AccountInfo: React.FC<any> = () => {
           </div>
           <div className="flex-[8] md:flex-[9] lg:flex-[9]">
             <p className="text-[18px] md:text-lg lg:text-lg font-normal text-black">
-              Chưa cập nhật
+              {!isValidEmptyString(userDetail?.bankOwnerNumber)
+                ? "Chưa cập nhật"
+                : userDetail?.bankOwnerNumber}
             </p>
           </div>
         </div>
 
-        <ModalChangeInfoCTV
-          isShowModal={isOpenModalEditCTV}
-          setIsShowModal={(value) => {
-            setOpenModalEditCTV(value);
-          }}
-        />
+        {!isLoading && (
+          <ModalChangeInfoCTV
+            isShowModal={isOpenModalEditCTV}
+            listBanks={listBanks}
+            setIsShowModal={(value) => {
+              setOpenModalEditCTV(value);
+            }}
+            bankInfo={{
+              bankCode: userDetail?.bankName,
+              bankBranch: userDetail?.bankBranch,
+              bankNumber: userDetail?.bankOwnerNumber,
+              bankOwner: userDetail?.bankOwnerName,
+            }}
+          />
+        )}
       </div>
     );
   };
 
-  return (
-    <section className="rounded-[10px] overflow-hidden">
+  const renderBackground = () => {
+    return (
       <div className="top-account relative">
         <img
           src={imagesIcon.banner}
@@ -276,9 +408,16 @@ const AccountInfo: React.FC<any> = () => {
           </div>
         </div>
       </div>
+    );
+  };
+
+  return (
+    <section className="rounded-[10px] overflow-hidden">
+      {renderBackground()}
       <div className="bot-account bg-white p-[15px] md:p-[15px] lg:p-[20px] sm:p-[40px] ">
+        {contractInfo()}
         {profileInfo()}
-        {infoCTV()}
+        {userProfile.roleId == RoleAccount["CTV"] && infoCTV()}
       </div>
     </section>
   );

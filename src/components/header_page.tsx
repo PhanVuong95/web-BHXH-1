@@ -1,4 +1,10 @@
 import { useEffect, useState } from "react";
+
+declare global {
+  interface Window {
+    google: any;
+  }
+}
 import { Link, useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
 import clsx from "clsx";

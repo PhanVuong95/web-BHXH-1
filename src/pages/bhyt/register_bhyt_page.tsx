@@ -14,17 +14,17 @@ import {
   isValidPhone,
   isValidSocialInsuranceNumber,
 } from "../../utils/validate_string";
-import UserBeneficiaryBHYTPage from "../../components/card_user_beneficiary_bhyt";
-import UserBuyerPage from "../../components/card_user_buyer";
+import UserBeneficiaryBHYT from "./components/card_user_beneficiary_bhyt";
+import CardBuyer from "./components/card_buyer";
 import { FadeLoader } from "react-spinners";
 import Modal from "react-modal";
-import CardHouseHold from "../../components/card_house_hold";
-import CardMembersHouseHold from "../../components/card_members_house_hold";
-import CardObject from "../../components/card_object";
+import CardHouseHold from "./components/card_house_hold";
+import CardMembersHouseHoldBHYT from "./components/card_members_house_hold_bhyt";
+import CardObject from "./components/card_object";
 import HeaderTitle from "../../components/header_title";
 import { APP_CONFIG } from "../../utils/constants";
 
-const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
+const RegisterBHYTPage: React.FunctionComponent<ListHistoryBHYTProps> = ({
   onBack,
 }) => {
   const { state } = useLocation();
@@ -103,7 +103,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
     ksAddressDetail: React.createRef(),
   });
 
-  const userBuyerPageRefs = {
+  const CardBuyerRefs = {
     phone: useRef<any>(null),
     fullName: useRef<any>(null),
     email: useRef<any>(null),
@@ -215,7 +215,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
   const scrollToElement = (input: any, boxNumber: any) => {
     switch (boxNumber) {
       case 1:
-        (userBuyerPageRefs as any)[input].current?.focus();
+        (CardBuyerRefs as any)[input].current?.focus();
         break;
       case 2:
         input.current.focus();
@@ -533,33 +533,11 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
         }
       }
 
-      // if (registerInfoBHYT["listInsuredPerson"][index].newCardStartDate == "") {
-      //   toast.warn("Ngày hiệu lực của thẻ mới không được để trống");
-      //   scrollToElement(beneficiaries[index].newCardStartDate, 2);
-      //   return false;
-      // }
-
-      // if (registerInfoBHYT['listInsuredPerson'][index].insuranceProvinceId == 0) {
-      //   toast.warn(
-      //     "Tỉnh / Thành phố nơi tham gia BHYT",
-      //   );
-      //   scrollToElement(beneficiaries[index].insuranceProvinceId, 2)
-      //   return false;
-      // }
-
       if (registerInfoBHYT["listInsuredPerson"][index].medicalProvinceId == 0) {
         toast.warn("Thành phố khám chữa bệnh không được để trống");
         scrollToElement(beneficiaries[index].medicalProvinceId, 2);
         return false;
       }
-
-      // if (registerInfoBHYT['listInsuredPerson'][index].medicalDistrictId == 0) {
-      //   toast.warn(
-      //     "Quận huyện khám chữa bệnh không được để trống",
-      //   );
-      //   scrollToElement(beneficiaries[index].medicalDistrictId, 2)
-      //   return false;
-      // }
 
       if (registerInfoBHYT["listInsuredPerson"][index].hospitalId == 0) {
         toast.warn("Bệnh viện đăng ký khám chữa bệnh không được để trống");
@@ -699,19 +677,6 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
 
     return true;
   };
-
-  // const renderHeader = () => {
-  //   return (
-  //     <HeaderBase
-  //       isHome={false}
-  //       title={
-  //         state.type == "register"
-  //           ? "Đăng ký BHYT tự nguyện"
-  //           : "Cập nhật BHYT tự nguyện"
-  //       }
-  //     />
-  //   );
-  // };
 
   const renderAddUserBeneficiary = () => {
     return (
@@ -1055,7 +1020,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
               <CardHouseHold refs={houseHoldRefs} />
 
               {members.map((member: any, index: any) => (
-                <CardMembersHouseHold
+                <CardMembersHouseHoldBHYT
                   key={`${index}`}
                   item={member}
                   index={index}
@@ -1079,7 +1044,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
             </div>
 
             {beneficiaries.map((beneficiary, index) => (
-              <UserBeneficiaryBHYTPage
+              <UserBeneficiaryBHYT
                 key={`${index}`}
                 index={index}
                 price={state?.data?.price}
@@ -1099,7 +1064,7 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
             {renderAddUserBeneficiary()}
 
             <div>
-              <UserBuyerPage data={state.data} refs={userBuyerPageRefs} />
+              <CardBuyer data={state.data} refs={CardBuyerRefs} />
             </div>
 
             <div className="flex flex-col flex-wrap border border-[#B9BDC1] overflow-hidden rounded-xl ">
@@ -1149,4 +1114,4 @@ const RegisterBHYT: React.FunctionComponent<ListHistoryBHYTProps> = ({
   );
 };
 
-export default RegisterBHYT;
+export default RegisterBHYTPage;

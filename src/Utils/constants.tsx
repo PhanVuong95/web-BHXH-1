@@ -160,4 +160,10 @@ export const RoleName = {
   "1003": "Cộng tác viên",
 };
 
+export const RoleId = {
+  Admin: 1001,
+  User: 1002,
+  CTV: 1003,
+};
+
 export type RoleNameKey = keyof typeof RoleName;
