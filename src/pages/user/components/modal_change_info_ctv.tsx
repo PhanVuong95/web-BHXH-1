@@ -7,7 +7,7 @@ import { APP_CONFIG } from "../../../utils/constants";
 import { modalBodyStyle, modalMaskStyle } from "../../../utils/css_common";
 
 interface BankInfo {
-  bankCode: number;
+  bankBin: number;
   bankBranch: string;
   bankOwner: string;
   bankNumber: string;
@@ -17,12 +17,13 @@ interface Props {
   setIsShowModal: (isShowModal: boolean) => void;
   listBanks: any[];
   bankInfo: BankInfo;
+  onSuccess: () => void;
 }
 
 const ModalChangeInfoCTV = (props: Props) => {
-  const { isShowModal, setIsShowModal, listBanks, bankInfo } = props;
+  const { isShowModal, setIsShowModal, listBanks, bankInfo, onSuccess } = props;
   const [selectedBankCode, setSelectedBankCode] = useState(
-    bankInfo.bankCode ?? 0
+    bankInfo.bankBin ?? 0
   );
   const [bankBranch, setBankBranch] = useState(bankInfo.bankBranch ?? "");
   const [bankOwner, setBankOwner] = useState(bankInfo.bankOwner ?? "");
@@ -79,6 +80,7 @@ const ModalChangeInfoCTV = (props: Props) => {
         ) {
           toast.success("Cập nhật thông tin tài khoản thành công!");
           setIsShowModal(false);
+          onSuccess();
           return;
         }
 

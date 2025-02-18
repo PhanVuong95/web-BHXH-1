@@ -9,10 +9,11 @@ import { isValidEmptyString } from "../../../utils/validate_string";
 interface Props {
   isShowModal: boolean;
   setIsShowModal: (isShowModal: boolean) => void;
+  onSuccess: () => void;
 }
 
 const ModalVerifyOTPEmail = (props: Props) => {
-  const { isShowModal, setIsShowModal } = props;
+  const { isShowModal, setIsShowModal, onSuccess } = props;
   const [otp, setOtp] = useState("");
   const [loadingVerifyOtp, setLoadingVerifyOtp] = useState(false);
 
@@ -40,6 +41,7 @@ const ModalVerifyOTPEmail = (props: Props) => {
           case "200":
             toast.success("Đổi email thành công");
             setIsShowModal(false);
+            onSuccess();
             break;
           case "099":
             toast.info("Nhập sai OTP quá nhiều lần");

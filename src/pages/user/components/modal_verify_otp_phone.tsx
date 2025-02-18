@@ -9,10 +9,11 @@ import axios from "axios";
 interface Props {
   isShowModal: boolean;
   setIsShowModal: (isShowModal: boolean) => void;
+  onSuccess: () => void;
 }
 
 const ModalVerifyOTPPhone = (props: Props) => {
-  const { isShowModal, setIsShowModal } = props;
+  const { isShowModal, setIsShowModal, onSuccess } = props;
   const [otp, setOtp] = useState("");
   const [loadingVerifyOtp, setLoadingVerifyOtp] = useState(false);
 
@@ -49,6 +50,7 @@ const ModalVerifyOTPPhone = (props: Props) => {
           case "200":
             toast.success("Đổi số điện thoại thành công");
             setIsShowModal(false);
+            onSuccess();
             break;
           case "099":
             toast.info("Nhập sai OTP quá nhiều lần");

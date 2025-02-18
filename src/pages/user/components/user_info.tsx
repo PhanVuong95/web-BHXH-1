@@ -146,6 +146,7 @@ const AccountInfo: React.FC<any> = () => {
               setIsShowModal={(value) => {
                 setOpenModalVerifyOTPEmail(value);
               }}
+              onSuccess={fetchUserDetail}
             />
 
             {/* Change Phone */}
@@ -165,6 +166,7 @@ const AccountInfo: React.FC<any> = () => {
               setIsShowModal={(value) => {
                 setOpenModalVerifyOTPPhone(value);
               }}
+              onSuccess={fetchUserDetail}
             />
           </div>
         )}
@@ -274,6 +276,7 @@ const AccountInfo: React.FC<any> = () => {
               addressDetail: userDetail?.addressDetail,
               citizenId: userDetail?.citizenId,
             }}
+            onSuccess={fetchUserDetail}
           />
         )}
       </div>
@@ -367,11 +370,12 @@ const AccountInfo: React.FC<any> = () => {
               setOpenModalEditCTV(value);
             }}
             bankInfo={{
-              bankCode: userDetail?.bankName,
+              bankBin: userDetail?.bankBin,
               bankBranch: userDetail?.bankBranch,
               bankNumber: userDetail?.bankOwnerNumber,
               bankOwner: userDetail?.bankOwnerName,
             }}
+            onSuccess={fetchUserDetail}
           />
         )}
       </div>

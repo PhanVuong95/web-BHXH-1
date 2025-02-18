@@ -22,10 +22,11 @@ interface Props {
   isShowModal: boolean;
   setIsShowModal: (isShowModal: boolean) => void;
   profile: profileProps;
+  onSuccess: () => void;
 }
 
 const ModalChangeInfoProfile = (props: Props) => {
-  const { isShowModal, setIsShowModal, profile } = props;
+  const { isShowModal, setIsShowModal, profile, onSuccess } = props;
   const dateFormat = "DD/MM/YYYY";
 
   const [dob, setDob] = useState<any>(
@@ -86,6 +87,7 @@ const ModalChangeInfoProfile = (props: Props) => {
       if (response.data.status == "200" && response.data.message == "SUCCESS") {
         toast.success("Cập nhật thông tin thành công");
         setIsShowModal(false);
+        onSuccess();
       } else {
         toast.error(response.data.data[0]);
       }
@@ -98,6 +100,89 @@ const ModalChangeInfoProfile = (props: Props) => {
     if (validateForm()) {
       onSubmitForm();
     }
+  };
+
+  const renderInputDob = () => {
+    return (
+      <div className="w-full">
+        <label className="block text-sm font-normal text-gray-900 pb-2">
+          Ngày sinh <span className="text-[red]">*</span>
+        </label>
+        <DatePicker
+          type="date"
+          size="large"
+          locale={locale}
+          className="w-[100%]"
+          placeholder="dd/mm/yyyy"
+          defaultValue={dob}
+          onChange={(value) => {
+            const dateObject = dayjs(value.toString());
+
+            const dateStr = `${dateObject
+              .date()
+              .toString()
+              .padStart(2, "0")}/${(dateObject.month() + 1)
+              .toString()
+              .padStart(2, "0")}/${dateObject.year()}`;
+
+            setDob(dayjs(dateStr, dateFormat));
+          }}
+          format={dateFormat}
+          maxDate={dayjs(formatDate2(new Date()), dateFormat)}
+        />
+      </div>
+    );
+  };
+
+  const renderInputCCCD = () => {
+    return (
+      <div className="w-full">
+        <label className="block text-sm font-normal text-gray-900 pb-2">
+          CCCD <span className="text-[red]">*</span>
+        </label>
+        <Input
+          type="text"
+          defaultValue={citizenId}
+          maxLength={12}
+          onChange={(e) => {
+            setCitizenId(e.target.value);
+          }}
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
+          placeholder="Nhập CCCD"
+        />
+      </div>
+    );
+  };
+
+  const renderInputAddress = () => {
+    return (
+      <div className="w-full">
+        <label className="block text-sm font-normal text-gray-900 pb-2">
+          Địa chỉ <span className="text-[red]">*</span>
+        </label>
+        <Input
+          type="text"
+          defaultValue={addressDetail}
+          maxLength={100}
+          onChange={(e) => {
+            setAddressDetail(e.target.value);
+          }}
+          className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
+          placeholder="Nhập địa chỉ"
+        />
+      </div>
+    );
+  };
+
+  const renderBtnSubmit = () => {
+    return (
+      <button
+        className=" text-white bg-[#0077D5] p-[10px] rounded-sm text-[18px]"
+        onClick={onClickSubmit}
+      >
+        <p className="text-center w-full">Chỉnh sửa</p>
+      </button>
+    );
   };
 
   return (
@@ -113,72 +198,10 @@ const ModalChangeInfoProfile = (props: Props) => {
           Thay đổi thông tin cá nhân
         </span>
 
-        <div className="w-full">
-          <label className="block text-sm font-normal text-gray-900 pb-2">
-            Ngày sinh
-          </label>
-          <DatePicker
-            type="date"
-            size="large"
-            locale={locale}
-            className="w-[100%]"
-            placeholder="dd/mm/yyyy"
-            defaultValue={dob}
-            onChange={(value) => {
-              const dateObject = dayjs(value.toString());
-
-              const dateStr = `${dateObject
-                .date()
-                .toString()
-                .padStart(2, "0")}/${(dateObject.month() + 1)
-                .toString()
-                .padStart(2, "0")}/${dateObject.year()}`;
-
-              setDob(dayjs(dateStr, dateFormat));
-            }}
-            format={dateFormat}
-            maxDate={dayjs(formatDate2(new Date()), dateFormat)}
-          />
-        </div>
-
-        <div className="w-full">
-          <label className="block text-sm font-normal text-gray-900 pb-2">
-            CCCD <span className="text-[red]">*</span>
-          </label>
-          <Input
-            type="text"
-            defaultValue={citizenId}
-            maxLength={12}
-            onChange={(e) => {
-              setCitizenId(e.target.value);
-            }}
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
-            placeholder="Nhập CCCD"
-          />
-        </div>
-
-        <div className="w-full">
-          <label className="block text-sm font-normal text-gray-900 pb-2">
-            Địa chỉ
-          </label>
-          <Input
-            type="text"
-            defaultValue={addressDetail}
-            maxLength={100}
-            onChange={(e) => {
-              setAddressDetail(e.target.value);
-            }}
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5             "
-            placeholder="Nhập địa chỉ"
-          />
-        </div>
-
-        <button
-          className=" text-white bg-[#0077D5] p-[10px] rounded-sm text-[18px]"
-          onClick={onClickSubmit}
-        >
-          <p className="text-center w-full">Chỉnh sửa</p>
-        </button>
+        {renderInputDob()}
+        {renderInputCCCD()}
+        {renderInputAddress()}
+        {renderBtnSubmit()}
       </div>
     </Modal>
   );
