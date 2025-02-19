@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "antd";
@@ -11,6 +10,7 @@ import {
 } from "../../../utils/validate_string";
 import { toast } from "react-toastify";
 import { APP_CONFIG } from "../../../utils/constants";
+import api from "../../../api/api-config";
 
 const RegisterCollaborate = () => {
   const [frontImageUrl, setFrontImageUrl] = useState<string>("");
@@ -37,23 +37,17 @@ const RegisterCollaborate = () => {
     event: React.ChangeEvent<HTMLInputElement>,
     setImageUrl: React.Dispatch<React.SetStateAction<string>>
   ) => {
-    const token = localStorage.accessToken;
     const file = event.target.files?.[0];
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
 
       try {
-        const response = await axios.post(
-          `${APP_CONFIG.BASE_URL}/account/api/upload-file`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await api.post(`/account/api/upload-file`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         setImageUrl(response.data.data[0]);
         return response.data.data[0];
       } catch (error) {
@@ -442,8 +436,6 @@ const RegisterCollaborate = () => {
 
   const onSubmit = async () => {
     if (validateForm()) {
-      const token = localStorage.accessToken;
-
       const data = {
         name: fullNameHouseHold,
         citizenId: numberCardId,
@@ -455,13 +447,12 @@ const RegisterCollaborate = () => {
       };
 
       try {
-        const response = await axios.post(
-          `${APP_CONFIG.BASE_URL}/account/api/register-contributor`,
+        const response = await api.post(
+          `/account/api/register-contributor`,
           data,
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
             },
           }
         );
