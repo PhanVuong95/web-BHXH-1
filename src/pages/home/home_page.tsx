@@ -11,7 +11,7 @@ console.log(__CONFIG_APP__);
 const HomePage = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [pageIndex, setPageIndex] = useState(1);
-  const [pageSize] = useState(10);
+  const [pageSize] = useState(9);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
@@ -22,11 +22,10 @@ const HomePage = () => {
         );
         const jsonData = await response.json();
 
-        const data = jsonData.data?.[0] || [];
-        setPosts(data);
+        const data = jsonData.data?.[0]["posts"] || [];
 
-        // Giả sử API trả về số tổng trang
-        setTotalPages(5); // Cập nhật số trang giả lập (nếu API không trả về, sửa lại)
+        setPosts(data);
+        setTotalPages(Math.ceil(jsonData.data?.[0]["totalRecords"] / pageSize));
       } catch (error) {
         console.error("Error fetching posts:", error);
       }

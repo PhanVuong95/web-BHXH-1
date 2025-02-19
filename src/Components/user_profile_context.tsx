@@ -6,7 +6,7 @@ export const ProfileContext = createContext<any>({});
 export const ProfileProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [userProfile, setUserProfile] = useState();
+  const [userProfile, setUserProfile] = useState<any>();
 
   return (
     <ProfileContext.Provider
