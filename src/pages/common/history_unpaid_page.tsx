@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +6,7 @@ import { formatDate } from "../../utils/validate_string";
 import { SpecificContext } from "../../components/specific_context";
 import logo from "../../assets-src/logo1.png";
 import HeaderTitle from "../../components/header_title";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const HistoryUnpaidPage: React.FunctionComponent = () => {
   const { id, statusName } = useParams();
@@ -25,8 +24,8 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
   console.log(insuranceOrder);
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/insuranceorder/api/Detail-By-VM/` + id)
+    api
+      .get(`/insuranceorder/api/Detail-By-VM/` + id)
       .then((response) => {
         setOrderDetail(response.data.data[0]);
         setInsuredPerson(response.data.data[0].listInsuredPerson[0]);
@@ -106,8 +105,8 @@ const HistoryUnpaidPage: React.FunctionComponent = () => {
   }, [id]);
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/insuranceorder/api/check-order-status/` + id)
+    api
+      .get(`/insuranceorder/api/check-order-status/` + id)
       .then((response) => {
         setOrderStatusId(response.data.data[0]);
       })

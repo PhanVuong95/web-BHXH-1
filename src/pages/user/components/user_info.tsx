@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  APP_CONFIG,
-  RoleAccount,
-  RoleName,
-  RoleNameKey,
-} from "../../../utils/constants";
+import { RoleAccount, RoleName, RoleNameKey } from "../../../utils/constants";
 import imagesIcon from "../../../assets/icon/images";
 import users from "../../../assets/user.png";
 import {
@@ -21,6 +16,7 @@ import ModalChangeEmail from "./modal_change_email";
 import ModalChangePhone from "./modal_change_phone";
 import ModalVerifyOTPEmail from "./modal_verify_otp_email";
 import ModalVerifyOTPPhone from "./modal_verify_otp_phone";
+import api from "../../../api/api-config";
 
 const AccountInfo: React.FC<any> = () => {
   const [userDetail, setUserDetail] = useState<any>();
@@ -41,16 +37,8 @@ const AccountInfo: React.FC<any> = () => {
   // Thông tin cá nhân
   const fetchUserDetail = async () => {
     setIsLoading(true);
-    const token = localStorage.getItem("accessToken");
 
-    const response = await axios.get(
-      `${APP_CONFIG.BASE_URL}/account/api/get-profile`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await api.get(`/account/api/get-profile`);
 
     if (response.data.status == "200") {
       setUserDetail(response.data.data[0]);

@@ -3,7 +3,7 @@ import imgSlider from "../../assets-src/image-1002.png";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PostDetails } from "../../models";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const CardNewDetailPage = () => {
   const { id } = useParams();
@@ -15,13 +15,11 @@ const CardNewDetailPage = () => {
   useEffect(() => {
     const fetchPostDetail = async () => {
       try {
-        const response = await fetch(
-          `${APP_CONFIG.BASE_URL}/post/api/detailPost/${id}`
-        );
-        if (!response.ok) {
+        const response = await api.get(`/post/api/detailPost/${id}`);
+        if (response.status !== 200) {
           throw new Error("Failed to fetch post details");
         }
-        const data: PostDetails = await response.json();
+        const data: PostDetails = await response.data;
         setPost(data);
       } catch (error) {
         setError(error instanceof Error ? error.message : "An error occurred");

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { FadeLoader } from "react-spinners";
 import { registerInfoBHYT } from "../list_health_insurance_page";
@@ -25,6 +24,7 @@ import { motion } from "framer-motion";
 import { APP_CONFIG, BenefitLevevlList } from "../../../utils/constants";
 import { toast } from "react-toastify";
 import Modal from "react-modal";
+import api from "../../../api/api-config";
 
 dayjs.locale("vi");
 dayjs.extend(customParseFormat);
@@ -173,8 +173,8 @@ const UserBeneficiaryBHYT = (props: Props) => {
 
   // Load lại tất cả danh sách tỉnh thành
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/province/api/list`)
+    api
+      .get(`/province/api/list`)
       .then((response) => {
         // Load tỉnh thành thường trú người tham gia
         ttProvinces.current = response.data.data;
@@ -192,8 +192,8 @@ const UserBeneficiaryBHYT = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/VungLuongToiThieu/api/List`)
+    api
+      .get(`/VungLuongToiThieu/api/List`)
       .then((response) => {
         setVungLuongToiThieuList(response.data.data);
       })
@@ -210,9 +210,9 @@ const UserBeneficiaryBHYT = (props: Props) => {
 
   const fetchKSDistricts = () => {
     if (selectedKSProvince !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
+          `/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
         )
         .then((response) => {
           ksDistricts.current = response.data.data;
@@ -236,10 +236,8 @@ const UserBeneficiaryBHYT = (props: Props) => {
 
   const fetchKSWards = () => {
     if (selectedKSDistrict !== 0) {
-      axios
-        .get(
-          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
-        )
+      api
+        .get(`/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`)
         .then((response) => {
           ksWards.current = response.data.data;
           setTemp(Math.random());
@@ -259,9 +257,9 @@ const UserBeneficiaryBHYT = (props: Props) => {
 
   const fetchTTDistricts = () => {
     if (selectedTTProvince !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTProvince}`
+          `/district/api/list-by-provinceId?provinceId=${selectedTTProvince}`
         )
         .then((response) => {
           ttDistricts.current = response.data.data;
@@ -283,10 +281,8 @@ const UserBeneficiaryBHYT = (props: Props) => {
 
   const fetchTTWards = () => {
     if (selectedTTDistrict !== 0) {
-      axios
-        .get(
-          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTDistrict}`
-        )
+      api
+        .get(`/ward/api/list-by-districtId?districtId=${selectedTTDistrict}`)
         .then((response) => {
           ttWards.current = response.data.data;
           setTemp(Math.random());
@@ -303,9 +299,9 @@ const UserBeneficiaryBHYT = (props: Props) => {
     setDistricts([]);
     setListHospitals([]);
     if (medicalProvinceId != "0" || medicalProvinceId != 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/hospital/api/list-hospital-by-provinceId?provinceId=${medicalProvinceId}`
+          `/hospital/api/list-hospital-by-provinceId?provinceId=${medicalProvinceId}`
         )
         .then((response) => {
           setListHospitals(response.data.data);
@@ -316,43 +312,21 @@ const UserBeneficiaryBHYT = (props: Props) => {
     }
   }, [medicalProvinceId]);
 
-  // useEffect(() => {
-  //   setListHospitals([])
-  //   if (medicalDistrictId != "0" || medicalDistrictId != 0) {
-  //     axios
-  //       .get(
-  //         `${APP_CONFIG.BASE_URL}/hospital/api/list-hospital-by-districtId?districtId=${medicalDistrictId}`
-  //       ).then((response) => {
-  //         setListHospitals(response.data.data);
-  //       })
-  //       .catch((error) => {
-  //         setListHospitals([])
-  //         console.error(error);
-  //       });
-  //   }
-  // }, [medicalDistrictId])
-
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
     setImageUrl: React.Dispatch<React.SetStateAction<string>>
   ) => {
-    const token = localStorage.getItem("accessToken");
     const file = event.target.files?.[0];
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
 
       try {
-        const response = await axios.post(
-          `${APP_CONFIG.BASE_URL}/account/api/upload-file`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await api.post(`/account/api/upload-file`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         setImageUrl(response.data.data[0]);
         return response.data.data[0];
       } catch (error) {
@@ -434,7 +408,6 @@ const UserBeneficiaryBHYT = (props: Props) => {
 
   const onSubmitFormData = async () => {
     setIsLoadingLuckUp(true);
-    const token = localStorage.getItem("accessToken");
     const data = {
       name: registerInfoBHYT["listInsuredPerson"][index].fullName,
       doB: registerInfoBHYT["listInsuredPerson"][index].doB,
@@ -444,13 +417,12 @@ const UserBeneficiaryBHYT = (props: Props) => {
       WardId: registerInfoBHYT["listInsuredPerson"][index].ksXaPhuongMa,
     };
     try {
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/InsuranceOrder/api/search-social-insurance-number`,
+      const response = await api.post(
+        `/InsuranceOrder/api/search-social-insurance-number`,
         data,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
         }
       );

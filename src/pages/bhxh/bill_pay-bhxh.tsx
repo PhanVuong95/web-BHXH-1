@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import { Widthheight } from "../../models";
 import { SpecificContext } from "../../components/specific_context";
 import { Link } from "react-router-dom";
 import HeaderTitle from "../../components/header_title";
 import { Input } from "antd";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const BillPayBHXHPage: React.FC<Widthheight> = () => {
   const specificContext = useContext<any>(SpecificContext);
@@ -20,30 +19,24 @@ const BillPayBHXHPage: React.FC<Widthheight> = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(
-        `${APP_CONFIG.BASE_URL}/province/api/detail/` +
-          insuranceOrder.provinceId
-      )
+    api
+      .get(`/province/api/detail/` + insuranceOrder.provinceId)
       .then((response) => {
         setProvinceName(response.data.data[0].name);
       })
       .catch((error) => {
         console.error(error);
       });
-    axios
-      .get(
-        `${APP_CONFIG.BASE_URL}/district/api/detail/` +
-          insuranceOrder.districtId
-      )
+    api
+      .get(`/district/api/detail/` + insuranceOrder.districtId)
       .then((response) => {
         setDistrictName(response.data.data[0].name);
       })
       .catch((error) => {
         console.error(error);
       });
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/ward/api/detail/` + insuranceOrder.wardId)
+    api
+      .get(`/ward/api/detail/` + insuranceOrder.wardId)
       .then((response) => {
         setWardeName(response.data.data[0].name);
       })
@@ -54,19 +47,17 @@ const BillPayBHXHPage: React.FC<Widthheight> = () => {
 
   const [referrerCode, setReferrerCode] = useState("");
   const handleCheck = async () => {
-    const token = localStorage.getItem("accessToken");
-    const url = `${APP_CONFIG.BASE_URL}/insuranceOrder/api/create-payment?orderId=${insuranceOrder.wardId}&referrerCode=${referrerCode}`;
+    const url = `/insuranceOrder/api/create-payment?orderId=${insuranceOrder.wardId}&referrerCode=${referrerCode}`;
 
     try {
-      const response = await fetch(url, {
+      const response = await api.get(url, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
 
-      const data = await response.json();
+      const data = await response.data;
       console.log(data);
     } catch (error) {
       console.error("Error:", error);

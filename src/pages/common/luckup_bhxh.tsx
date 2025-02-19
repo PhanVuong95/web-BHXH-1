@@ -4,7 +4,6 @@ import "../../locale/vi";
 import dayjs from "dayjs";
 import locale from "antd/es/date-picker/locale/vi_VN";
 import { convertListToSelect, formatDate2 } from "../../utils/validate_string";
-import axios from "axios";
 import { Province } from "../../models";
 import { toast } from "react-toastify";
 import noData from "../../assets-src/no_data.png";
@@ -12,7 +11,7 @@ import { FadeLoader } from "react-spinners";
 import Modal from "react-modal";
 import icon from "../../assets-src/icon_coppy.png";
 import HeaderTitle from "../../components/header_title";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const LuckUpBHXH = () => {
   const [errors, setErrors] = useState<any>({});
@@ -34,8 +33,8 @@ const LuckUpBHXH = () => {
 
   // Danh sách tỉnh thành
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/province/api/list`)
+    api
+      .get(`/province/api/list`)
       .then((response) => {
         setProvinces(response.data.data);
       })
@@ -51,9 +50,9 @@ const LuckUpBHXH = () => {
 
   const fetchKSDistricts = () => {
     if (selectedKSProvince !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
+          `/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
         )
         .then((response) => {
           ksDistricts.current = response.data.data;
@@ -77,10 +76,8 @@ const LuckUpBHXH = () => {
 
   const fetchKSWards = () => {
     if (selectedKSDistrict !== 0) {
-      axios
-        .get(
-          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
-        )
+      api
+        .get(`/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`)
         .then((response) => {
           ksWards.current = response.data.data;
           setTemp(Math.random());
@@ -322,13 +319,12 @@ const LuckUpBHXH = () => {
       WardId: selectedKSWard,
     };
     try {
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/InsuranceOrder/api/search-social-insurance-number`,
+      const response = await api.post(
+        `/InsuranceOrder/api/search-social-insurance-number`,
         data,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
         }
       );

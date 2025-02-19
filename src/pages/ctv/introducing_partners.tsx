@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import QRCode from "react-qr-code";
 import html2canvas from "html2canvas";
 import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import imagesIocn from "../../assets/icon/images";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const IntroducingPartnersPage = () => {
   const [linkQRCode, setLinkQRCode] = useState<string>("");
@@ -14,14 +13,12 @@ const IntroducingPartnersPage = () => {
   const qrCodeRef = useRef<HTMLDivElement>(null);
 
   const getQrIntroduction = async () => {
-    const token = localStorage.accessToken;
     try {
-      const response = await axios.get(
-        `${APP_CONFIG.BASE_URL}/account/api/get-contributor-code?type=web`,
+      const response = await api.get(
+        `/account/api/get-contributor-code?type=web`,
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
           },
         }
       );

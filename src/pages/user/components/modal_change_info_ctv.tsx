@@ -2,9 +2,8 @@ import { Button, Input, Modal, Select } from "antd";
 import { memo, useState } from "react";
 import { convertListToSelectBanks } from "../../../utils/validate_string";
 import { toast } from "react-toastify";
-import axios from "axios";
-import { APP_CONFIG } from "../../../utils/constants";
 import { modalBodyStyle, modalMaskStyle } from "../../../utils/css_common";
+import api from "../../../api/api-config";
 
 interface BankInfo {
   bankBin: number;
@@ -49,7 +48,6 @@ const ModalChangeInfoCTV = (props: Props) => {
 
   const onSubmit = async () => {
     if (validate()) {
-      const token = localStorage.getItem("accessToken");
       const bankFind = listBanks.find(
         (item: any) => item?.bin == selectedBankCode
       ) as any;
@@ -63,16 +61,11 @@ const ModalChangeInfoCTV = (props: Props) => {
       };
 
       try {
-        const response = await axios.post(
-          `${APP_CONFIG.BASE_URL}/account/api/update-bank-info`,
-          data,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await api.post(`/account/api/update-bank-info`, data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         if (
           response.data.status == "200" &&

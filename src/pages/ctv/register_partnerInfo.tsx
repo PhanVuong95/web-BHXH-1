@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { MyComponentProps } from "../../models";
-import axios from "axios";
 import { Modal } from "antd";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const RegisterPartnerInfoPage: React.FC<MyComponentProps> = ({
   handleNext,
@@ -15,15 +14,12 @@ const RegisterPartnerInfoPage: React.FC<MyComponentProps> = ({
   const [isChecked, setIsChecked] = useState(false);
 
   const getStatusRegisterContributor = async () => {
-    const token = localStorage.accessToken;
-
     try {
-      const response = await axios.get(
-        `${APP_CONFIG.BASE_URL}/account/api/check-register-contributor`,
+      const response = await api.get(
+        `/account/api/check-register-contributor`,
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
           },
         }
       );

@@ -1,10 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { ItemInfoProps } from "../../models";
 import imagesIocn from "../../assets/icon/images";
 import { Modal } from "antd";
 import { formatMoneyVND } from "../../utils/validate_string";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [listCollabrorates, setListCollabrorates] = useState([]);
@@ -16,18 +15,12 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [, setPhone] = useState("");
 
   const fetchCollabrorates = async () => {
-    const token = localStorage.accessToken;
-
     try {
-      const response = await axios.get(
-        `${APP_CONFIG.BASE_URL}/account/api/get-list-contributor`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.get(`/account/api/get-list-contributor`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.data.status == "200" && response.data.message == "SUCCESS") {
         setListCollabrorates(response.data.data[0]);
@@ -59,17 +52,14 @@ const ListCollabrorates: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
   // chi tiết
   const fectReport = async (collaboratorId: string) => {
-    const token = localStorage.accessToken;
-
     setIsLoading(true);
 
     try {
-      const response = await axios.get(
-        `${APP_CONFIG.BASE_URL}/report/api/report-order-contributor?accountId=${collaboratorId}`,
+      const response = await api.get(
+        `/report/api/report-order-contributor?accountId=${collaboratorId}`,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
         }
       );

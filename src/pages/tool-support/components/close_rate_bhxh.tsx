@@ -5,10 +5,9 @@ import {
   isValidEmptyString,
 } from "../../../utils/validate_string";
 import { toast } from "react-toastify";
-import axios from "axios";
 import iconSearch from "../../../assets/icon/ic_search.svg";
 import iconRefresh from "../../../assets/icon/ic_refresh.svg";
-import { APP_CONFIG } from "../../../utils/constants";
+import api from "../../../api/api-config";
 
 const CloseRateBXH = () => {
   const [baseSalary, setBaseSalary] = useState<string>("");
@@ -87,10 +86,8 @@ const CloseRateBXH = () => {
           <div
             onClick={async () => {
               if (validateForm2()) {
-                const response = await axios.get(
-                  `${
-                    APP_CONFIG.BASE_URL
-                  }/insurance/api/calculate-payment-missing-year?salary=${baseSalary.replace(
+                const response = await api.get(
+                  `/insurance/api/calculate-payment-missing-year?salary=${baseSalary.replace(
                     /\D/g,
                     ""
                   )}&monthsLeft=${months.replace(/\D/g, "")}`,

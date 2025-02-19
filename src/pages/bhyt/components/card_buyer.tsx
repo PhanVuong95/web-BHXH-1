@@ -1,9 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { registerInfoBHYT } from "../list_health_insurance_page";
 import { Input, Select } from "antd";
 import { convertListToSelect } from "../../../utils/validate_string";
-import { APP_CONFIG } from "../../../utils/constants";
+import api from "../../../api/api-config";
 
 interface Props {
   data: any;
@@ -30,8 +29,8 @@ const CardBuyer = (props: Props) => {
   );
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/province/api/list`)
+    api
+      .get(`/province/api/list`)
       .then((response) => {
         setProvinces(response.data.data);
       })
@@ -44,10 +43,8 @@ const CardBuyer = (props: Props) => {
     setDistricts([]);
     setWards([]);
     if (selectedProvince !== 0) {
-      axios
-        .get(
-          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedProvince}`
-        )
+      api
+        .get(`/district/api/list-by-provinceId?provinceId=${selectedProvince}`)
         .then((response) => {
           setDistricts(response.data.data);
         })
@@ -60,10 +57,8 @@ const CardBuyer = (props: Props) => {
   useEffect(() => {
     setWards([]);
     if (selectedDistrict !== 0) {
-      axios
-        .get(
-          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedDistrict}`
-        )
+      api
+        .get(`/ward/api/list-by-districtId?districtId=${selectedDistrict}`)
         .then((response) => {
           setWards(response.data.data);
         })

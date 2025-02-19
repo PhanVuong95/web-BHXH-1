@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import imagesIocn from "../../assets/icon/images";
-import axios from "axios";
 import { ItemInfoProps } from "../../models";
 import { formatMoneyVND } from "../../utils/validate_string";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const ReportPartnerPage: React.FC<{ onViewCollaborators: () => void }> = ({
   onViewCollaborators,
@@ -14,15 +13,12 @@ const ReportPartnerPage: React.FC<{ onViewCollaborators: () => void }> = ({
     const token = localStorage.accessToken;
 
     try {
-      const response = await axios.get(
-        `${APP_CONFIG.BASE_URL}/report/api/report-overview`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.get(`/report/api/report-overview`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.data.status == "200" && response.data.message == "SUCCESS") {
         setReport(response.data.data[0]);

@@ -8,9 +8,8 @@ import {
 } from "../../../utils/validate_string";
 import { memo, useState } from "react";
 import { toast } from "react-toastify";
-import { APP_CONFIG } from "../../../utils/constants";
-import axios from "axios";
 import { modalBodyStyle, modalMaskStyle } from "../../../utils/css_common";
+import api from "../../../api/api-config";
 
 interface profileProps {
   dob: Date;
@@ -61,8 +60,6 @@ const ModalChangeInfoProfile = (props: Props) => {
   };
 
   const onSubmitForm = async () => {
-    const token = localStorage.getItem("accessToken");
-
     const data = {
       addressDetail: addressDetail,
       dob: `${dob.year()}-${(dob.month() + 1).toString().padStart(2, "0")}-${dob
@@ -73,13 +70,12 @@ const ModalChangeInfoProfile = (props: Props) => {
     };
 
     try {
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/account/api/update-personal-info`,
+      const response = await api.post(
+        `/account/api/update-personal-info`,
         data,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
         }
       );

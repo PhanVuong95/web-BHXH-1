@@ -11,8 +11,7 @@ import {
   isValidEmptyString,
 } from "../../../utils/validate_string";
 import { toast } from "react-toastify";
-import axios from "axios";
-import { APP_CONFIG } from "../../../utils/constants";
+import api from "../../../api/api-config";
 
 const WithdrawBHXH = () => {
   const [insurancePaymentPeriod, setInsurancePaymentPeriod] = useState([
@@ -237,8 +236,8 @@ const WithdrawBHXH = () => {
                   InsurancePaymentPeriod: insurancePayment,
                 };
 
-                const response = await axios.post(
-                  `${APP_CONFIG.BASE_URL}/insurance/api/calculate-insurance-one-time`,
+                const response = await api.post(
+                  `/insurance/api/calculate-insurance-one-time`,
                   data,
                   {
                     headers: {

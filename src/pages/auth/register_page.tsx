@@ -18,8 +18,7 @@ import {
   isValidPhone,
   isValidUserName,
 } from "../../utils/validate_string";
-import axios from "axios";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const RegisterPage = () => {
   const [isShowModalOTP, setIsShowModalOTP] = useState(false);
@@ -114,15 +113,7 @@ const RegisterPage = () => {
         phone: phone,
       };
 
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/account/api/register`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await api.post(`/account/api/register`, data);
       //reset mã otp
       setOtp("");
 
@@ -160,13 +151,8 @@ const RegisterPage = () => {
     if (otp.length == 6) {
       try {
         setLoadingSendOtp(true);
-        const response = await axios.post(
-          `${APP_CONFIG.BASE_URL}/account/api/verify-register-otp?accountId=${userId}&OTPCode=${otp}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+        const response = await api.post(
+          `/account/api/verify-register-otp?accountId=${userId}&OTPCode=${otp}`
         );
 
         switch (response.data.status) {

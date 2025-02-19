@@ -7,8 +7,7 @@ import {
   isValidEmptyString,
   isValidPassword,
 } from "../../utils/validate_string";
-import axios from "axios";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const ChangePasswordPage = () => {
   const [searchParams] = useSearchParams();
@@ -44,13 +43,8 @@ const ChangePasswordPage = () => {
     try {
       setIsLoadingChangePassword(true);
 
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/Account/api/reset-password?newPassword=${password}&value=${hashCode}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+      const response = await api.post(
+        `/Account/api/reset-password?newPassword=${password}&value=${hashCode}`
       );
 
       if (response.data.status == "200") {

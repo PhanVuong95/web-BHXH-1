@@ -4,8 +4,7 @@ import { convertListToSelect } from "../../../utils/validate_string";
 import "../../../locale/vi";
 import { registerInfoBHYT } from "../list_health_insurance_page";
 import { useEffect } from "react";
-import axios from "axios";
-import { APP_CONFIG } from "../../../utils/constants";
+import api from "../../../api/api-config";
 
 interface Props {
   refs: any;
@@ -57,8 +56,8 @@ const CardHouseHold = (props: Props) => {
 
   // Load lại tất cả danh sách tỉnh thành
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/province/api/list`)
+    api
+      .get(`/province/api/list`)
       .then((response) => {
         householdProvinces.current = response.data.data;
 
@@ -80,9 +79,9 @@ const CardHouseHold = (props: Props) => {
 
   const fetchHouseholdProvinces = () => {
     if (selectedHouseholdProvince !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedHouseholdProvince}`
+          `/district/api/list-by-provinceId?provinceId=${selectedHouseholdProvince}`
         )
         .then((response) => {
           householdDistricts.current = response.data.data;
@@ -104,9 +103,9 @@ const CardHouseHold = (props: Props) => {
 
   const fetchHouseholdWards = () => {
     if (selectedHouseholdDistrict !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedHouseholdDistrict}`
+          `/ward/api/list-by-districtId?districtId=${selectedHouseholdDistrict}`
         )
         .then((response) => {
           householdWards.current = response.data.data;
@@ -127,9 +126,9 @@ const CardHouseHold = (props: Props) => {
 
   const fetchTTHouseholdProvinces = () => {
     if (selectedTTHouseholdProvince !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTHouseholdProvince}`
+          `/district/api/list-by-provinceId?provinceId=${selectedTTHouseholdProvince}`
         )
         .then((response) => {
           householdTTDistricts.current = response.data.data;
@@ -151,9 +150,9 @@ const CardHouseHold = (props: Props) => {
 
   const fetchTTHouseholdWards = () => {
     if (selectedTTHouseholdDistrict !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTHouseholdDistrict}`
+          `/ward/api/list-by-districtId?districtId=${selectedTTHouseholdDistrict}`
         )
         .then((response) => {
           householdTTWards.current = response.data.data;

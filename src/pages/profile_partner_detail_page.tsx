@@ -1,9 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import users from "../assets/user.png";
 import imagesIocn from "../assets/icon/images";
 import { User } from "../models";
-import { APP_CONFIG } from "../utils/constants";
+import api from "../api/api-config";
 interface ProfilePartnerDetailPageProps {
   user: User;
   onViewCollaborators1: () => void;
@@ -15,18 +14,12 @@ const ProfilePartnerDetailPage: React.FC<ProfilePartnerDetailPageProps> = ({
   const [bankInfo, setBankInfo] = useState<any>();
 
   const fetchBankInfo = async () => {
-    const token = localStorage.accessToken;
-
     try {
-      const response = await axios.get(
-        `${APP_CONFIG.BASE_URL}/account/api/get-bank-info`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.get(`/account/api/get-bank-info`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.data.status == "200" && response.data.message == "SUCCESS") {
         setBankInfo(response.data.data[0]);

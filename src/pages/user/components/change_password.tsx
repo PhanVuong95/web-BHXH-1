@@ -5,9 +5,8 @@ import {
   isValidPassword,
 } from "../../../utils/validate_string";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { Button, Input } from "antd";
-import { APP_CONFIG } from "../../../utils/constants";
+import api from "../../../api/api-config";
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -57,24 +56,17 @@ const ChangePassword = () => {
     try {
       setIsLoadingChangePassword(true);
 
-      const token = localStorage.getItem("accessToken");
-
       const data = {
         OldPassword: oldPassword,
         NewPassword: newPassword,
         ReNewPassword: confirmPassword,
       };
 
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/account/api/change-password`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.post(`/account/api/change-password`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.data.status == "200") {
         toast.success("Đổi mật khẩu thành công");

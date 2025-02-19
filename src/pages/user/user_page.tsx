@@ -14,10 +14,9 @@ import Guidelines from "./components/guid_lines";
 import PartnerInfo from "./components/partner_info";
 import Activities from "./components/activities";
 import camera from "../../assets/icon/camera.svg";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { validUrlImage } from "../../utils/validate_string";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
   const [activeContent, setActiveContent] = useState<React.ReactNode>(null);
@@ -110,8 +109,6 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const token = localStorage.getItem("accessToken");
-
     const file = event.target.files?.[0];
 
     if (file) {
@@ -121,13 +118,12 @@ const UserPage: React.FunctionComponent<HistoryPageProps> = () => {
       try {
         setIsUploadingAvatar(true);
 
-        const response = await axios.post(
-          `${APP_CONFIG.BASE_URL}/account/api/change-avatar`,
+        const response = await api.post(
+          `/account/api/change-avatar`,
           formData,
           {
             headers: {
               "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${token}`,
             },
           }
         );

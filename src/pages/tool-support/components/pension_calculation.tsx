@@ -11,8 +11,7 @@ import {
   isValidEmptyString,
 } from "../../../utils/validate_string";
 import { toast } from "react-toastify";
-import axios from "axios";
-import { APP_CONFIG } from "../../../utils/constants";
+import api from "../../../api/api-config";
 
 const PensionCalculation = () => {
   const [gender, setGender] = useState("");
@@ -269,8 +268,8 @@ const PensionCalculation = () => {
                   InsurancePaymentPeriod: insurancePayment,
                 };
 
-                const response = await axios.post(
-                  `${APP_CONFIG.BASE_URL}/insurance/api/calculate-monthly-pension`,
+                const response = await api.post(
+                  `/insurance/api/calculate-monthly-pension`,
                   data,
                   {
                     headers: {

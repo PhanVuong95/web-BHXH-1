@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FadeLoader } from "react-spinners";
@@ -27,6 +26,7 @@ import lottieScanQR from "../../assets-src/lottie_scan_qr.json";
 import CardMembersHouseHoldBHXH from "./components/card_members_house_hold_bhxh";
 import HeaderTitle from "../../components/header_title";
 import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 dayjs.locale("vi");
 dayjs.extend(customParseFormat);
@@ -224,8 +224,8 @@ const RegisterBHXH = () => {
 
   // Load lại tất cả danh sách tỉnh thành
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/province/api/list`)
+    api
+      .get(`/province/api/list`)
       .then((response) => {
         // Load tỉnh thành người mua
         buyerProvinces.current = response.data.data;
@@ -259,9 +259,9 @@ const RegisterBHXH = () => {
 
   const fetchBuyerDistricts = () => {
     if (selectedBuyerProvince !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedBuyerProvince}`
+          `/district/api/list-by-provinceId?provinceId=${selectedBuyerProvince}`
         )
         .then((response) => {
           buyerDistricts.current = response.data.data;
@@ -285,10 +285,8 @@ const RegisterBHXH = () => {
 
   const fetchBuyerWards = () => {
     if (selectedBuyerDistrict !== 0) {
-      axios
-        .get(
-          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedBuyerDistrict}`
-        )
+      api
+        .get(`/ward/api/list-by-districtId?districtId=${selectedBuyerDistrict}`)
         .then((response) => {
           buyerWards.current = response.data.data;
           setTemp(!temp);
@@ -308,9 +306,9 @@ const RegisterBHXH = () => {
 
   const fetchKSDistricts = () => {
     if (selectedKSProvince !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
+          `/district/api/list-by-provinceId?provinceId=${selectedKSProvince}`
         )
         .then((response) => {
           ksDistricts.current = response.data.data;
@@ -334,10 +332,8 @@ const RegisterBHXH = () => {
 
   const fetchKSWards = () => {
     if (selectedKSDistrict !== 0) {
-      axios
-        .get(
-          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`
-        )
+      api
+        .get(`/ward/api/list-by-districtId?districtId=${selectedKSDistrict}`)
         .then((response) => {
           ksWards.current = response.data.data;
           setTemp(!temp);
@@ -357,9 +353,9 @@ const RegisterBHXH = () => {
 
   const fetchTTDistricts = () => {
     if (selectedTTProvince !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTProvince}`
+          `/district/api/list-by-provinceId?provinceId=${selectedTTProvince}`
         )
         .then((response) => {
           ttDistricts.current = response.data.data;
@@ -381,10 +377,8 @@ const RegisterBHXH = () => {
 
   const fetchTTWards = () => {
     if (selectedTTDistrict !== 0) {
-      axios
-        .get(
-          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTDistrict}`
-        )
+      api
+        .get(`/ward/api/list-by-districtId?districtId=${selectedTTDistrict}`)
         .then((response) => {
           ttWards.current = response.data.data;
           setTemp(!temp);
@@ -404,9 +398,9 @@ const RegisterBHXH = () => {
 
   const fetchMedicalByProvinceParticipants = () => {
     if (selectedMedicalByProvinceParticipant !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/hospital/api/list-hospital-by-provinceId?provinceId=${selectedMedicalByProvinceParticipant}`
+          `/hospital/api/list-hospital-by-provinceId?provinceId=${selectedMedicalByProvinceParticipant}`
         )
         .then((response) => {
           infoInsuranceHospital.current = response.data.data;
@@ -426,9 +420,9 @@ const RegisterBHXH = () => {
 
   const fetchHouseholdProvinces = () => {
     if (selectedHouseholdProvince !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedHouseholdProvince}`
+          `/district/api/list-by-provinceId?provinceId=${selectedHouseholdProvince}`
         )
         .then((response) => {
           householdDistricts.current = response.data.data;
@@ -450,9 +444,9 @@ const RegisterBHXH = () => {
 
   const fetchHouseholdWards = () => {
     if (selectedHouseholdDistrict !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedHouseholdDistrict}`
+          `/ward/api/list-by-districtId?districtId=${selectedHouseholdDistrict}`
         )
         .then((response) => {
           householdWards.current = response.data.data;
@@ -473,9 +467,9 @@ const RegisterBHXH = () => {
 
   const fetchTTHouseholdProvinces = () => {
     if (selectedTTHouseholdProvince !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedTTHouseholdProvince}`
+          `/district/api/list-by-provinceId?provinceId=${selectedTTHouseholdProvince}`
         )
         .then((response) => {
           householdTTDistricts.current = response.data.data;
@@ -497,9 +491,9 @@ const RegisterBHXH = () => {
 
   const fetchTTHouseholdWards = () => {
     if (selectedTTHouseholdDistrict !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedTTHouseholdDistrict}`
+          `/ward/api/list-by-districtId?districtId=${selectedTTHouseholdDistrict}`
         )
         .then((response) => {
           householdTTWards.current = response.data.data;
@@ -514,8 +508,8 @@ const RegisterBHXH = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/VungLuongToiThieu/api/List`)
+    api
+      .get(`/VungLuongToiThieu/api/List`)
       .then((response) => {
         setVungLuongToiThieuList(response.data.data);
       })
@@ -551,29 +545,14 @@ const RegisterBHXH = () => {
           response6,
           response7,
         ] = await Promise.all([
-          axios.get(
-            `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${id1}`
-          ),
-          axios.get(
-            `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${id2}`
-          ),
-
-          axios.get(
-            `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${id3}`
-          ),
-          axios.get(
-            `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${id4}`
-          ),
-
-          axios.get(
-            `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${id5}`
-          ),
-          axios.get(
-            `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${id6}`
-          ),
-
-          axios.get(
-            `${APP_CONFIG.BASE_URL}/hospital/api/list-hospital-by-provinceId?provinceId=${id7}`
+          api.get(`/district/api/list-by-provinceId?provinceId=${id1}`),
+          api.get(`/ward/api/list-by-districtId?districtId=${id2}`),
+          api.get(`/district/api/list-by-provinceId?provinceId=${id3}`),
+          api.get(`/ward/api/list-by-districtId?districtId=${id4}`),
+          api.get(`/district/api/list-by-provinceId?provinceId=${id5}`),
+          api.get(`/ward/api/list-by-districtId?districtId=${id6}`),
+          api.get(
+            `/hospital/api/list-hospital-by-provinceId?provinceId=${id7}`
           ),
         ]);
 
@@ -591,19 +570,10 @@ const RegisterBHXH = () => {
         if (insuranceOrder.houseHold.soGiayToCaNhan != "") {
           const [response8, response9, response10, response11] =
             await Promise.all([
-              axios.get(
-                `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${id8}`
-              ),
-              axios.get(
-                `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${id9}`
-              ),
-
-              axios.get(
-                `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${id10}`
-              ),
-              axios.get(
-                `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${id11}`
-              ),
+              api.get(`/district/api/list-by-provinceId?provinceId=${id8}`),
+              api.get(`/ward/api/list-by-districtId?districtId=${id9}`),
+              api.get(`/district/api/list-by-provinceId?provinceId=${id10}`),
+              api.get(`/ward/api/list-by-districtId?districtId=${id11}`),
             ]);
 
           householdDistricts.current = response8.data.data;
@@ -732,8 +702,8 @@ const RegisterBHXH = () => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/ethnic/api/list`)
+    api
+      .get(`/ethnic/api/list`)
       .then((response) => {
         setEthnicLists(response.data.data);
       })
@@ -847,8 +817,6 @@ const RegisterBHXH = () => {
     event: React.ChangeEvent<HTMLInputElement>,
     setImageUrl: React.Dispatch<React.SetStateAction<string>>
   ) => {
-    const token = localStorage.getItem("accessToken");
-
     const file = event.target.files?.[0];
 
     if (file) {
@@ -856,16 +824,11 @@ const RegisterBHXH = () => {
       formData.append("file", file);
 
       try {
-        const response = await axios.post(
-          `${APP_CONFIG.BASE_URL}/account/api/upload-file`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await api.post(`/account/api/upload-file`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         setImageUrl(response.data.data[0]);
         return response.data.data[0];
       } catch (error) {
@@ -1222,15 +1185,13 @@ const RegisterBHXH = () => {
   };
 
   const AddInsuranceOrder = async () => {
-    const token = localStorage.getItem("accessToken");
     try {
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/insuranceorder/api/add-order`,
+      const response = await api.post(
+        `/insuranceorder/api/add-order`,
         insuranceOrder,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -1271,15 +1232,13 @@ const RegisterBHXH = () => {
   };
 
   const UpdateInsuranceOrder = async () => {
-    const token = localStorage.getItem("accessToken");
     try {
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/insuranceorder/api/update-order`,
+      const response = await api.post(
+        `/insuranceorder/api/update-order`,
         insuranceOrder,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -1315,8 +1274,8 @@ const RegisterBHXH = () => {
       WardId: selectedKSWard,
     };
     try {
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/InsuranceOrder/api/search-social-insurance-number`,
+      const response = await api.post(
+        `/InsuranceOrder/api/search-social-insurance-number`,
         data,
         {
           headers: {

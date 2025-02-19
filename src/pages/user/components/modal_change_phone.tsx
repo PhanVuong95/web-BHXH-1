@@ -6,8 +6,7 @@ import {
   isValidPhone,
 } from "../../../utils/validate_string";
 import { toast } from "react-toastify";
-import axios from "axios";
-import { APP_CONFIG } from "../../../utils/constants";
+import api from "../../../api/api-config";
 
 interface Props {
   isShowModal: boolean;
@@ -42,22 +41,16 @@ const ModalChangePhone = (props: Props) => {
 
   const onSubmitSendOTP = async () => {
     setLoadingSendOtp(true);
-    const token = localStorage.getItem("accessToken");
     const data = {
       phoneNumber: phone,
     };
 
     try {
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/account/api/update-phone`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.post(`/account/api/update-phone`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.data.status == "200" && response.data.message == "SUCCESS") {
         toast.success("Đã gửi OTP, vui lòng kiểm tra số điện thoại");

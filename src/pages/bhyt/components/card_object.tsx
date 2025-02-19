@@ -1,12 +1,11 @@
 import { Select } from "antd";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { registerInfoBHYT } from "../list_health_insurance_page";
 import {
   convertListToSelectObjectTypeGroup,
   convertListToSelectObjectTypeGroupList,
 } from "../../../utils/validate_string";
-import { APP_CONFIG } from "../../../utils/constants";
+import api from "../../../api/api-config";
 
 interface Props {
   refs?: any;
@@ -25,8 +24,8 @@ const CardObject = (props: Props) => {
   );
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/nhomloaidoituong/api/list`)
+    api
+      .get(`/nhomloaidoituong/api/list`)
       .then((response) => {
         setObjectTypeGroupList(response.data.data);
       })
@@ -41,9 +40,9 @@ const CardObject = (props: Props) => {
 
   const fetchObjectTypeGroup = () => {
     if (selectedObjectTypeGroup !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/loaidoituong/api/listbynhomloaidoituongid?nhomloaidoituongid=${selectedObjectTypeGroupList}`
+          `/loaidoituong/api/listbynhomloaidoituongid?nhomloaidoituongid=${selectedObjectTypeGroupList}`
         )
         .then((response) => {
           setObjectTypeGroup(response.data.data);

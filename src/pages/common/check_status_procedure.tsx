@@ -1,9 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 import { formatDate, formatDateByTime } from "../../utils/validate_string";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const CheckStatusProcedure = () => {
   const { id } = useParams();
@@ -14,8 +13,8 @@ const CheckStatusProcedure = () => {
     const fetchData = async () => {
       const token = localStorage.getItem("accessToken");
       try {
-        const response = await axios.get(
-          `${APP_CONFIG.BASE_URL}/InsuranceOrder/api/check-status-procedure/${id}`,
+        const response = await api.get(
+          `/InsuranceOrder/api/check-status-procedure/${id}`,
           {
             headers: {
               "Content-Type": "application/json",

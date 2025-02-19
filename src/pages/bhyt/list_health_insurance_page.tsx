@@ -1,10 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { PulseLoader } from "react-spinners";
 import CardProductBHYT from "./components/card_product_bhyt";
 import HeaderTitle from "../../components/header_title";
 import { formatDate } from "../../utils/validate_string";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 export let registerInfoBHYT = {
   id: 0,
@@ -267,9 +266,9 @@ const ListHealthInsurance: React.FunctionComponent = () => {
   // }, [])
 
   useEffect(() => {
-    axios
+    api
       .get(
-        `${APP_CONFIG.BASE_URL}/insurance/api/list-paging-viewmodel?pageIndex=1&pageSize=100&insuranceTypeId=1002`
+        `/insurance/api/list-paging-viewmodel?pageIndex=1&pageSize=100&insuranceTypeId=1002`
       )
       .then((response) => {
         setListProduct(response.data.data);

@@ -1,7 +1,7 @@
-import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import HeaderTitle from "../../components/header_title";
 import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const IntroductBHYT: React.FunctionComponent = () => {
   const [imageSrcs, setImageSrcs] = useState<string[]>([]);
@@ -16,9 +16,9 @@ const IntroductBHYT: React.FunctionComponent = () => {
   }, []);
 
   useEffect(() => {
-    axios
+    api
       .get(
-        `${APP_CONFIG.BASE_URL}/insurance/api/list-paging-viewmodel?pageIndex=1&PageSizes=100&insuranceTypeId=1002`
+        `/insurance/api/list-paging-viewmodel?pageIndex=1&PageSizes=100&insuranceTypeId=1002`
       )
       .then((response) => {
         const data = response.data.data.filter(

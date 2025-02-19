@@ -9,8 +9,7 @@ import {
   convertListToSelect,
   formatDate2,
 } from "../../../utils/validate_string";
-import axios from "axios";
-import { APP_CONFIG } from "../../../utils/constants";
+import api from "../../../api/api-config";
 
 interface Props {
   item: any;
@@ -51,9 +50,9 @@ const CardMembersHouseHoldBHYT = (props: Props) => {
 
   const fetchMemberProvinces = () => {
     if (selectedMemberProvince !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/district/api/list-by-provinceId?provinceId=${selectedMemberProvince}`
+          `/district/api/list-by-provinceId?provinceId=${selectedMemberProvince}`
         )
         .then((response) => {
           memberDistricts.current = response.data.data;
@@ -75,9 +74,9 @@ const CardMembersHouseHoldBHYT = (props: Props) => {
 
   const fetchMemberWards = () => {
     if (selectedMemberDistrict !== 0) {
-      axios
+      api
         .get(
-          `${APP_CONFIG.BASE_URL}/ward/api/list-by-districtId?districtId=${selectedMemberDistrict}`
+          `/ward/api/list-by-districtId?districtId=${selectedMemberDistrict}`
         )
         .then((response) => {
           memberWards.current = response.data.data;

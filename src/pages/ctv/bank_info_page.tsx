@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { convertListToSelectBanks } from "../../utils/validate_string";
 import { toast } from "react-toastify";
 import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 interface BankInfoPageProps {
   onBack1: () => void;
@@ -28,18 +29,12 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
   }, []);
 
   const fetchBankInfo = async () => {
-    const token = localStorage.accessToken;
-
     try {
-      const response = await axios.get(
-        `${APP_CONFIG.BASE_URL}/account/api/get-bank-info`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.get(`/account/api/get-bank-info`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.data.status == "200" && response.data.message == "SUCCESS") {
         const data = response.data.data[0];
@@ -159,7 +154,6 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
 
   const onSubmit = async () => {
     if (validate()) {
-      const token = localStorage.accessToken;
       const bankFind = listBanks.find(
         (item: any) => item?.bin == selectedBankCode
       ) as any;
@@ -173,16 +167,11 @@ const BankInfoPage: React.FC<BankInfoPageProps> = ({ onBack1 }) => {
       };
 
       try {
-        const response = await axios.post(
-          `${APP_CONFIG.BASE_URL}/account/api/update-bank-info`,
-          data,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await api.post(`/account/api/update-bank-info`, data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         if (
           response.data.status == "200" &&

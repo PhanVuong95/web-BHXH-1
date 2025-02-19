@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { formatMoneyVND, formatPhoneNumber } from "../../utils/validate_string";
 import HeaderTitle from "../../components/header_title";
 import { Input } from "antd";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const BillPayBHYTPage: React.FunctionComponent = () => {
   const { id } = useParams();
@@ -18,8 +17,8 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/insuranceOrder/api/detail-by-vm/` + id)
+    api
+      .get(`/insuranceOrder/api/detail-by-vm/` + id)
       .then((response) => {
         setBillPay(response.data.data[0]);
         setLoading(false);
@@ -33,19 +32,16 @@ const BillPayBHYTPage: React.FunctionComponent = () => {
   const [referrerCode, setReferrerCode] = useState("");
 
   const handleCheck = async () => {
-    const token = localStorage.getItem("accessToken");
-    const url = `${APP_CONFIG.BASE_URL}/insuranceOrder/api/create-payment?orderId=${id}&referrerCode=${referrerCode}`;
+    const url = `/insuranceOrder/api/create-payment?orderId=${id}&referrerCode=${referrerCode}`;
 
     try {
-      const response = await fetch(url, {
+      const response = await api.get(url, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
-      const data = await response.json();
-      console.log(data);
+      const data = await response.data;
     } catch (error) {
       console.error("Error:", error);
     }

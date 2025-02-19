@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ListsHistoryPageProps } from "../../models";
-import axios from "axios";
 import { PulseLoader } from "react-spinners";
 import logo from "../../assets-src/logo1.png";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 interface OrderItem {
   id: string;
@@ -26,18 +25,10 @@ const ListBHXHHistoryPage: React.FC<ListsHistoryPageProps> = ({ onBack }) => {
   const [openTab, setOpenTab] = useState<number>(1);
   const [listOrder, setListOrder] = useState<OrderItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
-    axios
-      .get(
-        `${APP_CONFIG.BASE_URL}/insuranceOrder/api/list-by-insuranceId?insuranceId=1001`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+    api
+      .get(`/insuranceOrder/api/list-by-insuranceId?insuranceId=1001`)
       .then((response) => {
         const filteredOrders: OrderItem[] = [];
         response.data.data.forEach((item: OrderItem) => {
@@ -58,7 +49,7 @@ const ListBHXHHistoryPage: React.FC<ListsHistoryPageProps> = ({ onBack }) => {
         setListOrder([]);
         setLoading(false);
       });
-  }, [openTab, token]);
+  }, [openTab]);
 
   function formatDateTime(dateTimeString: string): string {
     const date = new Date(dateTimeString);

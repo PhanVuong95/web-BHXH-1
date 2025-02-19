@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { SpecificContext } from "../../components/specific_context";
 import { PulseLoader } from "react-spinners";
 import warningIc from "../../assets-src/warning_icon.png";
 import HeaderTitle from "../../components/header_title";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const BuillDetailPage: React.FunctionComponent = () => {
   const { id } = useParams();
@@ -28,8 +27,8 @@ const BuillDetailPage: React.FunctionComponent = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/insuranceOrder/api/Detail-By-VM/` + id)
+    api
+      .get(`/insuranceOrder/api/Detail-By-VM/` + id)
       .then((response) => {
         setOrderDetail(response.data.data[0]);
         setInsuredPerson(response.data.data[0].listInsuredPerson[0]);
@@ -40,15 +39,12 @@ const BuillDetailPage: React.FunctionComponent = () => {
   }, [id]);
 
   const GetQrCode = async () => {
-    const token = localStorage.getItem("accessToken");
     try {
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/insuranceOrder/api/create-payment?orderId=` +
-          id,
+      const response = await api.post(
+        `/insuranceOrder/api/create-payment?orderId=` + id,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -78,13 +74,11 @@ const BuillDetailPage: React.FunctionComponent = () => {
   };
   useEffect(() => {
     const interval = setInterval(() => {
-      axios
-        .get(
-          `${APP_CONFIG.BASE_URL}/insuranceOrder/api/check-order-status/` + id
-        )
+      api
+        .get(`/insuranceOrder/api/check-order-status/` + id)
         .then((response) => {
           if (response.data.data[0] === STATUS_DONE_ID) {
-            setIsPaymentSuccessful(true); // Hiển thị modal
+            setIsPaymentSuccessful(true);
             clearInterval(interval);
           } else if (base64QRCode == "400") {
             clearInterval(interval);

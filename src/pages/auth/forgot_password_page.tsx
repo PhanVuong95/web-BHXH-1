@@ -8,13 +8,12 @@ import close from "../../assets/close.png";
 import Modal from "react-modal";
 import type { GetProps } from "antd";
 import { toast } from "react-toastify";
-import axios from "axios";
 import {
   isValidEmptyString,
   isValidPassword,
 } from "../../utils/validate_string";
 import { useNavigate } from "react-router-dom";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 type OTPProps = GetProps<typeof Input.OTP>;
 
 const ForgotPasswordPage = () => {
@@ -47,13 +46,8 @@ const ForgotPasswordPage = () => {
     try {
       setIsLoadingSendOTP(true);
 
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/account/api/send-forgot-password?value=${userName}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+      const response = await api.post(
+        `/account/api/send-forgot-password?value=${userName}`
       );
 
       switch (response.data.status) {
@@ -98,13 +92,8 @@ const ForgotPasswordPage = () => {
       try {
         setIsLoadingCheckOTP(true);
 
-        const response = await axios.post(
-          `${APP_CONFIG.BASE_URL}/Account/api/check-otp?value=${otp}&phone=${userName}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+        const response = await api.post(
+          `/Account/api/check-otp?value=${otp}&phone=${userName}`
         );
 
         if (response.data.status != "200") {
@@ -174,13 +163,8 @@ const ForgotPasswordPage = () => {
   };
 
   const onSubmitChangePassword = async () => {
-    const response = await axios.post(
-      `${APP_CONFIG.BASE_URL}/Account/api/reset-password?newPassword=${password}&value=${otp}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+    const response = await api.post(
+      `/Account/api/reset-password?newPassword=${password}&value=${otp}`
     );
 
     if (response.data.status == "200") {

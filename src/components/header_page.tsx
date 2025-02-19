@@ -20,11 +20,11 @@ import { FlexBox } from "./box/FlexBox";
 import { QRCodeCanvas } from "qrcode.react";
 import * as signalR from "@microsoft/signalr";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { useModalLogin } from "../context/auth_context";
 import { useProfile } from "./user_profile_context";
 import { validUrlImage } from "../utils/validate_string";
 import { APP_CONFIG } from "../utils/constants";
+import api from "../api/api-config";
 
 const HeaderPage = () => {
   const [isSideMenuOpen, setMenu] = useState(false);
@@ -98,15 +98,7 @@ const HeaderPage = () => {
 
   const loginWithGoogle = async (user: any) => {
     try {
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/account/api/sign-in-google`,
-        user,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await api.post(`account/api/sign-in-google`, user);
 
       const responseData = response.data;
 
@@ -201,15 +193,7 @@ const HeaderPage = () => {
         password: password,
       };
 
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/account/api/login-web`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await api.post(`/account/api/login-web`, data);
 
       if (response.data.status == "200") {
         const data = response.data.resources;

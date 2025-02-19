@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { PulseLoader } from "react-spinners";
 import { formatMoneyVND } from "../../utils/validate_string";
 import logo from "../../assets-src/logo1.png";
 import { ListsHistoryPageProps, Order } from "../../models";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const ListHistoryBHYT: React.FunctionComponent<ListsHistoryPageProps> = ({
   onBack,
@@ -21,15 +20,12 @@ const ListHistoryBHYT: React.FunctionComponent<ListsHistoryPageProps> = ({
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    axios
-      .get(
-        `${APP_CONFIG.BASE_URL}/insuranceorder/api/list-by-insuranceId?insuranceId=1002`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+    api
+      .get(`/insuranceorder/api/list-by-insuranceId?insuranceId=1002`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         const fillteredOrders: Order[] = [];
         response.data.data.forEach((item: Order) => {

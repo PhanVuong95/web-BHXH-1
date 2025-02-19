@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets-src/logo1.png";
 import { useParams } from "react-router-dom";
@@ -13,7 +12,7 @@ import {
 } from "../../utils/validate_string";
 import { registerInfoBHYT } from "./list_health_insurance_page";
 import HeaderTitle from "../../components/header_title";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const InfoDetailBHYT: React.FunctionComponent = () => {
   const { id, statusName } = useParams();
@@ -42,8 +41,8 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/insuranceorder/api/detail-by-vm/` + id)
+    api
+      .get(`/insuranceorder/api/detail-by-vm/` + id)
       .then((response) => {
         const data = response.data.data[0];
 
@@ -156,9 +155,9 @@ const InfoDetailBHYT: React.FunctionComponent = () => {
   }, [id]);
 
   useEffect(() => {
-    axios
+    api
       .get(
-        `${APP_CONFIG.BASE_URL}/insurance/api/list-paging-viewmodel?pageIndex=1&Pageize=100&insuranceTypeId=1002`
+        `/insurance/api/list-paging-viewmodel?pageIndex=1&Pageize=100&insuranceTypeId=1002`
       )
       .then((response) => {
         const data = response.data.data.filter(

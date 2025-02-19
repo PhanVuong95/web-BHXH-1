@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SpecificContext } from "../../components/specific_context";
@@ -6,7 +5,7 @@ import logo from "../../assets-src/logo1.png";
 import HeaderTitle from "../../components/header_title";
 import { useModalLogin } from "../../context/auth_context";
 import { motion } from "framer-motion";
-import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 interface Insurance {
   name: string;
@@ -25,8 +24,8 @@ const ListSocialInsurance = () => {
   const { setIsShowModalLogin } = useModalLogin();
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/insurance/api/detail-viewmodel?id=1001`)
+    api
+      .get(`/insurance/api/detail-viewmodel?id=1001`)
       .then((response) => {
         setInsurance(response.data.data[0]);
       })

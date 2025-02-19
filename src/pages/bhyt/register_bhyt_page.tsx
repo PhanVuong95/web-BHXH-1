@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -23,6 +22,7 @@ import CardMembersHouseHoldBHYT from "./components/card_members_house_hold_bhyt"
 import CardObject from "./components/card_object";
 import HeaderTitle from "../../components/header_title";
 import { APP_CONFIG } from "../../utils/constants";
+import api from "../../api/api-config";
 
 const RegisterBHYTPage: React.FunctionComponent<ListHistoryBHYTProps> = ({
   onBack,
@@ -191,8 +191,8 @@ const RegisterBHYTPage: React.FunctionComponent<ListHistoryBHYTProps> = ({
   };
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/ethnic/api/list`)
+    api
+      .get(`/ethnic/api/list`)
       .then((response) => {
         setEthnicLists(response.data.data);
       })
@@ -202,8 +202,8 @@ const RegisterBHYTPage: React.FunctionComponent<ListHistoryBHYTProps> = ({
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${APP_CONFIG.BASE_URL}/province/api/list`)
+    api
+      .get(`/province/api/list`)
       .then((response) => {
         setProvinces(response.data.data);
       })
@@ -718,23 +718,17 @@ const RegisterBHYTPage: React.FunctionComponent<ListHistoryBHYTProps> = ({
     event: React.ChangeEvent<HTMLInputElement>,
     setFileUpload: React.Dispatch<React.SetStateAction<string>>
   ) => {
-    const token = localStorage.getItem("accessToken");
     const file = event.target.files?.[0];
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
 
       try {
-        const response = await axios.post(
-          `${APP_CONFIG.BASE_URL}/account/api/upload-file`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await api.post(`/account/api/upload-file`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         setFileUpload(response.data.data[0]);
         return response.data.data[0];
       } catch (error) {
@@ -843,14 +837,13 @@ const RegisterBHYTPage: React.FunctionComponent<ListHistoryBHYTProps> = ({
     );
   };
 
-  const onCreate = async (token: any) => {
-    const response = await axios.post(
-      `${APP_CONFIG.BASE_URL}/insuranceorder/api/add-order`,
+  const onCreate = async () => {
+    const response = await api.post(
+      `/insuranceorder/api/add-order`,
       registerInfoBHYT,
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -874,14 +867,13 @@ const RegisterBHYTPage: React.FunctionComponent<ListHistoryBHYTProps> = ({
     navigate(`/bill-pay-bhyt/${registerInfoBHYT["id"]}`);
   };
 
-  const onUpdate = async (token: any) => {
-    const response = await axios.post(
-      `${APP_CONFIG.BASE_URL}/insuranceorder/api/update-insuranceOrder`,
+  const onUpdate = async () => {
+    const response = await api.post(
+      `/insuranceorder/api/update-insuranceOrder`,
       registerInfoBHYT,
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -896,12 +888,11 @@ const RegisterBHYTPage: React.FunctionComponent<ListHistoryBHYTProps> = ({
   };
 
   const onSubmitFormData = async () => {
-    const token = localStorage.getItem("accessToken");
     try {
       if (registerInfoBHYT["id"] == 0) {
-        onCreate(token);
+        onCreate();
       } else {
-        onUpdate(token);
+        onUpdate();
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {

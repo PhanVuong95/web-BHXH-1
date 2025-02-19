@@ -4,9 +4,7 @@ import { toast } from "react-toastify";
 import CardNewHome from "./components/card_new_home";
 import { useEffect, useState } from "react";
 import { Post } from "../../models";
-import { APP_CONFIG } from "../../utils/constants";
-
-console.log(__CONFIG_APP__);
+import api from "../../api/api-config";
 
 const HomePage = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -17,10 +15,10 @@ const HomePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `${APP_CONFIG.BASE_URL}/post/api/listPaging-post?pageIndex=${pageIndex}&pageSize=${pageSize}`
+        const response = await api.get(
+          `/post/api/listPaging-post?pageIndex=${pageIndex}&pageSize=${pageSize}`
         );
-        const jsonData = await response.json();
+        const jsonData = await response.data;
 
         const data = jsonData.data?.[0]["posts"] || [];
 

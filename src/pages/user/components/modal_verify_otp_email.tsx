@@ -1,10 +1,9 @@
 import { Button, Input, Modal } from "antd";
 import { modalBodyStyle, modalMaskStyle } from "../../../utils/css_common";
 import { useState } from "react";
-import axios from "axios";
-import { APP_CONFIG } from "../../../utils/constants";
 import { toast } from "react-toastify";
 import { isValidEmptyString } from "../../../utils/validate_string";
+import api from "../../../api/api-config";
 
 interface Props {
   isShowModal: boolean;
@@ -19,22 +18,16 @@ const ModalVerifyOTPEmail = (props: Props) => {
 
   const onSubmitVerifyOTP = async () => {
     setLoadingVerifyOtp(true);
-    const token = localStorage.getItem("accessToken");
     const data = {
       otpCode: otp,
     };
 
     try {
-      const response = await axios.post(
-        `${APP_CONFIG.BASE_URL}/account/api/verify-email-otp`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.post(`/account/api/verify-email-otp`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.data.status == "200" && response.data.message == "SUCCESS") {
         switch (response.data.status) {
