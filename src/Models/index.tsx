@@ -84,6 +84,7 @@ export interface Post {
   publishedTime: string;
   url: string;
   id: number;
+  slug: string;
 }
 
 export interface CardNewHomeProps {

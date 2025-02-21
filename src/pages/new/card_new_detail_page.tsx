@@ -47,7 +47,7 @@ const CardNewDetailPage = () => {
   const postData = post.data[0];
 
   return (
-    <div className="py-[60px] max-w-[1280px] mx-auto container">
+    <div className="py-[60px] max-w-[960px] mx-auto container">
       <img
         className="aspect-[100/2] object-cover h-[300px] rounded-lg"
         src={(postData as any).photo ? (postData as any).photo : imgSlider}
@@ -56,7 +56,7 @@ const CardNewDetailPage = () => {
       <h3 className="text-base py-4 text-justify sm:text-[32px] font-bold leading-10">
         {postData.name}
       </h3>
-      <div className="flex flex-col text-justify items-center gap-2 html-text-fomat">
+      <div className="flex flex-col text-justify gap-2 html-text-fomat">
         {parse(postData.text)}
       </div>
     </div>

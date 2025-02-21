@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import imgSlider from "../../../assets-src/image-1002.png";
 import { CardNewHomeProps } from "../../../models";
+import slugify from "react-slugify";
+import { isValidEmptyString } from "../../../utils/validate_string";
 
 const CardNewHome: React.FC<CardNewHomeProps> = ({ post }) => {
+  const link = isValidEmptyString(post.slug)
+    ? `${slugify(post.slug)}`
+    : post.id;
+
   return (
     <div
       className="card_new_page"
@@ -28,7 +34,7 @@ const CardNewHome: React.FC<CardNewHomeProps> = ({ post }) => {
           >
             {post.description}
           </p>
-          <Link to={`/new-detail/${post.id}`} className="link-button">
+          <Link to={`/new-detail/${link}`} className="link-button">
             <p className="text-[16px] text-[#0076B7]">Xem thêm</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
